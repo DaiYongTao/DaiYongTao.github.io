@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。 #一.通过frame去计算  第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。  简单布局的就可直接">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/iOS随笔/UITableViewCell的高度自适应浅析.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。 #一.通过frame去计算  第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。  简单布局的就可直接">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-25T09:57:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。 #一.通过frame去计算  第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。  简单布局的就可直接">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/iOS随笔/UITableViewCell的高度自适应浅析.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+  
+
+
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。</p>
+<p>#一.通过frame去计算</p>
+<blockquote>
+<p>第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。</p>
+</blockquote>
+<p>简单布局的就可直接计算，但，如果复杂一些，结构多变，就需要另外创建一个frameModel来专门计算和存储cell的frame。这种情况逻辑复杂，也比较容易出错。</p>
+<p>######需要创建两个模型：model(存储数据)、frameModel(存储cell上子view的frame)</p>
+<p>两者间的关系：frameModel是通过model来进行设置的，通过传入的model中的属性，来判断cell中子view显示或隐藏，从而一步一步得到所有的子view的frame值，最后，将cell的高度保存起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// model.h</span><br><span class="line">@interface Model : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) NSString *name; //昵称</span><br><span class="line">@property (nonatomic, copy) NSString *icon; //头像</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.h</span><br><span class="line">@class Model;</span><br><span class="line">@interface FrameModel : NSObject</span><br><span class="line"></span><br><span class="line">/** 数据模型 */</span><br><span class="line">@property (nonatomic, strong) Model *model;</span><br><span class="line">/** 头像frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect iconViewF;</span><br><span class="line">/** 昵称frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect nameLabelF;</span><br><span class="line"></span><br><span class="line">/** cell的高度 */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat cellHeight;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    </span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    </span><br><span class="line">    // cell的宽度</span><br><span class="line">    CGFloat cellW = screen_Width;</span><br><span class="line"></span><br><span class="line">    // cell的边框宽度</span><br><span class="line">    CGFloat cellBorderW = 10;</span><br><span class="line">    // cell之间的间距</span><br><span class="line">    CGFloat cellBorderMargin = 15;</span><br><span class="line">    </span><br><span class="line">    // 1.头像</span><br><span class="line">    CGFloat iconWH = 35;</span><br><span class="line">    CGFloat iconX = cellBorderW;</span><br><span class="line">    CGFloat iconY = cellBorderW;</span><br><span class="line">    _iconViewF = CGRectMake(iconX, iconY, iconWH, iconWH);</span><br><span class="line">    </span><br><span class="line">    // 2.昵称</span><br><span class="line">    CGFloat nameX = CGRectGetMaxX(self.iconViewF) + cellBorderW;</span><br><span class="line">    CGFloat nameY = iconY;</span><br><span class="line">    CGSize nameSize = [model.name sizeWithFont:[UIFont systemFontOfSize:15]];</span><br><span class="line">    _nameLabelF = (CGRect)&#123;&#123;nameX,nameY&#125;,nameSize&#125;;</span><br><span class="line">    </span><br><span class="line">    // 13.cell的宽度</span><br><span class="line">    _cellHeight = CGRectGetMaxY(self.nameLabelF) + cellBorderMargin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// cell.h</span><br><span class="line">@class FrameModel;</span><br><span class="line">@interface Cell : UITableViewCell</span><br><span class="line"></span><br><span class="line">+ (Cell *)cellWithTableView:(UITableView *)tableView;</span><br><span class="line">/** frame模型 */</span><br><span class="line">@property (nonatomic, strong) FrameModel *frameModel;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setFrameModel:(FrameModel *)frameModel &#123;</span><br><span class="line">    </span><br><span class="line">    _frameModel = frameModel;</span><br><span class="line">    </span><br><span class="line">    Model *model = frameModel.model;</span><br><span class="line">    // 头像</span><br><span class="line">    self.iconView.frame = frameModel.iconViewF;</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    </span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.frame = frameModel.nameLabelF;</span><br><span class="line">    self.nameLabel.text = model.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一步步走下来应该非常直观的。<br>最后也就只有一步了，将拿到的数据进行model和frameModel之间的转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  将Model模型转为FrameModel模型</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)frameModelsWithStatuses:(NSArray *)models &#123;</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *frames = [NSMutableArray array];</span><br><span class="line">    for (Model *model in models) &#123;</span><br><span class="line">        FrameModel *frame = [[FrameModel alloc] init];</span><br><span class="line">        frame.model = model;</span><br><span class="line">        [frames addObject:frame];</span><br><span class="line">    &#125;</span><br><span class="line">    return frames;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来就是数据展示咯，将frameModel导入进cell里面就OK了。</p>
+<p>这其实是一种分离思路，将各个模块分离化，逻辑会清晰很多，对于复杂的数据和UI异常适合。</p>
+<p>额，其中有一个sizeWithFont，是我创建的一个分类，只是为了简化代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// NSString+Extension.m</span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font maxW:(CGFloat)maxW &#123;</span><br><span class="line">    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];</span><br><span class="line">    attrs[NSFontAttributeName] = font;</span><br><span class="line">    CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);</span><br><span class="line">    NSString *version = [UIDevice currentDevice].systemVersion;</span><br><span class="line">    if ([version doubleValue] &gt; 7.0) &#123;</span><br><span class="line">        return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        return [self sizeWithFont:font constrainedToSize:maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font &#123;</span><br><span class="line">    return [self sizeWithFont:font maxW:MAXFLOAT];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#二.通过自动布局自动适配（推荐使用）<br>1.在cell中，setModel方法中所做的事情只是将数据导入view中进行展示，其他都不用管。label的话需要设定preferredMaxLayoutWidth属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    // 头像</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.text = model.name;    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    CGFloat width = screen_Width - 35 - 5; // label的宽度</span><br><span class="line">    // 自动布局：设定label文字的最大宽度,这个宽度也可以通过外部进行传递，从而设定。</span><br><span class="line">    self.nameLabel.preferredMaxLayoutWidth = width;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.在获取cellHeight代理方法中，因为可能无法获取到当前的cell，我们的目的只是要得到cell的高度，所以在这我们创建了一个临时变量cell，用来计算cellHeight。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    self.cell.nameLabel.text = nil;</span><br><span class="line">    self.cell.model = self.models[indexPath.row];</span><br><span class="line">    // cell进行自动布局，可以得到cellHeight</span><br><span class="line">    CGFloat cellHeight = [self.cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;</span><br><span class="line">    return cellHeight&gt;31.0f? cellHeight:31.0f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后记：如果有些需求是想得到tableview最大的高度，让cell完全展示出来，可以监听tableView的contentSize属性。<br>注：iOS10以下，监听contentSize属性；iOS10及以上监听scrollView.contentSize属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;scrollView.contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    </span><br><span class="line">    float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">    if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height; //得到tableview的高度。</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;scrollView.contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height;</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看到这里，或许你挥一挥衣袖，只留下了一个赞。😄</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

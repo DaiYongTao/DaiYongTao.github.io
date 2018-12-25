@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。 #二次验证 关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。具体区别不一一表述，可以查看下面的链接。iOS二次验证两种做法的区别我要着重说的是二次验证的实际做法和收到的数据是什么。 ####一、二次验证具体如何验证在这分为测试地址和实际上线地址测试：h">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/iOS随笔/iOS内购之二次验证.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。 #二次验证 关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。具体区别不一一表述，可以查看下面的链接。iOS二次验证两种做法的区别我要着重说的是二次验证的实际做法和收到的数据是什么。 ####一、二次验证具体如何验证在这分为测试地址和实际上线地址测试：h">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-25T09:57:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。 #二次验证 关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。具体区别不一一表述，可以查看下面的链接。iOS二次验证两种做法的区别我要着重说的是二次验证的实际做法和收到的数据是什么。 ####一、二次验证具体如何验证在这分为测试地址和实际上线地址测试：h">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/iOS随笔/iOS内购之二次验证.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+  
+
+
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。</p>
+<p>#二次验证</p>
+<p>关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。<br>具体区别不一一表述，可以查看下面的链接。<br><a href="https://www.cnblogs.com/zhaoqingqing/p/4597794.html" target="_blank" rel="noopener">iOS二次验证两种做法的区别</a><br>我要着重说的是二次验证的实际做法和收到的数据是什么。</p>
+<p>####一、二次验证具体如何验证<br>在这分为测试地址和实际上线地址<br>测试：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://sandbox.itunes.apple.com/verifyReceipt</a><br>已上线Appstore：<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://buy.itunes.apple.com/verifyReceipt</a><br>在沙箱测试时，我们使用测试地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 从沙盒中获取交易凭证(收据)</span><br><span class="line">NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];</span><br><span class="line">    </span><br><span class="line">// 转化为base64字符串</span><br><span class="line">NSString *receiptString = [receiptData base64EncodedStringWithOptions:0];</span><br></pre></td></tr></table></figure>
+<p>为了方便拿到数据，我们在app端上进行验证，注意⚠️实际开发中都是在服务端进行验证的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 拼接请求数据</span><br><span class="line">NSString *bodyString = [NSString stringWithFormat:@&quot;&#123;\&quot;receipt-data\&quot; : \&quot;%@\&quot;&#125;&quot;, receiptString];</span><br><span class="line">NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">// 创建请求到苹果官方进行购买验证</span><br><span class="line">NSURL *url = [NSURL URLWithString:verifyReceipt_url];</span><br><span class="line">NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">requestM.HTTPBody = bodyData;</span><br><span class="line">requestM.HTTPMethod = @&quot;POST&quot;;</span><br><span class="line"></span><br><span class="line">// 创建连接并发送同步请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;验证购买过程中发生错误，错误信息：%@&quot;,error.localizedDescription);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];</span><br></pre></td></tr></table></figure></p>
+<p>####二、收据回传得到的数据分析<br>上文得到的dic就是我们通过收据得到的所有数据<br>在这里有个坑，我相信有很多同学都踩过。<br>就是你支付成功了，但是在这个数组里却找不到你想要的数据。<br>我们可以看下面一张图，然后再分析分析。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内购类型.png"></p>
+<p>可以看到有四种类型，但是具体到我们项目中我们该如何选择和操作呢。</p>
+<blockquote>
+<p>1.消耗型：比如我们游戏里的金币，6元600个金币，你使用完了就失效了。比如现在各大视频app推出的电影购买，6元买完一张影片之后，你如果想买下一张影片就必须再次购买。<br>2.非消耗型：比如某app推出永久会员，购买一次终身使用，就是非消耗型。再比如游戏过关时app的某关，你一直过不去，花钱购买过去了，等你下次再打开app时，他这关默认是已经通过的。<br>3.自动续订型：具体可以看爱奇艺视频开通会员（腾讯app也类似），里面就有一个自动续订会员。也就是到期了，它会自动从你的苹果账号上扣钱。这个慎点慎点，他们这样搞很坑钱。<br>4.非自动续订型：这个就是1个月优酷会员啦，或者3个月季度会员啥的。有期限，到期时也不会自动扣钱。一般的都是选择这个，不然像爱奇艺的自动续订，用户不知情时，会被骂死，哈哈</p>
+</blockquote>
+<p>说了这么多，来看看订单数据长啥样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	product_id = &quot;lalalalahahaha&quot;,//商品的标识，和产品定，随便写但是不能重复</span><br><span class="line">	quantity = &quot;1&quot;,//购买商品的数量</span><br><span class="line">	transaction_id = &quot;1000000357637984&quot;,//交易的标识</span><br><span class="line">	purchase_date_ms = &quot;1512613065000&quot;,//购买时间毫秒</span><br><span class="line">	original_purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//购买时间,太平洋标准时间</span><br><span class="line">	purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//太平洋标准时间</span><br><span class="line">	original_purchase_date_ms = &quot;1512613065000&quot;,//毫秒</span><br><span class="line">	is_trial_period = &quot;false&quot;,</span><br><span class="line">	original_purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;,//原始购买时间</span><br><span class="line">	original_transaction_id = &quot;1000000357637984&quot;,//原始交易ID</span><br><span class="line">	purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;//购买时间</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>我们得到的字典里如果有多条数据，就会有一个数组in_app。<br>如果只有一条数据，或者没有数据，就没有in_app。<br>in_app里的数据格式就如上文代码所书。</p>
+<p>所有的订单信息都在in_app里。所以我们要找到最新成功的那条数据，就需要在这里面去找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1.消耗性的和其他的有区别，消耗性的下一次购买的，会覆盖上一次购买的，所以只有一条消耗性的订单信息，当然也是最新的。</span><br><span class="line">2.其他三种每次购买，都会生成新的订单信息，不会覆盖原来的，所以你购买多少次，上面就会显示多少条。</span><br></pre></td></tr></table></figure>
+<p>####三、内购二次验证实际开发中具体做法</p>
+<blockquote>
+<p>1.我们把收据信息传给服务器<br>2.服务器自行处理所有的订单信息，返回一个成功与失败的状态给我们。所有的操作，后台都已经记录在案了，我们不再需要管。我们只需要知道，此次购买是否成功就行了。</p>
+</blockquote>
+<p>结语：内购其实很简单，只是有时候不经意就会入坑，在此特意记录下困惑的地方，帮助自己深刻记忆，也希望帮助到其他遇到该问题的童鞋。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

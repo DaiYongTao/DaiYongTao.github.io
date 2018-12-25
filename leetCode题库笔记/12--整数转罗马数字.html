@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="#一、题目原型：可参考  13. 罗马数字转整数 #二、题目意思剖析：其实就是和 13. 罗马数字转整数反着来12345678910111213141516输入: 3输出: &amp;quot;III&amp;quot;输入: 4输出: &amp;quot;IV&amp;quot;输入: 9输出: &amp;quot;IX&amp;quot;输入: 58输出: &amp;quot;LVIII&amp;quot;解释: C = 100, L = 50, XXX">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/leetCode题库笔记/12--整数转罗马数字.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#一、题目原型：可参考  13. 罗马数字转整数 #二、题目意思剖析：其实就是和 13. 罗马数字转整数反着来12345678910111213141516输入: 3输出: &amp;quot;III&amp;quot;输入: 4输出: &amp;quot;IV&amp;quot;输入: 9输出: &amp;quot;IX&amp;quot;输入: 58输出: &amp;quot;LVIII&amp;quot;解释: C = 100, L = 50, XXX">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-0a26b401ff4c3084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-25T09:57:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="#一、题目原型：可参考  13. 罗马数字转整数 #二、题目意思剖析：其实就是和 13. 罗马数字转整数反着来12345678910111213141516输入: 3输出: &amp;quot;III&amp;quot;输入: 4输出: &amp;quot;IV&amp;quot;输入: 9输出: &amp;quot;IX&amp;quot;输入: 58输出: &amp;quot;LVIII&amp;quot;解释: C = 100, L = 50, XXX">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/leetCode题库笔记/12--整数转罗马数字.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+  
+
+
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>#一、题目原型：<br>可参考  <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a></p>
+<p>#二、题目意思剖析：<br>其实就是和 <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a>反着来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: 3</span><br><span class="line">输出: &quot;III&quot;</span><br><span class="line"></span><br><span class="line">输入: 4</span><br><span class="line">输出: &quot;IV&quot;</span><br><span class="line"></span><br><span class="line">输入: 9</span><br><span class="line">输出: &quot;IX&quot;</span><br><span class="line"></span><br><span class="line">输入: 58</span><br><span class="line">输出: &quot;LVIII&quot;</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: 1994</span><br><span class="line">输出: &quot;MCMXCIV&quot;</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNum = num</span><br><span class="line">    var arr: [Int] = []</span><br><span class="line">    while tempNum != 0 &#123;</span><br><span class="line">        arr.append(tempNum % 10)</span><br><span class="line">        tempNum = tempNum / 10</span><br><span class="line">    &#125;</span><br><span class="line">    var numArr: [Int] = Array.init(repeating: 0, count: arr.count)</span><br><span class="line">    for i in 0..&lt;arr.count &#123;</span><br><span class="line">        </span><br><span class="line">        let haha: Int = Int.init(pow(10.0, Double(i)))</span><br><span class="line">        numArr[arr.count - 1 - i] = haha * arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    for i in 0..&lt;numArr.count &#123;</span><br><span class="line">        </span><br><span class="line">        var num: Int = numArr[i]</span><br><span class="line">        </span><br><span class="line">        if num == 900 &#123;</span><br><span class="line">            resultStr += &quot;CM&quot;</span><br><span class="line">        &#125;else if num == 400 &#123;</span><br><span class="line">            resultStr += &quot;CD&quot;</span><br><span class="line">        &#125;else if num == 90 &#123;</span><br><span class="line">            resultStr += &quot;XC&quot;</span><br><span class="line">        &#125;else if num == 40 &#123;</span><br><span class="line">            resultStr += &quot;XL&quot;</span><br><span class="line">        &#125;else if num == 9 &#123;</span><br><span class="line">            resultStr += &quot;IX&quot;</span><br><span class="line">        &#125;else if num == 4 &#123;</span><br><span class="line">            resultStr += &quot;IV&quot;</span><br><span class="line">        &#125;else if num % 1000 == 0 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1000 &#123;</span><br><span class="line">                resultStr += &quot;M&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 500 &amp;&amp; num &lt; 1000&#123;</span><br><span class="line">            num = num - 500</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 500 &#123;</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">        &#125;else if num % 100 == 0 &amp;&amp; num &lt; 500&#123;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 50 &amp;&amp; num &lt; 100&#123;</span><br><span class="line">            num = num - 50</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 50 &#123;</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">        &#125;else if num % 10 == 0 &amp;&amp; num &lt; 50 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &lt; 10 &amp;&amp; num &gt; 5 &#123;</span><br><span class="line">            num = num - 5</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">            for _ in 0..&lt;num &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 5 &#123;</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">        &#125;else if num &lt;= 3 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1 &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 优化方案</span><br><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var lala = num</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    let numList = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]</span><br><span class="line">    let romanList = [&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;,</span><br><span class="line">&quot;V&quot;, &quot;IV&quot;, &quot;I&quot;]</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;numList.count &#123;</span><br><span class="line">        </span><br><span class="line">        if lala &lt; numList[i] &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        while lala &gt;= numList[i] &#123;</span><br><span class="line">            lala = lala - numList[i]</span><br><span class="line">            resultStr += romanList[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>第一种方法看起来是不是特麻烦，我写起来的时候也是，得想清楚。。。<br>之后优化的方案清晰多了。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-0a26b401ff4c3084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
