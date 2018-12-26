@@ -293,759 +293,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/leetCode题库笔记/17.电话号码的字母组合/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/05/leetCode题库笔记/17.电话号码的字母组合/" class="post-title-link" itemprop="url">17.电话号码的字母组合</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-05 20:02:12" itemprop="dateCreated datePublished" datetime="2018-07-05T20:02:12+08:00">2018-07-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:17:30" itemprop="dateModified" datetime="2018-12-26T15:17:30+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。<br>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-0cb3d33198ad2914.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="电话按键"></p>
-<p>#二、题目意思剖析：<br>其实呢就是一个排列组合，将字母按照有序的顺序组合起来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">    2-abc</span><br><span class="line">    3-def</span><br><span class="line">    4-ghi</span><br><span class="line">    5-jkl</span><br><span class="line">    6-mno</span><br><span class="line">    7-pqrs</span><br><span class="line">    8-tuv</span><br><span class="line">    9-wxyz</span><br><span class="line"> </span><br><span class="line">   输入：&quot;23&quot;</span><br><span class="line">   输出：[&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].</span><br><span class="line">   如果输入的是 245</span><br><span class="line">   输出：[&quot;agj&quot;, &quot;agk&quot;, &quot;agl&quot;, &quot;ahj&quot;, &quot;ahk&quot;, &quot;ahl&quot;, &quot;aij&quot;, &quot;aik&quot;, &quot;ail&quot;......</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>我呢是用swift语法来做，但是逻辑思路都是相通的。<br>第一想到的应该是递归。通过递归，再加上一些判断条件，将对应的字符串加入进数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 1.最外围的主方法</span><br><span class="line">func letterCombinations(_ digits: String) -&gt; [String] &#123;</span><br><span class="line">    if digits.isEmpty &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    //  由于swift语法特性，需要将digits字符串包装为一个数组</span><br><span class="line">    var strings: [String] = []</span><br><span class="line">    for digit in digits &#123;</span><br><span class="line">        let str: String = String.init(digit)</span><br><span class="line">        strings .append(str)</span><br><span class="line">    &#125;</span><br><span class="line">    haha(strings,0)</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// 2.核心代码实现</span><br><span class="line">func haha(_ strings: [String], _ index: Int) &#123;</span><br><span class="line">    if str.count == strings.count &#123;</span><br><span class="line">        result .append(str)</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    // 防止数组越界</span><br><span class="line">    if index &gt;= strings.count &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    // 1.首先我们需要一个电话号码base数组。</span><br><span class="line">    let bases: [[String]] = [[&quot;&quot;],[&quot;&quot;],[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;],[&quot;d&quot;,&quot;e&quot;,&quot;f&quot;],[&quot;g&quot;,&quot;h&quot;,&quot;i&quot;],[&quot;j&quot;,&quot;k&quot;,&quot;l&quot;],[&quot;m&quot;,&quot;n&quot;,&quot;o&quot;],[&quot;p&quot;,&quot;q&quot;,&quot;r&quot;,&quot;s&quot;],[&quot;t&quot;,&quot;u&quot;,&quot;v&quot;],[&quot;w&quot;,&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]]</span><br><span class="line">    // 2.通过index索引将strings对应的字符串元素转换为Int类型的索引</span><br><span class="line">    // baseIndex : 电话号码(数字)索引,比如strings=[&quot;2&quot;,&quot;4&quot;,&quot;5&quot;],baseIndex就是2,4,5</span><br><span class="line">    let baseIndex: Int = (Int)(strings[index])!</span><br><span class="line">    for i in 0..&lt;bases[baseIndex].count &#123;</span><br><span class="line">        // 拿到子数组里对应的字母</span><br><span class="line">        let baseStr: String = bases[baseIndex][i]</span><br><span class="line">        // 1.如果当前正在添加第一个字母,就将str清空</span><br><span class="line">        if index == 0 &#123;</span><br><span class="line">            str .removeAll()</span><br><span class="line">        &#125;</span><br><span class="line">        /* 2.如果当前正在添加最后一个字母,并且不是第一个字母串,就删除str的最后一个字符</span><br><span class="line">             比如index = 2,说明在添加第三个字母，如果i不等于0，就需要把最后一个字母删除。</span><br><span class="line">             &quot;agj&quot;, &quot;agk&quot;, &quot;agl&quot;</span><br><span class="line">             过程 : agj - ag - agk - ag - agl</span><br><span class="line">         */</span><br><span class="line">        else if index == strings.count - 1 &amp;&amp; i != 0&#123;</span><br><span class="line">            str .removeLast()</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            // 3.如果str不为空，需要删除字母串的后面几位，通过index来设定</span><br><span class="line">            // 用str的长度 - index得到后面需要删除的长度</span><br><span class="line">            // &quot;jmpt&quot;, &quot;jmpu&quot;, &quot;jmpv&quot;, &quot;jmqt&quot;, &quot;jmqu&quot;, &quot;jmqv&quot;, &quot;jmrt&quot;, &quot;jmru&quot;, &quot;jmrv&quot;, &quot;jmst&quot;, &quot;jmsu&quot;, &quot;jmsv</span><br><span class="line">            </span><br><span class="line">            // 比如当前字符串为 jmrv，index为2，就需要删除后面 4 - 2 = 2，删除后面2位。</span><br><span class="line">            // baseStr为s，然后接下来的baseStr为t。</span><br><span class="line">            // 过程 : jmrv - jm - jms - jmst</span><br><span class="line">            if !str.isEmpty &#123;</span><br><span class="line">                str .removeLast(str.count - index)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        str .append(baseStr)</span><br><span class="line">        haha(strings, index + 1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>有时候这类题都是去找规律，我们需要把一些例子所得到的数据展示出来，然后去寻找规律，让计算的过程直观的表达出来。<br>注：可以在haha方法里加入一个indexs数组，result也不要限定条件来添加，然后直接在letterCombinations方法里打印出indexs和result的值。这样可以非常直观的查看添加过程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func haha(_ strings: [String], _ index: Int) &#123;</span><br><span class="line">    indexs .append(index)</span><br><span class="line">    result .append(str)</span><br><span class="line">    、、、后面的代码不变</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-699c02b94608c237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-424a9f5580170199.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-<p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/旅行/东西涌穿越官方攻略/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/06/11/旅行/东西涌穿越官方攻略/" class="post-title-link" itemprop="url">东西涌穿越官方攻略</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-11 10:38:12" itemprop="dateCreated datePublished" datetime="2018-06-11T10:38:12+08:00">2018-06-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:33:59" itemprop="dateModified" datetime="2018-12-26T15:33:59+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/旅行/" itemprop="url" rel="index"><span itemprop="name">旅行</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##一、收拾行囊(物品准备)<br>时间：最好在出发的前一天晚上准备好<br>装备：<br>1、穿戴： 帽子、头巾(围脖、护脸多功能使用)、护臂(直接淘宝搜护肘护臂)、手套(防滑的就行)、太阳镜(可以考虑带，很帅)、衣服带两套(长裤一条、短袖两件)、运动鞋一双、拖鞋一双(可以考虑带)、泳裤一条、沙滩裤(短裤)一条、不会游泳的那边有泳圈租10元一个、一把伞(防晒、防雨)<br>2、药品：扭伤药系列(防止有人意外扭伤，及时处理)、花露水(要穿越树林和一些茂密的草丛，驱蚊止痒)、然后防晒霜啥的(男孩子就别带了，做好上面的穿戴就没事)。<br>3、吃喝：1袋面包(不需要太多，5个就够了)、4个煌上煌鸭架(补充盐分)、4根黄瓜(4根真的不多，你相信那几根黄瓜是我吃过最好吃的黄瓜吗)、2瓶2元怡宝水、1瓶盐水 (注–以上说的吃喝，是一个人的分量哦，水最好都带冰的，解渴)<br>4、报备：可以提前在<a href="https://dp.coolcar365.com/wtt/home/outing/outing?from=singlemessage&amp;isappinstalled=0" target="_blank" rel="noopener">网上报备</a>，也可以现场报备，其实就是登记一下。</p>
-<p>差不多就这些，如果还有遗漏的，再及时补充。</p>
-<p>##二、出发<br>起点：早上5点半起床，洗漱收拾东西差不多10-15分钟，5:45在楼下直接拦了辆车（早上出租车还是挺多的），几分钟就到了深圳北站交通枢纽公交站。问了下路，坐E11路是在二楼。差不多在6点前就到了，这时是可以赶上第一班的。不过我那朋友迟到了，最后我们坐的6点半那车。<br>定位目的地技巧：直接在百度地图搜索E11路，直接会有一个起点终点，找到深圳北站交通枢纽公交站，点击然后点击到这去，直接导航。从我民乐新村(地铁4号线民乐站附近)这到那边不到五公里，开车花了10分钟不到。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-b325248dc0872e3f.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="起点.JPG"></p>
-<p>坐车：坐E11到 (南澳街道办站) 下车，然后在南澳街道办站等车。<br>1.如果你要去东涌，就做M231，到终点站东涌浴场下车；<br>2.如果去西涌，就做M232，到西涌三四号浴场下车（其实后面那几站都行，西涌海岸线简直太美了，又比较长，到哪下都行，不要去终点站西涌西贡村就行。）<br>坐车时间：6点半上车，8点25到南澳街道办，南澳街道办坐车到东涌/西冲大概20-30分钟。总体时间：2个半小时左右。<br>ps：最好下一个叫做“车来了”的app，这样方便很多。</p>
-<p>##三、路线建议：东涌 到 西涌<br>到了南澳街道办，就直接坐M231去东涌。不要进去东涌浴场，切记切记！！！那里完全和西涌浴场没法比，只有西涌海岸线长的四分之一可能更少，价格却是20元一人，西涌是13。<br>到了终点站，直接下车往东涌码头走，那边有一座桥，百度地图没更新，大概在这个位置。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-31bf4e249e29ad56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="东涌码头.png"></p>
-<p>桥的那边会有人守着，你需要登记一下(报备)。<br>过桥沿着土路（能容纳一辆车的路）一直走，看到一个小亭子(铁皮房)，里面有人吹着空调(可能也不在)，不用管他。直接往左转上山，此时沿着路走你就开始穿越啦。</p>
-<p>##四、正式穿越<br>时间控制：穿越时间3小时<br>穿越时间一般在3-5小时之间。我们是两个人(男孩)，行动力比较强，从报备登记完到目的地差不多花了3个小时，包括了中间休息的时间。中间休息大概在8-10次，每次3-5分钟，如果坚持不了，就找一个就近的地方休息，最好是有遮阴的地方。喝口水、多做深呼吸，慢慢走不要急。<br>路就一直跟着海岸线走就行了，有些很陡峭，有些很平坦，在岩石上跳来跳去要小心，不要扭到脚，注意安全，如果队伍里有女生，最好有几个男孩子带着，慢慢走。放几张图，你们感受下。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-3c1aef4f370e7d38.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="山石"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-5421086276cdc6ff.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="峭壁"><br>有些困难，这样就会有挑战性，人活着就需要做一些自己不一定能完全做好的事，这样才会有意义，这段记忆会一直存储在你的记忆里，经久不息。</p>
-<p>##五、东西涌路线选择<br>1、东西冲穿越：如果你要爬山穿越（很苦的，脚会很酸，有些地方很陡峭，要注意安全），累但是很有意义。<br>2、如果不穿越，单纯的是想去海边玩玩，看看干净的海水，看看日出，踩着沙子看着心爱的人的笑容，那就完全可以直接坐M232去西涌。(海边小屋我问了，双人床一晚238，两张床一晚338，需要电话的话留言，我不是打广告的坚决不是，因为那个要提前预定，火爆期真的怕订不到。也可以自己带帐篷，在那搭着睡)<br>西涌是真的好看，好几公里的海岸线，延绵无尽。海水清澈见底，沙子柔软，你可以光着脚踩着沙子慢慢走，也可以租一个太阳伞在那躺着坐着，一天感觉就会过得很缓慢，听着海浪的拍打声，陪着自己的家人开开心心的，一切就真的很美好，其实这就是幸福生活了吧。也是自己一个人偶尔放松放松、放空自己的非常好的去处。<br>额，我不会游泳，怕吃海水，太特么咸了，学了很久也不会。<br>喜欢游泳的在那呆上两天，你就知道那简直就是天堂。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-25fc26c7dd88f55f.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="沙滩"></p>
-<p>————————————我是分割线——————————————————</p>
-<p>前段时间家里人来深圳玩，我又去了一趟西冲，路线大致相同但也有些不同，再次分享下。</p>
-<p>1.起点还是<code>深圳北</code>，时间是接近中午的时候。这次因为带着家人路途遥远，我们就在<code>大棚中心站</code>下的车，补充了能量吃了个午饭。在那公交站附近有一个华润万家超市，我们把很多多余的背包都存放在那了，免费的，你就说去买东西等下来拿😄。</p>
-<p>2.然后坐<code>M232</code>，直接到达<code>西冲一号浴场</code>。然后租了几个游泳圈就过去了。然后发现人炒鸡多。。。这个时候是下午不到4点的时候。当然，海水依旧清澈，旁边时不时有人坐快艇过，一浪接一浪。有人冲浪、有人潜水。</p>
-<p>3.然后我妈妈不打算住宿，我们玩了几个小时就打道回府了。差不多6点钟开始出发，折回大棚中心，取东西，然后等<code>E11</code>，8点半到了家，之后当然就是丰盛的晚餐咯。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/iOS随笔/iOS瀑布流之横-纵瀑布流/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/06/08/iOS随笔/iOS瀑布流之横-纵瀑布流/" class="post-title-link" itemprop="url">iOS瀑布流之横-纵瀑布流</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-08 10:16:12" itemprop="dateCreated datePublished" datetime="2018-06-08T10:16:12+08:00">2018-06-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 14:56:48" itemprop="dateModified" datetime="2018-12-26T14:56:48+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、开篇</p>
-<p>####1.瀑布流设计讨论<br>1.应用场景：在我们app开发中，瀑布流一般应用于大数据展示时，比如淘宝搜索页面、蘑菇街app、各大直播app主播列表页面等等。</p>
-<p>2.设计思路：我们首要考虑UICollectionView,因为UICollectionView特殊性和可复用性。因为瀑布流每个格子item大小不同，需要计算每个item的宽高，就需要自定义UICollectionViewLayout。</p>
-<p>####2.瀑布流分类<br>我把瀑布流分为两种：垂直瀑布流、水平瀑布流。</p>
-<p>1.垂直瀑布流：在我们app上实现的瀑布流一般是垂直瀑布流，也就是列数可设定，item宽度由列数决定，从上往下布局。</p>
-<p>2.水平瀑布流：我在搜索网页百度图片时，看到百度图片的布局从而想到的一种布局方式。每行的高度是可设定的，item高度由图片大小决定，比例缩放。</p>
-<p>####3.瀑布流样式展示<br><img src="https://upload-images.jianshu.io/upload_images/1869467-06e7c4b154b9f2ac.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="垂直瀑布.jpeg"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-02a5fe8096cbcf84.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="水平瀑布.jpeg"></p>
-<p>#二、具体实现</p>
-<p>####1.创建一个UICollectionViewCell，它上面只有一个imageView。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// CollectionViewCell.m</span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    </span><br><span class="line">    if (self = [super initWithFrame:frame]) &#123;</span><br><span class="line">        _imageView = [[UIImageView alloc] init];</span><br><span class="line">        _imageView.frame = self.bounds;</span><br><span class="line">        [self addSubview:_imageView];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>####2.我们需要自定义一个layout，并且暴露一些可设置的属性用来控制瀑布流的对应展示，让瀑布流可用性更强大一些。</p>
-<p>######2.1 头文件：DYTWaterflowLayout.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout : UICollectionViewLayout</span><br><span class="line">/**</span><br><span class="line"> *  行高(水平瀑布流时),默认为100</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowHeight;</span><br><span class="line">/**</span><br><span class="line"> *  单元格宽度(垂直瀑布流时)</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat itemWidth;</span><br><span class="line">/**</span><br><span class="line"> *  列数 : 默认为3</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) NSInteger numberOfColumns;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  内边距 : 每一列之间的间距 (top, left, bottom, right)默认为&#123;10, 10, 10, 10&#125;;</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) UIEdgeInsets insets;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一行之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一列之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat columnGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  高度数组 : 存储所有item的高度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemHeights;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  宽度数组 : 存储所有item的宽度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemWidths;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  瀑布流类型 : 分为水平瀑布流 和 垂直瀑布流</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) DirectionType type;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>######2.2 .m文件：DYTWaterflowLayout.m属性声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout()</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) NSMutableArray *itemAttributes; // 存放每个cell的布局属性</span><br><span class="line"></span><br><span class="line">// 垂直瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsHeights; // 每一列的高度(count=多少列)</span><br><span class="line">@property (nonatomic, assign) CGFloat maxHeight; // 最长列的高度(最大高度)</span><br><span class="line">@property (nonatomic, assign) CGFloat minHeight; // 最短列的高度(最低高度)</span><br><span class="line">@property (nonatomic, assign) NSInteger minIndex; // 最短列的下标</span><br><span class="line">@property (nonatomic, assign) NSInteger maxIndex; // 最长列的下标</span><br><span class="line"></span><br><span class="line">// 水平瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsWidths; // 每一行的宽度(count不确定)</span><br><span class="line">@property (nonatomic, assign) NSInteger tempItemX; // 临时x : 用来计算每个cell的x值</span><br><span class="line">@property (nonatomic, assign) NSInteger maxRowIndex; //最大行</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>######2.3 .m文件：DYTWaterflowLayout.m主要方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">// </span><br><span class="line">#pragma mark -- 系统内部方法</span><br><span class="line">/**</span><br><span class="line"> *  重写父类布局</span><br><span class="line"> */</span><br><span class="line">- (void)prepareLayout &#123;</span><br><span class="line">    </span><br><span class="line">    [super prepareLayout];</span><br><span class="line">    // (水平瀑布流时)重置最大行</span><br><span class="line">    if ((self.type == HorizontalType)) &#123;</span><br><span class="line">        self.maxRowIndex = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (self.type == VerticalType) &#123;</span><br><span class="line">        // (垂直瀑布流时)重置每一列的高度</span><br><span class="line">        [self.columnsHeights removeAllObjects];</span><br><span class="line">        for (NSUInteger i = 0; i &lt; self.numberOfColumns; i++) &#123;</span><br><span class="line">            [self.columnsHeights addObject:@(self.insets.top)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 计算所有cell的布局属性</span><br><span class="line">    [self.itemAttributes removeAllObjects];</span><br><span class="line">    NSUInteger itemCount = [self.collectionView numberOfItemsInSection:0];</span><br><span class="line">    self.tempItemX = self.insets.left;</span><br><span class="line">    for (NSUInteger i = 0; i &lt; itemCount; ++i) &#123;</span><br><span class="line">        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];</span><br><span class="line">        if (self.type == VerticalType) &#123;</span><br><span class="line">            [self setVerticalFrame:indexPath];</span><br><span class="line">        &#125;else if ((self.type == HorizontalType))&#123;</span><br><span class="line">            [self setHorizontalFrame:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  水平瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setHorizontalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    CGFloat w = [self.itemWidths[indexPath.item] floatValue];</span><br><span class="line">    CGFloat width = w + self.columnGap;</span><br><span class="line">    CGFloat h = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     *  如果当前的x值+当前cell的宽度 超出了 屏幕宽度，那么就要换行了。</span><br><span class="line">     *  换行操作 : 最大行+1，tempItemX重置为10(self.insets.left)。</span><br><span class="line">     */</span><br><span class="line">    if (self.tempItemX + w &gt; [UIScreen mainScreen].bounds.size.width) &#123;</span><br><span class="line">        self.maxRowIndex++;</span><br><span class="line">        self.tempItemX = self.insets.left;</span><br><span class="line">    &#125;</span><br><span class="line">    CGFloat x = self.tempItemX;</span><br><span class="line">    CGFloat y = self.insets.top + self.maxRowIndex * (h + self.rowGap);</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度由外部传进来，高度固定为rowHeight(默认为100)。</span><br><span class="line">     *    2.cell的x : 通过tempItemX算好了。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">    self.tempItemX += width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  垂直瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setVerticalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    </span><br><span class="line">    // cell的frame</span><br><span class="line">    CGFloat w = self.itemWidth;</span><br><span class="line">    CGFloat h = [self.itemHeights[indexPath.item] floatValue];</span><br><span class="line">    CGFloat x = self.insets.left + self.minIndex * (w + self.columnGap);</span><br><span class="line">    CGFloat y = self.minHeight + self.rowGap;</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度固定(itemWidth已经算好)，高度由外部传进来</span><br><span class="line">     *    2.cell的x : minIndex最短列作为当前列。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    // 更新数组中的最大高度</span><br><span class="line">    self.columnsHeights[self.minIndex] = @(CGRectGetMaxY(attrs.frame));</span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  返回collectionView的尺寸</span><br><span class="line"> */</span><br><span class="line">- (CGSize)collectionViewContentSize &#123;</span><br><span class="line">    CGFloat height;</span><br><span class="line">    if (self.type == HorizontalType) &#123;</span><br><span class="line">        CGFloat rowHeight = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">        height = self.insets.top + (self.maxRowIndex+1) * (rowHeight + self.rowGap);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        height = self.maxHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    return CGSizeMake(self.collectionView.frame.size.width, height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  所有元素（比如cell、补充控件、装饰控件）的布局属性</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect</span><br><span class="line">&#123;</span><br><span class="line">    return self.itemAttributes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######3.1 直接在控制器里使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 设置布局</span><br><span class="line">DYTWaterflowLayout *layout = [[DYTWaterflowLayout alloc]init];</span><br><span class="line">layout.type = _type;</span><br><span class="line">// 设置相关属性(不设置的话也行，都有相关默认配置)</span><br><span class="line">layout.numberOfColumns = 3;</span><br><span class="line">layout.columnGap = 10;</span><br><span class="line">layout.rowGap = 10;</span><br><span class="line">layout.insets = UIEdgeInsetsMake(10, 10, 10, 10);</span><br><span class="line">layout.rowHeight = 100;</span><br><span class="line">self.collectionView.collectionViewLayout = self.waterflowLayout = layout;</span><br></pre></td></tr></table></figure></p>
-<p>######3.2 (举例)垂直瀑布流时，SDWebImage获取图片block里的具体实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (weakSelf.heights.count &lt; weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 根据图片原始比例 计算 当前图片的高度(宽度固定)</span><br><span class="line">   CGFloat scale = image.size.height / image.size.width;</span><br><span class="line">   CGFloat width = weakSelf.waterflowLayout.itemWidth;</span><br><span class="line">   CGFloat height = width * scale;</span><br><span class="line">   NSNumber *heightNum = [NSNumber numberWithFloat:height];</span><br><span class="line">   [weakSelf.heights addObject:heightNum];</span><br><span class="line">&#125;</span><br><span class="line">if (weakSelf.heights.count == weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 赋值所有cell的高度数组itemHeights</span><br><span class="line">   weakSelf.waterflowLayout.itemHeights = weakSelf.heights;</span><br><span class="line">   [weakSelf.collectionView reloadData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######3.3 UICollectionViewDataSource中要注意的点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];</span><br><span class="line">    cell.imageView.image = self.picImageArr[indexPath.item];</span><br><span class="line">    // 注：非常关键的一句，由于cell的复用，imageView的frame可能和cell对不上，需要重新设置。</span><br><span class="line">    cell.imageView.frame = cell.bounds;</span><br><span class="line">    cell.backgroundColor = [UIColor orangeColor];</span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#三、总结<br>1.瀑布流使用场景比较广泛，也是常用的技术之一，我也是又回顾了一遍，并且总结了整体的思路决定分享出来，结尾有demo，童鞋们可以自行下载。另外我参考的资料链接也会贴出，供大家研究比对。<br>2.水平瀑布流还没达到百度图片搜索的那种效果，右边距离屏幕间隙太大了，所以影响美观。后续会继续研究，期待有所突破。<br>3.有种情况是后台直接给图片的所有数据给我们，包括url、图片宽高等等，其实这样就是后台已经做好了图片的顺序优化处理。不过我们可以自己研究一下这个排序思路。如何达到右边间隙几乎相同，比如都为10。<br>4.当然有疑惑的地方可以留言或者直接私信我，我们可以一起讨论。</p>
-<p>#四、总结最终实现效果:<br><img src="https://upload-images.jianshu.io/upload_images/1869467-5b6da2338f3afe16.gif?imageMogr2/auto-orient/strip" alt="瀑布流.gif"></p>
-<p>本文章demo：<br><a href="https://github.com/DaiYongTao/DYTWaterflowLayoutDemo" target="_blank" rel="noopener">瀑布流Demo</a><br>参考相关文章：<br><a href="https://www.jianshu.com/p/826a43d28a39" target="_blank" rel="noopener">iOS–瀑布流的实现</a>  – <a href="/u/12c258ba8408">作者Go_Spec</a><br><a href="https://www.jianshu.com/p/78830bdb04a9" target="_blank" rel="noopener">iOS 瀑布流基本实现</a>  – <a href="/u/19f68e4b47ce">作者iOS_成才录</a></p>
-<blockquote>
-<p>额。。。如果想知道图片里的小姐姐是谁，请直接在文章下面留言。因为我想暂时留点悬念给大家。(皮一下就很开心😄)</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/iOS随笔/UITableViewCell的高度自适应浅析/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/22/iOS随笔/UITableViewCell的高度自适应浅析/" class="post-title-link" itemprop="url">UITableViewCell的高度自适应浅析</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-22 14:12:12" itemprop="dateCreated datePublished" datetime="2018-05-22T14:12:12+08:00">2018-05-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 14:58:28" itemprop="dateModified" datetime="2018-12-26T14:58:28+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>—开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。</p>
-<p>#一.通过frame去计算</p>
-<blockquote>
-<p>第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。</p>
-</blockquote>
-<p>简单布局的就可直接计算，但，如果复杂一些，结构多变，就需要另外创建一个frameModel来专门计算和存储cell的frame。这种情况逻辑复杂，也比较容易出错。</p>
-<p>######需要创建两个模型：model(存储数据)、frameModel(存储cell上子view的frame)</p>
-<p>两者间的关系：frameModel是通过model来进行设置的，通过传入的model中的属性，来判断cell中子view显示或隐藏，从而一步一步得到所有的子view的frame值，最后，将cell的高度保存起来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// model.h</span><br><span class="line">@interface Model : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) NSString *name; //昵称</span><br><span class="line">@property (nonatomic, copy) NSString *icon; //头像</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.h</span><br><span class="line">@class Model;</span><br><span class="line">@interface FrameModel : NSObject</span><br><span class="line"></span><br><span class="line">/** 数据模型 */</span><br><span class="line">@property (nonatomic, strong) Model *model;</span><br><span class="line">/** 头像frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect iconViewF;</span><br><span class="line">/** 昵称frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect nameLabelF;</span><br><span class="line"></span><br><span class="line">/** cell的高度 */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat cellHeight;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    </span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    </span><br><span class="line">    // cell的宽度</span><br><span class="line">    CGFloat cellW = screen_Width;</span><br><span class="line"></span><br><span class="line">    // cell的边框宽度</span><br><span class="line">    CGFloat cellBorderW = 10;</span><br><span class="line">    // cell之间的间距</span><br><span class="line">    CGFloat cellBorderMargin = 15;</span><br><span class="line">    </span><br><span class="line">    // 1.头像</span><br><span class="line">    CGFloat iconWH = 35;</span><br><span class="line">    CGFloat iconX = cellBorderW;</span><br><span class="line">    CGFloat iconY = cellBorderW;</span><br><span class="line">    _iconViewF = CGRectMake(iconX, iconY, iconWH, iconWH);</span><br><span class="line">    </span><br><span class="line">    // 2.昵称</span><br><span class="line">    CGFloat nameX = CGRectGetMaxX(self.iconViewF) + cellBorderW;</span><br><span class="line">    CGFloat nameY = iconY;</span><br><span class="line">    CGSize nameSize = [model.name sizeWithFont:[UIFont systemFontOfSize:15]];</span><br><span class="line">    _nameLabelF = (CGRect)&#123;&#123;nameX,nameY&#125;,nameSize&#125;;</span><br><span class="line">    </span><br><span class="line">    // 13.cell的宽度</span><br><span class="line">    _cellHeight = CGRectGetMaxY(self.nameLabelF) + cellBorderMargin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// cell.h</span><br><span class="line">@class FrameModel;</span><br><span class="line">@interface Cell : UITableViewCell</span><br><span class="line"></span><br><span class="line">+ (Cell *)cellWithTableView:(UITableView *)tableView;</span><br><span class="line">/** frame模型 */</span><br><span class="line">@property (nonatomic, strong) FrameModel *frameModel;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setFrameModel:(FrameModel *)frameModel &#123;</span><br><span class="line">    </span><br><span class="line">    _frameModel = frameModel;</span><br><span class="line">    </span><br><span class="line">    Model *model = frameModel.model;</span><br><span class="line">    // 头像</span><br><span class="line">    self.iconView.frame = frameModel.iconViewF;</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    </span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.frame = frameModel.nameLabelF;</span><br><span class="line">    self.nameLabel.text = model.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一步步走下来应该非常直观的。<br>最后也就只有一步了，将拿到的数据进行model和frameModel之间的转换。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  将Model模型转为FrameModel模型</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)frameModelsWithStatuses:(NSArray *)models &#123;</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *frames = [NSMutableArray array];</span><br><span class="line">    for (Model *model in models) &#123;</span><br><span class="line">        FrameModel *frame = [[FrameModel alloc] init];</span><br><span class="line">        frame.model = model;</span><br><span class="line">        [frames addObject:frame];</span><br><span class="line">    &#125;</span><br><span class="line">    return frames;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接下来就是数据展示咯，将frameModel导入进cell里面就OK了。</p>
-<p>这其实是一种分离思路，将各个模块分离化，逻辑会清晰很多，对于复杂的数据和UI异常适合。</p>
-<p>额，其中有一个sizeWithFont，是我创建的一个分类，只是为了简化代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// NSString+Extension.m</span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font maxW:(CGFloat)maxW &#123;</span><br><span class="line">    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];</span><br><span class="line">    attrs[NSFontAttributeName] = font;</span><br><span class="line">    CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);</span><br><span class="line">    NSString *version = [UIDevice currentDevice].systemVersion;</span><br><span class="line">    if ([version doubleValue] &gt; 7.0) &#123;</span><br><span class="line">        return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        return [self sizeWithFont:font constrainedToSize:maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font &#123;</span><br><span class="line">    return [self sizeWithFont:font maxW:MAXFLOAT];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#二.通过自动布局自动适配（推荐使用）<br>1.在cell中，setModel方法中所做的事情只是将数据导入view中进行展示，其他都不用管。label的话需要设定preferredMaxLayoutWidth属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    // 头像</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.text = model.name;    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    CGFloat width = screen_Width - 35 - 5; // label的宽度</span><br><span class="line">    // 自动布局：设定label文字的最大宽度,这个宽度也可以通过外部进行传递，从而设定。</span><br><span class="line">    self.nameLabel.preferredMaxLayoutWidth = width;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.在获取cellHeight代理方法中，因为可能无法获取到当前的cell，我们的目的只是要得到cell的高度，所以在这我们创建了一个临时变量cell，用来计算cellHeight。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    self.cell.nameLabel.text = nil;</span><br><span class="line">    self.cell.model = self.models[indexPath.row];</span><br><span class="line">    // cell进行自动布局，可以得到cellHeight</span><br><span class="line">    CGFloat cellHeight = [self.cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;</span><br><span class="line">    return cellHeight&gt;31.0f? cellHeight:31.0f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>后记：如果有些需求是想得到tableview最大的高度，让cell完全展示出来，可以监听tableView的contentSize属性。<br>注：iOS10以下，监听contentSize属性；iOS10及以上监听scrollView.contentSize属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;scrollView.contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    </span><br><span class="line">    float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">    if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height; //得到tableview的高度。</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;scrollView.contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height;</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看到这里，或许你挥一挥衣袖，只留下了一个赞。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/iOS随笔/APP基础功能的配置管理之系统权限控制/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2159,11 +1406,752 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/iOS随笔/iOS内购之二次验证/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/01/25/iOS随笔/iOS内购之二次验证/" class="post-title-link" itemprop="url">iOS内购之二次验证</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-25 10:55:12" itemprop="dateCreated datePublished" datetime="2018-01-25T10:55:12+08:00">2018-01-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:56:14" itemprop="dateModified" datetime="2018-12-26T14:56:14+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。</p>
+<p>#二次验证</p>
+<p>关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。<br>具体区别不一一表述，可以查看下面的链接。<br><a href="https://www.cnblogs.com/zhaoqingqing/p/4597794.html" target="_blank" rel="noopener">iOS二次验证两种做法的区别</a><br>我要着重说的是二次验证的实际做法和收到的数据是什么。</p>
+<p>####一、二次验证具体如何验证<br>在这分为测试地址和实际上线地址<br>测试：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://sandbox.itunes.apple.com/verifyReceipt</a><br>已上线Appstore：<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://buy.itunes.apple.com/verifyReceipt</a><br>在沙箱测试时，我们使用测试地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 从沙盒中获取交易凭证(收据)</span><br><span class="line">NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];</span><br><span class="line">    </span><br><span class="line">// 转化为base64字符串</span><br><span class="line">NSString *receiptString = [receiptData base64EncodedStringWithOptions:0];</span><br></pre></td></tr></table></figure>
+<p>为了方便拿到数据，我们在app端上进行验证，注意⚠️实际开发中都是在服务端进行验证的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 拼接请求数据</span><br><span class="line">NSString *bodyString = [NSString stringWithFormat:@&quot;&#123;\&quot;receipt-data\&quot; : \&quot;%@\&quot;&#125;&quot;, receiptString];</span><br><span class="line">NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">// 创建请求到苹果官方进行购买验证</span><br><span class="line">NSURL *url = [NSURL URLWithString:verifyReceipt_url];</span><br><span class="line">NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">requestM.HTTPBody = bodyData;</span><br><span class="line">requestM.HTTPMethod = @&quot;POST&quot;;</span><br><span class="line"></span><br><span class="line">// 创建连接并发送同步请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;验证购买过程中发生错误，错误信息：%@&quot;,error.localizedDescription);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];</span><br></pre></td></tr></table></figure></p>
+<p>####二、收据回传得到的数据分析<br>上文得到的dic就是我们通过收据得到的所有数据<br>在这里有个坑，我相信有很多同学都踩过。<br>就是你支付成功了，但是在这个数组里却找不到你想要的数据。<br>我们可以看下面一张图，然后再分析分析。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内购类型.png"></p>
+<p>可以看到有四种类型，但是具体到我们项目中我们该如何选择和操作呢。</p>
+<blockquote>
+<p>1.消耗型：比如我们游戏里的金币，6元600个金币，你使用完了就失效了。比如现在各大视频app推出的电影购买，6元买完一张影片之后，你如果想买下一张影片就必须再次购买。<br>2.非消耗型：比如某app推出永久会员，购买一次终身使用，就是非消耗型。再比如游戏过关时app的某关，你一直过不去，花钱购买过去了，等你下次再打开app时，他这关默认是已经通过的。<br>3.自动续订型：具体可以看爱奇艺视频开通会员（腾讯app也类似），里面就有一个自动续订会员。也就是到期了，它会自动从你的苹果账号上扣钱。这个慎点慎点，他们这样搞很坑钱。<br>4.非自动续订型：这个就是1个月优酷会员啦，或者3个月季度会员啥的。有期限，到期时也不会自动扣钱。一般的都是选择这个，不然像爱奇艺的自动续订，用户不知情时，会被骂死，哈哈</p>
+</blockquote>
+<p>说了这么多，来看看订单数据长啥样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	product_id = &quot;lalalalahahaha&quot;,//商品的标识，和产品定，随便写但是不能重复</span><br><span class="line">	quantity = &quot;1&quot;,//购买商品的数量</span><br><span class="line">	transaction_id = &quot;1000000357637984&quot;,//交易的标识</span><br><span class="line">	purchase_date_ms = &quot;1512613065000&quot;,//购买时间毫秒</span><br><span class="line">	original_purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//购买时间,太平洋标准时间</span><br><span class="line">	purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//太平洋标准时间</span><br><span class="line">	original_purchase_date_ms = &quot;1512613065000&quot;,//毫秒</span><br><span class="line">	is_trial_period = &quot;false&quot;,</span><br><span class="line">	original_purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;,//原始购买时间</span><br><span class="line">	original_transaction_id = &quot;1000000357637984&quot;,//原始交易ID</span><br><span class="line">	purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;//购买时间</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>我们得到的字典里如果有多条数据，就会有一个数组in_app。<br>如果只有一条数据，或者没有数据，就没有in_app。<br>in_app里的数据格式就如上文代码所书。</p>
+<p>所有的订单信息都在in_app里。所以我们要找到最新成功的那条数据，就需要在这里面去找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1.消耗性的和其他的有区别，消耗性的下一次购买的，会覆盖上一次购买的，所以只有一条消耗性的订单信息，当然也是最新的。</span><br><span class="line">2.其他三种每次购买，都会生成新的订单信息，不会覆盖原来的，所以你购买多少次，上面就会显示多少条。</span><br></pre></td></tr></table></figure>
+<p>####三、内购二次验证实际开发中具体做法</p>
+<blockquote>
+<p>1.我们把收据信息传给服务器<br>2.服务器自行处理所有的订单信息，返回一个成功与失败的状态给我们。所有的操作，后台都已经记录在案了，我们不再需要管。我们只需要知道，此次购买是否成功就行了。</p>
+</blockquote>
+<p>结语：内购其实很简单，只是有时候不经意就会入坑，在此特意记录下困惑的地方，帮助自己深刻记忆，也希望帮助到其他遇到该问题的童鞋。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/22/iOS随笔/iOS导航栏设置背景图片/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/01/22/iOS随笔/iOS导航栏设置背景图片/" class="post-title-link" itemprop="url">iOS导航栏设置背景图片</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-22 15:37:12" itemprop="dateCreated datePublished" datetime="2018-01-22T15:37:12+08:00">2018-01-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:55:41" itemprop="dateModified" datetime="2018-12-26T14:55:41+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、基础知识铺垫<br>1.众所周知，导航栏设置背景图片有两个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.-setBackgroundImage:forBarMetrics:</span><br><span class="line">2.-setBackgroundImage:forBarPosition:barMetrics:</span><br></pre></td></tr></table></figure></p>
+<p>设置属性的话分别取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">forBarPosition ： </span><br><span class="line">UIBarPositionAny</span><br><span class="line">UIBarPositionBottom ：官方解释shadow above the bar，注：除了这个枚举，其他使用都有效。</span><br><span class="line">UIBarPositionTop</span><br><span class="line">UIBarPositionTopAttached</span><br><span class="line"></span><br><span class="line">barMetrics ： </span><br><span class="line">UIBarMetricsDefault ： 我试过了除了这个默认属性，其他的使用了都无效。</span><br><span class="line">UIBarMetricsCompact</span><br><span class="line">UIBarMetricsDefaultPrompt</span><br><span class="line">UIBarMetricsCompactPrompt</span><br><span class="line">UIBarMetricsLandscapePhone</span><br><span class="line">UIBarMetricsLandscapePhonePrompt</span><br><span class="line"></span><br><span class="line">注：一般情况下，只需要用1方法就行。</span><br></pre></td></tr></table></figure></p>
+<p>##二、遇到问题<br>但是，我就这么设置，然后遇到一个问题。<br>UI给了我们有一张颜色渐变的背景图，尺寸为750*6。<br>这张图分别用于：1.我们app中所有的按钮 2.首页的一张背景图 3.导航栏背景<br>设置时，这张图默认是平铺的。设置按钮和UIImageview时都没问题，但是导航栏背景出问题了。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-432ac52cf7df5a53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<p>从图中可以看出，导航栏的颜色和用UIImageView设置的颜色并不相同，导航栏中颜色没有渐变。<br>怎么办呢，我在想这是什么原因造成的。</p>
+<p>我把设置导航栏的代码又检查了一遍，而且用了各种方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如 ： 1.将图片变成颜色给导航栏设置backgroundcolor </span><br><span class="line">        2.自己来画渐变色</span><br><span class="line">        3.设置导航栏的透明度 </span><br><span class="line">        4.自定义UINavigaitonbar、、、等等</span><br></pre></td></tr></table></figure></p>
+<p>但是毫无效果，我细细琢磨，发现该导航栏上的颜色并没有出现渐变的颜色，而只取到了渐变颜色最左边的色值。有个朋友提醒我是不是导航栏设置颜色和其他控件设置颜色有什么不同。</p>
+<p>最终我们猜想是导航栏可能是通过像素来平铺图片的。而出现上面问题的原因是，我这张背景图只有一张，没有@2x和@3x。在这里又涉及到关于@1x和@2x、@3x的意思和设置问题。<img src="http://upload-images.jianshu.io/upload_images/1869467-aac41d779e9c0755.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">知识小结：</span><br><span class="line">如果只有一张图，拖进Xcode中Assets.xcassets里，会自动放入@1x的选项框内。</span><br><span class="line">在iPhone4及后面的机型，都是取@2x和@3x的。那如果没有@2x和@3x，会默认选择@1x，而且尺寸和原图像素相同。</span><br><span class="line">如果有@2x和@3x，得到的尺寸是原图像素的一半。</span><br><span class="line">所以UI给我的图是750*6，我只取到了它的前一部分的色值。所以颜色没有渐变。</span><br></pre></td></tr></table></figure></p>
+<p>##三、验证猜想<br>为了验证猜想，我将图设置为320*6，用的是iPhone5s进行测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-c051bc99ad77e2aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
+<p>完美！<br>此刻我的心情是激动的，为了进一步验证我的猜想，我创建了两张图@2x和@3x，图的尺寸分别为750 × 626和1125 × 939。<br>为了方便观看效果，我用了另一张图来试验，用的是iPhone7测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-356b94738d6997b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<p>问题完美解决。<br>由于代码非常简单，这里给一张渐变的图，就放入下文了。<br>资源文件：<img src="http://upload-images.jianshu.io/upload_images/1869467-289d0554c21fda27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gradient.png"></p>
+<p>——————————————————– 分割线 ————————————————–<br>还有个东西忘记说了，就是设置设置导航栏底部阴影效果。<br>系统有个方法是:setShadowImage<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@&quot;timg&quot;]]; //这里的timg就是那张叶子图</span><br></pre></td></tr></table></figure></p>
+<p>然后得到了下面这样的效果。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-280c9d35cde437fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
+<p>初看时觉得这又是啥情况，它的UI结构其实很简单，如下图<br><img src="http://upload-images.jianshu.io/upload_images/1869467-46f848935dec33fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"></p>
+<p>由此可见，导航栏上所有的图片设置，都是按照像素来平铺的。</p>
+<p>为了达到阴影效果，我在下面的UIImageView上加了一个view，设置view的阴影。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage new]]; //去除导航栏自带阴影</span><br><span class="line">UIView *view = [[UIView alloc] init];</span><br><span class="line">view.backgroundColor = [UIColor blackColor]; //这个随便设置什么颜色，切记不可设置为clearColor</span><br><span class="line">view.frame = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, 1);</span><br><span class="line">view.layer.shadowOpacity = 0.7; //不透明度</span><br><span class="line">view.layer.shadowOffset = CGSizeMake(0, 3); //偏移距离</span><br><span class="line">view.layer.shadowRadius = 5; //阴影半径</span><br><span class="line">[self.imgView addSubview: view];</span><br></pre></td></tr></table></figure></p>
+<p>最终效果：<br><img src="http://upload-images.jianshu.io/upload_images/1869467-0a5b0f088f69153f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/iOS随笔/Github上如何创建ssh/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/13/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Github上如何创建ssh</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-11-13 15:03:12" itemprop="dateCreated datePublished" datetime="2017-11-13T15:03:12+08:00">2017-11-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:54:58" itemprop="dateModified" datetime="2018-12-26T14:54:58+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##1.创建本地ssh：操作环境（终端）</p>
+<blockquote>
+<ol>
+<li>ssh-keygen  </li>
+<li>输入密码</li>
+<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
+</ol>
+</blockquote>
+<p>##2.在Github上创建ssh</p>
+<blockquote>
+<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/iOS随笔/如何上传本地项目到GitHub远程仓库中/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/13/iOS随笔/如何上传本地项目到GitHub远程仓库中/" class="post-title-link" itemprop="url">如何上传本地项目到GitHub远程仓库中</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-11-13 14:22:12" itemprop="dateCreated datePublished" datetime="2017-11-13T14:22:12+08:00">2017-11-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:47:05" itemprop="dateModified" datetime="2018-12-26T14:47:05+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、建立本地仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cd到本地项目的文件夹路径下</span><br><span class="line">2.创建git: git init</span><br><span class="line">3.git add .</span><br><span class="line">4.git commit -m &apos;初始化想写啥写啥&apos;</span><br></pre></td></tr></table></figure></p>
+<p>##二、添加远程仓库：操作环境（github上）<br><img src="http://upload-images.jianshu.io/upload_images/1869467-316031cfb1547f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.点击添加.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-a767b37dbca93c18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.创建repository.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-3e83cd81bef52c65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.创建完成.png"></p>
+<p>##三、建立连接：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:DaiYongTao/demo.git</span><br></pre></td></tr></table></figure></p>
+<p>其中<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:DaiYongTao/demo.git` 是图3中选择SSH时的地址</p>
+<p>##四、将本地仓库push到远程仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master // 第一次推送master分支上所有的内容</span><br><span class="line">git push origin master // 推送最新修改</span><br></pre></td></tr></table></figure></p>
+<p>##五、错误问题解决办法<br>(很重要！！！注：在做这些步骤的前提是已经将ssh在本地创建好了。亦或者你的ssh已经过期了，你进行上面的最后一个步骤时会报错。所以需要检查ssh状态)</p>
+<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
+<p>是因为你的ssh过期了，需要重新获取ssh，然后添加到github上去。</p>
+<p>相关链接：<a href="http://www.jianshu.com/p/4c06335b29a7" target="_blank" rel="noopener">Github上如何创建ssh</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 
@@ -2206,7 +2194,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">64</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

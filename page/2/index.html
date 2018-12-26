@@ -293,767 +293,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/leetCode题库笔记/387--字符串中的第一个唯一字符/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/26/leetCode题库笔记/387--字符串中的第一个唯一字符/" class="post-title-link" itemprop="url">387. 字符串中的第一个唯一字符</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-26 17:43:12" itemprop="dateCreated datePublished" datetime="2018-09-26T17:43:12+08:00">2018-09-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:24:23" itemprop="dateModified" datetime="2018-12-26T15:24:23+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。<br>注意事项：您可以假定该字符串只包含小写字母。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">返回 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">返回 2.</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>用ASCII码来判断，因为一个字符对应唯一的一个ASCII码。由于题目可以假定只包含小写字母，我们范围就可缩小至小写字母这一块：97~122。<br>用一个count=27的数组，所有元素初始化都为0。如果ASCII码出现一次，该元素就+1；如果重复出现多次，该元素就会&gt;1。所以我们只需要拿到最后的==1的元素就行。取它的i值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let allLowerLetters: [Int8]? = &quot;abcdefghijklmnopqrstuvwxyz&quot;.cString(using: String.Encoding.utf8)</span><br><span class="line">// 小写字母ASCII码为：97~122</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func firstUniqChar(_ s: String) -&gt; Int &#123;</span><br><span class="line">    // 1.先将字符串转换成ASCII码数组</span><br><span class="line">    let chars: [Int8]? = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    var ret: Int = -1</span><br><span class="line">    var last: [Int] = Array.init(repeating: 0, count: 27)</span><br><span class="line">    </span><br><span class="line">    if s.count &gt; 0 &#123;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            last[hash_i - hash_a] = last[hash_i - hash_a] + 1</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            if last[hash_i - hash_a] == 1 &#123;</span><br><span class="line">                ret = i</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>1.耗时<code>188</code>毫秒，超过<code>96.94%</code>的提交记录，总提交数<code>104</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/leetCode题库笔记/344--反转字符串/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/25/leetCode题库笔记/344--反转字符串/" class="post-title-link" itemprop="url">344. 反转字符串</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-25 18:10:12" itemprop="dateCreated datePublished" datetime="2018-09-25T18:10:12+08:00">2018-09-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:24:07" itemprop="dateModified" datetime="2018-12-26T15:24:07+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>编写一个函数，其作用是将输入的字符串反转过来。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;hello&quot;</span><br><span class="line">输出: &quot;olleh&quot;</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: &quot;amanaP :lanac a ,nalp a ,nam A&quot;</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.用一个数组存起来，再反向遍历。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    var chars: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        chars.append(char)</span><br><span class="line">    &#125;</span><br><span class="line">    var string: String = &quot;&quot;</span><br><span class="line">    var index = s.count - 1</span><br><span class="line">    while index &gt;= 0 &#123;</span><br><span class="line">        string.append(chars[index])</span><br><span class="line">        index = index - 1</span><br><span class="line">    &#125;</span><br><span class="line">    return string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.用一个数组接收字符串，直接利用原数组进行反转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)!</span><br><span class="line">    var left = 0</span><br><span class="line">    var right = s.count - 1</span><br><span class="line">    </span><br><span class="line">    while left &lt; right &#123;</span><br><span class="line">        </span><br><span class="line">        let char = chars[left]</span><br><span class="line">        chars[left] = chars[right]</span><br><span class="line">        chars[right] = char</span><br><span class="line">        </span><br><span class="line">        left = left + 1</span><br><span class="line">        right = right - 1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">      print(chars)</span><br><span class="line">    return String.init(utf8String: chars)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>1.耗时<code>60</code>毫秒，超过<code>48%</code>的提交记录，总提交数<code>476</code>。<br>2.耗时<code>36</code>毫秒，超过<code>99.33%</code>的提交记录，总提交数<code>476</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/leetCode题库笔记/326--3的幂/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/25/leetCode题库笔记/326--3的幂/" class="post-title-link" itemprop="url">326. 3的幂</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-25 17:16:12" itemprop="dateCreated datePublished" datetime="2018-09-25T17:16:12+08:00">2018-09-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:23:40" itemprop="dateModified" datetime="2018-12-26T15:23:40+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个整数，写一个函数来判断它是否是 3 的幂次方。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入: 27</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: 0</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">输入: 9</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: 45</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>除以3，然后判断%3是否=0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func isPowerOfThree(_ n: Int) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if n &lt; 3 &#123;</span><br><span class="line">        if n == 1 &#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var mut_n = n</span><br><span class="line">    while mut_n &gt; 0  &#123;</span><br><span class="line">        if mut_n % 3 != 0 &amp;&amp; mut_n != 1 &#123;</span><br><span class="line">            print(mut_n)</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">        mut_n = mut_n / 3</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>耗时<figure class="highlight plain"><figcaption><span>```毫秒，超过```30%```的提交记录，总提交数```21038 ```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">----------------</span><br><span class="line"></span><br><span class="line">&gt;进阶：你能不使用循环或者递归来完成本题吗？</span><br><span class="line"></span><br><span class="line">思路：在Int有效范围内找出最大的3的幂次方的数b，只要n是3的幂次方，那么n必定能被b整除。</span><br></pre></td></tr></table></figure></p>
-<p>func isPowerOfThree(_ n: Int) -&gt; Bool {</p>
-<pre><code>if n &lt;= 0 {
-    return false
-}
-
-// 将整数转换为浮点型
-let max = Double(Int.max)
-
-// 求出Int范围内最大的3的幂 -- 39
-let k = Int(log(max) / log(3.0))
-
-// 得到Int范围内最大的3的幂次方，幂=k
-
-let b: Int = Int(pow(3.0, Double(k)))
-
-// 如果n是3的幂次方，那么b必定能整除n
-return b % n == 0
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">然而，问题出来了，leetcode输入27，竟然是错的！！！</span><br><span class="line">后面发现，原来是精确度的问题。</span><br><span class="line"></span><br><span class="line">&gt;float：2^23 = 8388608，一共七位，这意味着最多能有7位有效数字，但绝对能保证的为6位，也即float的精度为```6~7```位有效数字； </span><br><span class="line"></span><br><span class="line">&gt;double：2^52 = 4503599627370496，一共16位，同理，double的精度为```15~16```位；</span><br><span class="line"></span><br><span class="line">&gt; decimal：1-10^38 ~ 10^38-1 的固定精度和小数位的数字，精度为```28~29```位有效数字；</span><br></pre></td></tr></table></figure></p>
-<p>// pow(3.0, 39.0)所得结果<br>Float：    4052555218645155840<br>Double：   4052555153018976256<br>Decimal:   4052555153018976267<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明显是Double的精度不够了，算出的结果精度要求为```18```位。</span><br><span class="line">所以我把Double换成了Decimal。</span><br></pre></td></tr></table></figure></p>
-<p>func isPowerOfThree(_ n: Int) -&gt; Bool {</p>
-<pre><code>if n &lt;= 0 {
-    return false
-}
-
-// 将整数转换为浮点型
-let max = Double(Int.max)
-
-// 求出Int范围内最大的3的幂 -- 39
-let k: Int = Int(log(max) / log(3.0))
-
-// 得到Int范围内最大的3的幂次方，幂=k
-let x: Decimal = Decimal.init(3)
-let b: Int = Int(pow(x, k).description)!
-
-// 如果n是3的幂次方，那么b必定能整除n
-return int_b % n == 0
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">然后，报错了。。。😭</span><br><span class="line">```cannot invoke &apos;pow&apos; with an argument list of type &apos;(Decimal, Int)&apos;</span><br></pre></td></tr></table></figure></p>
-<p>leetcode编译板竟然编译不通过，说类型不对。<br>苹果上写的是有这个类型的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 苹果官方文档</span><br><span class="line">public func pow(_ x: Decimal, _ y: Int) -&gt; Decimal</span><br></pre></td></tr></table></figure></p>
-<p>算了，懒得去搞那个类型了。我发现，直接把正确的数据填上去不就完了吗<br>最终代码，超简易。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">func isPowerOfThree(_ n: Int) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if n &lt;= 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let b: Int = 4052555153018976267</span><br><span class="line">    return b % n == 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#小结<br>耗时<code>244</code>毫秒，超过<code>97.5%</code>的提交记录，总提交数<code>21038</code>。完美😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/leetCode题库笔记/204-计算质数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/21/leetCode题库笔记/204-计算质数/" class="post-title-link" itemprop="url">204.计算质数</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-21 18:08:12" itemprop="dateCreated datePublished" datetime="2018-09-21T18:08:12+08:00">2018-09-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-26 15:23:19" itemprop="dateModified" datetime="2018-12-26T15:23:19+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>统计所有小于非负整数 n 的质数的数量。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 10</span><br><span class="line">输出: 4</span><br><span class="line">解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。（不包括10）</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：</p>
-<blockquote>
-<p>注意：题意是 所有小于n的数字里，<br>质数定义为在大于1的自然数中，除了1和它本身以外不再有其他因数。<br>也就是只能被1和自己整除的数。</p>
-</blockquote>
-<p>首先看一个关于质数分布的规律：大于等于5的质数一定和6的倍数相邻。例如 （5和7）（11和13）（17和19）等等；<br>证明：令x≥1，将大于等于5的自然数表示如下：<br>··· 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ···<br>可以看到，不在6的倍数两侧，即6x两侧的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。<br>因此在5到sqrt(n)中每6个数只判断2个，时间复杂度O(sqrt(n)/3)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 判断一个数字是否为质数</span><br><span class="line">func isPrime(_ num: Int) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if num%6 != 1 &amp;&amp; num%6 != 5 &#123; //不是质数</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let num_sqrt = sqrt(Double(num))</span><br><span class="line">    let n = Int(num_sqrt) + 1</span><br><span class="line">    </span><br><span class="line">    var index: Int = 5</span><br><span class="line">    </span><br><span class="line">    if n &gt;= 5 &#123;</span><br><span class="line">        while index &lt;= n &#123;</span><br><span class="line">            if num % index == 0 || num % (index+2) == 0 &#123; //不是质数</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            index = index + 6</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func countPrimes(_ n: Int) -&gt; Int &#123;</span><br><span class="line">    var count: Int = 0</span><br><span class="line">    if n == 1 || n == 2 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;else if n == 3 &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;else if n == 4 || n == 5 &#123;</span><br><span class="line">        return 2</span><br><span class="line">    &#125;else if n == 6 || n == 7 &#123;</span><br><span class="line">        return 3</span><br><span class="line">    &#125;else if n &gt; 7 &#123;</span><br><span class="line">        for i in 7..&lt;n &#123;</span><br><span class="line">            count = 3</span><br><span class="line">            if self.isPrime(i) &#123;</span><br><span class="line">                count = count + 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return count</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>耗时<code>1524</code>毫秒，超过<code>45.16%</code>的提交记录，总提交数<code>20</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/leetCode题库笔记/412--Fizz-Buzz/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2160,11 +1399,723 @@ return nums
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/leetCode题库笔记/217--存在重复元素/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/20/leetCode题库笔记/217--存在重复元素/" class="post-title-link" itemprop="url">217. 存在重复元素</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-20 19:29:12" itemprop="dateCreated datePublished" datetime="2018-09-20T19:29:12+08:00">2018-09-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 15:20:41" itemprop="dateModified" datetime="2018-12-26T15:20:41+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个整数数组，判断是否存在重复元素。<br>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,1]</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [1,2,3,4]</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">示例 3:</span><br><span class="line">输入: [1,1,1,3,3,4,3,2,4,2]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.先排序，然后通过两个指针进行遍历比较，相同就直接返回true。<br>耗时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">func containsDuplicate(_ nums: [Int]) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = nums.sorted()</span><br><span class="line">    let count = mutNums.count</span><br><span class="line">    var i: Int = 0</span><br><span class="line">    var j: Int = 1</span><br><span class="line">    </span><br><span class="line">    while i&lt;j &amp;&amp; i&lt;count &amp;&amp; j&lt;count &#123;</span><br><span class="line">        if mutNums[i] == mutNums[j] &#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            i = i + 1</span><br><span class="line">            j = j + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.直接用set来判断，因为set是无重复数据的集合。<br>耗时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;Swift语言 提供Arrays、Sets和Dictionaries三种基本的集合类型用来存储集合数据。</span><br><span class="line">数组（Arrays）是有序数据的集。</span><br><span class="line">集合（Sets）是无序无重复数据的集。</span><br><span class="line">字典（Dictionaries）是无序的键值对的集。</span><br></pre></td></tr></table></figure></p>
+<p>func containsDuplicate(_ nums: [Int]) -&gt; Bool {<br>    let set = Set(nums)<br>    return set.count &lt; nums.count<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.用Set的另一个方法，.inserted，如果集合里存在某个元素，再加该元素时，.inserted = false。</span><br><span class="line">耗时```48```毫秒，超过```98.33%```的提交记录。</span><br></pre></td></tr></table></figure></p>
+<p>// checkNums ：[1] [1,2] [1,2,3] [1,2,3,4]<br>// 因为集合里有3，所以加不进去，所以.inserted = false，说明有重复的数字<br>func containsDuplicate(_ nums: [Int]) -&gt; Bool {<br>    if nums.count &lt;= 1 { return false}<br>    var checkNums: Set<int> = [nums.first!]<br>    for i in 1..&lt;nums.count {<br>        if !checkNums.insert(nums[i]).inserted {<br>            return true<br>        }<br>    }<br>    return false<br>}<br><code>`</code></int></p>
+<p>#四、小结<br>推荐使用2、3方法，总提交数18.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/14/leetCode题库笔记/136--只出现一次的数字/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/14/leetCode题库笔记/136--只出现一次的数字/" class="post-title-link" itemprop="url">136. 只出现一次的数字</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-14 17:29:12" itemprop="dateCreated datePublished" datetime="2018-09-14T17:29:12+08:00">2018-09-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 15:20:16" itemprop="dateModified" datetime="2018-12-26T15:20:16+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetCode题库笔记/" itemprop="url" rel="index"><span itemprop="name">leetCode题库笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">说明：</span><br><span class="line">你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</span><br><span class="line">示例 1:</span><br><span class="line">输入: [2,2,1]</span><br><span class="line">输出: 1</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [4,1,2,1,2]</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：</p>
+<p>######第一种<br>根据题目意思，数组的个数一定是奇数。(2+2+2+1+2)类似这样,先排个序，然后 i = i + 2，一旦前后不同，就return前面那个数字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func singleNumber(_ nums: [Int]) -&gt; Int &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 1 &#123;</span><br><span class="line">        return nums.first!</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 0 0 1 1 2 3 3</span><br><span class="line">    // 除了某个元素只出现一次以外，其余每个元素均出现两次 </span><br><span class="line">    // 说明数组个数一定是奇数</span><br><span class="line">    var mutnums = nums.sorted()</span><br><span class="line">    var index: Int = 0</span><br><span class="line">    while index &lt; mutnums.count &#123;</span><br><span class="line">        //print(index)</span><br><span class="line">        if index+1 &gt;= mutnums.count &#123;</span><br><span class="line">            return mutnums[index]</span><br><span class="line">        &#125;</span><br><span class="line">        //上面代码已经屏蔽掉了index+1越界的情况</span><br><span class="line">        if mutnums[index] != mutnums[index+1] &#123;</span><br><span class="line">            return mutnums[index]</span><br><span class="line">        &#125;</span><br><span class="line">        index = index + 2</span><br><span class="line">    &#125;</span><br><span class="line">    //print(mutnums)</span><br><span class="line">    return -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>######第二种：异或法<br>找到数组里唯一不同的那个数字，其实可以用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">两个相同数字 异或所得到的是0，可以测试下。</span><br></pre></td></tr></table></figure></p>
+<p>{<br>    var temp: Int = 2<br>    temp ^= 2<br>    print(temp)<br>}<br>打印的temp = 0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0异或任何数字，都等于原数字本身</span><br></pre></td></tr></table></figure></p>
+<p>{<br>    var temp: Int = 0<br>    temp ^= 2<br>    print(temp)<br>}<br>打印的temp = 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">######原理：</span><br><span class="line">假设如果 A = 60，且 B = 13，现在以二进制格式表示，它们如下所示：</span><br><span class="line"></span><br><span class="line">A = 0011 1100</span><br><span class="line">B = 0000 1101</span><br><span class="line">-----------------</span><br><span class="line">A&amp;B = 0000 1100</span><br><span class="line"></span><br><span class="line">A|B = 0011 1101</span><br><span class="line"></span><br><span class="line">A^B = 0011 0001</span><br><span class="line"></span><br><span class="line">~A  = 1100 0011</span><br><span class="line"></span><br><span class="line">&gt;&amp; 两者同时为真才为真；| 两者一者为真就为真；^相同为假，不同为真</span><br><span class="line"></span><br><span class="line">所以，我们只要用0去异或数组里所有的数字，最后得到的就是不同的那个数字。</span><br></pre></td></tr></table></figure></p>
+<p>func singleNumber(_ nums: [Int]) -&gt; Int {<br>    if nums.count == 1 {<br>        return nums.first!<br>    }<br>    // 异或<br>    var temp: Int = 0<br>    for num in nums {<br>        temp ^= num<br>    }<br>    return temp<br>}<br><code>`</code></p>
+<p>#四、小结<br>第一种方法耗时 <code>144ms</code>，超过<code>19.02%</code>提交记录。<br>第二种方法耗时 <code>32ms</code>，超过<code>68.1%</code>提交记录。<br>总提交数：16。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/手绘/《名侦探柯南》--灰原哀/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/12/手绘/《名侦探柯南》--灰原哀/" class="post-title-link" itemprop="url">《名侦探柯南》--灰原哀</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-12 18:02:12" itemprop="dateCreated datePublished" datetime="2018-09-12T18:02:12+08:00">2018-09-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 15:30:09" itemprop="dateModified" datetime="2018-12-26T15:30:09+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/涂鸦/" itemprop="url" rel="index"><span itemprop="name">涂鸦</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://upload-images.jianshu.io/upload_images/1869467-f023a500a5e195df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="胡乱画"></p>
+<p>画友评价：头发线条不清晰，结构布局有些不对，眼睛间距太宽。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/手绘/《一人之下》----王也/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/12/手绘/《一人之下》----王也/" class="post-title-link" itemprop="url">《一人之下》 -- 王也</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-12 17:58:12" itemprop="dateCreated datePublished" datetime="2018-09-12T17:58:12+08:00">2018-09-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 15:30:49" itemprop="dateModified" datetime="2018-12-26T15:30:49+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/涂鸦/" itemprop="url" rel="index"><span itemprop="name">涂鸦</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>《一人之下》第一季豆瓣评分8.6，第二季豆瓣评分9.2，可以去看看。里面最有灵性也最神秘的角色当属武当王道长。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-46bf7b769a381c15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初稿"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-7f37dd43af09e9f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终稿"></p>
+<p>画友评价：眼睛太大，右边脸太小了，脖子太长。。。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2207,7 +2158,7 @@ return nums
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">64</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
