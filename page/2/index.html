@@ -293,6 +293,764 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/Github上如何创建ssh/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##1.创建本地ssh：操作环境（终端）</p>
+<blockquote>
+<ol>
+<li>ssh-keygen  </li>
+<li>输入密码</li>
+<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
+</ol>
+</blockquote>
+<p>##2.在Github上创建ssh</p>
+<blockquote>
+<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/QBImagePickerController导航栏的设置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/QBImagePickerController导航栏的设置/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：想必大家对QBImagePickerController是非常熟悉的吧，至于怎么用很简答，网上、简书上有各位大神说的很详细。<br>在此，我要说一个小知识，一不小心，思考方向走错了，可能会花上一两个小时哦。</p>
+<p>##一、我的困惑</p>
+<blockquote>
+<p>1.它是否有导航栏，熟悉的同学都知道我们跳转QBImagePickerController时，都是直接present，是模态视图之间的跳转，而并不是push过去的。而且我们看到的QBImagePickerController的导航栏都是透明的。那么，我们就会考虑，它是否真的有导航栏呢。</p>
+</blockquote>
+<p>验证我的想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.[imagePickerController.navigationController.navigationBar setBackgroundColor:[UIColor redColor]];</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.imagePickerController.view.backgroundColor = [UIColor redColor];</span><br></pre></td></tr></table></figure>
+<p>通过上面的两种方法都毫无效果，使我更加走进了一个误区，我认定QBImagePickerController没有导航栏。那么我猜想他头部的控件该是自定义的了，应该要暴露设置的参数给我，可惜我找了几遍，都没有。</p>
+<p>##二、刨根问底，直接进入pod里面的QBImagePickerController目录下<br><img src="http://upload-images.jianshu.io/upload_images/1869467-9193df32d1a7979c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="storyboard.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1869467-846837bf8cd16dcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置.png"></p>
+<p>一看之下，才知道QBImagePickerController确实有导航控制器，不过是系统的UINavigationController，导航栏的背景颜色为空。我直接将storyboard里的UINavigationController类改成我自定义的导航控制器。问题引刃而解。</p>
+<p>结语：有时候我们思考问题会走弯路，写这篇小知识，是希望自己走过的弯路提前告诉大家，给碰到问题的同学一点小帮助。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/UITableViewCell的高度自适应浅析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/UITableViewCell的高度自适应浅析/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。</p>
+<p>#一.通过frame去计算</p>
+<blockquote>
+<p>第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。</p>
+</blockquote>
+<p>简单布局的就可直接计算，但，如果复杂一些，结构多变，就需要另外创建一个frameModel来专门计算和存储cell的frame。这种情况逻辑复杂，也比较容易出错。</p>
+<p>######需要创建两个模型：model(存储数据)、frameModel(存储cell上子view的frame)</p>
+<p>两者间的关系：frameModel是通过model来进行设置的，通过传入的model中的属性，来判断cell中子view显示或隐藏，从而一步一步得到所有的子view的frame值，最后，将cell的高度保存起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// model.h</span><br><span class="line">@interface Model : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) NSString *name; //昵称</span><br><span class="line">@property (nonatomic, copy) NSString *icon; //头像</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.h</span><br><span class="line">@class Model;</span><br><span class="line">@interface FrameModel : NSObject</span><br><span class="line"></span><br><span class="line">/** 数据模型 */</span><br><span class="line">@property (nonatomic, strong) Model *model;</span><br><span class="line">/** 头像frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect iconViewF;</span><br><span class="line">/** 昵称frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect nameLabelF;</span><br><span class="line"></span><br><span class="line">/** cell的高度 */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat cellHeight;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    </span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    </span><br><span class="line">    // cell的宽度</span><br><span class="line">    CGFloat cellW = screen_Width;</span><br><span class="line"></span><br><span class="line">    // cell的边框宽度</span><br><span class="line">    CGFloat cellBorderW = 10;</span><br><span class="line">    // cell之间的间距</span><br><span class="line">    CGFloat cellBorderMargin = 15;</span><br><span class="line">    </span><br><span class="line">    // 1.头像</span><br><span class="line">    CGFloat iconWH = 35;</span><br><span class="line">    CGFloat iconX = cellBorderW;</span><br><span class="line">    CGFloat iconY = cellBorderW;</span><br><span class="line">    _iconViewF = CGRectMake(iconX, iconY, iconWH, iconWH);</span><br><span class="line">    </span><br><span class="line">    // 2.昵称</span><br><span class="line">    CGFloat nameX = CGRectGetMaxX(self.iconViewF) + cellBorderW;</span><br><span class="line">    CGFloat nameY = iconY;</span><br><span class="line">    CGSize nameSize = [model.name sizeWithFont:[UIFont systemFontOfSize:15]];</span><br><span class="line">    _nameLabelF = (CGRect)&#123;&#123;nameX,nameY&#125;,nameSize&#125;;</span><br><span class="line">    </span><br><span class="line">    // 13.cell的宽度</span><br><span class="line">    _cellHeight = CGRectGetMaxY(self.nameLabelF) + cellBorderMargin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// cell.h</span><br><span class="line">@class FrameModel;</span><br><span class="line">@interface Cell : UITableViewCell</span><br><span class="line"></span><br><span class="line">+ (Cell *)cellWithTableView:(UITableView *)tableView;</span><br><span class="line">/** frame模型 */</span><br><span class="line">@property (nonatomic, strong) FrameModel *frameModel;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setFrameModel:(FrameModel *)frameModel &#123;</span><br><span class="line">    </span><br><span class="line">    _frameModel = frameModel;</span><br><span class="line">    </span><br><span class="line">    Model *model = frameModel.model;</span><br><span class="line">    // 头像</span><br><span class="line">    self.iconView.frame = frameModel.iconViewF;</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    </span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.frame = frameModel.nameLabelF;</span><br><span class="line">    self.nameLabel.text = model.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一步步走下来应该非常直观的。<br>最后也就只有一步了，将拿到的数据进行model和frameModel之间的转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  将Model模型转为FrameModel模型</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)frameModelsWithStatuses:(NSArray *)models &#123;</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *frames = [NSMutableArray array];</span><br><span class="line">    for (Model *model in models) &#123;</span><br><span class="line">        FrameModel *frame = [[FrameModel alloc] init];</span><br><span class="line">        frame.model = model;</span><br><span class="line">        [frames addObject:frame];</span><br><span class="line">    &#125;</span><br><span class="line">    return frames;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来就是数据展示咯，将frameModel导入进cell里面就OK了。</p>
+<p>这其实是一种分离思路，将各个模块分离化，逻辑会清晰很多，对于复杂的数据和UI异常适合。</p>
+<p>额，其中有一个sizeWithFont，是我创建的一个分类，只是为了简化代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// NSString+Extension.m</span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font maxW:(CGFloat)maxW &#123;</span><br><span class="line">    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];</span><br><span class="line">    attrs[NSFontAttributeName] = font;</span><br><span class="line">    CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);</span><br><span class="line">    NSString *version = [UIDevice currentDevice].systemVersion;</span><br><span class="line">    if ([version doubleValue] &gt; 7.0) &#123;</span><br><span class="line">        return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        return [self sizeWithFont:font constrainedToSize:maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font &#123;</span><br><span class="line">    return [self sizeWithFont:font maxW:MAXFLOAT];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#二.通过自动布局自动适配（推荐使用）<br>1.在cell中，setModel方法中所做的事情只是将数据导入view中进行展示，其他都不用管。label的话需要设定preferredMaxLayoutWidth属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    // 头像</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.text = model.name;    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    CGFloat width = screen_Width - 35 - 5; // label的宽度</span><br><span class="line">    // 自动布局：设定label文字的最大宽度,这个宽度也可以通过外部进行传递，从而设定。</span><br><span class="line">    self.nameLabel.preferredMaxLayoutWidth = width;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.在获取cellHeight代理方法中，因为可能无法获取到当前的cell，我们的目的只是要得到cell的高度，所以在这我们创建了一个临时变量cell，用来计算cellHeight。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    self.cell.nameLabel.text = nil;</span><br><span class="line">    self.cell.model = self.models[indexPath.row];</span><br><span class="line">    // cell进行自动布局，可以得到cellHeight</span><br><span class="line">    CGFloat cellHeight = [self.cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;</span><br><span class="line">    return cellHeight&gt;31.0f? cellHeight:31.0f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后记：如果有些需求是想得到tableview最大的高度，让cell完全展示出来，可以监听tableView的contentSize属性。<br>注：iOS10以下，监听contentSize属性；iOS10及以上监听scrollView.contentSize属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;scrollView.contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    </span><br><span class="line">    float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">    if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height; //得到tableview的高度。</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;scrollView.contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height;</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看到这里，或许你挥一挥衣袖，只留下了一个赞。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/UITableView代理和数据源调用的先后顺序规律探究/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/UITableView代理和数据源调用的先后顺序规律探究/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：因为某些原因和朋友讨论到，tableView在不同的iOS版本中，调用的先后顺序有所不同。特此，我利用相同的代码，在三种版本的模拟器中运行，果然得出了一些特定的规律。</p>
+<p>我设置的数据源有1个section、30行，屏幕完全显示为22行。</p>
+<p>####iOS11.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">numberOfSectionsInTableView</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection		（这四个方法一共调用三次，顺序和此列表显示一样）</span><br><span class="line">numberOfRowsInSection</span><br><span class="line"></span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath </span><br><span class="line">….</span><br><span class="line">….	  (22-5 = 17行)</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection		（在倒数第五行，经测试5是固定的值）</span><br><span class="line">…. 	 </span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath         （剩余的5行，和上面的17行是相同的）</span><br><span class="line">….</span><br></pre></td></tr></table></figure></p>
+<p>####iOS9.0、iOS10.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">这些方法一共调用三次，顺序和此列表显示一样</span><br><span class="line">numberOfSectionsInTableView</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection</span><br><span class="line">heightForFooterInSection</span><br><span class="line">numberOfRowsInSection</span><br><span class="line"></span><br><span class="line">heightForRowAtIndexPath</span><br><span class="line">….</span><br><span class="line">….		(30行)</span><br><span class="line">….</span><br><span class="line"></span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath</span><br><span class="line">….</span><br><span class="line">….		(22行)</span><br><span class="line">….</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">iOS9.0、iOS10.0中</span><br><span class="line">就算以下两个方法都没有实现</span><br><span class="line">self.tableView.sectionHeaderHeight = 20;</span><br><span class="line">self.tableView.sectionFooterHeight = 20;</span><br><span class="line">heightForHeaderInSection和heightForFooterInSection都会调用</span><br><span class="line"></span><br><span class="line">iOS11.0中</span><br><span class="line">以下两个方法都没有实现</span><br><span class="line">self.tableView.sectionHeaderHeight = 20;</span><br><span class="line">self.tableView.sectionFooterHeight = 20;</span><br><span class="line">heightForHeaderInSection和heightForFooterInSection不会调用</span><br></pre></td></tr></table></figure>
+<p>结语：iOS11.0之后对tableview的数据源调用有了很大改变，节省了很多调用成本。更加合理规范化。<br>所以如果有同学在获取不到数据源等等问题时，可以考虑本文所写的调用顺序，从而查找原因。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS内购之二次验证/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/iOS内购之二次验证/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。</p>
+<p>#二次验证</p>
+<p>关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。<br>具体区别不一一表述，可以查看下面的链接。<br><a href="https://www.cnblogs.com/zhaoqingqing/p/4597794.html" target="_blank" rel="noopener">iOS二次验证两种做法的区别</a><br>我要着重说的是二次验证的实际做法和收到的数据是什么。</p>
+<p>####一、二次验证具体如何验证<br>在这分为测试地址和实际上线地址<br>测试：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://sandbox.itunes.apple.com/verifyReceipt</a><br>已上线Appstore：<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://buy.itunes.apple.com/verifyReceipt</a><br>在沙箱测试时，我们使用测试地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 从沙盒中获取交易凭证(收据)</span><br><span class="line">NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];</span><br><span class="line">    </span><br><span class="line">// 转化为base64字符串</span><br><span class="line">NSString *receiptString = [receiptData base64EncodedStringWithOptions:0];</span><br></pre></td></tr></table></figure>
+<p>为了方便拿到数据，我们在app端上进行验证，注意⚠️实际开发中都是在服务端进行验证的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 拼接请求数据</span><br><span class="line">NSString *bodyString = [NSString stringWithFormat:@&quot;&#123;\&quot;receipt-data\&quot; : \&quot;%@\&quot;&#125;&quot;, receiptString];</span><br><span class="line">NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">// 创建请求到苹果官方进行购买验证</span><br><span class="line">NSURL *url = [NSURL URLWithString:verifyReceipt_url];</span><br><span class="line">NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">requestM.HTTPBody = bodyData;</span><br><span class="line">requestM.HTTPMethod = @&quot;POST&quot;;</span><br><span class="line"></span><br><span class="line">// 创建连接并发送同步请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;验证购买过程中发生错误，错误信息：%@&quot;,error.localizedDescription);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];</span><br></pre></td></tr></table></figure></p>
+<p>####二、收据回传得到的数据分析<br>上文得到的dic就是我们通过收据得到的所有数据<br>在这里有个坑，我相信有很多同学都踩过。<br>就是你支付成功了，但是在这个数组里却找不到你想要的数据。<br>我们可以看下面一张图，然后再分析分析。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内购类型.png"></p>
+<p>可以看到有四种类型，但是具体到我们项目中我们该如何选择和操作呢。</p>
+<blockquote>
+<p>1.消耗型：比如我们游戏里的金币，6元600个金币，你使用完了就失效了。比如现在各大视频app推出的电影购买，6元买完一张影片之后，你如果想买下一张影片就必须再次购买。<br>2.非消耗型：比如某app推出永久会员，购买一次终身使用，就是非消耗型。再比如游戏过关时app的某关，你一直过不去，花钱购买过去了，等你下次再打开app时，他这关默认是已经通过的。<br>3.自动续订型：具体可以看爱奇艺视频开通会员（腾讯app也类似），里面就有一个自动续订会员。也就是到期了，它会自动从你的苹果账号上扣钱。这个慎点慎点，他们这样搞很坑钱。<br>4.非自动续订型：这个就是1个月优酷会员啦，或者3个月季度会员啥的。有期限，到期时也不会自动扣钱。一般的都是选择这个，不然像爱奇艺的自动续订，用户不知情时，会被骂死，哈哈</p>
+</blockquote>
+<p>说了这么多，来看看订单数据长啥样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	product_id = &quot;lalalalahahaha&quot;,//商品的标识，和产品定，随便写但是不能重复</span><br><span class="line">	quantity = &quot;1&quot;,//购买商品的数量</span><br><span class="line">	transaction_id = &quot;1000000357637984&quot;,//交易的标识</span><br><span class="line">	purchase_date_ms = &quot;1512613065000&quot;,//购买时间毫秒</span><br><span class="line">	original_purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//购买时间,太平洋标准时间</span><br><span class="line">	purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//太平洋标准时间</span><br><span class="line">	original_purchase_date_ms = &quot;1512613065000&quot;,//毫秒</span><br><span class="line">	is_trial_period = &quot;false&quot;,</span><br><span class="line">	original_purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;,//原始购买时间</span><br><span class="line">	original_transaction_id = &quot;1000000357637984&quot;,//原始交易ID</span><br><span class="line">	purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;//购买时间</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>我们得到的字典里如果有多条数据，就会有一个数组in_app。<br>如果只有一条数据，或者没有数据，就没有in_app。<br>in_app里的数据格式就如上文代码所书。</p>
+<p>所有的订单信息都在in_app里。所以我们要找到最新成功的那条数据，就需要在这里面去找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1.消耗性的和其他的有区别，消耗性的下一次购买的，会覆盖上一次购买的，所以只有一条消耗性的订单信息，当然也是最新的。</span><br><span class="line">2.其他三种每次购买，都会生成新的订单信息，不会覆盖原来的，所以你购买多少次，上面就会显示多少条。</span><br></pre></td></tr></table></figure>
+<p>####三、内购二次验证实际开发中具体做法</p>
+<blockquote>
+<p>1.我们把收据信息传给服务器<br>2.服务器自行处理所有的订单信息，返回一个成功与失败的状态给我们。所有的操作，后台都已经记录在案了，我们不再需要管。我们只需要知道，此次购买是否成功就行了。</p>
+</blockquote>
+<p>结语：内购其实很简单，只是有时候不经意就会入坑，在此特意记录下困惑的地方，帮助自己深刻记忆，也希望帮助到其他遇到该问题的童鞋。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS导航栏设置背景图片/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -390,6 +1148,152 @@
 <p>由此可见，导航栏上所有的图片设置，都是按照像素来平铺的。</p>
 <p>为了达到阴影效果，我在下面的UIImageView上加了一个view，设置view的阴影。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage new]]; //去除导航栏自带阴影</span><br><span class="line">UIView *view = [[UIView alloc] init];</span><br><span class="line">view.backgroundColor = [UIColor blackColor]; //这个随便设置什么颜色，切记不可设置为clearColor</span><br><span class="line">view.frame = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, 1);</span><br><span class="line">view.layer.shadowOpacity = 0.7; //不透明度</span><br><span class="line">view.layer.shadowOffset = CGSizeMake(0, 3); //偏移距离</span><br><span class="line">view.layer.shadowRadius = 5; //阴影半径</span><br><span class="line">[self.imgView addSubview: view];</span><br></pre></td></tr></table></figure></p>
 <p>最终效果：<br><img src="http://upload-images.jianshu.io/upload_images/1869467-0a5b0f088f69153f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/如何上传本地项目到GitHub远程仓库中/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/如何上传本地项目到GitHub远程仓库中/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、建立本地仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cd到本地项目的文件夹路径下</span><br><span class="line">2.创建git: git init</span><br><span class="line">3.git add .</span><br><span class="line">4.git commit -m &apos;初始化想写啥写啥&apos;</span><br></pre></td></tr></table></figure></p>
+<p>##二、添加远程仓库：操作环境（github上）<br><img src="http://upload-images.jianshu.io/upload_images/1869467-316031cfb1547f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.点击添加.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-a767b37dbca93c18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.创建repository.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-3e83cd81bef52c65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.创建完成.png"></p>
+<p>##三、建立连接：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:DaiYongTao/demo.git</span><br></pre></td></tr></table></figure></p>
+<p>其中<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:DaiYongTao/demo.git` 是图3中选择SSH时的地址</p>
+<p>##四、将本地仓库push到远程仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master // 第一次推送master分支上所有的内容</span><br><span class="line">git push origin master // 推送最新修改</span><br></pre></td></tr></table></figure></p>
+<p>##五、错误问题解决办法<br>(很重要！！！注：在做这些步骤的前提是已经将ssh在本地创建好了。亦或者你的ssh已经过期了，你进行上面的最后一个步骤时会报错。所以需要检查ssh状态)</p>
+<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
+<p>是因为你的ssh过期了，需要重新获取ssh，然后添加到github上去。</p>
+<p>相关链接：<a href="http://www.jianshu.com/p/4c06335b29a7" target="_blank" rel="noopener">Github上如何创建ssh</a></p>
 
           
         
@@ -605,7 +1509,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/如何上传本地项目到GitHub远程仓库中/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/手绘/《一人之下》----王也/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -625,7 +1529,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/iOS随笔/如何上传本地项目到GitHub远程仓库中/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/手绘/《一人之下》----王也/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -686,15 +1590,10 @@
       
         
           
-            <p>##一、建立本地仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cd到本地项目的文件夹路径下</span><br><span class="line">2.创建git: git init</span><br><span class="line">3.git add .</span><br><span class="line">4.git commit -m &apos;初始化想写啥写啥&apos;</span><br></pre></td></tr></table></figure></p>
-<p>##二、添加远程仓库：操作环境（github上）<br><img src="http://upload-images.jianshu.io/upload_images/1869467-316031cfb1547f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.点击添加.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-a767b37dbca93c18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.创建repository.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-3e83cd81bef52c65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.创建完成.png"></p>
-<p>##三、建立连接：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:DaiYongTao/demo.git</span><br></pre></td></tr></table></figure></p>
-<p>其中<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:DaiYongTao/demo.git` 是图3中选择SSH时的地址</p>
-<p>##四、将本地仓库push到远程仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master // 第一次推送master分支上所有的内容</span><br><span class="line">git push origin master // 推送最新修改</span><br></pre></td></tr></table></figure></p>
-<p>##五、错误问题解决办法<br>(很重要！！！注：在做这些步骤的前提是已经将ssh在本地创建好了。亦或者你的ssh已经过期了，你进行上面的最后一个步骤时会报错。所以需要检查ssh状态)</p>
-<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
-<p>是因为你的ssh过期了，需要重新获取ssh，然后添加到github上去。</p>
-<p>相关链接：<a href="http://www.jianshu.com/p/4c06335b29a7" target="_blank" rel="noopener">Github上如何创建ssh</a></p>
+            <p>《一人之下》第一季豆瓣评分8.6，第二季豆瓣评分9.2，可以去看看。里面最有灵性也最神秘的角色当属武当王道长。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-46bf7b769a381c15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初稿"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-7f37dd43af09e9f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终稿"></p>
+<p>画友评价：眼睛太大，右边脸太小了，脖子太长。。。</p>
 
           
         
@@ -751,7 +1650,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/11-盛最多水的容器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/手绘/《名侦探柯南》--灰原哀/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -771,7 +1670,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/11-盛最多水的容器/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/手绘/《名侦探柯南》--灰原哀/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -832,890 +1731,8 @@
       
         
           
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。画 n 条垂直线，使得垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br>实质：找最大面积<img src="https://upload-images.jianshu.io/upload_images/1869467-61c7b54e616721d7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="笔记思路"></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">func maxArea(_ height: [Int]) -&gt; Int &#123;</span><br><span class="line">    </span><br><span class="line">    guard height.count &gt; 0 else &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var l: Int = 0</span><br><span class="line">    var r: Int = height.count - 1</span><br><span class="line">    var maxArea = Int.min</span><br><span class="line">    while l &lt; r &#123;</span><br><span class="line">        // 找出两个高度之间更小的那个，找出最大面积</span><br><span class="line">        maxArea = max(maxArea, (r - l) * min(height[l], height[r]))</span><br><span class="line">        // 如果左边高度 &lt; 右边高度，左边+1</span><br><span class="line">        if height[l] &lt; height[r] &#123;</span><br><span class="line">            l = l + 1</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            // 反之，右边-1</span><br><span class="line">            r = r - 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return maxArea</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>因为如果高度不够，水就会溢出，所以就需要找更矮的那个高度。然后乘以他们之间的x距离，就是面积。通过两个指针l和r，节省了一半的时间。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b64f1dffea365db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-bcabf52748b9917c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/1--两数之和/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/1--两数之和/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。<br>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br>从数组里找出两个数，加起来=目标值，返回两个数的位置。<br>当然可能有非常多的两个数组合，所以需要将所有情况都返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [2, 7, 11, 15], target = 9</span><br><span class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</span><br><span class="line">所以返回 [0, 1]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>直接用两个for 循环暴力破解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 暴力破解法 : 时间复杂度O(n的平方) 空间复杂度O(1)，因为只创建了一次变量someInts。</span><br><span class="line">func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</span><br><span class="line">    </span><br><span class="line">    var someInts = [Int]()</span><br><span class="line">    for i in 0..&lt;nums.count &#123;</span><br><span class="line">        for j in i+1..&lt;nums.count &#123;</span><br><span class="line">            if nums[i]+nums[j] == target &#123;</span><br><span class="line">                someInts += [i]</span><br><span class="line">                someInts += [j]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return someInts</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>这题比较简单，从前往后数，相加之后进行比对。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-162fe059185efee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-6b6469661451564e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-<p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/12--整数转罗马数字/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/12--整数转罗马数字/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：<br>可参考  <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a></p>
-<p>#二、题目意思剖析：<br>其实就是和 <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a>反着来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: 3</span><br><span class="line">输出: &quot;III&quot;</span><br><span class="line"></span><br><span class="line">输入: 4</span><br><span class="line">输出: &quot;IV&quot;</span><br><span class="line"></span><br><span class="line">输入: 9</span><br><span class="line">输出: &quot;IX&quot;</span><br><span class="line"></span><br><span class="line">输入: 58</span><br><span class="line">输出: &quot;LVIII&quot;</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: 1994</span><br><span class="line">输出: &quot;MCMXCIV&quot;</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNum = num</span><br><span class="line">    var arr: [Int] = []</span><br><span class="line">    while tempNum != 0 &#123;</span><br><span class="line">        arr.append(tempNum % 10)</span><br><span class="line">        tempNum = tempNum / 10</span><br><span class="line">    &#125;</span><br><span class="line">    var numArr: [Int] = Array.init(repeating: 0, count: arr.count)</span><br><span class="line">    for i in 0..&lt;arr.count &#123;</span><br><span class="line">        </span><br><span class="line">        let haha: Int = Int.init(pow(10.0, Double(i)))</span><br><span class="line">        numArr[arr.count - 1 - i] = haha * arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    for i in 0..&lt;numArr.count &#123;</span><br><span class="line">        </span><br><span class="line">        var num: Int = numArr[i]</span><br><span class="line">        </span><br><span class="line">        if num == 900 &#123;</span><br><span class="line">            resultStr += &quot;CM&quot;</span><br><span class="line">        &#125;else if num == 400 &#123;</span><br><span class="line">            resultStr += &quot;CD&quot;</span><br><span class="line">        &#125;else if num == 90 &#123;</span><br><span class="line">            resultStr += &quot;XC&quot;</span><br><span class="line">        &#125;else if num == 40 &#123;</span><br><span class="line">            resultStr += &quot;XL&quot;</span><br><span class="line">        &#125;else if num == 9 &#123;</span><br><span class="line">            resultStr += &quot;IX&quot;</span><br><span class="line">        &#125;else if num == 4 &#123;</span><br><span class="line">            resultStr += &quot;IV&quot;</span><br><span class="line">        &#125;else if num % 1000 == 0 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1000 &#123;</span><br><span class="line">                resultStr += &quot;M&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 500 &amp;&amp; num &lt; 1000&#123;</span><br><span class="line">            num = num - 500</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 500 &#123;</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">        &#125;else if num % 100 == 0 &amp;&amp; num &lt; 500&#123;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 50 &amp;&amp; num &lt; 100&#123;</span><br><span class="line">            num = num - 50</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 50 &#123;</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">        &#125;else if num % 10 == 0 &amp;&amp; num &lt; 50 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &lt; 10 &amp;&amp; num &gt; 5 &#123;</span><br><span class="line">            num = num - 5</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">            for _ in 0..&lt;num &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 5 &#123;</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">        &#125;else if num &lt;= 3 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1 &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 优化方案</span><br><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var lala = num</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    let numList = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]</span><br><span class="line">    let romanList = [&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;,</span><br><span class="line">&quot;V&quot;, &quot;IV&quot;, &quot;I&quot;]</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;numList.count &#123;</span><br><span class="line">        </span><br><span class="line">        if lala &lt; numList[i] &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        while lala &gt;= numList[i] &#123;</span><br><span class="line">            lala = lala - numList[i]</span><br><span class="line">            resultStr += romanList[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>第一种方法看起来是不是特麻烦，我写起来的时候也是，得想清楚。。。<br>之后优化的方案清晰多了。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-0a26b401ff4c3084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br> 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br> 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</span><br><span class="line"> </span><br><span class="line">示例 2:</span><br><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。</span><br><span class="line">因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br><span class="line"> </span><br><span class="line">示例 3:</span><br><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>将前后两天价格相减，盈利interest = prices[i+1] - prices[i]<br>用一个新数组，将所有正整数加起来就是答案。(方便理解)<br>或者更简单，不用弄新的数组，得到interest后，直接判断是否为正数，如果是就加起来，最后的和就是结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[7,1,5,7,9,4]</span><br><span class="line">  9 - 1 = 8</span><br><span class="line">[-6,4,2,2,-2]</span><br><span class="line">        </span><br><span class="line">[1,7,5,3,6,4]</span><br><span class="line">  7 - 1 = 6</span><br><span class="line">  6 - 3 = 3</span><br><span class="line">  6 + 3 = 9</span><br><span class="line">[6,-2,-2,3,-2]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func maxProfit(_ prices: [Int]) -&gt; Int &#123;</span><br><span class="line">   </span><br><span class="line">    if prices.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var result_interest: Int = 0</span><br><span class="line">    for i in 0..&lt;prices.count-1 &#123;</span><br><span class="line">        </span><br><span class="line">        let interest: Int = prices[i+1] - prices[i]</span><br><span class="line">        if interest &gt; 0 &#123;</span><br><span class="line">            result_interest = result_interest + interest</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result_interest</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-25fef3da1eccdfa6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-db6f1ca480ebb609.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/128-旋转数组/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/128-旋转数组/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。<br> 说明:<br> 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。<br> 要求使用空间复杂度为 O(1) 的原地算法。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,4,5,6,7] 和 k = 3</span><br><span class="line">输出: [5,6,7,1,2,3,4]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [7,1,2,3,4,5,6]</span><br><span class="line">向右旋转 2 步: [6,7,1,2,3,4,5]</span><br><span class="line">向右旋转 3 步: [5,6,7,1,2,3,4]</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [-1,-100,3,99] 和 k = 2</span><br><span class="line">输出: [3,99,-1,-100]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [99,-1,-100,3]</span><br><span class="line">向右旋转 2 步: [3,99,-1,-100]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.最后一个数字 - &gt; 第一个<br>2.最后一个数字 - &gt; 第一个<br>。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func rotate(_ nums: inout [Int], _ k: Int) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = []</span><br><span class="line">    var mut_k: Int = k</span><br><span class="line">    </span><br><span class="line">    while mut_k &gt; 0 &#123;</span><br><span class="line">        mutNums.append(nums.last!)</span><br><span class="line">        for i in 0..&lt;nums.count-1 &#123;</span><br><span class="line">            mutNums.append(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        nums = mutNums</span><br><span class="line">        mutNums = []</span><br><span class="line">        mut_k = mut_k - 1</span><br><span class="line">    &#125;</span><br><span class="line">    print(nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>。。。待续</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/125--验证回文串/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/125--验证回文串/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>说明：本题中，我们将空字符串定义为有效的回文串。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;race a car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>回文串：就是从左边数到右边，和从右边数到左边是一样的。<br>比如：ama<br>题目中说<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">abcdefghijklmnopqrstuvwxyz   97~122 小写字母</span><br><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ   65~90 大写字母</span><br><span class="line">0123456789                   48~57 数字</span><br></pre></td></tr></table></figure></p>
-<p>所以我们只需要判定这一些字符的ASCII码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ s: String) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if s.count == 0 &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    let count = (chars?.count)!</span><br><span class="line">    var mutChars: [Int8] = []</span><br><span class="line">    for i in 0..&lt;count &#123;</span><br><span class="line">        </span><br><span class="line">        if chars![i] &gt;= 97 &amp;&amp; chars![i] &lt;= 122 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 65 &amp;&amp; chars![i] &lt;= 90 &#123;</span><br><span class="line">            // 将大写字母 转小写</span><br><span class="line">            chars![i] = chars![i] + 32</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 48 &amp;&amp; chars![i] &lt;= 57 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let mutCount = mutChars.count</span><br><span class="line">    var revert_mutChars: [Int8] = Array.init(repeating: 0, count: mutCount)</span><br><span class="line">    for i in 0..&lt;mutCount &#123;</span><br><span class="line">        </span><br><span class="line">        revert_mutChars[i] = mutChars[mutCount - 1 - i]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if revert_mutChars == mutChars &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>1.耗时<code>44</code>毫秒，超过<code>78.57%</code>的提交记录，总提交数<code>476</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/13--罗马数字转整数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/13--罗马数字转整数/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
-<blockquote>
-<p>六种特殊字符：IV， IX， XL， XC，CD 和 CM。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">特殊字符          数值</span><br><span class="line">IV                4</span><br><span class="line">IX                9</span><br><span class="line">XL                40</span><br><span class="line">XC                90</span><br><span class="line">CD                400</span><br><span class="line">CM                900</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>#二、题目意思剖析：<br>将罗马数字从后往前依次筛选<br>1.先筛选出特殊字符，+对应的数值，然后进行剔除<br>2.在筛选普通字符，+对应的数值，然后进行剔除<br>最后得出result。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br><span class="line"></span><br><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br><span class="line"></span><br><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br><span class="line"></span><br><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// 看起来清晰，然而写起来麻烦。</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    var str: String = s</span><br><span class="line">    var special: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">    for i in 0..&lt;special.count &#123;</span><br><span class="line">        if str.contains(special[i]) &#123;</span><br><span class="line">            let range: Range&lt;String.Index&gt; = str.range(of: special[i])!</span><br><span class="line">            str.removeSubrange(range)</span><br><span class="line">            if special[i] == &quot;CM&quot; &#123;</span><br><span class="line">                sum = sum + 900</span><br><span class="line">            &#125;else if special[i] == &quot;CD&quot; &#123;</span><br><span class="line">                sum = sum + 400</span><br><span class="line">            &#125;else if special[i] == &quot;XC&quot; &#123;</span><br><span class="line">                sum = sum + 90</span><br><span class="line">            &#125;else if special[i] == &quot;XL&quot; &#123;</span><br><span class="line">                sum = sum + 40</span><br><span class="line">            &#125;else if special[i] == &quot;IX&quot; &#123;</span><br><span class="line">                sum = sum + 9</span><br><span class="line">            &#125;else if special[i] == &quot;IV&quot; &#123;</span><br><span class="line">                sum = sum + 4</span><br><span class="line">            &#125;</span><br><span class="line">            print(str)</span><br><span class="line">            print(sum)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for char in str &#123;</span><br><span class="line">        let temp = String.init(char)</span><br><span class="line">        if temp == &quot;M&quot; &#123;</span><br><span class="line">            sum = sum + 1000</span><br><span class="line">        &#125;else if temp == &quot;D&quot; &#123;</span><br><span class="line">            sum = sum + 500</span><br><span class="line">        &#125;else if temp == &quot;C&quot; &#123;</span><br><span class="line">            sum = sum + 100</span><br><span class="line">        &#125;else if temp == &quot;L&quot; &#123;</span><br><span class="line">            sum = sum + 50</span><br><span class="line">        &#125;else if temp == &quot;X&quot; &#123;</span><br><span class="line">            sum = sum + 10</span><br><span class="line">        &#125;else if temp == &quot;V&quot; &#123;</span><br><span class="line">            sum = sum + 5</span><br><span class="line">        &#125;else if temp == &quot;I&quot; &#123;</span><br><span class="line">            sum = sum + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 优化写法</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">var sum: Int = 0</span><br><span class="line">var str: String = s</span><br><span class="line">let specialRoman: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">let specialNum: [Int] = [4, 9, 40, 90, 400, 900]</span><br><span class="line">let normalRoman: [String] = [&quot;M&quot;, &quot;D&quot;, &quot;C&quot;, &quot;L&quot;, &quot;X&quot;, &quot;V&quot;, &quot;I&quot;]</span><br><span class="line">let normalNum: [Int] = [1000, 500, 100, 50, 10, 5, 1]</span><br><span class="line">for i in 0..&lt;specialRoman.count &#123;</span><br><span class="line">    while str.contains(specialRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: specialRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + specialNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">for i in 0..&lt;normalNum.count &#123;</span><br><span class="line">    while str.contains(normalRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: normalRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + normalNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return sum</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-7345a7c4c8a51dc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-65ed9505b830c627.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+            <p><img src="https://upload-images.jianshu.io/upload_images/1869467-f023a500a5e195df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="胡乱画"></p>
+<p>画友评价：头发线条不清晰，结构布局有些不对，眼睛间距太宽。</p>
 
           
         

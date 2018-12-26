@@ -439,7 +439,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/日记本/我还是离开了你，北京。深圳，我来了。/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/8--字符串转整数-(atoi)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -459,7 +459,157 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/日记本/我还是离开了你，北京。深圳，我来了。/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/8--字符串转整数-(atoi)/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>实现 atoi，将字符串转为整数。<br>在找到第一个非空字符之前，需要移除掉字符串中的空格字符。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。<br>字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。<br>当字符串中的第一个非空字符序列不是个有效的整数；或字符串为空；或字符串仅包含空白字符时，则不进行转换。<br>若函数不能执行有效的转换，返回 0。<br>说明：<br>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。如果数值超过可表示的范围，则返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;42&quot;</span><br><span class="line">输出: 42</span><br><span class="line"></span><br><span class="line">输入: &quot;   -42&quot;</span><br><span class="line">输出: -42</span><br><span class="line">解释: 第一个非空白字符为 &apos;-&apos;, 它是一个负号。</span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</span><br><span class="line"></span><br><span class="line">输入: &quot;4193 with words&quot;</span><br><span class="line">输出: 4193</span><br><span class="line">解释: 转换截止于数字 &apos;3&apos; ，因为它的下一个字符不为数字。</span><br><span class="line"></span><br><span class="line">输入: &quot;words and 987&quot;</span><br><span class="line">输出: 0</span><br><span class="line">解释: 第一个非空字符是 &apos;w&apos;, 但它不是数字或正、负号。</span><br><span class="line">     因此无法执行有效的转换。</span><br><span class="line"></span><br><span class="line">输入: &quot;-91283472332&quot;</span><br><span class="line">输出: -2147483648</span><br><span class="line">解释: 数字 &quot;-91283472332&quot; 超过 32 位有符号整数范围。 </span><br><span class="line">     因此返回 INT_MIN (−231) 。</span><br></pre></td></tr></table></figure></p>
+<p>1.第一个非空字符前如果有空格，去掉。<br>2.第一个非空字符只有三种选项：+  -  数字，否则返回0<br>3.接下来将连续的数字连接起来，中间不可以有除数字外的其他字符</p>
+<p>#三、解题思路：<br>1.创建相应需要的变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr: [String] = [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;]</span><br><span class="line">var result: Int = 0 // 最终结果</span><br><span class="line">var numbers: [String] = []</span><br><span class="line">for char in str &#123;</span><br><span class="line">    let temp: String = String.init(char)</span><br><span class="line">    numbers.append(temp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.几个重要的标记<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var flag: Int = 1 // 表示最终结果(整数)的符号，默认为1</span><br><span class="line">var space: Int = -1 // 表示当前字符是否为空格，如果不等于-1，就不是空格了。</span><br><span class="line">var valid: Bool = false //表示是否出现了第一个有效的字符(+ - 或者数字)</span><br></pre></td></tr></table></figure></p>
+<p>3.遍历numbers，获取最终结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;numbers.count &#123;</span><br><span class="line">    </span><br><span class="line">    // 1.排除空格</span><br><span class="line">    if (numbers[i] == &quot; &quot;) &amp;&amp; space == -1 &#123;</span><br><span class="line">        continue</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        space = i</span><br><span class="line">    &#125;</span><br><span class="line">    // 2.第一个非空字符字符为 数字或正、负号，将valid标记好</span><br><span class="line">    if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">        flag = (numbers[i] == &quot;+&quot;) ? 1 : -1</span><br><span class="line">        valid = true</span><br><span class="line">        continue</span><br><span class="line">    &#125;else if (arr .contains(numbers[i])) &#123;</span><br><span class="line">        valid = true</span><br><span class="line">        // 3.将numbers中的元素转换为int类型，将result*10叠加起来。</span><br><span class="line">        result = result*10 + Int(numbers[i])!</span><br><span class="line">        if result &gt; Int32.max &amp;&amp; flag == 1&#123;</span><br><span class="line">            result = Int(Int32.max)</span><br><span class="line">            return result</span><br><span class="line">        &#125;else if result*flag &lt;= Int32.min &amp;&amp; flag == -1&#123;</span><br><span class="line">            result = Int(Int32.min)</span><br><span class="line">            return result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        break</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return result * flag</span><br></pre></td></tr></table></figure></p>
+<p>4.举例 ：“   –0000123”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.前面的空格会跳过，直到第一个“-”。此时space = i，i = 3，进入下一步</span><br><span class="line">2.此时是“-”，找到了第一个有效的非空字符，valid = true，然后continue</span><br><span class="line">3.接下来是第二个“-”，但是!valid = false，不会进入</span><br><span class="line">if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">&#125;</span><br><span class="line">这个判断，会直接到else，会直接break，此时，result = 0</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-bf9123c7a5fc4167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-8708ae67aa0e5b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/日记本/孤独的根号三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/日记本/孤独的根号三/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -525,7 +675,7 @@
   <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我还是离开了你，北京。深圳，我来了。</title>
+    <title>孤独的根号三</title>
     <style type="text/css" media="all">
       body {
         margin: 0;
@@ -577,14 +727,692 @@
   <body>
     <div class="container">
       <div class="post">
-        <h1 class="title">我还是离开了你，北京。深圳，我来了。</h1>
+        <h1 class="title">孤独的根号三</h1>
         <div class="show-content">
-          <p>2015年3月4号，初到北京，13来接的我。北京天通苑，阴，大风。轻度雾霾。</p><p>2015年3月23号，报班培训开始上课。北京永泰庄，晴，雾霾。</p><p>2015年7月15号，找到我的第一份工作。北京海淀五路居，晴，天空清澈。</p><p>2016年9月23，生病住院。北京，阴，雾霾。</p><p>2016年10月1号，国庆节。北京，雨。</p><p>2016年10月16号，将房子转租，请长假回家养病。北京，晴，轻度雾霾。</p><p>2016年12月19号，租房沙河。早晨7点半的昌平线，挤过的都知道，要通过一千米的人流挤上地铁。北京沙河，雾霾。</p><p>2017年3月16号，z9，北京到杭州。北京站，夜，轻度雾霾。</p><p>2017年4月底，杭州浑浑噩噩呆了1个半月，失业，坐火车回家。</p><p>2017年5月10号，上午10点，坐朋友的车从家里出发，前往深圳。</p><p>2017年5月10号晚，抵达广州南，乘高铁前往深圳北。从此开始了深圳之行。</p><p>2017年5月16号，找到工作，开始上班。</p><p>2017年7月14号，老板拖欠工资不发，忍无可忍，辞职重新找。</p><p>2017年7月21号，找到了新工作，一直到现在。</p><p>2017年11月8号，前老板发完了欠我的工资，开心。</p><p>2017年11月10号，准备周末一起和同事们爬马峦山</p><p>2018年4月5号，和亲戚朋友一起爬梧桐山</p><p>2018年5月20号晚，我第一次主动牵女孩子的手。是的，那晚我表白了，可能是第一次，我有些怂，有些紧张。但我还是说出了，邹丽娟，我喜欢你。</p><p>2018年5月21号，整天就没心思写代码，躁动不安的，心绪早就不在眼前了。一下班，我就忍不住在想去见她，如果爱上了一个人的笑容，真的很难抵抗得了。这次是我郑重其事的把昨天的事和没说清的话再说了一遍。她看着我，痴痴地笑，我估计是成了吧。那一晚，我没赶上4号线的车。但我心里却开心的睡不着觉了。</p><p>2018年5月27号，想不到竟然会这么快就结束了，感觉这么久来的感情就像是一个笑话。一句以后不要再联系我了，直接把我推开了，非常难受，在以后的时间里也是非常难受。或许是一个礼拜，或许一个月，或许更久。女人或许就喜欢伤害爱他的人，因为只有爱她的人才会被她伤害。我在等，在等。我不想就这么简单的结束，因为这样看起来就像是一个玩笑。我不想成为那个玩笑。夜还是那么深，她还是没回我。我在她学校门口等，她说我先回去吧，不必等了。呵呵，残忍的做法，往往是最直接，也是最有效的。我终于还是成了那个笑话。</p>
+          <p>在这寂静的深夜，望着窗外默默吹过的风。有没有人和我一样，打开手机通讯录，却发现不知道打给谁，只有内心深处的孤独久久无法散去。﻿<br></p><p>我也想像歌谣里那么唱的，我们大声的笑着无所谓的闹着，梦里没有牵绊只有那漫溢的青春。</p><p>有人说女人18岁就独立了，而男人永远长不大，他得花一生去学会成长。</p><p>回顾这一生（有人会说，这几把才二十几年的光景，不过到目前为止确实是我的一生），好哥们可以说有很多，但是能够谈天说地喝酒聊天的女性朋友，除了我妈真没有了，当然我妈不准我喝酒。</p><p>有时候我就在想，是不是我人品有问题交不到女生朋友，还是长得丑不够有魅力。自此产生深深的自卑和一种无奈感。﻿（有没有人和我一样）</p><p>1.小时候，有一个女孩比我大一岁，真的是光屁股长大的朋友，长大之后我们两见面说话也找不到话题，讨论的话题也不在一个点，直到远嫁他乡，联系的也渐渐少了。只知道她和她老公在做自己的事业，生了个宝宝；</p><p>2.小学懵懂，直至初中，情窦初开的我可以为一个女孩和别人打架。高中看人家文科班一个女生长得漂亮，高考竟然打定了主意要和她考同一所大学，虽然连她的名字都不知道。</p><p>3.大一，喝醉了酒，吐了一床。当然，最不幸的是我的室友。因为我吐了他们一脸，以至于他们用雨伞防御我的攻击。那次醉酒缘由其实也是因为一个女孩。（我特么是有多多情）临到大三下学期，才在图书馆遇见心中的女神。对于我这种情场彩笔，猛然发起进攻，效果功效甚微，具体细节脑补一下（看10号楼下，一个傻逼端着奶茶站在那两小时了）。直至我离校毕业晚上，她应邀出来和我吃的唯一一顿饭，然后再也没联系。</p><p>毕业之后在家呆了一年，当了一年的跆拳道教练。教教小朋友，自己锻炼。接触女性只有那几个生猛的女教练（有男友了）和一群我师傅级别的教练。</p><p>直到后来来北京自己闯荡，做起了程序员。才发现世界之大，自己渺小。每天都自己拼命努力，一直很认同那句，你有多努力，才能有机会遇到最好的另一半。</p><p>每天行色匆匆走在这路上，走过这天桥，这灯红酒绿，走过车站，火车道，回到家。练习指弹，看书，看自己喜欢的电影，包括整理自己的房间。我一直相信，有一个姑娘在远处等我，我只有认真的生活，热爱自己的一切，往自己想成为的那个自己前进。就能看见那个姑娘，相信她也是一样吧。我憧憬爱情。</p><p>根号三是一个无穷小数，相信在这个世界里，会有那个1.732......和你一起相遇相爱。致你们，也致我自己。</p>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/7--反转整数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/7--反转整数/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个 32 位有符号整数，将整数中的数字进行反转。<br>输入: 123<br>输出: 321<br>输入: -123<br>输出: -321<br>输入: 120<br>输出: 21</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用原整数一直余10，保存起来和sum*10相加再赋值给sum</span><br><span class="line">sum = sum * 10 + tempX % 10</span><br><span class="line">tempX =  tempX / 10</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func reverse(_ x: Int) -&gt; Int &#123;</span><br><span class="line">    var tempX:Int = x</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    while tempX != 0 &#123;</span><br><span class="line">        sum = sum * 10 + tempX % 10</span><br><span class="line">        tempX =  tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    if sum &gt; Int32.max || sum &lt; Int32.min &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>就比较简单，普通的算法。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-15ba2a43478f2b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/从光影中看人生/谢谢你，让我从你的全世界路过/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/从光影中看人生/谢谢你，让我从你的全世界路过/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>谢谢你，让我从你的全世界路过</title>
+    <style type="text/css" media="all">
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        color: #777;
+        background-color: white;
+      }
+      .container {
+        width: 700px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .post {
+        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
+        position: relative;
+        padding: 70px;
+        bottom: 0;
+        overflow-y: auto;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 25px;
+        color: #515151;
+      }
+
+      .post h1{
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 60px;
+        margin-bottom: 40px;
+        color: inherit;
+      }
+
+      .post p {
+        margin: 0 0 35px 0;
+      }
+
+      .post img {
+        border: 1px solid #D9D9D9;
+      }
+
+      .post a {
+        color: #28A1C5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="post">
+        <h1 class="title">谢谢你，让我从你的全世界路过</h1>
+        <div class="show-content">
+          <p>有那么一个女孩，初来这座城市，无依无靠。但每晚有一个电台，一个温情的声音陪伴她走过最艰难的时光。</p><p>生活给一个人的压力往往是巨大的，女孩生活的地方对面有一面墙，路过的人都可以在上面把自己的心愿画出来。女孩把自己画进了画里，她站在雨中，连衣裙随风摇摆。这是女孩的生活写照。</p><p>有一天，大雨倾盆，一个男孩路过这，在对面墙边躲雨。看到墙上的画，拿起粉笔在墙上画了起来。女孩不知道他画的是什么，直到男孩远远离开。当女孩再次注视对面的画时，女孩笑了。</p><p>画中的女孩多了一把伞。他是一个温暖的人。</p><p><br></p><div class="image-package">
+<img src="http://upload-images.jianshu.io/upload_images/1869467-80ccde6ba290916b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br><div class="image-caption">图片发自简书App</div>
+</div><p>﻿<br></p><p>后来她知道，那个男孩就是一直陪伴她的那个声音。</p><p>当她鼓起勇气，作为听众打电话给男孩的时候，却无意间听到了一个消息，他分手了。对，他的女友就是他的搭档--小容。</p><p>从此，他好像完全变了一个人。没以前温暖了，甚至会嘲笑打来电话的听众，放一些浮躁夸张的音乐。他从台收听率第一到倒数第一。生活邋遢，自暴自弃。</p><p>她知道，这是失恋给他造成的痛苦。</p><p>她为了接近他，想让他变成原来的样子。她努力学习播音，进入他们公司面试，很幸运的，她被录用了。当作为实习生被安排工作时，收听率垫底的他，没有实习生愿意跟着他，但这让这个女孩更坚定了自己的想法，她选择做他的实习生。</p><p>纵使所有人都放弃你，我还是选择你。因为我知道，你是一个愿意为她人撑伞的人。</p><p>在男孩眼里，只知道她是一个没有天赋的实习生，她叫幺鸡，麻将里最小的那张。</p><p>这是她跟着男孩第一次开播，接听了第一位听众。听众怀疑他老婆出轨，因为跟着他吃了十几年的面，现在不愿意和他一起吃面了。男孩还是习惯性的用讽刺的口语嘲笑听众：“天涯何处无芳草，春风一吹绿油油，你这一绿起来，挡都挡不住。”听众习惯性用恶毒的语言攻击着男孩：“陈末，你就是一个垃圾，你的节目也是个垃圾。”男孩笑笑，不置可否。</p><p>女孩愤怒的抢过麦克风，痛骂了这位听众。</p><p>“闭嘴，你今年多大了？”</p><p>“三十二。”</p><p>“三十二岁，都已经半截入土了，人家天天陪你吃面条，突然心情不好想吃水饺怎么了？你知道自己事业为什么不成功吗？就是一天到晚瞎琢磨，你说你到底闲不闲，啊？你就是一咸鸭蛋。知道为什么叫咸鸭蛋吗？因为你被腌过了。你老婆瞎了眼，男人死光了才拉你做丈夫。简称：男-死-拉-夫！下一个。”</p><p>男孩在旁边，咬着一口面，目瞪口呆的看着她。女孩吓坏了，连忙说：真是，对不起。</p><p>男孩吃完嘴里的面说：“下一个”。</p><p>播音室外的天台</p><p>女孩端着男孩的面条，“吃一点吧。”</p><p>“内奸。小容派来的，对不对？”</p><p>“我就是受不了别人骂你。”</p><p>“别解释。安插在我身边，我就自暴自弃怎么了，没人听我节目怎么了，我就不走了，我要与它共存亡。耶……”</p><p>“陈末老师，我要怎么做你才肯原谅我。”</p><p>“很简单，不要再让我看到你。”</p><p>“陈末老师！”</p><p>“滚吧”。</p><p>第二天，这一期节目收听率极高，直接飙到台里第一了。幺鸡成为了香饽饽。</p><p>后续经历了一系列的事情，陈末渐渐的有些喜欢身边的这个女孩了。</p><p>女孩想尽办法让男孩与她前女友复合，让陈末重新做回那个温暖人心的人。当看到他们一起相拥，也是她准备离开他的时候了。</p><p>男孩进入播音室，准备开播，却无意间发现了一个优盘，是女孩的秘密。</p><p>女孩爱着男孩的秘密。</p><p>只是，这个时候，女孩已经在离开的路上了。</p><p>“说来可笑，每天我对着麦克风自说自话，帮别人解答人生的困惑，其实我自己的生活才是一团糟。你根本不知道这个城市会有几个人，听我在这胡说八道。但是如果你愿意的话，请帮我打下双闪。哪怕是一个人、一辆车、一盏灯。我就想让幺鸡知道，我在找她。”</p><p>说完，男孩放下麦克风，站在窗口凝望这座城市，没有一辆车为他打着双闪。</p><p>“也难怪，我都放弃自己这么久，你们也应该放弃我。”</p><p>沉默的坐回了播音室。</p><p>过了一会，男孩听到导播员敲玻璃，指了指窗外。</p><p>男孩起身看往窗外，来到天台，看见这座城市越来越多的双闪陆陆续续的都在打开，甚至是一间房里的关灯开灯。</p><p>男孩欣喜的看着眼前这座城市，非常温暖。</p><p>女孩也听到了广播，坐在公交车上，看着窗外朦胧的街道，哭得泪流满面。</p><p>“谢谢你，让我从你的全世界路过。”</p><p>信息发出去之后，女孩就永远的离开了这座城市。</p><p>那天以后，男孩再也没有了女孩的消息。人生的改变，往往是一夜之间。</p><p>男孩从此辞去了电台工作，四处寻找女孩的消息。</p><p>人的一生或许会拥有很美好的爱情，又或许你一直找不到你心里认为对的那个人。但我一直期许，我想你也要期许，期许有那么一个人，一直在等你，而你也一直在找他。</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/9--回文数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/9--回文数/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>判断一个整数是否是回文数。<br>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br>回文数可以看作一个对称的字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br><span class="line"></span><br><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：</p>
+<p>######第一种思路：用数组将每个数字存起来，看是否对称<br>1.如果该整数为负数，就不是回文数。比如-123，反过来是321-，不管如何反都不是。<br>2.遍历将余数保存在一个数组里，然后遍历该数组，如果左右对称 –<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    var remainder: Int = 0</span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var array: Array = Array.init(repeating: 0, count: 0)</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        remainder = tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">        array .append(remainder)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;array.count &#123;</span><br><span class="line">        </span><br><span class="line">        if array[i] != array[array.count - 1 - i] &#123;</span><br><span class="line">            </span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>######第二种思路：将数字反序，然后对比和原整数是否相等<br>（推荐，耗时较少，少了一步遍历的时间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var result: Int = 0</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        result = result * 10 + tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if result != x &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>如果是第一种方法大概是300ms，第二种大概是200ms。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-c30af19ddb35cae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-ccc10836670acdf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、TLS的历史</p>
+<blockquote>
+<p>1994年，NetScape公司设计了SSL协议（Secure Sockets Layer）的1.0版，但是未发布。<br>1995年，NetScape公司发布SSL 2.0版，很快发现有严重漏洞。<br>1996年，SSL 3.0版问世，得到大规模应用。<br>1999年，互联网标准化组织ISOC接替NetScape公司，发布了SSL的升级版<a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" target="_blank" rel="noopener">TLS</a>（Transport Layer Security） 1.0版。<br>2006年和2008年，TLS进行了两次升级，分别为TLS 1.1版和TLS 1.2版。最新的变动是2011年TLS 1.2的<a href="http://tools.ietf.org/html/rfc6176" target="_blank" rel="noopener">修订版</a>。</p>
+</blockquote>
+<p>##二、Xcode中info.plist相关字段含义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInMedia&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsLocalNetworking&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInWebContent&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSExceptionDomains&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;www.app.youCompany.cn&lt;/key&gt;</span><br><span class="line">		&lt;dict&gt;</span><br><span class="line">			&lt;key&gt;NSIncludesSubdomains&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSRequiresCertificateTransparency&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">		&lt;/dict&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">&lt;/dict&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>NSAllowsArbitraryLoads ：   默认为NO。如果设置为YES，将解除ATS限制，将会引发苹果的审查。一般设置为NO，然后通过下面的NSExceptionDomains去添加白名单（或者叫例外）。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsArbitraryLoadsInMedia ：  默认为NO。如果设置为YES，将解除AVFoundation访问媒体内容时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsArbitraryLoadsInWebContent ：  默认为NO。如果设置为YES，将解除网页访问时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsLocalNetworking：  默认为NO。如果设置为YES，将解除访问本地资源时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionDomains : 添加例外</p>
+</blockquote>
+<blockquote>
+<p>NSIncludesSubdomains ： 默认为NO。如果设置为YES，当前域名的 ATS 策略适用于其所有子域名。</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionAllowsInsecureHTTPLoads：  默认为NO。如果设置为YES，可以同时通过 HTTP 和 HTTPS 访问当前域名。（将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionMinimumTLSVersion： string类型，可以设置 TLS 最低版本。（因为低版本有安全漏洞，将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionRequiresForwardSecrecy：  默认为YES。如果设置为NO，允许针对当前域名使用不支持正向保密的 TLS 加密算法。</p>
+</blockquote>
+<blockquote>
+<p>NSRequiresCertificateTransparency：  默认为NO。如果设置为YES，将验证域名服务器证书的Certificate Transparency时间戳 。</p>
+</blockquote>
+<p>提交审核说明(举例)：</p>
+<ul>
+<li>必须连接由其他机构控制的服务器，其还不支持安全连接。</li>
+<li>必须通过 web 展示来源不一的各种网络内容，但又不能完全使用NSAllowsArbitraryLoadsInWebContent所管理的类。</li>
+<li>必须支持那些还未升级至可使用安全连接，不得不通过公共域名访问网络的设备。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后记：因最近公司需要我们整理一些自己在工作中用到的基础知识，特此整理搜集了一些笔记，放入简书供大家学习探讨。</span><br></pre></td></tr></table></figure>
+<p>相关文章：<br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
 
           
         
@@ -1037,764 +1865,6 @@
 <p>注：到目前为止一共是24项，但是最后两项是相同的，有一个被弃用了，所以只有23项。</p>
 </blockquote>
 <p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/Github上如何创建ssh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##1.创建本地ssh：操作环境（终端）</p>
-<blockquote>
-<ol>
-<li>ssh-keygen  </li>
-<li>输入密码</li>
-<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
-</ol>
-</blockquote>
-<p>##2.在Github上创建ssh</p>
-<blockquote>
-<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/QBImagePickerController导航栏的设置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/QBImagePickerController导航栏的设置/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开篇：想必大家对QBImagePickerController是非常熟悉的吧，至于怎么用很简答，网上、简书上有各位大神说的很详细。<br>在此，我要说一个小知识，一不小心，思考方向走错了，可能会花上一两个小时哦。</p>
-<p>##一、我的困惑</p>
-<blockquote>
-<p>1.它是否有导航栏，熟悉的同学都知道我们跳转QBImagePickerController时，都是直接present，是模态视图之间的跳转，而并不是push过去的。而且我们看到的QBImagePickerController的导航栏都是透明的。那么，我们就会考虑，它是否真的有导航栏呢。</p>
-</blockquote>
-<p>验证我的想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.[imagePickerController.navigationController.navigationBar setBackgroundColor:[UIColor redColor]];</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.imagePickerController.view.backgroundColor = [UIColor redColor];</span><br></pre></td></tr></table></figure>
-<p>通过上面的两种方法都毫无效果，使我更加走进了一个误区，我认定QBImagePickerController没有导航栏。那么我猜想他头部的控件该是自定义的了，应该要暴露设置的参数给我，可惜我找了几遍，都没有。</p>
-<p>##二、刨根问底，直接进入pod里面的QBImagePickerController目录下<br><img src="http://upload-images.jianshu.io/upload_images/1869467-9193df32d1a7979c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="storyboard.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1869467-846837bf8cd16dcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置.png"></p>
-<p>一看之下，才知道QBImagePickerController确实有导航控制器，不过是系统的UINavigationController，导航栏的背景颜色为空。我直接将storyboard里的UINavigationController类改成我自定义的导航控制器。问题引刃而解。</p>
-<p>结语：有时候我们思考问题会走弯路，写这篇小知识，是希望自己走过的弯路提前告诉大家，给碰到问题的同学一点小帮助。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/UITableViewCell的高度自适应浅析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/UITableViewCell的高度自适应浅析/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开篇：在我们开发中经常会用到UITableView, TableView上面的cell有时候非常复杂，高度可变、结构可变等等。那么这个时候我们该如何去自适应cell的高度呢。</p>
-<p>#一.通过frame去计算</p>
-<blockquote>
-<p>第一种大家比较容易想到的方法，就是由上往下依次计算控件的frame，再将最下面的控件frame的最大y值拿到，赋值给整个cell_height，得到整个cell的最终高度。</p>
-</blockquote>
-<p>简单布局的就可直接计算，但，如果复杂一些，结构多变，就需要另外创建一个frameModel来专门计算和存储cell的frame。这种情况逻辑复杂，也比较容易出错。</p>
-<p>######需要创建两个模型：model(存储数据)、frameModel(存储cell上子view的frame)</p>
-<p>两者间的关系：frameModel是通过model来进行设置的，通过传入的model中的属性，来判断cell中子view显示或隐藏，从而一步一步得到所有的子view的frame值，最后，将cell的高度保存起来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// model.h</span><br><span class="line">@interface Model : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) NSString *name; //昵称</span><br><span class="line">@property (nonatomic, copy) NSString *icon; //头像</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.h</span><br><span class="line">@class Model;</span><br><span class="line">@interface FrameModel : NSObject</span><br><span class="line"></span><br><span class="line">/** 数据模型 */</span><br><span class="line">@property (nonatomic, strong) Model *model;</span><br><span class="line">/** 头像frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect iconViewF;</span><br><span class="line">/** 昵称frame */</span><br><span class="line">@property (nonatomic, assign, readonly) CGRect nameLabelF;</span><br><span class="line"></span><br><span class="line">/** cell的高度 */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat cellHeight;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// FrameModel.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    </span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    </span><br><span class="line">    // cell的宽度</span><br><span class="line">    CGFloat cellW = screen_Width;</span><br><span class="line"></span><br><span class="line">    // cell的边框宽度</span><br><span class="line">    CGFloat cellBorderW = 10;</span><br><span class="line">    // cell之间的间距</span><br><span class="line">    CGFloat cellBorderMargin = 15;</span><br><span class="line">    </span><br><span class="line">    // 1.头像</span><br><span class="line">    CGFloat iconWH = 35;</span><br><span class="line">    CGFloat iconX = cellBorderW;</span><br><span class="line">    CGFloat iconY = cellBorderW;</span><br><span class="line">    _iconViewF = CGRectMake(iconX, iconY, iconWH, iconWH);</span><br><span class="line">    </span><br><span class="line">    // 2.昵称</span><br><span class="line">    CGFloat nameX = CGRectGetMaxX(self.iconViewF) + cellBorderW;</span><br><span class="line">    CGFloat nameY = iconY;</span><br><span class="line">    CGSize nameSize = [model.name sizeWithFont:[UIFont systemFontOfSize:15]];</span><br><span class="line">    _nameLabelF = (CGRect)&#123;&#123;nameX,nameY&#125;,nameSize&#125;;</span><br><span class="line">    </span><br><span class="line">    // 13.cell的宽度</span><br><span class="line">    _cellHeight = CGRectGetMaxY(self.nameLabelF) + cellBorderMargin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// cell.h</span><br><span class="line">@class FrameModel;</span><br><span class="line">@interface Cell : UITableViewCell</span><br><span class="line"></span><br><span class="line">+ (Cell *)cellWithTableView:(UITableView *)tableView;</span><br><span class="line">/** frame模型 */</span><br><span class="line">@property (nonatomic, strong) FrameModel *frameModel;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setFrameModel:(FrameModel *)frameModel &#123;</span><br><span class="line">    </span><br><span class="line">    _frameModel = frameModel;</span><br><span class="line">    </span><br><span class="line">    Model *model = frameModel.model;</span><br><span class="line">    // 头像</span><br><span class="line">    self.iconView.frame = frameModel.iconViewF;</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    </span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.frame = frameModel.nameLabelF;</span><br><span class="line">    self.nameLabel.text = model.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一步步走下来应该非常直观的。<br>最后也就只有一步了，将拿到的数据进行model和frameModel之间的转换。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  将Model模型转为FrameModel模型</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)frameModelsWithStatuses:(NSArray *)models &#123;</span><br><span class="line">    </span><br><span class="line">    NSMutableArray *frames = [NSMutableArray array];</span><br><span class="line">    for (Model *model in models) &#123;</span><br><span class="line">        FrameModel *frame = [[FrameModel alloc] init];</span><br><span class="line">        frame.model = model;</span><br><span class="line">        [frames addObject:frame];</span><br><span class="line">    &#125;</span><br><span class="line">    return frames;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接下来就是数据展示咯，将frameModel导入进cell里面就OK了。</p>
-<p>这其实是一种分离思路，将各个模块分离化，逻辑会清晰很多，对于复杂的数据和UI异常适合。</p>
-<p>额，其中有一个sizeWithFont，是我创建的一个分类，只是为了简化代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// NSString+Extension.m</span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font maxW:(CGFloat)maxW &#123;</span><br><span class="line">    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];</span><br><span class="line">    attrs[NSFontAttributeName] = font;</span><br><span class="line">    CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);</span><br><span class="line">    NSString *version = [UIDevice currentDevice].systemVersion;</span><br><span class="line">    if ([version doubleValue] &gt; 7.0) &#123;</span><br><span class="line">        return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        return [self sizeWithFont:font constrainedToSize:maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGSize)sizeWithFont:(UIFont *)font &#123;</span><br><span class="line">    return [self sizeWithFont:font maxW:MAXFLOAT];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#二.通过自动布局自动适配（推荐使用）<br>1.在cell中，setModel方法中所做的事情只是将数据导入view中进行展示，其他都不用管。label的话需要设定preferredMaxLayoutWidth属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// cell.m</span><br><span class="line">- (void)setModel:(Model *)model &#123;</span><br><span class="line">    _model = model;</span><br><span class="line">    </span><br><span class="line">    // 头像</span><br><span class="line">    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];</span><br><span class="line">    // 昵称</span><br><span class="line">    self.nameLabel.text = model.name;    </span><br><span class="line">    CGFloat screen_Width = [UIScreen mainScreen].bounds.size.width;</span><br><span class="line">    CGFloat width = screen_Width - 35 - 5; // label的宽度</span><br><span class="line">    // 自动布局：设定label文字的最大宽度,这个宽度也可以通过外部进行传递，从而设定。</span><br><span class="line">    self.nameLabel.preferredMaxLayoutWidth = width;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.在获取cellHeight代理方法中，因为可能无法获取到当前的cell，我们的目的只是要得到cell的高度，所以在这我们创建了一个临时变量cell，用来计算cellHeight。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    self.cell.nameLabel.text = nil;</span><br><span class="line">    self.cell.model = self.models[indexPath.row];</span><br><span class="line">    // cell进行自动布局，可以得到cellHeight</span><br><span class="line">    CGFloat cellHeight = [self.cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;</span><br><span class="line">    return cellHeight&gt;31.0f? cellHeight:31.0f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>后记：如果有些需求是想得到tableview最大的高度，让cell完全展示出来，可以监听tableView的contentSize属性。<br>注：iOS10以下，监听contentSize属性；iOS10及以上监听scrollView.contentSize属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">    [self.tableView addObserver:self forKeyPath:@&quot;scrollView.contentSize&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    </span><br><span class="line">    float iOS_version = [[[UIDevice currentDevice] systemVersion] floatValue];</span><br><span class="line">    if (iOS_version &gt;= 8.0 &amp;&amp; iOS_version &lt; 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height; //得到tableview的高度。</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if (iOS_version &gt;= 10.0) &#123;</span><br><span class="line">        if ([keyPath isEqualToString:@&quot;scrollView.contentSize&quot;] &amp;&amp; object == self.tableView) &#123;</span><br><span class="line">            CGSize size = [[change objectForKey:@&quot;new&quot;] CGSizeValue];</span><br><span class="line">            CGFloat height = size.height;</span><br><span class="line">            if(self.viewHeightBlock)&#123;</span><br><span class="line">                self.viewHeightBlock(height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看到这里，或许你挥一挥衣袖，只留下了一个赞。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/UITableView代理和数据源调用的先后顺序规律探究/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/UITableView代理和数据源调用的先后顺序规律探究/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开篇：因为某些原因和朋友讨论到，tableView在不同的iOS版本中，调用的先后顺序有所不同。特此，我利用相同的代码，在三种版本的模拟器中运行，果然得出了一些特定的规律。</p>
-<p>我设置的数据源有1个section、30行，屏幕完全显示为22行。</p>
-<p>####iOS11.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">numberOfSectionsInTableView</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection		（这四个方法一共调用三次，顺序和此列表显示一样）</span><br><span class="line">numberOfRowsInSection</span><br><span class="line"></span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath </span><br><span class="line">….</span><br><span class="line">….	  (22-5 = 17行)</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection		（在倒数第五行，经测试5是固定的值）</span><br><span class="line">…. 	 </span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath         （剩余的5行，和上面的17行是相同的）</span><br><span class="line">….</span><br></pre></td></tr></table></figure></p>
-<p>####iOS9.0、iOS10.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">这些方法一共调用三次，顺序和此列表显示一样</span><br><span class="line">numberOfSectionsInTableView</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForHeaderInSection</span><br><span class="line">heightForFooterInSection</span><br><span class="line">heightForFooterInSection</span><br><span class="line">numberOfRowsInSection</span><br><span class="line"></span><br><span class="line">heightForRowAtIndexPath</span><br><span class="line">….</span><br><span class="line">….		(30行)</span><br><span class="line">….</span><br><span class="line"></span><br><span class="line">cellForRowAtIndexPath </span><br><span class="line">heightForRowAtIndexPath</span><br><span class="line">….</span><br><span class="line">….		(22行)</span><br><span class="line">….</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">iOS9.0、iOS10.0中</span><br><span class="line">就算以下两个方法都没有实现</span><br><span class="line">self.tableView.sectionHeaderHeight = 20;</span><br><span class="line">self.tableView.sectionFooterHeight = 20;</span><br><span class="line">heightForHeaderInSection和heightForFooterInSection都会调用</span><br><span class="line"></span><br><span class="line">iOS11.0中</span><br><span class="line">以下两个方法都没有实现</span><br><span class="line">self.tableView.sectionHeaderHeight = 20;</span><br><span class="line">self.tableView.sectionFooterHeight = 20;</span><br><span class="line">heightForHeaderInSection和heightForFooterInSection不会调用</span><br></pre></td></tr></table></figure>
-<p>结语：iOS11.0之后对tableview的数据源调用有了很大改变，节省了很多调用成本。更加合理规范化。<br>所以如果有同学在获取不到数据源等等问题时，可以考虑本文所写的调用顺序，从而查找原因。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS内购之二次验证/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/iOS内购之二次验证/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。</p>
-<p>#二次验证</p>
-<p>关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。<br>具体区别不一一表述，可以查看下面的链接。<br><a href="https://www.cnblogs.com/zhaoqingqing/p/4597794.html" target="_blank" rel="noopener">iOS二次验证两种做法的区别</a><br>我要着重说的是二次验证的实际做法和收到的数据是什么。</p>
-<p>####一、二次验证具体如何验证<br>在这分为测试地址和实际上线地址<br>测试：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://sandbox.itunes.apple.com/verifyReceipt</a><br>已上线Appstore：<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://buy.itunes.apple.com/verifyReceipt</a><br>在沙箱测试时，我们使用测试地址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 从沙盒中获取交易凭证(收据)</span><br><span class="line">NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];</span><br><span class="line">    </span><br><span class="line">// 转化为base64字符串</span><br><span class="line">NSString *receiptString = [receiptData base64EncodedStringWithOptions:0];</span><br></pre></td></tr></table></figure>
-<p>为了方便拿到数据，我们在app端上进行验证，注意⚠️实际开发中都是在服务端进行验证的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 拼接请求数据</span><br><span class="line">NSString *bodyString = [NSString stringWithFormat:@&quot;&#123;\&quot;receipt-data\&quot; : \&quot;%@\&quot;&#125;&quot;, receiptString];</span><br><span class="line">NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">// 创建请求到苹果官方进行购买验证</span><br><span class="line">NSURL *url = [NSURL URLWithString:verifyReceipt_url];</span><br><span class="line">NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">requestM.HTTPBody = bodyData;</span><br><span class="line">requestM.HTTPMethod = @&quot;POST&quot;;</span><br><span class="line"></span><br><span class="line">// 创建连接并发送同步请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;验证购买过程中发生错误，错误信息：%@&quot;,error.localizedDescription);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];</span><br></pre></td></tr></table></figure></p>
-<p>####二、收据回传得到的数据分析<br>上文得到的dic就是我们通过收据得到的所有数据<br>在这里有个坑，我相信有很多同学都踩过。<br>就是你支付成功了，但是在这个数组里却找不到你想要的数据。<br>我们可以看下面一张图，然后再分析分析。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内购类型.png"></p>
-<p>可以看到有四种类型，但是具体到我们项目中我们该如何选择和操作呢。</p>
-<blockquote>
-<p>1.消耗型：比如我们游戏里的金币，6元600个金币，你使用完了就失效了。比如现在各大视频app推出的电影购买，6元买完一张影片之后，你如果想买下一张影片就必须再次购买。<br>2.非消耗型：比如某app推出永久会员，购买一次终身使用，就是非消耗型。再比如游戏过关时app的某关，你一直过不去，花钱购买过去了，等你下次再打开app时，他这关默认是已经通过的。<br>3.自动续订型：具体可以看爱奇艺视频开通会员（腾讯app也类似），里面就有一个自动续订会员。也就是到期了，它会自动从你的苹果账号上扣钱。这个慎点慎点，他们这样搞很坑钱。<br>4.非自动续订型：这个就是1个月优酷会员啦，或者3个月季度会员啥的。有期限，到期时也不会自动扣钱。一般的都是选择这个，不然像爱奇艺的自动续订，用户不知情时，会被骂死，哈哈</p>
-</blockquote>
-<p>说了这么多，来看看订单数据长啥样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	product_id = &quot;lalalalahahaha&quot;,//商品的标识，和产品定，随便写但是不能重复</span><br><span class="line">	quantity = &quot;1&quot;,//购买商品的数量</span><br><span class="line">	transaction_id = &quot;1000000357637984&quot;,//交易的标识</span><br><span class="line">	purchase_date_ms = &quot;1512613065000&quot;,//购买时间毫秒</span><br><span class="line">	original_purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//购买时间,太平洋标准时间</span><br><span class="line">	purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//太平洋标准时间</span><br><span class="line">	original_purchase_date_ms = &quot;1512613065000&quot;,//毫秒</span><br><span class="line">	is_trial_period = &quot;false&quot;,</span><br><span class="line">	original_purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;,//原始购买时间</span><br><span class="line">	original_transaction_id = &quot;1000000357637984&quot;,//原始交易ID</span><br><span class="line">	purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;//购买时间</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
-<p>我们得到的字典里如果有多条数据，就会有一个数组in_app。<br>如果只有一条数据，或者没有数据，就没有in_app。<br>in_app里的数据格式就如上文代码所书。</p>
-<p>所有的订单信息都在in_app里。所以我们要找到最新成功的那条数据，就需要在这里面去找。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1.消耗性的和其他的有区别，消耗性的下一次购买的，会覆盖上一次购买的，所以只有一条消耗性的订单信息，当然也是最新的。</span><br><span class="line">2.其他三种每次购买，都会生成新的订单信息，不会覆盖原来的，所以你购买多少次，上面就会显示多少条。</span><br></pre></td></tr></table></figure>
-<p>####三、内购二次验证实际开发中具体做法</p>
-<blockquote>
-<p>1.我们把收据信息传给服务器<br>2.服务器自行处理所有的订单信息，返回一个成功与失败的状态给我们。所有的操作，后台都已经记录在案了，我们不再需要管。我们只需要知道，此次购买是否成功就行了。</p>
-</blockquote>
-<p>结语：内购其实很简单，只是有时候不经意就会入坑，在此特意记录下困惑的地方，帮助自己深刻记忆，也希望帮助到其他遇到该问题的童鞋。</p>
 
           
         

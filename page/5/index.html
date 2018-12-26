@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/5/"/>
+  <link rel="canonical" href="http://yoursite.com/page/5/">
 
 
 
@@ -168,7 +168,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
 
   
   
@@ -179,7 +179,7 @@
   page-home">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -224,7 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -241,7 +241,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -288,20 +288,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/48--旋转图像/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/26-从排序数组中删除重复项/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
 
@@ -313,7 +313,156 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/48--旋转图像/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/26-从排序数组中删除重复项/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前言：从20题之后就没再按照顺序来做了，准备先把初级算法先写完。</p>
+<p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。<br> 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1,1,2],</span><br><span class="line">函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。 </span><br><span class="line">给定 nums = [0,0,1,1,1,2,2,3,3,4],</span><br><span class="line">函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br><span class="line"></span><br><span class="line">为什么返回数值是整数，但输出的答案是数组呢?</span><br><span class="line">请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</span><br><span class="line">你可以想象内部操作如下:</span><br><span class="line"> </span><br><span class="line"> // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span><br><span class="line">    int len = removeDuplicates(nums);</span><br><span class="line"> </span><br><span class="line"> // 在函数里修改输入数组对于调用者是可见的。</span><br><span class="line"> // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span><br><span class="line">    for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        print(nums[i]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>想到的第一种办法是用两个变量来分别控制，resultCount：数组最终元素个数，n：和i两个指针间，形成一个滑动窗口关系。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">func removeDuplicates(_ nums: inout [Int]) -&gt; Int &#123;</span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    var n: Int = 0</span><br><span class="line">    var resultCount: Int = nums.count</span><br><span class="line">    for i in 0..&lt;nums.count-1 &#123;</span><br><span class="line">        if nums[i] == nums[i+1] &#123;</span><br><span class="line">            resultCount = resultCount - 1</span><br><span class="line">            n = n + 1</span><br><span class="line">            // i = 4 n = 3</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            // i = 3 n = 3</span><br><span class="line">            // i = 5 n = 4</span><br><span class="line">            nums[i - n + 1] = nums[i+1]</span><br><span class="line">        &#125;</span><br><span class="line">        print(&quot;i=\(i) n=\(n)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    // [1,1,1,1,2,2,11]</span><br><span class="line">    // [1,2,11,1,1,1,2]</span><br><span class="line">    // 4 -&gt; 1</span><br><span class="line">    // 6 -&gt; 2</span><br><span class="line">    // 出现多少次n 就用最后的i - n + 1</span><br><span class="line">    print(nums)</span><br><span class="line">    return resultCount</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，发现，其实用nums[i] != nums[k]来判断显得更为简洁和直观。而且还少了一个变量的空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">func removeDuplicates(_ nums: inout [Int]) -&gt; Int &#123;</span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    var i: Int = 0</span><br><span class="line">    for k in 1..&lt;nums.count &#123;</span><br><span class="line">        if nums[i] != nums[k] &#123;</span><br><span class="line">            i = i + 1</span><br><span class="line">            nums[i] = nums[k]</span><br><span class="line">            print(&quot;i=\(i) k=\(k) nums[i]=\(nums[i])&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    print(nums)</span><br><span class="line">    return i+1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：题中的使用 O(1) 额外空间的条件下完成，固定多少的变量下其实也是O(1)，并不是说只能用一个额外的变量。</p>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-ce87f57dfcb10984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-91b6f1127888db08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/28--实现strStr()/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/28--实现strStr()/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -376,30 +525,158 @@
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。</p>
+<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
+</blockquote>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;</span><br><span class="line"> 输出: 2</span><br><span class="line"> </span><br><span class="line"> 输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;</span><br><span class="line"> 输出: -1</span><br><span class="line"></span><br><span class="line">说明:</span><br><span class="line">当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。</span><br><span class="line">对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.方法简单，运用swift语言特性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func strStr(_ haystack: String, _ needle: String) -&gt; Int &#123;</span><br><span class="line">    if needle.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    let range = haystack.range(of: needle)</span><br><span class="line">    return range?.lowerBound.encodedOffset ?? -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.将字符串变成数组，进行遍历。(借鉴top1的方案，其实也简单，就是看起来代码貌似会比较多)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">func strStr(_ haystack: String, _ needle: String) -&gt; Int &#123;</span><br><span class="line">    let count1 = haystack.count</span><br><span class="line">    let count2 = needle.count</span><br><span class="line">    if count2 == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if count1 &lt; count2 &#123;</span><br><span class="line">        return -1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var haystackChars = haystack.cString(using: .utf8)!</span><br><span class="line">    var needleChars = needle.cString(using: .utf8)!</span><br><span class="line">    var i = 0</span><br><span class="line">    var j = 0</span><br><span class="line">    </span><br><span class="line">    let maxi = count1 - count2</span><br><span class="line">    let maxj = count2 - 1</span><br><span class="line">    </span><br><span class="line">    while i &lt;= maxi &amp;&amp; j &lt;= maxj &#123;</span><br><span class="line">        var m = i</span><br><span class="line">        while m &lt;= count1 - 1 &amp;&amp; j &lt;= maxj &#123;</span><br><span class="line">            let mv = haystackChars[m]</span><br><span class="line">            let jv = needleChars[j]</span><br><span class="line">            if mv == jv &#123;</span><br><span class="line">                m += 1</span><br><span class="line">                j += 1</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            j = 0</span><br><span class="line">            i += 1</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    j = j - 1</span><br><span class="line">    if j == maxj&#123;</span><br><span class="line">        return i</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>1.耗时<code>856</code>毫秒，超过<code>32.58%</code>的提交记录，总提交数<code>74</code>。<br>2.耗时<code>12</code>毫秒，超过<code>100%</code>的提交记录，总提交数<code>74</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/36--有效的数独/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/36--有效的数独/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。</p>
 </blockquote>
 <blockquote>
-<p>说明：<br>你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
+<p>数字 1-9 在每一行只能出现一次。<br>数字 1-9 在每一列只能出现一次。<br>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。</p>
 </blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">给定 matrix =</span><br><span class="line">[</span><br><span class="line">[1,2,3],</span><br><span class="line">[4,5,6],</span><br><span class="line">[7,8,9]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">[7,4,1],</span><br><span class="line">[8,5,2],</span><br><span class="line">[9,6,3]</span><br><span class="line">]</span><br><span class="line">示例 2:</span><br><span class="line">给定 matrix =</span><br><span class="line">[</span><br><span class="line">[ 5, 1, 9,11],</span><br><span class="line">[ 2, 4, 8,10],</span><br><span class="line">[13, 3, 6, 7],</span><br><span class="line">[15,14,12,16]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">[15,13, 2, 5],</span><br><span class="line">[14, 3, 4, 1],</span><br><span class="line">[12, 6, 8, 9],</span><br><span class="line">[16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>原题题意，我们把n*n的数组想象成一个正方形，我们顺时针旋转正方形的时候，最后得到的就是旋转后的新数组。<br>乍一看很简单，因为有很多规律可以找到。<br>比方说示例1，第一行123，变成了新数组的最后一列；第二行456，变成了新数组的倒数第二列；第三行789，变成了新数组的第一列。<br>我们完全可以用一个临时数组将每一行抽取出来，再根据该规律，加入到新数组中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">![推算笔记](https://upload-images.jianshu.io/upload_images/1869467-5ff49721e2c6ba57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">然后发现，全乱了。。。问题原因应该是在相互赋值时，i和j的遍历会重复，反正方法是不对的。</span><br><span class="line"></span><br><span class="line">接下来我想，既然一步完成不了，就分几步来做吧。</span><br><span class="line">1.```上下置换```，将最上面的一排放到最下面，第二排放到倒数第二排。</span><br></pre></td></tr></table></figure>
-<p>[<br> [1,2,3],<br> [4,5,6],<br> [7,8,9]<br>],</p>
-<p>变成</p>
-<p>[<br> [7,8,9],<br> [4,5,6],<br> [1,2,3]<br>],<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>var i: Int = 0<br>var j: Int = 0<br>let m = matrix.count<br>let n = matrix[0].count<br>while j &lt; n {</p>
-<pre><code>while i &lt; m/2 {
-    let temp = matrix[i][j]
-    matrix[i][j] = matrix[m-1-i][j]
-    matrix[m-1-i][j] = temp
-    i = i + 1
-}
-j = j + 1
-i = 0
-</code></pre><p>}<br>print(“i = (i) j = (j)            (matrix)”)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.根据中间的753这条斜线对称。</span><br></pre></td></tr></table></figure></p>
-<p>[<br> [7,8,9],<br> [4,5,6],<br> [1,2,3]<br>],</p>
-<p>变成</p>
-<p>[<br> [7,4,1],<br> [8,5,2],<br> [9,6,3]<br>],<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">i = 0</span><br><span class="line">j = 0</span><br><span class="line">while j &lt; n - 1 &#123;</span><br><span class="line">    while i &lt; m &#123;</span><br><span class="line">        if (i &gt;= j) &#123;</span><br><span class="line">            let temp = matrix[i][j]</span><br><span class="line">            matrix[i][j] = matrix[j][i]</span><br><span class="line">            matrix[j][i] = temp</span><br><span class="line">            print(&quot;i = \(i) j = \(j)            \(matrix)&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        i = i + 1</span><br><span class="line">    &#125;</span><br><span class="line">    j = j + 1</span><br><span class="line">    i = 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],</span><br><span class="line">[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],</span><br><span class="line">[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]</span><br><span class="line">]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>数独，应该大家都玩过，其实就只是判断三个点，横、竖、3*3的方格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">func isValidSudoku(_ board: [[Character]]) -&gt; Bool &#123;</span><br><span class="line"></span><br><span class="line">    var bool: Bool = true</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        let characters = board[i]</span><br><span class="line">        var mutCharacters1: [Character] = []</span><br><span class="line">        var mutCharacters2: [Character] = []</span><br><span class="line">        for j in 0..&lt;characters.count &#123;</span><br><span class="line">            </span><br><span class="line">            // 1.每行比较</span><br><span class="line">            let character1 = board[i][j]</span><br><span class="line">            if character1 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters1.append(character1)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 2.每列比较</span><br><span class="line">            let character2 = board[j][i]</span><br><span class="line">            if character2 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters2.append(character2)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if j == characters.count - 1 &#123;</span><br><span class="line">                </span><br><span class="line">                let set1: Set = Set(mutCharacters1)</span><br><span class="line">                if set1.count == mutCharacters1.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let set2: Set = Set(mutCharacters2)</span><br><span class="line">                if set2.count == mutCharacters2.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var index_i = 0</span><br><span class="line">    var index_j = 0</span><br><span class="line">    while index_i&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        // 3.每方格</span><br><span class="line">        while index_j&lt;board[0].count &#123;</span><br><span class="line">            </span><br><span class="line">            var square: [Character] = []</span><br><span class="line">            if board[index_i][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if index_j % 3 == 0 &#123;</span><br><span class="line">                let set: Set = Set(square)</span><br><span class="line">                if set.count == square.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 因为是3*3的小方格，所以需要+3，而不是再+1了</span><br><span class="line">            index_j = index_j + 3</span><br><span class="line">        &#125;</span><br><span class="line">        index_i = index_i + 3</span><br><span class="line">        // 因为index_j循环后变成了9，需要设置为0</span><br><span class="line">        index_j = 0</span><br><span class="line">    &#125;</span><br><span class="line">    return bool</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>#四、小结<br>耗时<code>72</code>毫秒，超过<code>73.77%</code>的提交记录，总提交数<code>504</code>。</p>
 
           
@@ -452,20 +729,20 @@ i = 0
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/5--最长回文子串/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/350--两个数组的交集-II/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
 
@@ -477,7 +754,7 @@ i = 0
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/5--最长回文子串/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/350--两个数组的交集-II/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -540,19 +817,484 @@ i = 0
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。</p>
+<p>给定两个数组，编写一个函数来计算它们的交集。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br>回文其实是对称的一个字符串。<br>比如：aba 、xyx、 mnnm、xoox 这样子。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;babad&quot;</span><br><span class="line">输出: &quot;bab&quot;</span><br><span class="line">注意: &quot;aba&quot;也是一个有效答案。</span><br><span class="line"></span><br><span class="line">输入: &quot;cbbd&quot;</span><br><span class="line">输出: &quot;bb&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: nums1 = [1,2,2,1], nums2 = [2,2]</span><br><span class="line">输出: [2,2]</span><br><span class="line"> </span><br><span class="line">示例 2:</span><br><span class="line">输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]</span><br><span class="line">输出: [4,9]</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.遍历两个数组，如果发现有元素相同，就用新数组把它存起来。然后，把原来的两个数组里的这个元素设置为Int.max，下一次遍历就不会重复了。<br>耗时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>func intersect(_ nums1: [Int], _ nums2: [Int]) -&gt; [Int] {<br>    if nums1.count == 0 || nums2.count == 0 {<br>        return []<br>    }</p>
+<pre><code>var nums: [Int] = []
+var mutNums1 = nums1
+var mutNums2 = nums2
+
+for i in 0..&lt;mutNums1.count {
+
+    let subNum1: Int = mutNums1[i]
+    for j in 0..&lt;mutNums2.count {
+        let subNum2: Int = mutNums2[j]
+        if (subNum1 == subNum2) {
+            nums.append(subNum1)
+            mutNums1[i] = Int.max
+            mutNums2[j] = Int.max
+            break
+        }
+    }
+}
+return nums
+</code></pre><p>}<br><code>`</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/344--反转字符串/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/344--反转字符串/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>编写一个函数，其作用是将输入的字符串反转过来。</p>
+</blockquote>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;hello&quot;</span><br><span class="line">输出: &quot;olleh&quot;</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: &quot;amanaP :lanac a ,nalp a ,nam A&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.用一个数组存起来，再反向遍历。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    var chars: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        chars.append(char)</span><br><span class="line">    &#125;</span><br><span class="line">    var string: String = &quot;&quot;</span><br><span class="line">    var index = s.count - 1</span><br><span class="line">    while index &gt;= 0 &#123;</span><br><span class="line">        string.append(chars[index])</span><br><span class="line">        index = index - 1</span><br><span class="line">    &#125;</span><br><span class="line">    return string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.用一个数组接收字符串，直接利用原数组进行反转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)!</span><br><span class="line">    var left = 0</span><br><span class="line">    var right = s.count - 1</span><br><span class="line">    </span><br><span class="line">    while left &lt; right &#123;</span><br><span class="line">        </span><br><span class="line">        let char = chars[left]</span><br><span class="line">        chars[left] = chars[right]</span><br><span class="line">        chars[right] = char</span><br><span class="line">        </span><br><span class="line">        left = left + 1</span><br><span class="line">        right = right - 1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">      print(chars)</span><br><span class="line">    return String.init(utf8String: chars)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>1.耗时<code>60</code>毫秒，超过<code>48%</code>的提交记录，总提交数<code>476</code>。<br>2.耗时<code>36</code>毫秒，超过<code>99.33%</code>的提交记录，总提交数<code>476</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/283--移动零/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/283--移动零/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br><span class="line">说明:</span><br><span class="line">必须在原数组上操作，不能拷贝额外的数组。</span><br><span class="line">尽量减少操作次数。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>遍历数组，如果发现元素=0，直接删除当前元素，在数组末尾加上0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[0,1,0,3,12]</span><br><span class="line">[1,0,3,12,0]</span><br><span class="line">[1,3,12,0,0]</span><br><span class="line">[1,3,12,0,0]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">func moveZeroes(_ nums: inout [Int]) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 1 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    var i: Int = 0</span><br><span class="line">    var j: Int = 0</span><br><span class="line">    let n: Int = nums.count</span><br><span class="line">    while i&lt;n &amp;&amp; j&lt;n &#123;</span><br><span class="line">        if nums[i] == 0 &#123;</span><br><span class="line">              print(&quot;\(i)开始\(nums)&quot;)</span><br><span class="line">            nums.remove(at: i)</span><br><span class="line">              print(&quot;\(i)删除\(nums)&quot;)</span><br><span class="line">            nums.append(0)</span><br><span class="line">              print(&quot;\(i)添加\(nums)&quot;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">          i = i + 1</span><br><span class="line">        &#125;</span><br><span class="line">        j = j + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>耗时<code>32</code>毫秒，超过<code>59.06%</code>的提交记录，总提交数<code>21</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/3-无重复字符的最长子串/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/3-无重复字符的最长子串/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个字符串，找出不含有重复字符的最长子串的长度。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定 &quot;abcabcbb&quot; ，没有重复字符的最长子串是 &quot;abc&quot; ，那么长度就是3。</span><br><span class="line"></span><br><span class="line">给定 &quot;bbbbb&quot; ，最长的子串就是 &quot;b&quot; ，长度是1。</span><br><span class="line"></span><br><span class="line">给定 &quot;pwwkew&quot; ，最长子串是 &quot;wke&quot; ，长度是3。请注意答案必须是一个子串，&quot;pwke&quot; 是 子序列  而不是子串。</span><br></pre></td></tr></table></figure></p>
 <p>#三、解题思路：</p>
-<p>####中心法<br>官方解释：<br>事实上，只需使用恒定的空间，我们就可以在 O(n^2) 的时间内解决这个问题。<br>我们观察到回文中心的两侧互为镜像。因此，回文可以从它的中心展开，并且只有 2n−1 个这样的中心。<br>你可能会问，为什么会是 2n−1 个，而不是 n 个中心？原因在于所含字母数为偶数的回文的中心可以处于两字母之间（例如 “abba” 的中心在两个 ‘b’ 之间）。</p>
-<p>我的理解：<br>我们根据对称的这个特性，来进行查找，以一个点为中心，两个指针左右移动，如果两边对应的字母相同，那么就继续移动，直到超出边界或者两边字母不同。</p>
-<p>安排：<img src="https://upload-images.jianshu.io/upload_images/1869467-986f1b7364c561a6.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="笔记思路.JPG"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 返回当前回文最大的长度</span><br><span class="line">func haha(_ letters: [String],_ left: Int, _ right: Int) -&gt; (Int) &#123;</span><br><span class="line">    </span><br><span class="line">    var L:Int = left</span><br><span class="line">    var R: Int = right</span><br><span class="line">    </span><br><span class="line">    // 当左边指针不小于0，当右边指针不超过字符串长度</span><br><span class="line">    // 并且左右两个数值要相等</span><br><span class="line">    while L&gt;=0 &amp;&amp; R&lt;letters.count &amp;&amp; letters[L] == letters[R] &#123;</span><br><span class="line">        L = L - 1</span><br><span class="line">        R = R + 1</span><br><span class="line">    &#125;</span><br><span class="line">    return R - L - 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">func longestPalindrome(_ s: String) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    var letters: [String] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        let str: String = String.init(char)</span><br><span class="line">        letters.append(str)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var start:Int = 0</span><br><span class="line">    var end: Int = 0</span><br><span class="line">    var huiwen: String = &quot;&quot;</span><br><span class="line">    for i in 0..&lt;letters.count &#123;</span><br><span class="line">        </span><br><span class="line">        // 这分为两种情况：1.回文长度为奇数时，中心在中间那个字母</span><br><span class="line">        //              2.回文长度为偶数时，中心在两个字母之间</span><br><span class="line">        let len1: Int = haha(letters, i, i)</span><br><span class="line">        let len2: Int = haha(letters, i, i+1)</span><br><span class="line">        // 取最大值</span><br><span class="line">        let len: Int = len1 &gt; len2 ? len1 : len2</span><br><span class="line">        </span><br><span class="line">        if len &gt; end - start &#123;</span><br><span class="line">            start = i - (len - 1) / 2</span><br><span class="line">            end = i + len / 2</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for i in start..&lt;end+1 &#123;</span><br><span class="line">        huiwen.append(letters[i])</span><br><span class="line">    &#125;</span><br><span class="line">    return huiwen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>一切一切的算法，前提是要找到规律。然后一步一步剖析找出最好的算法。<br>在本题中，我的笔记思路只画出了一种情况，还有另一种情况就是回文长度为偶数时，中心在两个字母之间，也是一样的规律去找。最后比较这两种情况，找出最大值就行了。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-45e06cea14dd09e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b034054d7e700549.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+<p>####3.1暴力破解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 分析</span><br><span class="line">// abcabcdb</span><br><span class="line">//    abcd -- 答案</span><br><span class="line">a          b           c            a           b</span><br><span class="line">ab         bc          ca           ab          bc</span><br><span class="line">abc  3     bca  3      cab  3       abc         bcd  3</span><br><span class="line">abca ❌    bcab ❌    cabc ❌      abcd  4     bcdb  ❌</span><br><span class="line">                                    abcdb ❌</span><br><span class="line">// 1.找出每次遍历时当前string的最长substring，当然不能出现重复的字母</span><br><span class="line">// 2.从中拿到最长的</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// 上代码</span><br><span class="line">// 注：resultLength是个全局变量</span><br><span class="line">func lengthOfLongestSubstring(_ s: String) -&gt; Int &#123;</span><br><span class="line">    </span><br><span class="line">    if s.count &lt;= 1 &#123;</span><br><span class="line">        print(s)</span><br><span class="line">        return s.count</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var letters: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        letters .append(char)</span><br><span class="line">    &#125;</span><br><span class="line">      print(letters)</span><br><span class="line">    </span><br><span class="line">    var subString: String = &quot;&quot;</span><br><span class="line">    var maxLength: Int = 1</span><br><span class="line">    for i in 0..&lt;letters.count - 1 &#123;</span><br><span class="line">        </span><br><span class="line">        subString .append(letters[i])</span><br><span class="line">        for j in i+1..&lt;letters.count &#123;</span><br><span class="line">            if !subString .contains(letters[j]) &#123;</span><br><span class="line">                subString .append(letters[j])</span><br><span class="line">                maxLength = maxLength + 1</span><br><span class="line">                // 用全局变量resultLength保存最大的长度</span><br><span class="line">                resultLength = maxLength &gt; resultLength ? maxLength : resultLength</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                  print(subString)</span><br><span class="line">                  print(maxLength)</span><br><span class="line">                // 用全局变量resultLength保存最大的长度</span><br><span class="line">                resultLength = maxLength &gt; resultLength ? maxLength : resultLength</span><br><span class="line">                subString .removeAll()</span><br><span class="line">                maxLength = 1</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 如果 resultLength和i 相加刚好等于letters.count - 1，就不需要再进行下面的遍历了。</span><br><span class="line">        // 因为此时的resultLength的长度是最长的了</span><br><span class="line">        if i + resultLength == (letters.count - 1) &#123;</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####3.2滑动窗口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">func lengthOfLongestSubstring(_ s: String) -&gt; Int &#123;</span><br><span class="line">    let n = s.count</span><br><span class="line">    var letters: [String] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        let tempStr: String = String.init(char)</span><br><span class="line">        letters .append(tempStr)</span><br><span class="line">    &#125;</span><br><span class="line">    // 1.如果s长度 &lt;= 1</span><br><span class="line">    if s.count &lt;= 1 &#123;</span><br><span class="line">        print(s)</span><br><span class="line">        return s.count</span><br><span class="line">    &#125;</span><br><span class="line">    var set: [String] = Array.init(repeating: &quot;&quot;, count: letters.count)</span><br><span class="line">    var start: Int = 0 // 起始位置</span><br><span class="line">    var end: Int = 0   // 结束位置</span><br><span class="line">    var maxLength: Int = 0  // 最大长度</span><br><span class="line">    while start&lt;n &amp;&amp; end&lt;n &#123;</span><br><span class="line">        maxLength = (end - start + 1) &gt; maxLength ? (end - start + 1) : maxLength</span><br><span class="line">        if set.contains(letters[end]) &#123;</span><br><span class="line">            let index: Int = set.index(of: letters[end])!</span><br><span class="line">            // 1.start移动到上次出现重复位置的后一位</span><br><span class="line">            start = index + 1</span><br><span class="line">            // 2.短遍历，将前面遍历完的字符串置为空</span><br><span class="line">            for i in tempStart..&lt;start &#123;</span><br><span class="line">                if set[i] != &quot;&quot; &#123;</span><br><span class="line">                    set[i] = &quot;&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 3.tempStart作用：记录上一次start位置</span><br><span class="line">            tempStart = start</span><br><span class="line">            // 4.当发现重复字符，maxLength需要-1</span><br><span class="line">            maxLength = maxLength - 1</span><br><span class="line">        &#125;</span><br><span class="line">        set[end] = letters[end]</span><br><span class="line">        end = end + 1</span><br><span class="line">        print(&quot;start-\(start) end-\(end) maxLength-\(maxLength)&quot;)</span><br><span class="line">        // 最终最大长度</span><br><span class="line">        resultLength = maxLength &gt; resultLength ? maxLength : resultLength</span><br><span class="line">    &#125;</span><br><span class="line">    return resultLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>暴力破解：时间复杂度o(n的平方)<br>滑动窗口：时间复杂度o(n*一个常数)<br><a href="http://baijiahao.baidu.com/s?id=1596959005481205984&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">滑动窗口参考资料，这里边有详细图解</a></p>
+<p>由于时间复杂度太高了，没有通过leetcode检测，超时了。😭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// leetcode测试用例</span><br><span class="line">var s:String = &quot;&quot;</span><br><span class="line">for _ in 0..&lt;100 &#123;</span><br><span class="line">    s .append(&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~ &quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不同区间的耗时统计:<br>0..&lt;10   - 284ms<br>0..&lt;20   - 960ms<br>0..&lt;50   - 5.7s<br>0..&lt;100 - 20s</p>
+<p>ps：当区间为[0,100]，耗时简直恐怖。。。</p>
+<p>—————————————分割线————————————-<br>经过多方查找，和自己验证，果断找到了一种办法。</p>
+<p>####用hash值。<br>因为每个字符只对应一个hash值。但是swift的这个值和c++或者java又有所不同。他们之间的差值不同。</p>
+<p>####验证:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">将所有字符都列出来，比较找出最大最小的hash值和对应的字符。</span><br><span class="line">var s:String = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~ &quot;</span><br><span class="line">var characters:[String] = []</span><br><span class="line">for char in s &#123;</span><br><span class="line">    let string:String = String.init(char)</span><br><span class="line">    characters.append(string)</span><br><span class="line">&#125;</span><br><span class="line">var max: Int = 0</span><br><span class="line">var min: Int = Int.max</span><br><span class="line">for i in 0..&lt;characters.count &#123;</span><br><span class="line">    if (characters[i].hashValue &gt; max) &#123;</span><br><span class="line">        max = characters[i].hashValue</span><br><span class="line">        print(&quot;max:\(max), characters[i]:\(characters[i]) ,i:\(i)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if (characters[i].hashValue &lt; min) &#123;</span><br><span class="line">        min = characters[i].hashValue</span><br><span class="line">        print(&quot;min:\(min), characters[i]:\(characters[i]) ,i:\(i)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br>max: I   4799450059485597695<br>min: _   4799450059485595649<br>差值：2046</p>
+<p>然后就简单了，之前一直卡在越界问题上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">func lengthOfLongestSubstring(_ s: String) -&gt; Int &#123;</span><br><span class="line">    </span><br><span class="line">    var last:[Int] = Array.init(repeating: -1, count: 2047)</span><br><span class="line">    var start: Int = 0 // 起始位置</span><br><span class="line">    var maxLength: Int = 0  // 最大长度</span><br><span class="line">    var characters:[String] = []</span><br><span class="line">    </span><br><span class="line">    for char in s &#123;</span><br><span class="line">        let string:String = String.init(char)</span><br><span class="line">        characters.append(string)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;characters.count &#123;</span><br><span class="line">        </span><br><span class="line">        let hash_i: Int = characters[i].hashValue</span><br><span class="line">        let hash_a: Int = &quot;_&quot;.hashValue</span><br><span class="line">        </span><br><span class="line">        if (last[hash_i - hash_a] &gt;= start) &#123;</span><br><span class="line">            maxLength = max(maxLength, i-start)</span><br><span class="line">            start = last[hash_i - hash_a] + 1</span><br><span class="line">        &#125;</span><br><span class="line">        last[hash_i - hash_a] = i</span><br><span class="line">    &#125;</span><br><span class="line">    maxLength = max(maxLength, s.count - start)</span><br><span class="line">    return maxLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>奇迹出现：耗时6ms！几千倍的差距。</p>
+<p>然而leetcode还是没通过，说我越界了，我特么。。。自己运行没问题啊<img src="https://upload-images.jianshu.io/upload_images/1869467-a381f78813e255e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>然后我申诉了该题目。😏</p>
+<p>—————————————分割线————————————-</p>
+<p>在做<a href="https://www.jianshu.com/p/31ef441e3be3" target="_blank" rel="noopener">387.字符串中的第一个唯一字符</a>时，我发现了如果用hash值是会越界的，在leetcode上是会这样。那我们可以用ASCII码来搞，因为每一个字符只对应一个ASCII码。<br>可以参照<a href="http://ascii.911cha.com" target="_blank" rel="noopener">ASCII码对照表</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">abcdefghijklmnopqrstuvwxyz   97~122</span><br><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ   65~90</span><br><span class="line">0123456789                   48~57</span><br><span class="line">!\&quot;#$%&amp;&apos;()*+,-./             33~47</span><br><span class="line">:;&lt;=&gt;?                       58~64</span><br><span class="line">@[\\]^_`                     91~96</span><br><span class="line">&#123;|&#125;~                         123~126</span><br><span class="line">&quot; &quot;                          32</span><br><span class="line">空字符                        0</span><br></pre></td></tr></table></figure></p>
+<p>接下来，只要把hashValue换一下就OK了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 所有字符的所对应的ASCII码，用CChar类型表示，实质为Int8类型。</span><br><span class="line">// 该方法末尾会默认加上一个&quot;0&quot;元素，也就是空字符</span><br><span class="line">var allCharacter: [Int8]? =</span><br><span class="line">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~ &quot;.cString(using: String.Encoding.utf8)</span><br><span class="line">print(allCharacter)</span><br><span class="line">print(allCharacter?.count)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">func lengthOfLongestSubstring(_ s: String) -&gt; Int &#123;</span><br><span class="line">    </span><br><span class="line">    var last:[Int] = Array.init(repeating: -1, count: 127)</span><br><span class="line">    var start: Int = 0 // 起始位置</span><br><span class="line">    var maxLength: Int = 0  // 最大长度</span><br><span class="line">    </span><br><span class="line">    let chars: [Int8]? = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;s.count &#123;</span><br><span class="line">        </span><br><span class="line">        let hash_i: Int = Int(chars![i])</span><br><span class="line">        let hash_null: Int = 0</span><br><span class="line">        </span><br><span class="line">        if (last[hash_i - hash_null] &gt;= start) &#123;</span><br><span class="line">            maxLength = max(maxLength, i-start)</span><br><span class="line">            start = last[hash_i - hash_null] + 1</span><br><span class="line">        &#125;</span><br><span class="line">        last[hash_i - hash_null] = i</span><br><span class="line">    &#125;</span><br><span class="line">    maxLength = max(maxLength, s.count - start)</span><br><span class="line">    return maxLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#后记<br>这一题和<a href="https://www.jianshu.com/p/31ef441e3be3" target="_blank" rel="noopener">387.字符串中的第一个唯一字符</a>思路大致相同，不太清楚的可以先看一下那题。<br>1.耗时<code>44</code>毫秒，超过<code>99.35%</code>的提交记录，总提交数<code>987</code>。</p>
+<p>这一题总算告一段落了。<br>大家有疑惑的地方欢迎一起探讨啊。😄</p>
 
           
         
@@ -604,20 +1346,20 @@ i = 0
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/6--Z字形变换/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/217--存在重复元素/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
 
@@ -629,7 +1371,7 @@ i = 0
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/6--Z字形变换/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/217--存在重复元素/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -692,27 +1434,14 @@ i = 0
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数：<br> 输入: s = “PAYPALISHIRING”, numRows = 3<br> 输出: “PAHNAPLSIIGYIR”<br> 输入: s = “PAYPALISHIRING”, numRows = 4<br> 输出: “PINALSIGYAHRPI”<br>实现一个将字符串进行指定行数变换的函数:<br>string convert(string s, int numRows);</p>
+<p>给定一个整数数组，判断是否存在重复元素。<br>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">numRows = 3</span><br><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br><span class="line"></span><br><span class="line">numRows = 4</span><br><span class="line">P      I       N</span><br><span class="line">A   L  S    I  G</span><br><span class="line">Y A    H  R</span><br><span class="line">P      I</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：</p>
-<p>######3.1. 将原字符串按照“z字转换规律”保存进一个二维数组</p>
-<p>######3.2.将该二维数组横竖对调，得到最后的二维数组</p>
-<p>######3.3.用字符串拼接得到最后的答案<br>核心思路：找规律，找关键的几个数据和numRows、字符串总长度之间的关系。<br>下图中方框内表示一个单元格。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-70f7b1df5477c737.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="笔记思路"></p>
-<p>######第一步：能够看出，这个排列是由一个个单元格(相同的排列)组成。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> P      I       N</span><br><span class="line"> A   L  S    I  G</span><br><span class="line"> Y A    H  R</span><br><span class="line"> P      I</span><br><span class="line">其中，单元格是</span><br><span class="line"> P</span><br><span class="line"> A   L</span><br><span class="line"> Y A</span><br><span class="line"> P</span><br></pre></td></tr></table></figure></p>
-<p>######第二步：算出每一个单元所包含的字符个数<br>很简单可以看出，每个单元是由最长的那一列+中间的那几个字符。<br>而中间那些字符，刚好是除去最上面和最下面的那些。<br>所以：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let letterCount = numRows + (numRows - 2)</span><br></pre></td></tr></table></figure></p>
-<p>######第三步：每个单元格包含的列数<br>1表示是行数最大那一列，(numRows - 2)是中间过渡的那几列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let cols: Int = 1 + (numRows - 2)</span><br></pre></td></tr></table></figure></p>
-<p>######第四步：总共有多少个单元格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var count: Int = 0</span><br><span class="line">while letterCount*count &lt;= letters.count &#123;</span><br><span class="line">    </span><br><span class="line">    count = count + 1</span><br><span class="line">&#125;</span><br><span class="line">// 因为最后count会再次累加1，所以需要减1.</span><br><span class="line">count = count - 1</span><br></pre></td></tr></table></figure></p>
-<p>######第五步：总共列数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 最终列数</span><br><span class="line">var allCols: Int = 0</span><br><span class="line">// 余数：比如字符长度为17，17 % 6 = 5</span><br><span class="line">let remainder = letters.count % letterCount</span><br><span class="line">if remainder == 0 &#123; // 说明刚好有整数个单元格</span><br><span class="line">    allCols = count * cols</span><br><span class="line">&#125;else if remainder &gt;= numRows &amp;&amp; remainder &lt; letterCount &#123; </span><br><span class="line">    //如果余数大于或者行数，并且小于一个单元格所包含的最大字符数，allCols = 前面整数个的单元格列数 + 1 + (余数 - numRows)</span><br><span class="line">    allCols = count * cols + 1 + (remainder - numRows)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    // 比如上面的例子， PAYPALISHIRING中，结果余数 = 14%6 = 2，2 &lt; numRows，所以allCols =  前面整数个的单元格列数 + 1</span><br><span class="line">    allCols = count * cols + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 1.前二维数组</span><br><span class="line">var allConvert = dim(allCols, dim(numRows, &quot;*&quot;))</span><br><span class="line">var index: Int = 0 // 总字符串索引</span><br><span class="line">for i in 0..&lt;allCols &#123;</span><br><span class="line">    // i % cols，余数 - 指的是字母离底部多长。</span><br><span class="line">    if i % cols == 0 &#123; // 当余数为0时，就是最长列的时候。</span><br><span class="line">        var convert: [String] = Array.init(repeating: &quot;*&quot;, count: numRows)</span><br><span class="line">        var j: Int = 0</span><br><span class="line">        while index &lt; letterCount * (i/cols + 1) &amp;&amp; index &lt; letters.count &amp;&amp; j &lt; numRows &#123;</span><br><span class="line">            convert[j] = letters[index]</span><br><span class="line">            allConvert[i] = convert</span><br><span class="line">            index = index + 1</span><br><span class="line">            j = j + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123; // 其他时候，就是用（ 最大行数 - 1 - 余数 ）</span><br><span class="line">        var convert: [String] = Array.init(repeating: &quot;*&quot;, count: numRows)</span><br><span class="line">        convert[numRows - 1 - i%cols] = letters[index]</span><br><span class="line">        allConvert[i] = convert</span><br><span class="line">        index = index + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(allConvert)</span><br></pre></td></tr></table></figure>
-<p>这里需要一个创建二维数组的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 创建二维数组</span><br><span class="line">func dim&lt;T&gt;(_ count: Int, _ value: T) -&gt; [T] &#123;</span><br><span class="line">    return [T](repeating: value, count: count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######第六步：横竖置换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;e&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;f&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;l&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br><span class="line">         变成</span><br><span class="line"> [[&quot;a&quot;, &quot;*&quot;, &quot;*&quot;, &quot;g&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;b&quot;, &quot;*&quot;, &quot;f&quot;, &quot;h&quot;, &quot;*&quot;, &quot;l&quot;],</span><br><span class="line"> [&quot;c&quot;, &quot;e&quot;, &quot;*&quot;, &quot;i&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;d&quot;, &quot;*&quot;, &quot;*&quot;, &quot;j&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 将数组横转，横 -&gt; 竖</span><br><span class="line">// i[0,6) j[0,4)  -&gt;   i[0,4) j[0,6)</span><br><span class="line">var resultConverts = dim(numRows, dim(allCols, &quot;*&quot;))</span><br><span class="line">for i in 0..&lt;allCols &#123;</span><br><span class="line">    for j in 0..&lt;numRows &#123;</span><br><span class="line">        resultConverts[j][i] = allConvert[i][j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>######第七步：拼接最终字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var result: String = &quot;&quot;</span><br><span class="line">for i in 0..&lt;numRows &#123;</span><br><span class="line">    for j in 0..&lt;allCols &#123;</span><br><span class="line">        if resultConverts[i][j] != &quot;*&quot; &#123;</span><br><span class="line">            result.append(resultConverts[i][j])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(resultConverts)</span><br><span class="line">// result就是我们需要的答案</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-7859008047d2878f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-e1318be6f0cbd079.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>思路完全正确的，就是耗时太长了，<img src="https://upload-images.jianshu.io/upload_images/1869467-a381f78813e255e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,1]</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [1,2,3,4]</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">示例 3:</span><br><span class="line">输入: [1,1,1,3,3,4,3,2,4,2]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.先排序，然后通过两个指针进行遍历比较，相同就直接返回true。<br>耗时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">func containsDuplicate(_ nums: [Int]) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = nums.sorted()</span><br><span class="line">    let count = mutNums.count</span><br><span class="line">    var i: Int = 0</span><br><span class="line">    var j: Int = 1</span><br><span class="line">    </span><br><span class="line">    while i&lt;j &amp;&amp; i&lt;count &amp;&amp; j&lt;count &#123;</span><br><span class="line">        if mutNums[i] == mutNums[j] &#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            i = i + 1</span><br><span class="line">            j = j + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.直接用set来判断，因为set是无重复数据的集合。<br>耗时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;Swift语言 提供Arrays、Sets和Dictionaries三种基本的集合类型用来存储集合数据。</span><br><span class="line">数组（Arrays）是有序数据的集。</span><br><span class="line">集合（Sets）是无序无重复数据的集。</span><br><span class="line">字典（Dictionaries）是无序的键值对的集。</span><br></pre></td></tr></table></figure></p>
+<p>func containsDuplicate(_ nums: [Int]) -&gt; Bool {<br>    let set = Set(nums)<br>    return set.count &lt; nums.count<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.用Set的另一个方法，.inserted，如果集合里存在某个元素，再加该元素时，.inserted = false。</span><br><span class="line">耗时```48```毫秒，超过```98.33%```的提交记录。</span><br></pre></td></tr></table></figure></p>
+<p>// checkNums ：[1] [1,2] [1,2,3] [1,2,3,4]<br>// 因为集合里有3，所以加不进去，所以.inserted = false，说明有重复的数字<br>func containsDuplicate(_ nums: [Int]) -&gt; Bool {<br>    if nums.count &lt;= 1 { return false}<br>    var checkNums: Set<int> = [nums.first!]<br>    for i in 1..&lt;nums.count {<br>        if !checkNums.insert(nums[i]).inserted {<br>            return true<br>        }<br>    }<br>    return false<br>}<br><code>`</code></int></p>
+<p>#四、小结<br>推荐使用2、3方法，总提交数18.</p>
 
           
         
@@ -764,20 +1493,20 @@ i = 0
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/66-加一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/387--字符串中的第一个唯一字符/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
 
@@ -789,7 +1518,7 @@ i = 0
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/66-加一/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/387--字符串中的第一个唯一字符/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -852,14 +1581,12 @@ i = 0
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。<br>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。<br>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。<br>注意事项：您可以假定该字符串只包含小写字母。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2,4]</span><br><span class="line">解释: 输入数组表示数字 123。</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [4,3,2,1]</span><br><span class="line">输出: [4,3,2,2]</span><br><span class="line">解释: 输入数组表示数字 4321。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>误区：我一开始的想法是把数字+1，然后再分。<br>但是题目的数字并没有限制，所以，当去取余数然后*10的多少次方时，就越界了崩溃了。所以，这题不能这么做。</p>
-<p>######正解：递归，只能通过递归来算。<br>其实我们考虑该题的核心，应该集中于一点：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.在这里我们先要将最后一位先判断，是否+1后=10。如果=10，就需要进一位，再去判断接下来的情况；如果&lt;10,那就直接返回原数组了。</span><br><span class="line">2.至于除了最后一位的情况，其实也是和前面一样判断。</span><br><span class="line">3.问题核心：```iscarry：是否需要进位，也就是前一位+1后是否等于10</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 递归 iscarry：是否进位，也就是他前一个数是不是等于10</span><br><span class="line">func isCarry(_ index: inout Int, _ digits: inout [Int], _ iscarry: Bool) -&gt; [Int] &#123;</span><br><span class="line">    </span><br><span class="line">    if index &lt; 0  &#123;</span><br><span class="line">        if iscarry &#123;</span><br><span class="line">            // 如果这个时候数组已经遍历完了，但是iscarry=true，说明还是进位，在最前面加一个1</span><br><span class="line">            digits.insert(1, at: 0)</span><br><span class="line">        &#125;</span><br><span class="line">        return digits</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var bool: Bool = true</span><br><span class="line">    if index == digits.count - 1 &#123;</span><br><span class="line">        </span><br><span class="line">        let num = digits[index] + 1</span><br><span class="line">        if num == 10 &#123;</span><br><span class="line">            digits[index] = 0</span><br><span class="line">            bool = true</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            digits[index] = num</span><br><span class="line">            bool = false</span><br><span class="line">            return digits</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        var num: Int = 0</span><br><span class="line">        if iscarry &#123; //如果是进位</span><br><span class="line">            num = digits[index] + 1</span><br><span class="line">            if num == 10 &#123;</span><br><span class="line">                digits[index] = 0</span><br><span class="line">                bool = true</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                digits[index] = num</span><br><span class="line">                bool = false</span><br><span class="line">                return digits</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    index = index - 1</span><br><span class="line">    return isCarry(&amp;index, &amp;digits, bool)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func plusOne(_ digits: [Int]) -&gt; [Int] &#123;</span><br><span class="line">    </span><br><span class="line">    var nums: [Int] = digits</span><br><span class="line">    // 默认 index = 最后一位</span><br><span class="line">    var index: Int = digits.count-1</span><br><span class="line">    </span><br><span class="line">    return isCarry(&amp;index, &amp;nums, false)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>耗时<code>16</code>毫秒，超过<code>77.09%</code>的提交记录，总提交数<code>109</code>。</p>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">返回 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">返回 2.</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>用ASCII码来判断，因为一个字符对应唯一的一个ASCII码。由于题目可以假定只包含小写字母，我们范围就可缩小至小写字母这一块：97~122。<br>用一个count=27的数组，所有元素初始化都为0。如果ASCII码出现一次，该元素就+1；如果重复出现多次，该元素就会&gt;1。所以我们只需要拿到最后的==1的元素就行。取它的i值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let allLowerLetters: [Int8]? = &quot;abcdefghijklmnopqrstuvwxyz&quot;.cString(using: String.Encoding.utf8)</span><br><span class="line">// 小写字母ASCII码为：97~122</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func firstUniqChar(_ s: String) -&gt; Int &#123;</span><br><span class="line">    // 1.先将字符串转换成ASCII码数组</span><br><span class="line">    let chars: [Int8]? = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    var ret: Int = -1</span><br><span class="line">    var last: [Int] = Array.init(repeating: 0, count: 27)</span><br><span class="line">    </span><br><span class="line">    if s.count &gt; 0 &#123;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            last[hash_i - hash_a] = last[hash_i - hash_a] + 1</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            if last[hash_i - hash_a] == 1 &#123;</span><br><span class="line">                ret = i</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>1.耗时<code>188</code>毫秒，超过<code>96.94%</code>的提交记录，总提交数<code>104</code>。</p>
 
           
         
@@ -911,20 +1638,20 @@ i = 0
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/7--反转整数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/4--两个排序数组的中位数/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
 
@@ -936,7 +1663,7 @@ i = 0
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/7--反转整数/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/4--两个排序数组的中位数/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -999,921 +1726,15 @@ i = 0
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个 32 位有符号整数，将整数中的数字进行反转。<br>输入: 123<br>输出: 321<br>输入: -123<br>输出: -321<br>输入: 120<br>输出: 21</p>
+<p>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。<br>请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用原整数一直余10，保存起来和sum*10相加再赋值给sum</span><br><span class="line">sum = sum * 10 + tempX % 10</span><br><span class="line">tempX =  tempX / 10</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func reverse(_ x: Int) -&gt; Int &#123;</span><br><span class="line">    var tempX:Int = x</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    while tempX != 0 &#123;</span><br><span class="line">        sum = sum * 10 + tempX % 10</span><br><span class="line">        tempX =  tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    if sum &gt; Int32.max || sum &lt; Int32.min &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>就比较简单，普通的算法。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-15ba2a43478f2b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/8--字符串转整数-(atoi)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/8--字符串转整数-(atoi)/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>实现 atoi，将字符串转为整数。<br>在找到第一个非空字符之前，需要移除掉字符串中的空格字符。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。<br>字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。<br>当字符串中的第一个非空字符序列不是个有效的整数；或字符串为空；或字符串仅包含空白字符时，则不进行转换。<br>若函数不能执行有效的转换，返回 0。<br>说明：<br>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。如果数值超过可表示的范围，则返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;42&quot;</span><br><span class="line">输出: 42</span><br><span class="line"></span><br><span class="line">输入: &quot;   -42&quot;</span><br><span class="line">输出: -42</span><br><span class="line">解释: 第一个非空白字符为 &apos;-&apos;, 它是一个负号。</span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</span><br><span class="line"></span><br><span class="line">输入: &quot;4193 with words&quot;</span><br><span class="line">输出: 4193</span><br><span class="line">解释: 转换截止于数字 &apos;3&apos; ，因为它的下一个字符不为数字。</span><br><span class="line"></span><br><span class="line">输入: &quot;words and 987&quot;</span><br><span class="line">输出: 0</span><br><span class="line">解释: 第一个非空字符是 &apos;w&apos;, 但它不是数字或正、负号。</span><br><span class="line">     因此无法执行有效的转换。</span><br><span class="line"></span><br><span class="line">输入: &quot;-91283472332&quot;</span><br><span class="line">输出: -2147483648</span><br><span class="line">解释: 数字 &quot;-91283472332&quot; 超过 32 位有符号整数范围。 </span><br><span class="line">     因此返回 INT_MIN (−231) 。</span><br></pre></td></tr></table></figure></p>
-<p>1.第一个非空字符前如果有空格，去掉。<br>2.第一个非空字符只有三种选项：+  -  数字，否则返回0<br>3.接下来将连续的数字连接起来，中间不可以有除数字外的其他字符</p>
-<p>#三、解题思路：<br>1.创建相应需要的变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr: [String] = [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;]</span><br><span class="line">var result: Int = 0 // 最终结果</span><br><span class="line">var numbers: [String] = []</span><br><span class="line">for char in str &#123;</span><br><span class="line">    let temp: String = String.init(char)</span><br><span class="line">    numbers.append(temp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.几个重要的标记<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var flag: Int = 1 // 表示最终结果(整数)的符号，默认为1</span><br><span class="line">var space: Int = -1 // 表示当前字符是否为空格，如果不等于-1，就不是空格了。</span><br><span class="line">var valid: Bool = false //表示是否出现了第一个有效的字符(+ - 或者数字)</span><br></pre></td></tr></table></figure></p>
-<p>3.遍历numbers，获取最终结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;numbers.count &#123;</span><br><span class="line">    </span><br><span class="line">    // 1.排除空格</span><br><span class="line">    if (numbers[i] == &quot; &quot;) &amp;&amp; space == -1 &#123;</span><br><span class="line">        continue</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        space = i</span><br><span class="line">    &#125;</span><br><span class="line">    // 2.第一个非空字符字符为 数字或正、负号，将valid标记好</span><br><span class="line">    if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">        flag = (numbers[i] == &quot;+&quot;) ? 1 : -1</span><br><span class="line">        valid = true</span><br><span class="line">        continue</span><br><span class="line">    &#125;else if (arr .contains(numbers[i])) &#123;</span><br><span class="line">        valid = true</span><br><span class="line">        // 3.将numbers中的元素转换为int类型，将result*10叠加起来。</span><br><span class="line">        result = result*10 + Int(numbers[i])!</span><br><span class="line">        if result &gt; Int32.max &amp;&amp; flag == 1&#123;</span><br><span class="line">            result = Int(Int32.max)</span><br><span class="line">            return result</span><br><span class="line">        &#125;else if result*flag &lt;= Int32.min &amp;&amp; flag == -1&#123;</span><br><span class="line">            result = Int(Int32.min)</span><br><span class="line">            return result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        break</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return result * flag</span><br></pre></td></tr></table></figure></p>
-<p>4.举例 ：“   –0000123”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.前面的空格会跳过，直到第一个“-”。此时space = i，i = 3，进入下一步</span><br><span class="line">2.此时是“-”，找到了第一个有效的非空字符，valid = true，然后continue</span><br><span class="line">3.接下来是第二个“-”，但是!valid = false，不会进入</span><br><span class="line">if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">&#125;</span><br><span class="line">这个判断，会直接到else，会直接break，此时，result = 0</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-bf9123c7a5fc4167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-8708ae67aa0e5b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/9--回文数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/9--回文数/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>判断一个整数是否是回文数。<br>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br>回文数可以看作一个对称的字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br><span class="line"></span><br><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：</p>
-<p>######第一种思路：用数组将每个数字存起来，看是否对称<br>1.如果该整数为负数，就不是回文数。比如-123，反过来是321-，不管如何反都不是。<br>2.遍历将余数保存在一个数组里，然后遍历该数组，如果左右对称 –<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    var remainder: Int = 0</span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var array: Array = Array.init(repeating: 0, count: 0)</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        remainder = tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">        array .append(remainder)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;array.count &#123;</span><br><span class="line">        </span><br><span class="line">        if array[i] != array[array.count - 1 - i] &#123;</span><br><span class="line">            </span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######第二种思路：将数字反序，然后对比和原整数是否相等<br>（推荐，耗时较少，少了一步遍历的时间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var result: Int = 0</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        result = result * 10 + tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if result != x &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>如果是第一种方法大概是300ms，第二种大概是200ms。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-c30af19ddb35cae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-ccc10836670acdf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/永久性退出简书/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/永久性退出简书/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!DOCTYPE html>
-<html lang="en">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>永久性退出简书</title>
-    <style type="text/css" media="all">
-      body {
-        margin: 0;
-        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        color: #777;
-        background-color: white;
-      }
-      .container {
-        width: 700px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .post {
-        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
-        position: relative;
-        padding: 70px;
-        bottom: 0;
-        overflow-y: auto;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 25px;
-        color: #515151;
-      }
-
-      .post h1{
-        font-size: 50px;
-        font-weight: 500;
-        line-height: 60px;
-        margin-bottom: 40px;
-        color: inherit;
-      }
-
-      .post p {
-        margin: 0 0 35px 0;
-      }
-
-      .post img {
-        border: 1px solid #D9D9D9;
-      }
-
-      .post a {
-        color: #28A1C5;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="post">
-        <h1 class="title">永久性退出简书</h1>
-        <div class="show-content">
-          <p>我入简书的坑，是因为极简主义，没有广告，清新的画面让我很舒适。不过我以后不再用简书发文章了。</p><p>今天才真正查了下之前很多人说的那件事，一个文艺弱智不遗余力的黑程序员，最后的最后连一句道歉都没有，差不多可以起诉和控告那个傻逼的。凭着自己大V身份便可以无法无天，黑完之后，简书ceo还支持该傻逼。有点骨气，就不来了。<br></p><p>作为一名程序员，不会在这发任何技术文章了，在这偶尔装装文艺就好了。</p><div class="image-package">
-<img src="http://upload-images.jianshu.io/upload_images/1869467-4f41efb046c9d9b2.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br><div class="image-caption">图片发自简书App</div>
-</div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/日记本/孤独的根号三/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/日记本/孤独的根号三/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!DOCTYPE html>
-<html lang="en">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>孤独的根号三</title>
-    <style type="text/css" media="all">
-      body {
-        margin: 0;
-        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        color: #777;
-        background-color: white;
-      }
-      .container {
-        width: 700px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .post {
-        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
-        position: relative;
-        padding: 70px;
-        bottom: 0;
-        overflow-y: auto;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 25px;
-        color: #515151;
-      }
-
-      .post h1{
-        font-size: 50px;
-        font-weight: 500;
-        line-height: 60px;
-        margin-bottom: 40px;
-        color: inherit;
-      }
-
-      .post p {
-        margin: 0 0 35px 0;
-      }
-
-      .post img {
-        border: 1px solid #D9D9D9;
-      }
-
-      .post a {
-        color: #28A1C5;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="post">
-        <h1 class="title">孤独的根号三</h1>
-        <div class="show-content">
-          <p>在这寂静的深夜，望着窗外默默吹过的风。有没有人和我一样，打开手机通讯录，却发现不知道打给谁，只有内心深处的孤独久久无法散去。﻿<br></p><p>我也想像歌谣里那么唱的，我们大声的笑着无所谓的闹着，梦里没有牵绊只有那漫溢的青春。</p><p>有人说女人18岁就独立了，而男人永远长不大，他得花一生去学会成长。</p><p>回顾这一生（有人会说，这几把才二十几年的光景，不过到目前为止确实是我的一生），好哥们可以说有很多，但是能够谈天说地喝酒聊天的女性朋友，除了我妈真没有了，当然我妈不准我喝酒。</p><p>有时候我就在想，是不是我人品有问题交不到女生朋友，还是长得丑不够有魅力。自此产生深深的自卑和一种无奈感。﻿（有没有人和我一样）</p><p>1.小时候，有一个女孩比我大一岁，真的是光屁股长大的朋友，长大之后我们两见面说话也找不到话题，讨论的话题也不在一个点，直到远嫁他乡，联系的也渐渐少了。只知道她和她老公在做自己的事业，生了个宝宝；</p><p>2.小学懵懂，直至初中，情窦初开的我可以为一个女孩和别人打架。高中看人家文科班一个女生长得漂亮，高考竟然打定了主意要和她考同一所大学，虽然连她的名字都不知道。</p><p>3.大一，喝醉了酒，吐了一床。当然，最不幸的是我的室友。因为我吐了他们一脸，以至于他们用雨伞防御我的攻击。那次醉酒缘由其实也是因为一个女孩。（我特么是有多多情）临到大三下学期，才在图书馆遇见心中的女神。对于我这种情场彩笔，猛然发起进攻，效果功效甚微，具体细节脑补一下（看10号楼下，一个傻逼端着奶茶站在那两小时了）。直至我离校毕业晚上，她应邀出来和我吃的唯一一顿饭，然后再也没联系。</p><p>毕业之后在家呆了一年，当了一年的跆拳道教练。教教小朋友，自己锻炼。接触女性只有那几个生猛的女教练（有男友了）和一群我师傅级别的教练。</p><p>直到后来来北京自己闯荡，做起了程序员。才发现世界之大，自己渺小。每天都自己拼命努力，一直很认同那句，你有多努力，才能有机会遇到最好的另一半。</p><p>每天行色匆匆走在这路上，走过这天桥，这灯红酒绿，走过车站，火车道，回到家。练习指弹，看书，看自己喜欢的电影，包括整理自己的房间。我一直相信，有一个姑娘在远处等我，我只有认真的生活，热爱自己的一切，往自己想成为的那个自己前进。就能看见那个姑娘，相信她也是一样吧。我憧憬爱情。</p><p>根号三是一个无穷小数，相信在这个世界里，会有那个1.732......和你一起相遇相爱。致你们，也致我自己。</p>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/从光影中看人生/谢谢你，让我从你的全世界路过/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/从光影中看人生/谢谢你，让我从你的全世界路过/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!DOCTYPE html>
-<html lang="en">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>谢谢你，让我从你的全世界路过</title>
-    <style type="text/css" media="all">
-      body {
-        margin: 0;
-        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        color: #777;
-        background-color: white;
-      }
-      .container {
-        width: 700px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .post {
-        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
-        position: relative;
-        padding: 70px;
-        bottom: 0;
-        overflow-y: auto;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 25px;
-        color: #515151;
-      }
-
-      .post h1{
-        font-size: 50px;
-        font-weight: 500;
-        line-height: 60px;
-        margin-bottom: 40px;
-        color: inherit;
-      }
-
-      .post p {
-        margin: 0 0 35px 0;
-      }
-
-      .post img {
-        border: 1px solid #D9D9D9;
-      }
-
-      .post a {
-        color: #28A1C5;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="post">
-        <h1 class="title">谢谢你，让我从你的全世界路过</h1>
-        <div class="show-content">
-          <p>有那么一个女孩，初来这座城市，无依无靠。但每晚有一个电台，一个温情的声音陪伴她走过最艰难的时光。</p><p>生活给一个人的压力往往是巨大的，女孩生活的地方对面有一面墙，路过的人都可以在上面把自己的心愿画出来。女孩把自己画进了画里，她站在雨中，连衣裙随风摇摆。这是女孩的生活写照。</p><p>有一天，大雨倾盆，一个男孩路过这，在对面墙边躲雨。看到墙上的画，拿起粉笔在墙上画了起来。女孩不知道他画的是什么，直到男孩远远离开。当女孩再次注视对面的画时，女孩笑了。</p><p>画中的女孩多了一把伞。他是一个温暖的人。</p><p><br></p><div class="image-package">
-<img src="http://upload-images.jianshu.io/upload_images/1869467-80ccde6ba290916b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br><div class="image-caption">图片发自简书App</div>
-</div><p>﻿<br></p><p>后来她知道，那个男孩就是一直陪伴她的那个声音。</p><p>当她鼓起勇气，作为听众打电话给男孩的时候，却无意间听到了一个消息，他分手了。对，他的女友就是他的搭档--小容。</p><p>从此，他好像完全变了一个人。没以前温暖了，甚至会嘲笑打来电话的听众，放一些浮躁夸张的音乐。他从台收听率第一到倒数第一。生活邋遢，自暴自弃。</p><p>她知道，这是失恋给他造成的痛苦。</p><p>她为了接近他，想让他变成原来的样子。她努力学习播音，进入他们公司面试，很幸运的，她被录用了。当作为实习生被安排工作时，收听率垫底的他，没有实习生愿意跟着他，但这让这个女孩更坚定了自己的想法，她选择做他的实习生。</p><p>纵使所有人都放弃你，我还是选择你。因为我知道，你是一个愿意为她人撑伞的人。</p><p>在男孩眼里，只知道她是一个没有天赋的实习生，她叫幺鸡，麻将里最小的那张。</p><p>这是她跟着男孩第一次开播，接听了第一位听众。听众怀疑他老婆出轨，因为跟着他吃了十几年的面，现在不愿意和他一起吃面了。男孩还是习惯性的用讽刺的口语嘲笑听众：“天涯何处无芳草，春风一吹绿油油，你这一绿起来，挡都挡不住。”听众习惯性用恶毒的语言攻击着男孩：“陈末，你就是一个垃圾，你的节目也是个垃圾。”男孩笑笑，不置可否。</p><p>女孩愤怒的抢过麦克风，痛骂了这位听众。</p><p>“闭嘴，你今年多大了？”</p><p>“三十二。”</p><p>“三十二岁，都已经半截入土了，人家天天陪你吃面条，突然心情不好想吃水饺怎么了？你知道自己事业为什么不成功吗？就是一天到晚瞎琢磨，你说你到底闲不闲，啊？你就是一咸鸭蛋。知道为什么叫咸鸭蛋吗？因为你被腌过了。你老婆瞎了眼，男人死光了才拉你做丈夫。简称：男-死-拉-夫！下一个。”</p><p>男孩在旁边，咬着一口面，目瞪口呆的看着她。女孩吓坏了，连忙说：真是，对不起。</p><p>男孩吃完嘴里的面说：“下一个”。</p><p>播音室外的天台</p><p>女孩端着男孩的面条，“吃一点吧。”</p><p>“内奸。小容派来的，对不对？”</p><p>“我就是受不了别人骂你。”</p><p>“别解释。安插在我身边，我就自暴自弃怎么了，没人听我节目怎么了，我就不走了，我要与它共存亡。耶……”</p><p>“陈末老师，我要怎么做你才肯原谅我。”</p><p>“很简单，不要再让我看到你。”</p><p>“陈末老师！”</p><p>“滚吧”。</p><p>第二天，这一期节目收听率极高，直接飙到台里第一了。幺鸡成为了香饽饽。</p><p>后续经历了一系列的事情，陈末渐渐的有些喜欢身边的这个女孩了。</p><p>女孩想尽办法让男孩与她前女友复合，让陈末重新做回那个温暖人心的人。当看到他们一起相拥，也是她准备离开他的时候了。</p><p>男孩进入播音室，准备开播，却无意间发现了一个优盘，是女孩的秘密。</p><p>女孩爱着男孩的秘密。</p><p>只是，这个时候，女孩已经在离开的路上了。</p><p>“说来可笑，每天我对着麦克风自说自话，帮别人解答人生的困惑，其实我自己的生活才是一团糟。你根本不知道这个城市会有几个人，听我在这胡说八道。但是如果你愿意的话，请帮我打下双闪。哪怕是一个人、一辆车、一盏灯。我就想让幺鸡知道，我在找她。”</p><p>说完，男孩放下麦克风，站在窗口凝望这座城市，没有一辆车为他打着双闪。</p><p>“也难怪，我都放弃自己这么久，你们也应该放弃我。”</p><p>沉默的坐回了播音室。</p><p>过了一会，男孩听到导播员敲玻璃，指了指窗外。</p><p>男孩起身看往窗外，来到天台，看见这座城市越来越多的双闪陆陆续续的都在打开，甚至是一间房里的关灯开灯。</p><p>男孩欣喜的看着眼前这座城市，非常温暖。</p><p>女孩也听到了广播，坐在公交车上，看着窗外朦胧的街道，哭得泪流满面。</p><p>“谢谢你，让我从你的全世界路过。”</p><p>信息发出去之后，女孩就永远的离开了这座城市。</p><p>那天以后，男孩再也没有了女孩的消息。人生的改变，往往是一夜之间。</p><p>男孩从此辞去了电台工作，四处寻找女孩的消息。</p><p>人的一生或许会拥有很美好的爱情，又或许你一直找不到你心里认为对的那个人。但我一直期许，我想你也要期许，期许有那么一个人，一直在等你，而你也一直在找他。</p>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nums1 = [1, 3]</span><br><span class="line">nums2 = [2]</span><br><span class="line">中位数是 2.0</span><br><span class="line"></span><br><span class="line">nums1 = [1, 2]</span><br><span class="line">nums2 = [3, 4]</span><br><span class="line">中位数是 (2 + 3)/2 = 2.5</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.先将数组排好序<br>2.如果数组count是奇数，那中间那位数（count / 2）就是中位数。<br>3.如果数组count是偶数，那中位数 = （第(count / 2) - 1  +  第(count / 2)）/  2<br>例子：<br>[20、21、23、23、25、29、32]<br>7 / 2 = 3，中位数 = 23<br>[20、21、23、23、25、29、32、33]<br>8 / 2 = 4，中位数 =（23+25）/ 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -&gt; Double &#123;</span><br><span class="line">    var nums: [Int] = []</span><br><span class="line">    var result: Double = 0</span><br><span class="line">    for i in 0..&lt;nums1.count &#123;</span><br><span class="line">        nums .append(nums1[i])</span><br><span class="line">    &#125;</span><br><span class="line">    for i in 0..&lt;nums2.count &#123;</span><br><span class="line">        nums .append(nums2[i])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    nums.sort()</span><br><span class="line">    print(nums)</span><br><span class="line">    </span><br><span class="line">    if nums.count % 2 == 0 &#123; //偶数</span><br><span class="line">       </span><br><span class="line">        let num1: Int = nums[nums.count / 2 - 1]</span><br><span class="line">        let num2: Int = nums[nums.count / 2]</span><br><span class="line">        result = Double(Double(num1 + num2) / 2)</span><br><span class="line">    &#125;else if nums.count % 2 != 0 &#123; // 奇数</span><br><span class="line">        result = Double(nums[nums.count / 2])</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-12998bc966df761f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总通过数.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-8cd761250d063079.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<p>其实这是想到的最简答的方法，耗时会偏长，大家有好的想法可以留言啊，我暂时就没去深究了，继续下题下题。。。</p>
+<p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
 
           
         
@@ -1989,7 +1810,7 @@ i = 0
 
       <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">John Doe</p>
               <p class="site-description motion-element" itemprop="description"></p>
