@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/小故事们/《项脊轩志》后续/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/iOS随笔/iOS内购之二次验证/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -313,7 +313,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/09/10/小故事们/《项脊轩志》后续/" class="post-title-link" itemprop="url">《项脊轩志》后续</a>
+                <a href="/2018/01/25/iOS随笔/iOS内购之二次验证/" class="post-title-link" itemprop="url">iOS内购之二次验证</a>
               
             
           </h1>
@@ -338,7 +338,7 @@
                 
               
 
-              <time title="Created: 2018-09-10 17:31:12" itemprop="dateCreated datePublished" datetime="2018-09-10T17:31:12+08:00">2018-09-10</time>
+              <time title="Created: 2018-01-25 10:55:12" itemprop="dateCreated datePublished" datetime="2018-01-25T10:55:12+08:00">2018-01-25</time>
             
 
             
@@ -355,7 +355,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-26 14:16:50" itemprop="dateModified" datetime="2018-12-26T14:16:50+08:00">2018-12-26</time>
+                <time title="Modified: 2018-12-26 14:56:14" itemprop="dateModified" datetime="2018-12-26T14:56:14+08:00">2018-12-26</time>
               
             
           </span>
@@ -372,7 +372,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/小故事们/" itemprop="url" rel="index"><span itemprop="name">小故事们</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
 
                 
                 
@@ -408,31 +408,395 @@
       
         
           
-            <p>前言：《项脊轩志》– 高中课文，全文背诵（我们那时候）。<br>明代文学家归有光所作的一篇回忆性记事散文，全文真切再现了祖母、母亲、妻子的音容笑貌，也表达了作者对于三位已故亲人的深沉怀念。</p>
-<p>其实《项脊轩志》归有光自己就分了两部分来写。<br>前四段写于明世宗嘉靖三年（1524年），当时归有光18岁。<br>在经历了结婚、妻死、不遇等人生变故后，之后作者于明世宗嘉靖十八年（1539年），又为这篇散文增添了补记。（后半段写得着实悲伤）</p>
-<p>今天想说的是它的最后一句：</p>
+            <p>开篇：关于iOS内购整体流程网上能找到很多。我抽丝剥茧，着重说一下二次验证及收据回传的数据问题。</p>
+<p>#二次验证</p>
+<p>关于二次验证，其实有两种做法，第一种是在app端验证，第二种也是安全防盗的一种，在服务端进行验证。<br>具体区别不一一表述，可以查看下面的链接。<br><a href="https://www.cnblogs.com/zhaoqingqing/p/4597794.html" target="_blank" rel="noopener">iOS二次验证两种做法的区别</a><br>我要着重说的是二次验证的实际做法和收到的数据是什么。</p>
+<p>####一、二次验证具体如何验证<br>在这分为测试地址和实际上线地址<br>测试：<a href="https://sandbox.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://sandbox.itunes.apple.com/verifyReceipt</a><br>已上线Appstore：<a href="https://buy.itunes.apple.com/verifyReceipt" target="_blank" rel="noopener">https://buy.itunes.apple.com/verifyReceipt</a><br>在沙箱测试时，我们使用测试地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 从沙盒中获取交易凭证(收据)</span><br><span class="line">NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];</span><br><span class="line">    </span><br><span class="line">// 转化为base64字符串</span><br><span class="line">NSString *receiptString = [receiptData base64EncodedStringWithOptions:0];</span><br></pre></td></tr></table></figure>
+<p>为了方便拿到数据，我们在app端上进行验证，注意⚠️实际开发中都是在服务端进行验证的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 拼接请求数据</span><br><span class="line">NSString *bodyString = [NSString stringWithFormat:@&quot;&#123;\&quot;receipt-data\&quot; : \&quot;%@\&quot;&#125;&quot;, receiptString];</span><br><span class="line">NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">// 创建请求到苹果官方进行购买验证</span><br><span class="line">NSURL *url = [NSURL URLWithString:verifyReceipt_url];</span><br><span class="line">NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];</span><br><span class="line">requestM.HTTPBody = bodyData;</span><br><span class="line">requestM.HTTPMethod = @&quot;POST&quot;;</span><br><span class="line"></span><br><span class="line">// 创建连接并发送同步请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;验证购买过程中发生错误，错误信息：%@&quot;,error.localizedDescription);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];</span><br></pre></td></tr></table></figure></p>
+<p>####二、收据回传得到的数据分析<br>上文得到的dic就是我们通过收据得到的所有数据<br>在这里有个坑，我相信有很多同学都踩过。<br>就是你支付成功了，但是在这个数组里却找不到你想要的数据。<br>我们可以看下面一张图，然后再分析分析。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-95076d02313940ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内购类型.png"></p>
+<p>可以看到有四种类型，但是具体到我们项目中我们该如何选择和操作呢。</p>
 <blockquote>
-<p>庭有枇杷树，吾妻死之年所手植也，今已亭亭如盖矣。</p>
+<p>1.消耗型：比如我们游戏里的金币，6元600个金币，你使用完了就失效了。比如现在各大视频app推出的电影购买，6元买完一张影片之后，你如果想买下一张影片就必须再次购买。<br>2.非消耗型：比如某app推出永久会员，购买一次终身使用，就是非消耗型。再比如游戏过关时app的某关，你一直过不去，花钱购买过去了，等你下次再打开app时，他这关默认是已经通过的。<br>3.自动续订型：具体可以看爱奇艺视频开通会员（腾讯app也类似），里面就有一个自动续订会员。也就是到期了，它会自动从你的苹果账号上扣钱。这个慎点慎点，他们这样搞很坑钱。<br>4.非自动续订型：这个就是1个月优酷会员啦，或者3个月季度会员啥的。有期限，到期时也不会自动扣钱。一般的都是选择这个，不然像爱奇艺的自动续订，用户不知情时，会被骂死，哈哈</p>
 </blockquote>
-<p>人们不愿故事太过悲伤，然后《项脊轩志》有了后续。</p>
+<p>说了这么多，来看看订单数据长啥样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	product_id = &quot;lalalalahahaha&quot;,//商品的标识，和产品定，随便写但是不能重复</span><br><span class="line">	quantity = &quot;1&quot;,//购买商品的数量</span><br><span class="line">	transaction_id = &quot;1000000357637984&quot;,//交易的标识</span><br><span class="line">	purchase_date_ms = &quot;1512613065000&quot;,//购买时间毫秒</span><br><span class="line">	original_purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//购买时间,太平洋标准时间</span><br><span class="line">	purchase_date_pst = &quot;2017-12-06 18:17:45 America/Los_Angeles&quot;,//太平洋标准时间</span><br><span class="line">	original_purchase_date_ms = &quot;1512613065000&quot;,//毫秒</span><br><span class="line">	is_trial_period = &quot;false&quot;,</span><br><span class="line">	original_purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;,//原始购买时间</span><br><span class="line">	original_transaction_id = &quot;1000000357637984&quot;,//原始交易ID</span><br><span class="line">	purchase_date = &quot;2017-12-07 02:17:45 Etc/GMT&quot;//购买时间</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>我们得到的字典里如果有多条数据，就会有一个数组in_app。<br>如果只有一条数据，或者没有数据，就没有in_app。<br>in_app里的数据格式就如上文代码所书。</p>
+<p>所有的订单信息都在in_app里。所以我们要找到最新成功的那条数据，就需要在这里面去找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1.消耗性的和其他的有区别，消耗性的下一次购买的，会覆盖上一次购买的，所以只有一条消耗性的订单信息，当然也是最新的。</span><br><span class="line">2.其他三种每次购买，都会生成新的订单信息，不会覆盖原来的，所以你购买多少次，上面就会显示多少条。</span><br></pre></td></tr></table></figure>
+<p>####三、内购二次验证实际开发中具体做法</p>
 <blockquote>
-<p>今伐之，为博小娘子一笑。</p>
+<p>1.我们把收据信息传给服务器<br>2.服务器自行处理所有的订单信息，返回一个成功与失败的状态给我们。所有的操作，后台都已经记录在案了，我们不再需要管。我们只需要知道，此次购买是否成功就行了。</p>
 </blockquote>
-<p>1.起手网友很皮。</p>
+<p>结语：内购其实很简单，只是有时候不经意就会入坑，在此特意记录下困惑的地方，帮助自己深刻记忆，也希望帮助到其他遇到该问题的童鞋。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/22/iOS随笔/iOS导航栏设置背景图片/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/01/22/iOS随笔/iOS导航栏设置背景图片/" class="post-title-link" itemprop="url">iOS导航栏设置背景图片</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-22 15:37:12" itemprop="dateCreated datePublished" datetime="2018-01-22T15:37:12+08:00">2018-01-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:55:41" itemprop="dateModified" datetime="2018-12-26T14:55:41+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、基础知识铺垫<br>1.众所周知，导航栏设置背景图片有两个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.-setBackgroundImage:forBarMetrics:</span><br><span class="line">2.-setBackgroundImage:forBarPosition:barMetrics:</span><br></pre></td></tr></table></figure></p>
+<p>设置属性的话分别取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">forBarPosition ： </span><br><span class="line">UIBarPositionAny</span><br><span class="line">UIBarPositionBottom ：官方解释shadow above the bar，注：除了这个枚举，其他使用都有效。</span><br><span class="line">UIBarPositionTop</span><br><span class="line">UIBarPositionTopAttached</span><br><span class="line"></span><br><span class="line">barMetrics ： </span><br><span class="line">UIBarMetricsDefault ： 我试过了除了这个默认属性，其他的使用了都无效。</span><br><span class="line">UIBarMetricsCompact</span><br><span class="line">UIBarMetricsDefaultPrompt</span><br><span class="line">UIBarMetricsCompactPrompt</span><br><span class="line">UIBarMetricsLandscapePhone</span><br><span class="line">UIBarMetricsLandscapePhonePrompt</span><br><span class="line"></span><br><span class="line">注：一般情况下，只需要用1方法就行。</span><br></pre></td></tr></table></figure></p>
+<p>##二、遇到问题<br>但是，我就这么设置，然后遇到一个问题。<br>UI给了我们有一张颜色渐变的背景图，尺寸为750*6。<br>这张图分别用于：1.我们app中所有的按钮 2.首页的一张背景图 3.导航栏背景<br>设置时，这张图默认是平铺的。设置按钮和UIImageview时都没问题，但是导航栏背景出问题了。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-432ac52cf7df5a53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<p>从图中可以看出，导航栏的颜色和用UIImageView设置的颜色并不相同，导航栏中颜色没有渐变。<br>怎么办呢，我在想这是什么原因造成的。</p>
+<p>我把设置导航栏的代码又检查了一遍，而且用了各种方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如 ： 1.将图片变成颜色给导航栏设置backgroundcolor </span><br><span class="line">        2.自己来画渐变色</span><br><span class="line">        3.设置导航栏的透明度 </span><br><span class="line">        4.自定义UINavigaitonbar、、、等等</span><br></pre></td></tr></table></figure></p>
+<p>但是毫无效果，我细细琢磨，发现该导航栏上的颜色并没有出现渐变的颜色，而只取到了渐变颜色最左边的色值。有个朋友提醒我是不是导航栏设置颜色和其他控件设置颜色有什么不同。</p>
+<p>最终我们猜想是导航栏可能是通过像素来平铺图片的。而出现上面问题的原因是，我这张背景图只有一张，没有@2x和@3x。在这里又涉及到关于@1x和@2x、@3x的意思和设置问题。<img src="http://upload-images.jianshu.io/upload_images/1869467-aac41d779e9c0755.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">知识小结：</span><br><span class="line">如果只有一张图，拖进Xcode中Assets.xcassets里，会自动放入@1x的选项框内。</span><br><span class="line">在iPhone4及后面的机型，都是取@2x和@3x的。那如果没有@2x和@3x，会默认选择@1x，而且尺寸和原图像素相同。</span><br><span class="line">如果有@2x和@3x，得到的尺寸是原图像素的一半。</span><br><span class="line">所以UI给我的图是750*6，我只取到了它的前一部分的色值。所以颜色没有渐变。</span><br></pre></td></tr></table></figure></p>
+<p>##三、验证猜想<br>为了验证猜想，我将图设置为320*6，用的是iPhone5s进行测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-c051bc99ad77e2aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
+<p>完美！<br>此刻我的心情是激动的，为了进一步验证我的猜想，我创建了两张图@2x和@3x，图的尺寸分别为750 × 626和1125 × 939。<br>为了方便观看效果，我用了另一张图来试验，用的是iPhone7测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-356b94738d6997b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<p>问题完美解决。<br>由于代码非常简单，这里给一张渐变的图，就放入下文了。<br>资源文件：<img src="http://upload-images.jianshu.io/upload_images/1869467-289d0554c21fda27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gradient.png"></p>
+<p>——————————————————– 分割线 ————————————————–<br>还有个东西忘记说了，就是设置设置导航栏底部阴影效果。<br>系统有个方法是:setShadowImage<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@&quot;timg&quot;]]; //这里的timg就是那张叶子图</span><br></pre></td></tr></table></figure></p>
+<p>然后得到了下面这样的效果。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-280c9d35cde437fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
+<p>初看时觉得这又是啥情况，它的UI结构其实很简单，如下图<br><img src="http://upload-images.jianshu.io/upload_images/1869467-46f848935dec33fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"></p>
+<p>由此可见，导航栏上所有的图片设置，都是按照像素来平铺的。</p>
+<p>为了达到阴影效果，我在下面的UIImageView上加了一个view，设置view的阴影。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage new]]; //去除导航栏自带阴影</span><br><span class="line">UIView *view = [[UIView alloc] init];</span><br><span class="line">view.backgroundColor = [UIColor blackColor]; //这个随便设置什么颜色，切记不可设置为clearColor</span><br><span class="line">view.frame = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, 1);</span><br><span class="line">view.layer.shadowOpacity = 0.7; //不透明度</span><br><span class="line">view.layer.shadowOffset = CGSizeMake(0, 3); //偏移距离</span><br><span class="line">view.layer.shadowRadius = 5; //阴影半径</span><br><span class="line">[self.imgView addSubview: view];</span><br></pre></td></tr></table></figure></p>
+<p>最终效果：<br><img src="http://upload-images.jianshu.io/upload_images/1869467-0a5b0f088f69153f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/iOS随笔/Github上如何创建ssh/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/13/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Github上如何创建ssh</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-11-13 15:03:12" itemprop="dateCreated datePublished" datetime="2017-11-13T15:03:12+08:00">2017-11-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-26 14:54:58" itemprop="dateModified" datetime="2018-12-26T14:54:58+08:00">2018-12-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##1.创建本地ssh：操作环境（终端）</p>
 <blockquote>
-<p>小娘子一笑，恰似吾妻少年时。</p>
+<ol>
+<li>ssh-keygen  </li>
+<li>输入密码</li>
+<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
+</ol>
 </blockquote>
-<p>2.接的好，我们要把故事从头讲</p>
+<p>##2.在Github上创建ssh</p>
 <blockquote>
-<p>小娘子为吾与吾妻之女，今伐树，为小娘子造出嫁之物，愿其伉俪情深，不输吾与吾妻。</p>
-</blockquote>
-<p>3.我们所有人都期待白首不负心，这是我们最爱的结局。</p>
-<p>注：<br>归有光：明代“唐宋派”代表作家，被誉为“今之欧阳修。”</p>
-<p>小娘子：少女的通称。<br>宋欧阳修《答连郎中》“承贤郎，小娘子见过。故人有佳儿女，朋友当所共庆也。”<br>归有光有“今之欧阳修”之称，“小娘子”用于此恰当无比。</p>
-<p>在文中，我把“年少”改为“少年”，在古时候，未出嫁的女子、男子他们所处的时期都可称为少年时。特别爱“少年”两个字，可能是最纯洁的年代吧，也可能是自己再也回不去了。</p>
-<p>抛开项脊轩志这篇文章，光从最后这些句子，我感觉都能编很长的一段故事了。</p>
-<blockquote>
-<p>大风吹来了<br>我们随风飘荡<br>在风尘中遗忘的清白脸庞<br>此生多寒凉<br>此身越重洋<br>轻描时光漫长低唱语焉不详<br>大风吹来了<br>我们随风飘荡<br>在风尘中熄灭的清澈目光<br>我想回头望<br>把故事从头讲<br>时光迟暮不返人生已不再来</p>
+<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
 </blockquote>
 
           
@@ -490,7 +854,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/小故事们/将军与茶娘/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/iOS随笔/如何上传本地项目到GitHub远程仓库中/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -510,7 +874,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/09/07/小故事们/将军与茶娘/" class="post-title-link" itemprop="url">将军与茶娘</a>
+                <a href="/2017/11/13/iOS随笔/如何上传本地项目到GitHub远程仓库中/" class="post-title-link" itemprop="url">如何上传本地项目到GitHub远程仓库中</a>
               
             
           </h1>
@@ -535,7 +899,7 @@
                 
               
 
-              <time title="Created: 2018-09-07 17:03:12" itemprop="dateCreated datePublished" datetime="2018-09-07T17:03:12+08:00">2018-09-07</time>
+              <time title="Created: 2017-11-13 14:22:12" itemprop="dateCreated datePublished" datetime="2017-11-13T14:22:12+08:00">2017-11-13</time>
             
 
             
@@ -552,7 +916,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-26 14:18:02" itemprop="dateModified" datetime="2018-12-26T14:18:02+08:00">2018-12-26</time>
+                <time title="Modified: 2018-12-26 14:47:05" itemprop="dateModified" datetime="2018-12-26T14:47:05+08:00">2018-12-26</time>
               
             
           </span>
@@ -569,7 +933,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/小故事们/" itemprop="url" rel="index"><span itemprop="name">小故事们</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/iOS随笔/" itemprop="url" rel="index"><span itemprop="name">iOS随笔</span></a></span>
 
                 
                 
@@ -605,25 +969,15 @@
       
         
           
-            <p>有没有一句话、一段小故事能勾起你思绪万千，让你微笑却又叹息。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-71876dda80bd3bb3.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="古道西风瘦马，夕阳西下"></p>
-<blockquote>
-<p>风霜满面的将军下马问路边茶娘：“大婶，你知道附近那个说话很温柔的卖茶姑娘住在哪吗”<br>茶娘笑笑：“她呀，嫁了个好人家，衣食无忧，听说过的很好”<br>将军叹息，从怀中掏出块手绢，请您帮我把这个还给她，谢谢她当年的茶点心。<br>日落马远，茶娘小心将手绢系在手腕，叉腰向食客吆喝着：<br>老娘今天开心，所有茶水半价。</p>
-</blockquote>
-<blockquote>
-<p>普二丁说：“能在你心里一直是个小姑娘，这挺好的。”​</p>
-</blockquote>
-<p>由于人们不忍故事太过伤感，才有了许多后续。</p>
-<p>1.<br>古道边，难相望。<br>茶娘摘下老态龙钟的人皮面具，容颜不改，<br>望着天边的余晖，轻拂了下耳边的发髻， 转身走进茶馆。<br>这时风悠悠的吹来，多少淡了点思念。<br>你既已为驸马，又何必扯着我这故里旧人。<br>誓言已凉，不必重温。<br>天边黄草凄凄连天，一只老鹰也在这黄昏中飞的那么的遥远，<br>似乎带走了所有的结局。<br>残阳逐渐下落，<br>古道尽头马蹄声传来，<br>一道身影骑乘战马飞也似的奔来，<br>茶娘略显慌乱， 仓促下竟来不及带上伪装，<br>将军下马，眼中尽是温柔道：我已不再为将，<br>公主金枝玉叶却不及二十年前的一缕茶香…</p>
-<p>2.<br>夕阳染红白马，茶娘望着将军远去的背影，伫立了良久。<br>茶馆小二不解地问：<br>“阿姐，你为何要骗他？”<br>她淡淡地笑了笑，<br>“世事如书，翻过去了就过去了。”<br>正当茶娘眼含泪水时，身后传来粗犷的男声：<br>“不知这里是否还缺个小二，后半生皆可伴你走下去的那种。”<br>茶娘略带僵硬的转过身，将军张开双臂说：<br>“我回来了。”</p>
-<p>3.<br>茶娘随后转身拭去那滴眼泪，笑着说道：“那傻瓜真信了呢，我心里早嫁给了他。”夕阳逐渐拉长了茶娘的影子…………<br>傍晚收摊后，突然发现一个黑影靠着土墙，醉的一踏涂地，而嘴里仍然嘟囔着“二十年征战的伤痕不及你一句话”…………</p>
-<p>也有伤感版本：</p>
-<p>4.<br>一缕残阳如血，将军骑马缓步而去，夕阳的余晖落在他疲惫的眼里。<br>侍卫转回头悄声问：“将军，刚刚那位妇人不就是……”<br>将军抬头闭了闭眼，“是。”<br>“那为何……”<br>将军提起缰绳策马飞奔，“世事如棋，一步错步步错。”</p>
-<p>5.<br>手下问将军，将军既然已经认出，又为何不相认呢？<br>将军黯然，说道：我马上又将西征，这一去不知几个年头，生死难料，我已将她当年送我的定情物还于她。她安好，便好……</p>
-<p>6.<br>急走百十步，<br>随从问：将军为何不与其相认?<br>将军：边关吃紧，此次能否归来都不知否，如何相认?<br>食客：茶娘，为何慌骗这位将军?<br>茶娘：将军没有了顾虑，才可打的胜战!</p>
-<p>####该段文字出处<br>网易云热评：《性空山》 — 陈粒，评论者：帐号已注销<br>原创：<a href="https://weibo.com/2417818061/Ch3Erq6DG?type=comment#_rnd1536302353558" target="_blank" rel="noopener">普二丁微博</a>，2015年5月9日，标签：《小故事们》。<br>原创：<a href="https://www.jianshu.com/p/c044b91c21f5" target="_blank" rel="noopener">《将军与茶娘》</a>简书，根据此热评展开的一段故事。 作者：张月半i<br>配合轻音乐听，更有感觉哦。<br>推荐《Somnambulating》 — 羽肿、《23：30》 – 曹思义</p>
-<blockquote>
-<p>后记：有些版本整理自百度贴吧，有些是网易云音乐热评。推荐看普二丁的一些小故事，写的挺暖的挺有意思的。另外张月半i写的几个短篇也挺不错的。<br>有没有更好的结局，请在评论区里留言哦。😄期待</p>
-</blockquote>
+            <p>##一、建立本地仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cd到本地项目的文件夹路径下</span><br><span class="line">2.创建git: git init</span><br><span class="line">3.git add .</span><br><span class="line">4.git commit -m &apos;初始化想写啥写啥&apos;</span><br></pre></td></tr></table></figure></p>
+<p>##二、添加远程仓库：操作环境（github上）<br><img src="http://upload-images.jianshu.io/upload_images/1869467-316031cfb1547f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.点击添加.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-a767b37dbca93c18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.创建repository.png"><br><img src="http://upload-images.jianshu.io/upload_images/1869467-3e83cd81bef52c65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.创建完成.png"></p>
+<p>##三、建立连接：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:DaiYongTao/demo.git</span><br></pre></td></tr></table></figure></p>
+<p>其中<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:DaiYongTao/demo.git` 是图3中选择SSH时的地址</p>
+<p>##四、将本地仓库push到远程仓库：操作环境（终端）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master // 第一次推送master分支上所有的内容</span><br><span class="line">git push origin master // 推送最新修改</span><br></pre></td></tr></table></figure></p>
+<p>##五、错误问题解决办法<br>(很重要！！！注：在做这些步骤的前提是已经将ssh在本地创建好了。亦或者你的ssh已经过期了，你进行上面的最后一个步骤时会报错。所以需要检查ssh状态)</p>
+<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
+<p>是因为你的ssh过期了，需要重新获取ssh，然后添加到github上去。</p>
+<p>相关链接：<a href="http://www.jianshu.com/p/4c06335b29a7" target="_blank" rel="noopener">Github上如何创建ssh</a></p>
 
           
         
@@ -712,7 +1066,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">64</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -727,7 +1081,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   
                 </div>
