@@ -293,6 +293,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS瀑布流之横-纵瀑布流/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/iOS瀑布流之横-纵瀑布流/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、开篇</p>
+<p>####1.瀑布流设计讨论<br>1.应用场景：在我们app开发中，瀑布流一般应用于大数据展示时，比如淘宝搜索页面、蘑菇街app、各大直播app主播列表页面等等。</p>
+<p>2.设计思路：我们首要考虑UICollectionView,因为UICollectionView特殊性和可复用性。因为瀑布流每个格子item大小不同，需要计算每个item的宽高，就需要自定义UICollectionViewLayout。</p>
+<p>####2.瀑布流分类<br>我把瀑布流分为两种：垂直瀑布流、水平瀑布流。</p>
+<p>1.垂直瀑布流：在我们app上实现的瀑布流一般是垂直瀑布流，也就是列数可设定，item宽度由列数决定，从上往下布局。</p>
+<p>2.水平瀑布流：我在搜索网页百度图片时，看到百度图片的布局从而想到的一种布局方式。每行的高度是可设定的，item高度由图片大小决定，比例缩放。</p>
+<p>####3.瀑布流样式展示<br><img src="https://upload-images.jianshu.io/upload_images/1869467-06e7c4b154b9f2ac.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="垂直瀑布.jpeg"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-02a5fe8096cbcf84.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="水平瀑布.jpeg"></p>
+<p>#二、具体实现</p>
+<p>####1.创建一个UICollectionViewCell，它上面只有一个imageView。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// CollectionViewCell.m</span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    </span><br><span class="line">    if (self = [super initWithFrame:frame]) &#123;</span><br><span class="line">        _imageView = [[UIImageView alloc] init];</span><br><span class="line">        _imageView.frame = self.bounds;</span><br><span class="line">        [self addSubview:_imageView];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####2.我们需要自定义一个layout，并且暴露一些可设置的属性用来控制瀑布流的对应展示，让瀑布流可用性更强大一些。</p>
+<p>######2.1 头文件：DYTWaterflowLayout.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout : UICollectionViewLayout</span><br><span class="line">/**</span><br><span class="line"> *  行高(水平瀑布流时),默认为100</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowHeight;</span><br><span class="line">/**</span><br><span class="line"> *  单元格宽度(垂直瀑布流时)</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat itemWidth;</span><br><span class="line">/**</span><br><span class="line"> *  列数 : 默认为3</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) NSInteger numberOfColumns;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  内边距 : 每一列之间的间距 (top, left, bottom, right)默认为&#123;10, 10, 10, 10&#125;;</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) UIEdgeInsets insets;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一行之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一列之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat columnGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  高度数组 : 存储所有item的高度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemHeights;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  宽度数组 : 存储所有item的宽度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemWidths;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  瀑布流类型 : 分为水平瀑布流 和 垂直瀑布流</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) DirectionType type;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>######2.2 .m文件：DYTWaterflowLayout.m属性声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout()</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) NSMutableArray *itemAttributes; // 存放每个cell的布局属性</span><br><span class="line"></span><br><span class="line">// 垂直瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsHeights; // 每一列的高度(count=多少列)</span><br><span class="line">@property (nonatomic, assign) CGFloat maxHeight; // 最长列的高度(最大高度)</span><br><span class="line">@property (nonatomic, assign) CGFloat minHeight; // 最短列的高度(最低高度)</span><br><span class="line">@property (nonatomic, assign) NSInteger minIndex; // 最短列的下标</span><br><span class="line">@property (nonatomic, assign) NSInteger maxIndex; // 最长列的下标</span><br><span class="line"></span><br><span class="line">// 水平瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsWidths; // 每一行的宽度(count不确定)</span><br><span class="line">@property (nonatomic, assign) NSInteger tempItemX; // 临时x : 用来计算每个cell的x值</span><br><span class="line">@property (nonatomic, assign) NSInteger maxRowIndex; //最大行</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>######2.3 .m文件：DYTWaterflowLayout.m主要方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">// </span><br><span class="line">#pragma mark -- 系统内部方法</span><br><span class="line">/**</span><br><span class="line"> *  重写父类布局</span><br><span class="line"> */</span><br><span class="line">- (void)prepareLayout &#123;</span><br><span class="line">    </span><br><span class="line">    [super prepareLayout];</span><br><span class="line">    // (水平瀑布流时)重置最大行</span><br><span class="line">    if ((self.type == HorizontalType)) &#123;</span><br><span class="line">        self.maxRowIndex = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (self.type == VerticalType) &#123;</span><br><span class="line">        // (垂直瀑布流时)重置每一列的高度</span><br><span class="line">        [self.columnsHeights removeAllObjects];</span><br><span class="line">        for (NSUInteger i = 0; i &lt; self.numberOfColumns; i++) &#123;</span><br><span class="line">            [self.columnsHeights addObject:@(self.insets.top)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 计算所有cell的布局属性</span><br><span class="line">    [self.itemAttributes removeAllObjects];</span><br><span class="line">    NSUInteger itemCount = [self.collectionView numberOfItemsInSection:0];</span><br><span class="line">    self.tempItemX = self.insets.left;</span><br><span class="line">    for (NSUInteger i = 0; i &lt; itemCount; ++i) &#123;</span><br><span class="line">        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];</span><br><span class="line">        if (self.type == VerticalType) &#123;</span><br><span class="line">            [self setVerticalFrame:indexPath];</span><br><span class="line">        &#125;else if ((self.type == HorizontalType))&#123;</span><br><span class="line">            [self setHorizontalFrame:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  水平瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setHorizontalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    CGFloat w = [self.itemWidths[indexPath.item] floatValue];</span><br><span class="line">    CGFloat width = w + self.columnGap;</span><br><span class="line">    CGFloat h = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     *  如果当前的x值+当前cell的宽度 超出了 屏幕宽度，那么就要换行了。</span><br><span class="line">     *  换行操作 : 最大行+1，tempItemX重置为10(self.insets.left)。</span><br><span class="line">     */</span><br><span class="line">    if (self.tempItemX + w &gt; [UIScreen mainScreen].bounds.size.width) &#123;</span><br><span class="line">        self.maxRowIndex++;</span><br><span class="line">        self.tempItemX = self.insets.left;</span><br><span class="line">    &#125;</span><br><span class="line">    CGFloat x = self.tempItemX;</span><br><span class="line">    CGFloat y = self.insets.top + self.maxRowIndex * (h + self.rowGap);</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度由外部传进来，高度固定为rowHeight(默认为100)。</span><br><span class="line">     *    2.cell的x : 通过tempItemX算好了。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">    self.tempItemX += width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  垂直瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setVerticalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    </span><br><span class="line">    // cell的frame</span><br><span class="line">    CGFloat w = self.itemWidth;</span><br><span class="line">    CGFloat h = [self.itemHeights[indexPath.item] floatValue];</span><br><span class="line">    CGFloat x = self.insets.left + self.minIndex * (w + self.columnGap);</span><br><span class="line">    CGFloat y = self.minHeight + self.rowGap;</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度固定(itemWidth已经算好)，高度由外部传进来</span><br><span class="line">     *    2.cell的x : minIndex最短列作为当前列。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    // 更新数组中的最大高度</span><br><span class="line">    self.columnsHeights[self.minIndex] = @(CGRectGetMaxY(attrs.frame));</span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  返回collectionView的尺寸</span><br><span class="line"> */</span><br><span class="line">- (CGSize)collectionViewContentSize &#123;</span><br><span class="line">    CGFloat height;</span><br><span class="line">    if (self.type == HorizontalType) &#123;</span><br><span class="line">        CGFloat rowHeight = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">        height = self.insets.top + (self.maxRowIndex+1) * (rowHeight + self.rowGap);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        height = self.maxHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    return CGSizeMake(self.collectionView.frame.size.width, height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  所有元素（比如cell、补充控件、装饰控件）的布局属性</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect</span><br><span class="line">&#123;</span><br><span class="line">    return self.itemAttributes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>######3.1 直接在控制器里使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 设置布局</span><br><span class="line">DYTWaterflowLayout *layout = [[DYTWaterflowLayout alloc]init];</span><br><span class="line">layout.type = _type;</span><br><span class="line">// 设置相关属性(不设置的话也行，都有相关默认配置)</span><br><span class="line">layout.numberOfColumns = 3;</span><br><span class="line">layout.columnGap = 10;</span><br><span class="line">layout.rowGap = 10;</span><br><span class="line">layout.insets = UIEdgeInsetsMake(10, 10, 10, 10);</span><br><span class="line">layout.rowHeight = 100;</span><br><span class="line">self.collectionView.collectionViewLayout = self.waterflowLayout = layout;</span><br></pre></td></tr></table></figure></p>
+<p>######3.2 (举例)垂直瀑布流时，SDWebImage获取图片block里的具体实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (weakSelf.heights.count &lt; weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 根据图片原始比例 计算 当前图片的高度(宽度固定)</span><br><span class="line">   CGFloat scale = image.size.height / image.size.width;</span><br><span class="line">   CGFloat width = weakSelf.waterflowLayout.itemWidth;</span><br><span class="line">   CGFloat height = width * scale;</span><br><span class="line">   NSNumber *heightNum = [NSNumber numberWithFloat:height];</span><br><span class="line">   [weakSelf.heights addObject:heightNum];</span><br><span class="line">&#125;</span><br><span class="line">if (weakSelf.heights.count == weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 赋值所有cell的高度数组itemHeights</span><br><span class="line">   weakSelf.waterflowLayout.itemHeights = weakSelf.heights;</span><br><span class="line">   [weakSelf.collectionView reloadData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>######3.3 UICollectionViewDataSource中要注意的点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];</span><br><span class="line">    cell.imageView.image = self.picImageArr[indexPath.item];</span><br><span class="line">    // 注：非常关键的一句，由于cell的复用，imageView的frame可能和cell对不上，需要重新设置。</span><br><span class="line">    cell.imageView.frame = cell.bounds;</span><br><span class="line">    cell.backgroundColor = [UIColor orangeColor];</span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#三、总结<br>1.瀑布流使用场景比较广泛，也是常用的技术之一，我也是又回顾了一遍，并且总结了整体的思路决定分享出来，结尾有demo，童鞋们可以自行下载。另外我参考的资料链接也会贴出，供大家研究比对。<br>2.水平瀑布流还没达到百度图片搜索的那种效果，右边距离屏幕间隙太大了，所以影响美观。后续会继续研究，期待有所突破。<br>3.有种情况是后台直接给图片的所有数据给我们，包括url、图片宽高等等，其实这样就是后台已经做好了图片的顺序优化处理。不过我们可以自己研究一下这个排序思路。如何达到右边间隙几乎相同，比如都为10。<br>4.当然有疑惑的地方可以留言或者直接私信我，我们可以一起讨论。</p>
+<p>#四、总结最终实现效果:<br><img src="https://upload-images.jianshu.io/upload_images/1869467-5b6da2338f3afe16.gif?imageMogr2/auto-orient/strip" alt="瀑布流.gif"></p>
+<p>本文章demo：<br><a href="https://github.com/DaiYongTao/DYTWaterflowLayoutDemo" target="_blank" rel="noopener">瀑布流Demo</a><br>参考相关文章：<br><a href="https://www.jianshu.com/p/826a43d28a39" target="_blank" rel="noopener">iOS–瀑布流的实现</a>  – <a href="/u/12c258ba8408">作者Go_Spec</a><br><a href="https://www.jianshu.com/p/78830bdb04a9" target="_blank" rel="noopener">iOS 瀑布流基本实现</a>  – <a href="/u/19f68e4b47ce">作者iOS_成才录</a></p>
+<blockquote>
+<p>额。。。如果想知道图片里的小姐姐是谁，请直接在文章下面留言。因为我想暂时留点悬念给大家。(皮一下就很开心😄)</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS导航栏设置背景图片/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -592,165 +751,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS瀑布流之横-纵瀑布流/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/iOS瀑布流之横-纵瀑布流/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、开篇</p>
-<p>####1.瀑布流设计讨论<br>1.应用场景：在我们app开发中，瀑布流一般应用于大数据展示时，比如淘宝搜索页面、蘑菇街app、各大直播app主播列表页面等等。</p>
-<p>2.设计思路：我们首要考虑UICollectionView,因为UICollectionView特殊性和可复用性。因为瀑布流每个格子item大小不同，需要计算每个item的宽高，就需要自定义UICollectionViewLayout。</p>
-<p>####2.瀑布流分类<br>我把瀑布流分为两种：垂直瀑布流、水平瀑布流。</p>
-<p>1.垂直瀑布流：在我们app上实现的瀑布流一般是垂直瀑布流，也就是列数可设定，item宽度由列数决定，从上往下布局。</p>
-<p>2.水平瀑布流：我在搜索网页百度图片时，看到百度图片的布局从而想到的一种布局方式。每行的高度是可设定的，item高度由图片大小决定，比例缩放。</p>
-<p>####3.瀑布流样式展示<br><img src="https://upload-images.jianshu.io/upload_images/1869467-06e7c4b154b9f2ac.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="垂直瀑布.jpeg"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-02a5fe8096cbcf84.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="水平瀑布.jpeg"></p>
-<p>#二、具体实现</p>
-<p>####1.创建一个UICollectionViewCell，它上面只有一个imageView。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// CollectionViewCell.m</span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    </span><br><span class="line">    if (self = [super initWithFrame:frame]) &#123;</span><br><span class="line">        _imageView = [[UIImageView alloc] init];</span><br><span class="line">        _imageView.frame = self.bounds;</span><br><span class="line">        [self addSubview:_imageView];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>####2.我们需要自定义一个layout，并且暴露一些可设置的属性用来控制瀑布流的对应展示，让瀑布流可用性更强大一些。</p>
-<p>######2.1 头文件：DYTWaterflowLayout.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout : UICollectionViewLayout</span><br><span class="line">/**</span><br><span class="line"> *  行高(水平瀑布流时),默认为100</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowHeight;</span><br><span class="line">/**</span><br><span class="line"> *  单元格宽度(垂直瀑布流时)</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat itemWidth;</span><br><span class="line">/**</span><br><span class="line"> *  列数 : 默认为3</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) NSInteger numberOfColumns;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  内边距 : 每一列之间的间距 (top, left, bottom, right)默认为&#123;10, 10, 10, 10&#125;;</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) UIEdgeInsets insets;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一行之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat rowGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  每一列之间的间距 : 默认为10</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) CGFloat columnGap;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  高度数组 : 存储所有item的高度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemHeights;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  宽度数组 : 存储所有item的宽度</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, strong) NSArray *itemWidths;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  瀑布流类型 : 分为水平瀑布流 和 垂直瀑布流</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic, assign) DirectionType type;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>######2.2 .m文件：DYTWaterflowLayout.m属性声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@interface DYTWaterflowLayout()</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) NSMutableArray *itemAttributes; // 存放每个cell的布局属性</span><br><span class="line"></span><br><span class="line">// 垂直瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsHeights; // 每一列的高度(count=多少列)</span><br><span class="line">@property (nonatomic, assign) CGFloat maxHeight; // 最长列的高度(最大高度)</span><br><span class="line">@property (nonatomic, assign) CGFloat minHeight; // 最短列的高度(最低高度)</span><br><span class="line">@property (nonatomic, assign) NSInteger minIndex; // 最短列的下标</span><br><span class="line">@property (nonatomic, assign) NSInteger maxIndex; // 最长列的下标</span><br><span class="line"></span><br><span class="line">// 水平瀑布流相关属性</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *columnsWidths; // 每一行的宽度(count不确定)</span><br><span class="line">@property (nonatomic, assign) NSInteger tempItemX; // 临时x : 用来计算每个cell的x值</span><br><span class="line">@property (nonatomic, assign) NSInteger maxRowIndex; //最大行</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>######2.3 .m文件：DYTWaterflowLayout.m主要方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">// </span><br><span class="line">#pragma mark -- 系统内部方法</span><br><span class="line">/**</span><br><span class="line"> *  重写父类布局</span><br><span class="line"> */</span><br><span class="line">- (void)prepareLayout &#123;</span><br><span class="line">    </span><br><span class="line">    [super prepareLayout];</span><br><span class="line">    // (水平瀑布流时)重置最大行</span><br><span class="line">    if ((self.type == HorizontalType)) &#123;</span><br><span class="line">        self.maxRowIndex = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (self.type == VerticalType) &#123;</span><br><span class="line">        // (垂直瀑布流时)重置每一列的高度</span><br><span class="line">        [self.columnsHeights removeAllObjects];</span><br><span class="line">        for (NSUInteger i = 0; i &lt; self.numberOfColumns; i++) &#123;</span><br><span class="line">            [self.columnsHeights addObject:@(self.insets.top)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 计算所有cell的布局属性</span><br><span class="line">    [self.itemAttributes removeAllObjects];</span><br><span class="line">    NSUInteger itemCount = [self.collectionView numberOfItemsInSection:0];</span><br><span class="line">    self.tempItemX = self.insets.left;</span><br><span class="line">    for (NSUInteger i = 0; i &lt; itemCount; ++i) &#123;</span><br><span class="line">        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];</span><br><span class="line">        if (self.type == VerticalType) &#123;</span><br><span class="line">            [self setVerticalFrame:indexPath];</span><br><span class="line">        &#125;else if ((self.type == HorizontalType))&#123;</span><br><span class="line">            [self setHorizontalFrame:indexPath];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  水平瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setHorizontalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    CGFloat w = [self.itemWidths[indexPath.item] floatValue];</span><br><span class="line">    CGFloat width = w + self.columnGap;</span><br><span class="line">    CGFloat h = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     *  如果当前的x值+当前cell的宽度 超出了 屏幕宽度，那么就要换行了。</span><br><span class="line">     *  换行操作 : 最大行+1，tempItemX重置为10(self.insets.left)。</span><br><span class="line">     */</span><br><span class="line">    if (self.tempItemX + w &gt; [UIScreen mainScreen].bounds.size.width) &#123;</span><br><span class="line">        self.maxRowIndex++;</span><br><span class="line">        self.tempItemX = self.insets.left;</span><br><span class="line">    &#125;</span><br><span class="line">    CGFloat x = self.tempItemX;</span><br><span class="line">    CGFloat y = self.insets.top + self.maxRowIndex * (h + self.rowGap);</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度由外部传进来，高度固定为rowHeight(默认为100)。</span><br><span class="line">     *    2.cell的x : 通过tempItemX算好了。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">    self.tempItemX += width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  垂直瀑布：设置每一个attrs的frame，并加入数组中</span><br><span class="line"> */</span><br><span class="line">- (void)setVerticalFrame:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];</span><br><span class="line">    </span><br><span class="line">    // cell的frame</span><br><span class="line">    CGFloat w = self.itemWidth;</span><br><span class="line">    CGFloat h = [self.itemHeights[indexPath.item] floatValue];</span><br><span class="line">    CGFloat x = self.insets.left + self.minIndex * (w + self.columnGap);</span><br><span class="line">    CGFloat y = self.minHeight + self.rowGap;</span><br><span class="line">    attrs.frame = CGRectMake(x, y, w, h);</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 注：1.cell的宽度和高度算起来比较简单 : 宽度固定(itemWidth已经算好)，高度由外部传进来</span><br><span class="line">     *    2.cell的x : minIndex最短列作为当前列。</span><br><span class="line">     *    3.cell的y : minHeight最短列的高度，也就是最低高度，作为当前cell的起始y，当然要加上行之间的间隙。</span><br><span class="line">     */</span><br><span class="line">    </span><br><span class="line">    // 更新数组中的最大高度</span><br><span class="line">    self.columnsHeights[self.minIndex] = @(CGRectGetMaxY(attrs.frame));</span><br><span class="line">    NSLog(@&quot;%@&quot;,NSStringFromCGRect(attrs.frame));</span><br><span class="line">    [self.itemAttributes addObject:attrs];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  返回collectionView的尺寸</span><br><span class="line"> */</span><br><span class="line">- (CGSize)collectionViewContentSize &#123;</span><br><span class="line">    CGFloat height;</span><br><span class="line">    if (self.type == HorizontalType) &#123;</span><br><span class="line">        CGFloat rowHeight = (self.rowHeight == 0) ? 100 : self.rowHeight;</span><br><span class="line">        height = self.insets.top + (self.maxRowIndex+1) * (rowHeight + self.rowGap);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        height = self.maxHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    return CGSizeMake(self.collectionView.frame.size.width, height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  所有元素（比如cell、补充控件、装饰控件）的布局属性</span><br><span class="line"> */</span><br><span class="line">- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect</span><br><span class="line">&#123;</span><br><span class="line">    return self.itemAttributes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######3.1 直接在控制器里使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 设置布局</span><br><span class="line">DYTWaterflowLayout *layout = [[DYTWaterflowLayout alloc]init];</span><br><span class="line">layout.type = _type;</span><br><span class="line">// 设置相关属性(不设置的话也行，都有相关默认配置)</span><br><span class="line">layout.numberOfColumns = 3;</span><br><span class="line">layout.columnGap = 10;</span><br><span class="line">layout.rowGap = 10;</span><br><span class="line">layout.insets = UIEdgeInsetsMake(10, 10, 10, 10);</span><br><span class="line">layout.rowHeight = 100;</span><br><span class="line">self.collectionView.collectionViewLayout = self.waterflowLayout = layout;</span><br></pre></td></tr></table></figure></p>
-<p>######3.2 (举例)垂直瀑布流时，SDWebImage获取图片block里的具体实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (weakSelf.heights.count &lt; weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 根据图片原始比例 计算 当前图片的高度(宽度固定)</span><br><span class="line">   CGFloat scale = image.size.height / image.size.width;</span><br><span class="line">   CGFloat width = weakSelf.waterflowLayout.itemWidth;</span><br><span class="line">   CGFloat height = width * scale;</span><br><span class="line">   NSNumber *heightNum = [NSNumber numberWithFloat:height];</span><br><span class="line">   [weakSelf.heights addObject:heightNum];</span><br><span class="line">&#125;</span><br><span class="line">if (weakSelf.heights.count == weakSelf.allImageUrls.count) &#123;</span><br><span class="line">   // 赋值所有cell的高度数组itemHeights</span><br><span class="line">   weakSelf.waterflowLayout.itemHeights = weakSelf.heights;</span><br><span class="line">   [weakSelf.collectionView reloadData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######3.3 UICollectionViewDataSource中要注意的点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];</span><br><span class="line">    cell.imageView.image = self.picImageArr[indexPath.item];</span><br><span class="line">    // 注：非常关键的一句，由于cell的复用，imageView的frame可能和cell对不上，需要重新设置。</span><br><span class="line">    cell.imageView.frame = cell.bounds;</span><br><span class="line">    cell.backgroundColor = [UIColor orangeColor];</span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#三、总结<br>1.瀑布流使用场景比较广泛，也是常用的技术之一，我也是又回顾了一遍，并且总结了整体的思路决定分享出来，结尾有demo，童鞋们可以自行下载。另外我参考的资料链接也会贴出，供大家研究比对。<br>2.水平瀑布流还没达到百度图片搜索的那种效果，右边距离屏幕间隙太大了，所以影响美观。后续会继续研究，期待有所突破。<br>3.有种情况是后台直接给图片的所有数据给我们，包括url、图片宽高等等，其实这样就是后台已经做好了图片的顺序优化处理。不过我们可以自己研究一下这个排序思路。如何达到右边间隙几乎相同，比如都为10。<br>4.当然有疑惑的地方可以留言或者直接私信我，我们可以一起讨论。</p>
-<p>#四、总结最终实现效果:<br><img src="https://upload-images.jianshu.io/upload_images/1869467-5b6da2338f3afe16.gif?imageMogr2/auto-orient/strip" alt="瀑布流.gif"></p>
-<p>本文章demo：<br><a href="https://github.com/DaiYongTao/DYTWaterflowLayoutDemo" target="_blank" rel="noopener">瀑布流Demo</a><br>参考相关文章：<br><a href="https://www.jianshu.com/p/826a43d28a39" target="_blank" rel="noopener">iOS–瀑布流的实现</a>  – <a href="/u/12c258ba8408">作者Go_Spec</a><br><a href="https://www.jianshu.com/p/78830bdb04a9" target="_blank" rel="noopener">iOS 瀑布流基本实现</a>  – <a href="/u/19f68e4b47ce">作者iOS_成才录</a></p>
-<blockquote>
-<p>额。。。如果想知道图片里的小姐姐是谁，请直接在文章下面留言。因为我想暂时留点悬念给大家。(皮一下就很开心😄)</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/1--两数之和/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -840,439 +840,6 @@
 <p>#三、解题思路：<br>直接用两个for 循环暴力破解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 暴力破解法 : 时间复杂度O(n的平方) 空间复杂度O(1)，因为只创建了一次变量someInts。</span><br><span class="line">func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</span><br><span class="line">    </span><br><span class="line">    var someInts = [Int]()</span><br><span class="line">    for i in 0..&lt;nums.count &#123;</span><br><span class="line">        for j in i+1..&lt;nums.count &#123;</span><br><span class="line">            if nums[i]+nums[j] == target &#123;</span><br><span class="line">                someInts += [i]</span><br><span class="line">                someInts += [j]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return someInts</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>#四、小结<br>这题比较简单，从前往后数，相加之后进行比对。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-162fe059185efee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-6b6469661451564e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
 <p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/125--验证回文串/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/125--验证回文串/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>说明：本题中，我们将空字符串定义为有效的回文串。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;race a car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>回文串：就是从左边数到右边，和从右边数到左边是一样的。<br>比如：ama<br>题目中说<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">abcdefghijklmnopqrstuvwxyz   97~122 小写字母</span><br><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ   65~90 大写字母</span><br><span class="line">0123456789                   48~57 数字</span><br></pre></td></tr></table></figure></p>
-<p>所以我们只需要判定这一些字符的ASCII码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ s: String) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if s.count == 0 &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    let count = (chars?.count)!</span><br><span class="line">    var mutChars: [Int8] = []</span><br><span class="line">    for i in 0..&lt;count &#123;</span><br><span class="line">        </span><br><span class="line">        if chars![i] &gt;= 97 &amp;&amp; chars![i] &lt;= 122 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 65 &amp;&amp; chars![i] &lt;= 90 &#123;</span><br><span class="line">            // 将大写字母 转小写</span><br><span class="line">            chars![i] = chars![i] + 32</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 48 &amp;&amp; chars![i] &lt;= 57 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let mutCount = mutChars.count</span><br><span class="line">    var revert_mutChars: [Int8] = Array.init(repeating: 0, count: mutCount)</span><br><span class="line">    for i in 0..&lt;mutCount &#123;</span><br><span class="line">        </span><br><span class="line">        revert_mutChars[i] = mutChars[mutCount - 1 - i]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if revert_mutChars == mutChars &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>1.耗时<code>44</code>毫秒，超过<code>78.57%</code>的提交记录，总提交数<code>476</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/12--整数转罗马数字/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/12--整数转罗马数字/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：<br>可参考  <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a></p>
-<p>#二、题目意思剖析：<br>其实就是和 <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a>反着来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: 3</span><br><span class="line">输出: &quot;III&quot;</span><br><span class="line"></span><br><span class="line">输入: 4</span><br><span class="line">输出: &quot;IV&quot;</span><br><span class="line"></span><br><span class="line">输入: 9</span><br><span class="line">输出: &quot;IX&quot;</span><br><span class="line"></span><br><span class="line">输入: 58</span><br><span class="line">输出: &quot;LVIII&quot;</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: 1994</span><br><span class="line">输出: &quot;MCMXCIV&quot;</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNum = num</span><br><span class="line">    var arr: [Int] = []</span><br><span class="line">    while tempNum != 0 &#123;</span><br><span class="line">        arr.append(tempNum % 10)</span><br><span class="line">        tempNum = tempNum / 10</span><br><span class="line">    &#125;</span><br><span class="line">    var numArr: [Int] = Array.init(repeating: 0, count: arr.count)</span><br><span class="line">    for i in 0..&lt;arr.count &#123;</span><br><span class="line">        </span><br><span class="line">        let haha: Int = Int.init(pow(10.0, Double(i)))</span><br><span class="line">        numArr[arr.count - 1 - i] = haha * arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    for i in 0..&lt;numArr.count &#123;</span><br><span class="line">        </span><br><span class="line">        var num: Int = numArr[i]</span><br><span class="line">        </span><br><span class="line">        if num == 900 &#123;</span><br><span class="line">            resultStr += &quot;CM&quot;</span><br><span class="line">        &#125;else if num == 400 &#123;</span><br><span class="line">            resultStr += &quot;CD&quot;</span><br><span class="line">        &#125;else if num == 90 &#123;</span><br><span class="line">            resultStr += &quot;XC&quot;</span><br><span class="line">        &#125;else if num == 40 &#123;</span><br><span class="line">            resultStr += &quot;XL&quot;</span><br><span class="line">        &#125;else if num == 9 &#123;</span><br><span class="line">            resultStr += &quot;IX&quot;</span><br><span class="line">        &#125;else if num == 4 &#123;</span><br><span class="line">            resultStr += &quot;IV&quot;</span><br><span class="line">        &#125;else if num % 1000 == 0 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1000 &#123;</span><br><span class="line">                resultStr += &quot;M&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 500 &amp;&amp; num &lt; 1000&#123;</span><br><span class="line">            num = num - 500</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 500 &#123;</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">        &#125;else if num % 100 == 0 &amp;&amp; num &lt; 500&#123;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 50 &amp;&amp; num &lt; 100&#123;</span><br><span class="line">            num = num - 50</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 50 &#123;</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">        &#125;else if num % 10 == 0 &amp;&amp; num &lt; 50 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &lt; 10 &amp;&amp; num &gt; 5 &#123;</span><br><span class="line">            num = num - 5</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">            for _ in 0..&lt;num &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 5 &#123;</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">        &#125;else if num &lt;= 3 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1 &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 优化方案</span><br><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var lala = num</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    let numList = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]</span><br><span class="line">    let romanList = [&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;,</span><br><span class="line">&quot;V&quot;, &quot;IV&quot;, &quot;I&quot;]</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;numList.count &#123;</span><br><span class="line">        </span><br><span class="line">        if lala &lt; numList[i] &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        while lala &gt;= numList[i] &#123;</span><br><span class="line">            lala = lala - numList[i]</span><br><span class="line">            resultStr += romanList[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br>第一种方法看起来是不是特麻烦，我写起来的时候也是，得想清楚。。。<br>之后优化的方案清晰多了。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-0a26b401ff4c3084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/128-旋转数组/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/128-旋转数组/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。<br> 说明:<br> 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。<br> 要求使用空间复杂度为 O(1) 的原地算法。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,4,5,6,7] 和 k = 3</span><br><span class="line">输出: [5,6,7,1,2,3,4]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [7,1,2,3,4,5,6]</span><br><span class="line">向右旋转 2 步: [6,7,1,2,3,4,5]</span><br><span class="line">向右旋转 3 步: [5,6,7,1,2,3,4]</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [-1,-100,3,99] 和 k = 2</span><br><span class="line">输出: [3,99,-1,-100]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [99,-1,-100,3]</span><br><span class="line">向右旋转 2 步: [3,99,-1,-100]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.最后一个数字 - &gt; 第一个<br>2.最后一个数字 - &gt; 第一个<br>。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func rotate(_ nums: inout [Int], _ k: Int) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = []</span><br><span class="line">    var mut_k: Int = k</span><br><span class="line">    </span><br><span class="line">    while mut_k &gt; 0 &#123;</span><br><span class="line">        mutNums.append(nums.last!)</span><br><span class="line">        for i in 0..&lt;nums.count-1 &#123;</span><br><span class="line">            mutNums.append(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        nums = mutNums</span><br><span class="line">        mutNums = []</span><br><span class="line">        mut_k = mut_k - 1</span><br><span class="line">    &#125;</span><br><span class="line">    print(nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>。。。待续</p>
 
           
         
@@ -1475,7 +1042,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/15--三数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/12--整数转罗马数字/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1495,7 +1062,151 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/15--三数之和/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/12--整数转罗马数字/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：<br>可参考  <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a></p>
+<p>#二、题目意思剖析：<br>其实就是和 <a href="https://www.jianshu.com/p/fd812848fa6f" target="_blank" rel="noopener">13. 罗马数字转整数</a>反着来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: 3</span><br><span class="line">输出: &quot;III&quot;</span><br><span class="line"></span><br><span class="line">输入: 4</span><br><span class="line">输出: &quot;IV&quot;</span><br><span class="line"></span><br><span class="line">输入: 9</span><br><span class="line">输出: &quot;IX&quot;</span><br><span class="line"></span><br><span class="line">输入: 58</span><br><span class="line">输出: &quot;LVIII&quot;</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: 1994</span><br><span class="line">输出: &quot;MCMXCIV&quot;</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNum = num</span><br><span class="line">    var arr: [Int] = []</span><br><span class="line">    while tempNum != 0 &#123;</span><br><span class="line">        arr.append(tempNum % 10)</span><br><span class="line">        tempNum = tempNum / 10</span><br><span class="line">    &#125;</span><br><span class="line">    var numArr: [Int] = Array.init(repeating: 0, count: arr.count)</span><br><span class="line">    for i in 0..&lt;arr.count &#123;</span><br><span class="line">        </span><br><span class="line">        let haha: Int = Int.init(pow(10.0, Double(i)))</span><br><span class="line">        numArr[arr.count - 1 - i] = haha * arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    for i in 0..&lt;numArr.count &#123;</span><br><span class="line">        </span><br><span class="line">        var num: Int = numArr[i]</span><br><span class="line">        </span><br><span class="line">        if num == 900 &#123;</span><br><span class="line">            resultStr += &quot;CM&quot;</span><br><span class="line">        &#125;else if num == 400 &#123;</span><br><span class="line">            resultStr += &quot;CD&quot;</span><br><span class="line">        &#125;else if num == 90 &#123;</span><br><span class="line">            resultStr += &quot;XC&quot;</span><br><span class="line">        &#125;else if num == 40 &#123;</span><br><span class="line">            resultStr += &quot;XL&quot;</span><br><span class="line">        &#125;else if num == 9 &#123;</span><br><span class="line">            resultStr += &quot;IX&quot;</span><br><span class="line">        &#125;else if num == 4 &#123;</span><br><span class="line">            resultStr += &quot;IV&quot;</span><br><span class="line">        &#125;else if num % 1000 == 0 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1000 &#123;</span><br><span class="line">                resultStr += &quot;M&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 500 &amp;&amp; num &lt; 1000&#123;</span><br><span class="line">            num = num - 500</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 500 &#123;</span><br><span class="line">            resultStr += &quot;D&quot;</span><br><span class="line">        &#125;else if num % 100 == 0 &amp;&amp; num &lt; 500&#123;</span><br><span class="line">            for _ in 0..&lt;num / 100 &#123;</span><br><span class="line">                resultStr += &quot;C&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &gt; 50 &amp;&amp; num &lt; 100&#123;</span><br><span class="line">            num = num - 50</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 50 &#123;</span><br><span class="line">            resultStr += &quot;L&quot;</span><br><span class="line">        &#125;else if num % 10 == 0 &amp;&amp; num &lt; 50 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 10 &#123;</span><br><span class="line">                resultStr += &quot;X&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num &lt; 10 &amp;&amp; num &gt; 5 &#123;</span><br><span class="line">            num = num - 5</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">            for _ in 0..&lt;num &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else if num == 5 &#123;</span><br><span class="line">            resultStr += &quot;V&quot;</span><br><span class="line">        &#125;else if num &lt;= 3 &#123;</span><br><span class="line">            for _ in 0..&lt;num / 1 &#123;</span><br><span class="line">                resultStr += &quot;I&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 优化方案</span><br><span class="line">func intToRoman(_ num: Int) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    if num&lt;1 || num&gt;3999 &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var lala = num</span><br><span class="line">    var resultStr: String = &quot;&quot;</span><br><span class="line">    let numList = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]</span><br><span class="line">    let romanList = [&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;,</span><br><span class="line">&quot;V&quot;, &quot;IV&quot;, &quot;I&quot;]</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;numList.count &#123;</span><br><span class="line">        </span><br><span class="line">        if lala &lt; numList[i] &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        while lala &gt;= numList[i] &#123;</span><br><span class="line">            lala = lala - numList[i]</span><br><span class="line">            resultStr += romanList[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resultStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>第一种方法看起来是不是特麻烦，我写起来的时候也是，得想清楚。。。<br>之后优化的方案清晰多了。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-b6fd82a9642f4f29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-0a26b401ff4c3084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/125--验证回文串/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/125--验证回文串/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -1558,20 +1269,309 @@
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>说明：本题中，我们将空字符串定义为有效的回文串。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，</span><br><span class="line"></span><br><span class="line">满足要求的三元组集合为：</span><br><span class="line">[[-1, 0, 1], [-1, -1, 2]]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>3.1.首先想到的最简单最傻的做法是三层循环，时间复杂度为O(n的三次方)。。。想想都觉得耗时。。。非常不建议，只是一个思路而已。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">func threeSum(_ nums: [Int]) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    var newNums: [Int] = []</span><br><span class="line">    var haha:[[Int]] = []</span><br><span class="line">    for i in 0..&lt;nums.count &#123;</span><br><span class="line">        </span><br><span class="line">        for j in i+1..&lt;nums.count &#123;</span><br><span class="line">            </span><br><span class="line">            for k in j+1..&lt;nums.count &#123;</span><br><span class="line">                </span><br><span class="line">                if nums[i] + nums[j] + nums[k] == 0 &#123;</span><br><span class="line">                    newNums.append(nums[i])</span><br><span class="line">                    newNums.append(nums[j])</span><br><span class="line">                    newNums.append(nums[k])</span><br><span class="line">                    newNums.sort()</span><br><span class="line">                    if haha.contains(newNums) &#123;</span><br><span class="line">                        newNums.removeAll()</span><br><span class="line">                        continue</span><br><span class="line">                    &#125;</span><br><span class="line">                    haha.append(newNums)</span><br><span class="line">                &#125;</span><br><span class="line">                newNums.removeAll()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return haha</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.2.经过耗时太长的惨痛经历，痛定思痛，我觉得从题目“三数之和=0”入手。排除三个数都为0的情况，也就是[0,0,0]；请他情况必定是有一个负数的。所以我们可以首先就排个序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//第一步：排序</span><br><span class="line">比如刚开始是[-1, 0, 1, 2, -1, -4]</span><br><span class="line">排序后变成是[-4, -1, -1, 0, 1, 2]</span><br></pre></td></tr></table></figure></p>
-<p>排序完，是不是觉得思路有了，对的。我们只需要遍历前面的负数和0，也就是&gt;0的我们统统不要了。我们需要拿到第一个负数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;MutNums.count &#123;</span><br><span class="line">    if (MutNums[i] &gt; 0) &#123;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    // MutNums[i]就是一个负数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>拿到第一个负数后，我们只需要再拿到后面两个数，与之相加=0即可。后面两个数我们用两个指针来表示，j和k，一个是从左边往右边走，一个是从最右边往前走。有些思想就是想通的，之前的两数之和就是这种思路。先排好序，左边一个left指针，右边一个right指针，如果left+right &gt; result，那么right往左移，如果left+right &lt; result，那么说明相加得数不够，就需要left往右移。找到相加之和相等的就行。此题，也是如此。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let target = 0 - MutNums[i]; // 这个就是动态的reslut</span><br><span class="line">var j = i+1, k = MutNums.count - 1</span><br><span class="line">if (MutNums[j] + MutNums[k] == target) &#123;</span><br><span class="line">    //这就回到了两数之和那个简单的问题。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>不过在这里要注意一个问题，就是题目中提到的“答案中不可以包含重复的三元组”，所以我们需要把相同的数字过滤掉。<br>其实很简单，只需要往下或者往前走一位，其他什么都不要做。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while j &lt; k &amp;&amp; MutNums[j] == MutNums[j+1] &#123; </span><br><span class="line">    j = j + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>贴出代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">func threeSum(_ nums: [Int]) -&gt; [[Int]] &#123;</span><br><span class="line">    var MutNums: [Int] = nums</span><br><span class="line">    var newNums: [Int] = []</span><br><span class="line">    var haha:[[Int]] = []</span><br><span class="line">    // 1.排序 对于MutNums[i]来说，我们只需要负数和0，因为三个数之和为0，一定是有一个数为负数的，当然除去三个数都为0的情况。所以，我们取非正数。</span><br><span class="line">    MutNums.sort()</span><br><span class="line">    for i in 0..&lt;MutNums.count &#123;</span><br><span class="line">        if (MutNums[i] &gt; 0) &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">        if (i &gt; 0 &amp;&amp; MutNums[i] == MutNums[i-1]) &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        let target = 0 - MutNums[i];</span><br><span class="line">        var j = i+1, k = MutNums.count - 1</span><br><span class="line">        while j &lt; k &#123;</span><br><span class="line">            // 2.找到后面的两个与MutNums[i]对应的数字</span><br><span class="line">            if (MutNums[j] + MutNums[k] == target) &#123;</span><br><span class="line">                newNums.append(MutNums[i])</span><br><span class="line">                newNums.append(MutNums[j])</span><br><span class="line">                newNums.append(MutNums[k])</span><br><span class="line">                haha.append(newNums)</span><br><span class="line">                newNums.removeAll()</span><br><span class="line">                // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                while j &lt; k &amp;&amp; MutNums[j] == MutNums[j+1] &#123;</span><br><span class="line">                    j = j + 1</span><br><span class="line">                &#125;</span><br><span class="line">                // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                while j &lt; k &amp;&amp; MutNums[k] == MutNums[k-1] &#123;</span><br><span class="line">                    k = k - 1</span><br><span class="line">                &#125;</span><br><span class="line">                // 否则就往中间靠拢</span><br><span class="line">                j = j + 1;k = k - 1</span><br><span class="line">            &#125;else if (MutNums[j] + MutNums[k] &lt; target) &#123;</span><br><span class="line">                // 如果后面两数相加小于target，说明左边还得往右移</span><br><span class="line">                j = j + 1</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                // 如果后面两数相加大于target，说明右边就要往左移</span><br><span class="line">                k = k - 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return haha</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运行数组</span><br><span class="line">[13,9,1,12,-7,-12,7,3,9,6,-7,4,9,5,5,-7,4,11,1,-2,12,3,-12,-15,0,-12,-6,-1,7,-5,-4,-3,12,4,-14,-10,-1,8,1,-6,-1,9,13,-14,-1,-5,-6,-12,-8,2,2,11,13,-3,11,-2,1,-10,4,-15,-8,7,-11,11,-4,-10,-13,3,5,3,12,11,-11,2,12,3,13,13,-2,12,-7,-15,8,-9,-10,-4,-4,6,1,-15,-2,0,-1,2,-3,10,-1,-9,-10,-11,1,-13,-15,5,-3,5,-7,-5,-5,6,14,3,-1,7,1,-4,-12,12,-13,-4,4,0,3,-12,9,-15,6]</span><br></pre></td></tr></table></figure>
-<p>耗时对比：<br>1.三层循环 347.76ms<br>2.滑尺优化方案 2.64ms<br>话不多说，感受下这个天壤之别。</p>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-f876f096ce93338f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-88be7187864d56dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;race a car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>回文串：就是从左边数到右边，和从右边数到左边是一样的。<br>比如：ama<br>题目中说<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">abcdefghijklmnopqrstuvwxyz   97~122 小写字母</span><br><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ   65~90 大写字母</span><br><span class="line">0123456789                   48~57 数字</span><br></pre></td></tr></table></figure></p>
+<p>所以我们只需要判定这一些字符的ASCII码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ s: String) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if s.count == 0 &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    let count = (chars?.count)!</span><br><span class="line">    var mutChars: [Int8] = []</span><br><span class="line">    for i in 0..&lt;count &#123;</span><br><span class="line">        </span><br><span class="line">        if chars![i] &gt;= 97 &amp;&amp; chars![i] &lt;= 122 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 65 &amp;&amp; chars![i] &lt;= 90 &#123;</span><br><span class="line">            // 将大写字母 转小写</span><br><span class="line">            chars![i] = chars![i] + 32</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;else if chars![i] &gt;= 48 &amp;&amp; chars![i] &lt;= 57 &#123;</span><br><span class="line">            mutChars.append(chars![i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let mutCount = mutChars.count</span><br><span class="line">    var revert_mutChars: [Int8] = Array.init(repeating: 0, count: mutCount)</span><br><span class="line">    for i in 0..&lt;mutCount &#123;</span><br><span class="line">        </span><br><span class="line">        revert_mutChars[i] = mutChars[mutCount - 1 - i]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if revert_mutChars == mutChars &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>1.耗时<code>44</code>毫秒，超过<code>78.57%</code>的提交记录，总提交数<code>476</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br> 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br> 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</span><br><span class="line"> </span><br><span class="line">示例 2:</span><br><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。</span><br><span class="line">因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br><span class="line"> </span><br><span class="line">示例 3:</span><br><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>将前后两天价格相减，盈利interest = prices[i+1] - prices[i]<br>用一个新数组，将所有正整数加起来就是答案。(方便理解)<br>或者更简单，不用弄新的数组，得到interest后，直接判断是否为正数，如果是就加起来，最后的和就是结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[7,1,5,7,9,4]</span><br><span class="line">  9 - 1 = 8</span><br><span class="line">[-6,4,2,2,-2]</span><br><span class="line">        </span><br><span class="line">[1,7,5,3,6,4]</span><br><span class="line">  7 - 1 = 6</span><br><span class="line">  6 - 3 = 3</span><br><span class="line">  6 + 3 = 9</span><br><span class="line">[6,-2,-2,3,-2]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func maxProfit(_ prices: [Int]) -&gt; Int &#123;</span><br><span class="line">   </span><br><span class="line">    if prices.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var result_interest: Int = 0</span><br><span class="line">    for i in 0..&lt;prices.count-1 &#123;</span><br><span class="line">        </span><br><span class="line">        let interest: Int = prices[i+1] - prices[i]</span><br><span class="line">        if interest &gt; 0 &#123;</span><br><span class="line">            result_interest = result_interest + interest</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result_interest</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-25fef3da1eccdfa6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-db6f1ca480ebb609.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/13--罗马数字转整数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/13--罗马数字转整数/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<blockquote>
+<p>六种特殊字符：IV， IX， XL， XC，CD 和 CM。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">特殊字符          数值</span><br><span class="line">IV                4</span><br><span class="line">IX                9</span><br><span class="line">XL                40</span><br><span class="line">XC                90</span><br><span class="line">CD                400</span><br><span class="line">CM                900</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>#二、题目意思剖析：<br>将罗马数字从后往前依次筛选<br>1.先筛选出特殊字符，+对应的数值，然后进行剔除<br>2.在筛选普通字符，+对应的数值，然后进行剔除<br>最后得出result。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br><span class="line"></span><br><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br><span class="line"></span><br><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br><span class="line"></span><br><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// 看起来清晰，然而写起来麻烦。</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    var str: String = s</span><br><span class="line">    var special: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">    for i in 0..&lt;special.count &#123;</span><br><span class="line">        if str.contains(special[i]) &#123;</span><br><span class="line">            let range: Range&lt;String.Index&gt; = str.range(of: special[i])!</span><br><span class="line">            str.removeSubrange(range)</span><br><span class="line">            if special[i] == &quot;CM&quot; &#123;</span><br><span class="line">                sum = sum + 900</span><br><span class="line">            &#125;else if special[i] == &quot;CD&quot; &#123;</span><br><span class="line">                sum = sum + 400</span><br><span class="line">            &#125;else if special[i] == &quot;XC&quot; &#123;</span><br><span class="line">                sum = sum + 90</span><br><span class="line">            &#125;else if special[i] == &quot;XL&quot; &#123;</span><br><span class="line">                sum = sum + 40</span><br><span class="line">            &#125;else if special[i] == &quot;IX&quot; &#123;</span><br><span class="line">                sum = sum + 9</span><br><span class="line">            &#125;else if special[i] == &quot;IV&quot; &#123;</span><br><span class="line">                sum = sum + 4</span><br><span class="line">            &#125;</span><br><span class="line">            print(str)</span><br><span class="line">            print(sum)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for char in str &#123;</span><br><span class="line">        let temp = String.init(char)</span><br><span class="line">        if temp == &quot;M&quot; &#123;</span><br><span class="line">            sum = sum + 1000</span><br><span class="line">        &#125;else if temp == &quot;D&quot; &#123;</span><br><span class="line">            sum = sum + 500</span><br><span class="line">        &#125;else if temp == &quot;C&quot; &#123;</span><br><span class="line">            sum = sum + 100</span><br><span class="line">        &#125;else if temp == &quot;L&quot; &#123;</span><br><span class="line">            sum = sum + 50</span><br><span class="line">        &#125;else if temp == &quot;X&quot; &#123;</span><br><span class="line">            sum = sum + 10</span><br><span class="line">        &#125;else if temp == &quot;V&quot; &#123;</span><br><span class="line">            sum = sum + 5</span><br><span class="line">        &#125;else if temp == &quot;I&quot; &#123;</span><br><span class="line">            sum = sum + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 优化写法</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">var sum: Int = 0</span><br><span class="line">var str: String = s</span><br><span class="line">let specialRoman: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">let specialNum: [Int] = [4, 9, 40, 90, 400, 900]</span><br><span class="line">let normalRoman: [String] = [&quot;M&quot;, &quot;D&quot;, &quot;C&quot;, &quot;L&quot;, &quot;X&quot;, &quot;V&quot;, &quot;I&quot;]</span><br><span class="line">let normalNum: [Int] = [1000, 500, 100, 50, 10, 5, 1]</span><br><span class="line">for i in 0..&lt;specialRoman.count &#123;</span><br><span class="line">    while str.contains(specialRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: specialRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + specialNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">for i in 0..&lt;normalNum.count &#123;</span><br><span class="line">    while str.contains(normalRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: normalRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + normalNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return sum</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-7345a7c4c8a51dc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-65ed9505b830c627.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
 
           
         
@@ -1805,12 +1805,25 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
               
 
               

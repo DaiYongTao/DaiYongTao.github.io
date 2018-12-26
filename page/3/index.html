@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/128-旋转数组/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -313,7 +313,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/122-买卖股票的最佳时机-II/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/128-旋转数组/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -376,13 +376,164 @@
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br> 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br> 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。<br> 说明:<br> 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。<br> 要求使用空间复杂度为 O(1) 的原地算法。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</span><br><span class="line"> </span><br><span class="line">示例 2:</span><br><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。</span><br><span class="line">因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br><span class="line"> </span><br><span class="line">示例 3:</span><br><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>将前后两天价格相减，盈利interest = prices[i+1] - prices[i]<br>用一个新数组，将所有正整数加起来就是答案。(方便理解)<br>或者更简单，不用弄新的数组，得到interest后，直接判断是否为正数，如果是就加起来，最后的和就是结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[7,1,5,7,9,4]</span><br><span class="line">  9 - 1 = 8</span><br><span class="line">[-6,4,2,2,-2]</span><br><span class="line">        </span><br><span class="line">[1,7,5,3,6,4]</span><br><span class="line">  7 - 1 = 6</span><br><span class="line">  6 - 3 = 3</span><br><span class="line">  6 + 3 = 9</span><br><span class="line">[6,-2,-2,3,-2]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func maxProfit(_ prices: [Int]) -&gt; Int &#123;</span><br><span class="line">   </span><br><span class="line">    if prices.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var result_interest: Int = 0</span><br><span class="line">    for i in 0..&lt;prices.count-1 &#123;</span><br><span class="line">        </span><br><span class="line">        let interest: Int = prices[i+1] - prices[i]</span><br><span class="line">        if interest &gt; 0 &#123;</span><br><span class="line">            result_interest = result_interest + interest</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result_interest</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-25fef3da1eccdfa6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-db6f1ca480ebb609.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,4,5,6,7] 和 k = 3</span><br><span class="line">输出: [5,6,7,1,2,3,4]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [7,1,2,3,4,5,6]</span><br><span class="line">向右旋转 2 步: [6,7,1,2,3,4,5]</span><br><span class="line">向右旋转 3 步: [5,6,7,1,2,3,4]</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [-1,-100,3,99] 和 k = 2</span><br><span class="line">输出: [3,99,-1,-100]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [99,-1,-100,3]</span><br><span class="line">向右旋转 2 步: [3,99,-1,-100]</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.最后一个数字 - &gt; 第一个<br>2.最后一个数字 - &gt; 第一个<br>。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func rotate(_ nums: inout [Int], _ k: Int) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = []</span><br><span class="line">    var mut_k: Int = k</span><br><span class="line">    </span><br><span class="line">    while mut_k &gt; 0 &#123;</span><br><span class="line">        mutNums.append(nums.last!)</span><br><span class="line">        for i in 0..&lt;nums.count-1 &#123;</span><br><span class="line">            mutNums.append(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        nums = mutNums</span><br><span class="line">        mutNums = []</span><br><span class="line">        mut_k = mut_k - 1</span><br><span class="line">    &#125;</span><br><span class="line">    print(nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>。。。待续</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/15--三数之和/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/15--三数之和/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，</span><br><span class="line"></span><br><span class="line">满足要求的三元组集合为：</span><br><span class="line">[[-1, 0, 1], [-1, -1, 2]]</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>3.1.首先想到的最简单最傻的做法是三层循环，时间复杂度为O(n的三次方)。。。想想都觉得耗时。。。非常不建议，只是一个思路而已。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">func threeSum(_ nums: [Int]) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    var newNums: [Int] = []</span><br><span class="line">    var haha:[[Int]] = []</span><br><span class="line">    for i in 0..&lt;nums.count &#123;</span><br><span class="line">        </span><br><span class="line">        for j in i+1..&lt;nums.count &#123;</span><br><span class="line">            </span><br><span class="line">            for k in j+1..&lt;nums.count &#123;</span><br><span class="line">                </span><br><span class="line">                if nums[i] + nums[j] + nums[k] == 0 &#123;</span><br><span class="line">                    newNums.append(nums[i])</span><br><span class="line">                    newNums.append(nums[j])</span><br><span class="line">                    newNums.append(nums[k])</span><br><span class="line">                    newNums.sort()</span><br><span class="line">                    if haha.contains(newNums) &#123;</span><br><span class="line">                        newNums.removeAll()</span><br><span class="line">                        continue</span><br><span class="line">                    &#125;</span><br><span class="line">                    haha.append(newNums)</span><br><span class="line">                &#125;</span><br><span class="line">                newNums.removeAll()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return haha</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.2.经过耗时太长的惨痛经历，痛定思痛，我觉得从题目“三数之和=0”入手。排除三个数都为0的情况，也就是[0,0,0]；请他情况必定是有一个负数的。所以我们可以首先就排个序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//第一步：排序</span><br><span class="line">比如刚开始是[-1, 0, 1, 2, -1, -4]</span><br><span class="line">排序后变成是[-4, -1, -1, 0, 1, 2]</span><br></pre></td></tr></table></figure></p>
+<p>排序完，是不是觉得思路有了，对的。我们只需要遍历前面的负数和0，也就是&gt;0的我们统统不要了。我们需要拿到第一个负数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;MutNums.count &#123;</span><br><span class="line">    if (MutNums[i] &gt; 0) &#123;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    // MutNums[i]就是一个负数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>拿到第一个负数后，我们只需要再拿到后面两个数，与之相加=0即可。后面两个数我们用两个指针来表示，j和k，一个是从左边往右边走，一个是从最右边往前走。有些思想就是想通的，之前的两数之和就是这种思路。先排好序，左边一个left指针，右边一个right指针，如果left+right &gt; result，那么right往左移，如果left+right &lt; result，那么说明相加得数不够，就需要left往右移。找到相加之和相等的就行。此题，也是如此。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let target = 0 - MutNums[i]; // 这个就是动态的reslut</span><br><span class="line">var j = i+1, k = MutNums.count - 1</span><br><span class="line">if (MutNums[j] + MutNums[k] == target) &#123;</span><br><span class="line">    //这就回到了两数之和那个简单的问题。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不过在这里要注意一个问题，就是题目中提到的“答案中不可以包含重复的三元组”，所以我们需要把相同的数字过滤掉。<br>其实很简单，只需要往下或者往前走一位，其他什么都不要做。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while j &lt; k &amp;&amp; MutNums[j] == MutNums[j+1] &#123; </span><br><span class="line">    j = j + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>贴出代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">func threeSum(_ nums: [Int]) -&gt; [[Int]] &#123;</span><br><span class="line">    var MutNums: [Int] = nums</span><br><span class="line">    var newNums: [Int] = []</span><br><span class="line">    var haha:[[Int]] = []</span><br><span class="line">    // 1.排序 对于MutNums[i]来说，我们只需要负数和0，因为三个数之和为0，一定是有一个数为负数的，当然除去三个数都为0的情况。所以，我们取非正数。</span><br><span class="line">    MutNums.sort()</span><br><span class="line">    for i in 0..&lt;MutNums.count &#123;</span><br><span class="line">        if (MutNums[i] &gt; 0) &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">        if (i &gt; 0 &amp;&amp; MutNums[i] == MutNums[i-1]) &#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        let target = 0 - MutNums[i];</span><br><span class="line">        var j = i+1, k = MutNums.count - 1</span><br><span class="line">        while j &lt; k &#123;</span><br><span class="line">            // 2.找到后面的两个与MutNums[i]对应的数字</span><br><span class="line">            if (MutNums[j] + MutNums[k] == target) &#123;</span><br><span class="line">                newNums.append(MutNums[i])</span><br><span class="line">                newNums.append(MutNums[j])</span><br><span class="line">                newNums.append(MutNums[k])</span><br><span class="line">                haha.append(newNums)</span><br><span class="line">                newNums.removeAll()</span><br><span class="line">                // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                while j &lt; k &amp;&amp; MutNums[j] == MutNums[j+1] &#123;</span><br><span class="line">                    j = j + 1</span><br><span class="line">                &#125;</span><br><span class="line">                // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                while j &lt; k &amp;&amp; MutNums[k] == MutNums[k-1] &#123;</span><br><span class="line">                    k = k - 1</span><br><span class="line">                &#125;</span><br><span class="line">                // 否则就往中间靠拢</span><br><span class="line">                j = j + 1;k = k - 1</span><br><span class="line">            &#125;else if (MutNums[j] + MutNums[k] &lt; target) &#123;</span><br><span class="line">                // 如果后面两数相加小于target，说明左边还得往右移</span><br><span class="line">                j = j + 1</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                // 如果后面两数相加大于target，说明右边就要往左移</span><br><span class="line">                k = k - 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return haha</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运行数组</span><br><span class="line">[13,9,1,12,-7,-12,7,3,9,6,-7,4,9,5,5,-7,4,11,1,-2,12,3,-12,-15,0,-12,-6,-1,7,-5,-4,-3,12,4,-14,-10,-1,8,1,-6,-1,9,13,-14,-1,-5,-6,-12,-8,2,2,11,13,-3,11,-2,1,-10,4,-15,-8,7,-11,11,-4,-10,-13,3,5,3,12,11,-11,2,12,3,13,13,-2,12,-7,-15,8,-9,-10,-4,-4,6,1,-15,-2,0,-1,2,-3,10,-1,-9,-10,-11,1,-13,-15,5,-3,5,-7,-5,-5,6,14,3,-1,7,1,-4,-12,12,-13,-4,4,0,3,-12,9,-15,6]</span><br></pre></td></tr></table></figure>
+<p>耗时对比：<br>1.三层循环 347.76ms<br>2.滑尺优化方案 2.64ms<br>话不多说，感受下这个天壤之别。</p>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-f876f096ce93338f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-88be7187864d56dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
 
           
         
@@ -529,306 +680,6 @@
 <p>其实我们可以将其简化为 和 上一题<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>一样的模式上。<br>也就是将最前面的数字抽出来，然后让left指针和right指针在该数字之后的数组里进行滑动。找出三数之和 - target的绝对值的最小值即可。判断会有点多。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">func threeSumClosest(_ nums: [Int], _ target: Int) -&gt; Int &#123;</span><br><span class="line">    if(nums.count &lt; 3)&#123;</span><br><span class="line">        var result = 0</span><br><span class="line">        for value in nums &#123;</span><br><span class="line">            result = result + value</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNums = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">    let count = tempNums.count</span><br><span class="line">    var threeSum = tempNums[0] + tempNums[1] + tempNums[2]</span><br><span class="line">    print(tempNums)</span><br><span class="line">    for indexF in 0 ..&lt; count &#123;</span><br><span class="line">        if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        let tempArray = self.aFunction(numbers: tempNums, begin: indexF + 1, end: count)</span><br><span class="line">        print(tempArray)</span><br><span class="line">        var left:Int = 0</span><br><span class="line">        var right:Int = tempArray.count - 1</span><br><span class="line">        while left &lt; right &#123;</span><br><span class="line">            print(threeSum)</span><br><span class="line">            let newOffsetValue = tempArray[left] + tempArray[right] + tempNums[indexF] - target</span><br><span class="line">            if(newOffsetValue == 0)&#123;</span><br><span class="line">                return target;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            let result = threeSum - target</span><br><span class="line">            if(result &lt; 0)&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(newOffsetValue &gt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; abs(result))&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(abs(newOffsetValue) &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return threeSum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-2ce88f0768a4f024.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-3696feb424a2b3a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄!</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/18--四数之和/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/18--四数之和/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。<br>注意：答案中不可以包含重复的四元组。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 思路：和三元组相似。我们需要找到 a+b+c+d = t</span><br><span class="line"> */</span><br><span class="line">func fourSum(_ nums: [Int], _ target: Int) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    // 二元组。。。三元组。。。终于到了四元组。。。。</span><br><span class="line">    if nums.count &lt; 4 &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    else if nums.count == 4 &#123;</span><br><span class="line">        </span><br><span class="line">        if nums[0] + nums[1] + nums[2] + nums[3] == target &#123;</span><br><span class="line">            return [nums]</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        let tempNums: [Int] = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">        let count = tempNums.count</span><br><span class="line">        var fourSum: [[Int]] = Array.init()</span><br><span class="line">        print(tempNums)</span><br><span class="line">        for indexF in 0 ..&lt; count-3 &#123;</span><br><span class="line">            // 剔除首位相同的元素</span><br><span class="line">            if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            for indexH in indexF + 1 ..&lt; count-2 &#123;</span><br><span class="line">                </span><br><span class="line">                // 剔除第二位相同的元素，添加判断当 indexH 和 indexF不相邻时/</span><br><span class="line">                if (indexH != 0) &amp;&amp; (tempNums[indexH] == tempNums[indexH - 1]) &amp;&amp; indexH - 1 != indexF  &#123;</span><br><span class="line">                    continue</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let tempArray = self.aFunction(numbers: tempNums, begin: indexH + 1, end: count)</span><br><span class="line">                print(tempArray)</span><br><span class="line">                var left:Int = 0</span><br><span class="line">                var right:Int = tempArray.count - 1</span><br><span class="line">                while left &lt; right &#123;</span><br><span class="line">                    // 临时的四个数字之和。</span><br><span class="line">                    let tempTarget = tempNums[indexF] + tempNums[indexH] + tempArray[left] + tempArray[right]</span><br><span class="line">                    print(tempTarget)</span><br><span class="line">                    // 让tempTarget和目标值 target进行比对</span><br><span class="line">                    if tempTarget == target &#123;</span><br><span class="line">                        let tempFourSum = [tempNums[indexF],tempNums[indexH],tempArray[left],tempArray[right]]</span><br><span class="line">                        fourSum .append(tempFourSum)</span><br><span class="line">                        </span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[left] == tempArray[left+1] &#123;</span><br><span class="line">                            left = left + 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[right] == tempArray[right-1] &#123;</span><br><span class="line">                            right = right - 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                    if tempTarget &lt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                    &#125;else if tempTarget &gt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return fourSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func aFunction(numbers: Array&lt;Int&gt;, begin: Int, end: Int) -&gt; Array&lt;Int&gt; &#123;</span><br><span class="line">    let newNumbers = Array(numbers[begin..&lt;end])</span><br><span class="line">    return newNumbers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>本题和<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a>都可归为一类处理，如果有困惑的地方可以前后看看这几篇文章哦，解题思路差不多。</p>
-<p>小哥哥小姐姐们有其他好的方法请留言哦，有困惑的地方也非常乐意一起探讨呢。😄!</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/13--罗马数字转整数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/13--罗马数字转整数/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
-<blockquote>
-<p>六种特殊字符：IV， IX， XL， XC，CD 和 CM。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">特殊字符          数值</span><br><span class="line">IV                4</span><br><span class="line">IX                9</span><br><span class="line">XL                40</span><br><span class="line">XC                90</span><br><span class="line">CD                400</span><br><span class="line">CM                900</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>#二、题目意思剖析：<br>将罗马数字从后往前依次筛选<br>1.先筛选出特殊字符，+对应的数值，然后进行剔除<br>2.在筛选普通字符，+对应的数值，然后进行剔除<br>最后得出result。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br><span class="line"></span><br><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br><span class="line"></span><br><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br><span class="line"></span><br><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br><span class="line"></span><br><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// 看起来清晰，然而写起来麻烦。</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    var str: String = s</span><br><span class="line">    var special: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">    for i in 0..&lt;special.count &#123;</span><br><span class="line">        if str.contains(special[i]) &#123;</span><br><span class="line">            let range: Range&lt;String.Index&gt; = str.range(of: special[i])!</span><br><span class="line">            str.removeSubrange(range)</span><br><span class="line">            if special[i] == &quot;CM&quot; &#123;</span><br><span class="line">                sum = sum + 900</span><br><span class="line">            &#125;else if special[i] == &quot;CD&quot; &#123;</span><br><span class="line">                sum = sum + 400</span><br><span class="line">            &#125;else if special[i] == &quot;XC&quot; &#123;</span><br><span class="line">                sum = sum + 90</span><br><span class="line">            &#125;else if special[i] == &quot;XL&quot; &#123;</span><br><span class="line">                sum = sum + 40</span><br><span class="line">            &#125;else if special[i] == &quot;IX&quot; &#123;</span><br><span class="line">                sum = sum + 9</span><br><span class="line">            &#125;else if special[i] == &quot;IV&quot; &#123;</span><br><span class="line">                sum = sum + 4</span><br><span class="line">            &#125;</span><br><span class="line">            print(str)</span><br><span class="line">            print(sum)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for char in str &#123;</span><br><span class="line">        let temp = String.init(char)</span><br><span class="line">        if temp == &quot;M&quot; &#123;</span><br><span class="line">            sum = sum + 1000</span><br><span class="line">        &#125;else if temp == &quot;D&quot; &#123;</span><br><span class="line">            sum = sum + 500</span><br><span class="line">        &#125;else if temp == &quot;C&quot; &#123;</span><br><span class="line">            sum = sum + 100</span><br><span class="line">        &#125;else if temp == &quot;L&quot; &#123;</span><br><span class="line">            sum = sum + 50</span><br><span class="line">        &#125;else if temp == &quot;X&quot; &#123;</span><br><span class="line">            sum = sum + 10</span><br><span class="line">        &#125;else if temp == &quot;V&quot; &#123;</span><br><span class="line">            sum = sum + 5</span><br><span class="line">        &#125;else if temp == &quot;I&quot; &#123;</span><br><span class="line">            sum = sum + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 优化写法</span><br><span class="line">func romanToInt(_ s: String) -&gt; Int &#123;</span><br><span class="line">var sum: Int = 0</span><br><span class="line">var str: String = s</span><br><span class="line">let specialRoman: [String] = [&quot;IV&quot;,&quot;IX&quot;,&quot;XL&quot;,&quot;XC&quot;,&quot;CD&quot;,&quot;CM&quot;]</span><br><span class="line">let specialNum: [Int] = [4, 9, 40, 90, 400, 900]</span><br><span class="line">let normalRoman: [String] = [&quot;M&quot;, &quot;D&quot;, &quot;C&quot;, &quot;L&quot;, &quot;X&quot;, &quot;V&quot;, &quot;I&quot;]</span><br><span class="line">let normalNum: [Int] = [1000, 500, 100, 50, 10, 5, 1]</span><br><span class="line">for i in 0..&lt;specialRoman.count &#123;</span><br><span class="line">    while str.contains(specialRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: specialRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + specialNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">for i in 0..&lt;normalNum.count &#123;</span><br><span class="line">    while str.contains(normalRoman[i]) &#123;</span><br><span class="line">        let range: Range&lt;String.Index&gt; = str.range(of: normalRoman[i])!</span><br><span class="line">        str.removeSubrange(range)</span><br><span class="line">        sum = sum + normalNum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return sum</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-7345a7c4c8a51dc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-65ed9505b830c627.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
 
           
         
@@ -1128,6 +979,155 @@
 <p>#四、小结<br>有时候抓住关键点就可以一击突破。这题的关键就在于处理sum的余数和除数。</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-5a4335e45978b729.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-cabd258a839980c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
 <p>有任何疑问都可以留言，非常乐意一起探讨。😄</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/18--四数之和/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/18--四数之和/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。<br>注意：答案中不可以包含重复的四元组。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 思路：和三元组相似。我们需要找到 a+b+c+d = t</span><br><span class="line"> */</span><br><span class="line">func fourSum(_ nums: [Int], _ target: Int) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    // 二元组。。。三元组。。。终于到了四元组。。。。</span><br><span class="line">    if nums.count &lt; 4 &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    else if nums.count == 4 &#123;</span><br><span class="line">        </span><br><span class="line">        if nums[0] + nums[1] + nums[2] + nums[3] == target &#123;</span><br><span class="line">            return [nums]</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        let tempNums: [Int] = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">        let count = tempNums.count</span><br><span class="line">        var fourSum: [[Int]] = Array.init()</span><br><span class="line">        print(tempNums)</span><br><span class="line">        for indexF in 0 ..&lt; count-3 &#123;</span><br><span class="line">            // 剔除首位相同的元素</span><br><span class="line">            if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            for indexH in indexF + 1 ..&lt; count-2 &#123;</span><br><span class="line">                </span><br><span class="line">                // 剔除第二位相同的元素，添加判断当 indexH 和 indexF不相邻时/</span><br><span class="line">                if (indexH != 0) &amp;&amp; (tempNums[indexH] == tempNums[indexH - 1]) &amp;&amp; indexH - 1 != indexF  &#123;</span><br><span class="line">                    continue</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let tempArray = self.aFunction(numbers: tempNums, begin: indexH + 1, end: count)</span><br><span class="line">                print(tempArray)</span><br><span class="line">                var left:Int = 0</span><br><span class="line">                var right:Int = tempArray.count - 1</span><br><span class="line">                while left &lt; right &#123;</span><br><span class="line">                    // 临时的四个数字之和。</span><br><span class="line">                    let tempTarget = tempNums[indexF] + tempNums[indexH] + tempArray[left] + tempArray[right]</span><br><span class="line">                    print(tempTarget)</span><br><span class="line">                    // 让tempTarget和目标值 target进行比对</span><br><span class="line">                    if tempTarget == target &#123;</span><br><span class="line">                        let tempFourSum = [tempNums[indexF],tempNums[indexH],tempArray[left],tempArray[right]]</span><br><span class="line">                        fourSum .append(tempFourSum)</span><br><span class="line">                        </span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[left] == tempArray[left+1] &#123;</span><br><span class="line">                            left = left + 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[right] == tempArray[right-1] &#123;</span><br><span class="line">                            right = right - 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                    if tempTarget &lt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                    &#125;else if tempTarget &gt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return fourSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func aFunction(numbers: Array&lt;Int&gt;, begin: Int, end: Int) -&gt; Array&lt;Int&gt; &#123;</span><br><span class="line">    let newNumbers = Array(numbers[begin..&lt;end])</span><br><span class="line">    return newNumbers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>本题和<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a>都可归为一类处理，如果有困惑的地方可以前后看看这几篇文章哦，解题思路差不多。</p>
+<p>小哥哥小姐姐们有其他好的方法请留言哦，有困惑的地方也非常乐意一起探讨呢。😄!</p>
 
           
         
@@ -1805,12 +1805,25 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
               
 
               

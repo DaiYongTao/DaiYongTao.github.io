@@ -793,7 +793,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之屏幕旋转控制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -813,7 +813,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之屏幕旋转控制/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -874,318 +874,49 @@
       
         
           
-            <p>前言：<br>1.屏幕分为：横竖屏。<br>2.在苹果系统中，分为4个类型：Portrait(竖直正方向)、Upside Down(竖直倒转方向)、 LandscapeLeft(左)、LandscapeRight(右)<br>一般情况下，我们创建一个app，系统默认选择的是1、3、4方向，倒转方向用的很少，如果需要使用2方向，即竖直倒转方向，除了info.plist设置之外，还需在视图控制器里设置shouldAutorotate为NO;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 是否默认旋转</span><br><span class="line">- (BOOL)shouldAutorotate &#123;</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>横屏用的地方也比较多，比如视频app从竖屏切到横屏全屏观看模式，再比如某些app的横屏页面板块。这就需要进行页面的横屏设置了。</p>
+            <p>##一、TLS的历史</p>
 <blockquote>
-<p>这里还涉及到一个跳转问题，iOS页面跳转分为模态视图跳转Modal Presentation和通过导航栏的跳转</p>
+<p>1994年，NetScape公司设计了SSL协议（Secure Sockets Layer）的1.0版，但是未发布。<br>1995年，NetScape公司发布SSL 2.0版，很快发现有严重漏洞。<br>1996年，SSL 3.0版问世，得到大规模应用。<br>1999年，互联网标准化组织ISOC接替NetScape公司，发布了SSL的升级版<a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" target="_blank" rel="noopener">TLS</a>（Transport Layer Security） 1.0版。<br>2006年和2008年，TLS进行了两次升级，分别为TLS 1.1版和TLS 1.2版。最新的变动是2011年TLS 1.2的<a href="http://tools.ietf.org/html/rfc6176" target="_blank" rel="noopener">修订版</a>。</p>
 </blockquote>
-<p>######1.通过模态视图跳转，只需要在destination控制器里加上以下代码配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)shouldAutorotate &#123;</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br><span class="line">- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation &#123;</span><br><span class="line">    return toInterfaceOrientation == UIInterfaceOrientationLandscapeRight;</span><br><span class="line">&#125;</span><br><span class="line">- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation &#123;</span><br><span class="line">    return UIInterfaceOrientationLandscapeRight;</span><br><span class="line">&#125;</span><br><span class="line">- (UIInterfaceOrientationMask)supportedInterfaceOrientations &#123;</span><br><span class="line">    return UIInterfaceOrientationMaskLandscapeRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######2.通过导航栏的跳转push到下个控制器</p>
-<p>在Appdelegate.h里添加外部属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic,assign)BOOL allowRotation; //是否允许转向</span><br></pre></td></tr></table></figure></p>
-<p>在Appdelegate.m里设定整个app的Orientation属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window &#123;</span><br><span class="line">    </span><br><span class="line">    if (self.allowRotation == YES) &#123;</span><br><span class="line">        //横屏</span><br><span class="line">        return UIInterfaceOrientationMaskLandscape;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //竖屏</span><br><span class="line">        return UIInterfaceOrientationMaskPortrait;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在目标控制器里，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;</span><br><span class="line">//允许转成横屏</span><br><span class="line">appDelegate.allowRotation = YES;</span><br><span class="line">//调用横屏代码</span><br><span class="line">[UIDevice switchNewOrientation:UIInterfaceOrientationLandscapeRight]; //设定切换模式，如果在手机里取消了屏幕旋转锁定，那么横屏时就会根据手机的放置方向而自动旋转。</span><br></pre></td></tr></table></figure></p>
-<p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之系统权限控制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之系统权限控制/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>开篇：在iOS系统上，对于系统权限、用户权限的审核是非常严格的。<br>比如相机、相册、麦克风、通讯录、定位和蓝牙等，在app线上审核时，如果你没用到其中的权限，但是在info.plist里设置了，就会被拒。</p>
+<p>##二、Xcode中info.plist相关字段含义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInMedia&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsLocalNetworking&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInWebContent&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSExceptionDomains&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;www.app.youCompany.cn&lt;/key&gt;</span><br><span class="line">		&lt;dict&gt;</span><br><span class="line">			&lt;key&gt;NSIncludesSubdomains&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSRequiresCertificateTransparency&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">		&lt;/dict&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">&lt;/dict&gt;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>所以接下来，我整理了目前版本的Xcode(9.2)里所有的权限控制及解释</p>
+<p>NSAllowsArbitraryLoads ：   默认为NO。如果设置为YES，将解除ATS限制，将会引发苹果的审查。一般设置为NO，然后通过下面的NSExceptionDomains去添加白名单（或者叫例外）。</p>
 </blockquote>
-<p>NSBluetoothPeripheralUsageDescription — 访问蓝牙<br>NSCalendarsUsageDescription — 访问日历<br>NSCameraUsageDescription — 访问相机<br>NSContactsUsageDescription — 访问通讯录<br>NSFaceIDUsageDescription — 访问FaceID，面部识别<br>NSHealthShareUsageDescription — 访问健康分享<br>NSHealthUpdateUsageDescription — 访问健康更新<br>NSHomeKitUsageDescription — 访问智能家居</p>
-<p>NSLocationAlwaysAndWhenInUseUsageDescription — 在使用期间始终访问位置<br>NSLocationWhenInUseUsageDescription — 在使用期间访问位置<br>NSLocationAlwaysUsageDescription — 始终访问位置<br>NSLocationUsageDescription — 访问位置</p>
-<p>NSAppleMusicUsageDescription — 访问媒体资料库 — Privacy - Media Library Usage Description（key和描述不太一样）</p>
-<p>NSMicrophoneUsageDescription — 麦克风<br>NSMotionUsageDescription — 运动使用权限<br>kTCCServiceMediaLibrary —  访问音乐权限 — Privacy - Music Usage Description（key和描述不太一样）<br>NFCReaderUsageDescription — NFC权限 — Privacy - NFC Scan Usage Description（key和描述不太一样）</p>
-<p>NSPhotoLibraryAddUsageDescription — 添加内容到相册 — Privacy - Photo Library Additions Usage Description（key和描述不太一样）<br>NSPhotoLibraryUsageDescription — 访问相册</p>
-<p>NSRemindersUsageDescription — 访问提醒事项<br>NSSiriUsageDescription — 访问Siri<br>NSSpeechRecognitionUsageDescription — 语音识别</p>
-<p>NSVideoSubscriberAccountUsageDescription — 电视供应商使用权限<br>Privacy - TV Provider Usage Description 、<br>Privacy - Video Subscriber Account Usage Description<br>最后两项是相同的。</p>
 <blockquote>
-<p>注：到目前为止一共是24项，但是最后两项是相同的，有一个被弃用了，所以只有23项。</p>
+<p>NSAllowsArbitraryLoadsInMedia ：  默认为NO。如果设置为YES，将解除AVFoundation访问媒体内容时的ATS限制。</p>
 </blockquote>
-<p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/Github上如何创建ssh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##1.创建本地ssh：操作环境（终端）</p>
 <blockquote>
-<ol>
-<li>ssh-keygen  </li>
-<li>输入密码</li>
-<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
-</ol>
+<p>NSAllowsArbitraryLoadsInWebContent ：  默认为NO。如果设置为YES，将解除网页访问时的ATS限制。</p>
 </blockquote>
-<p>##2.在Github上创建ssh</p>
 <blockquote>
-<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
+<p>NSAllowsLocalNetworking：  默认为NO。如果设置为YES，将解除访问本地资源时的ATS限制。</p>
 </blockquote>
+<blockquote>
+<p>NSExceptionDomains : 添加例外</p>
+</blockquote>
+<blockquote>
+<p>NSIncludesSubdomains ： 默认为NO。如果设置为YES，当前域名的 ATS 策略适用于其所有子域名。</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionAllowsInsecureHTTPLoads：  默认为NO。如果设置为YES，可以同时通过 HTTP 和 HTTPS 访问当前域名。（将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionMinimumTLSVersion： string类型，可以设置 TLS 最低版本。（因为低版本有安全漏洞，将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionRequiresForwardSecrecy：  默认为YES。如果设置为NO，允许针对当前域名使用不支持正向保密的 TLS 加密算法。</p>
+</blockquote>
+<blockquote>
+<p>NSRequiresCertificateTransparency：  默认为NO。如果设置为YES，将验证域名服务器证书的Certificate Transparency时间戳 。</p>
+</blockquote>
+<p>提交审核说明(举例)：</p>
+<ul>
+<li>必须连接由其他机构控制的服务器，其还不支持安全连接。</li>
+<li>必须通过 web 展示来源不一的各种网络内容，但又不能完全使用NSAllowsArbitraryLoadsInWebContent所管理的类。</li>
+<li>必须支持那些还未升级至可使用安全连接，不得不通过公共域名访问网络的设备。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后记：因最近公司需要我们整理一些自己在工作中用到的基础知识，特此整理搜集了一些笔记，放入简书供大家学习探讨。</span><br></pre></td></tr></table></figure>
+<p>相关文章：<br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
 
           
         
@@ -1694,6 +1425,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之系统权限控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之系统权限控制/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开篇：在iOS系统上，对于系统权限、用户权限的审核是非常严格的。<br>比如相机、相册、麦克风、通讯录、定位和蓝牙等，在app线上审核时，如果你没用到其中的权限，但是在info.plist里设置了，就会被拒。</p>
+<blockquote>
+<p>所以接下来，我整理了目前版本的Xcode(9.2)里所有的权限控制及解释</p>
+</blockquote>
+<p>NSBluetoothPeripheralUsageDescription — 访问蓝牙<br>NSCalendarsUsageDescription — 访问日历<br>NSCameraUsageDescription — 访问相机<br>NSContactsUsageDescription — 访问通讯录<br>NSFaceIDUsageDescription — 访问FaceID，面部识别<br>NSHealthShareUsageDescription — 访问健康分享<br>NSHealthUpdateUsageDescription — 访问健康更新<br>NSHomeKitUsageDescription — 访问智能家居</p>
+<p>NSLocationAlwaysAndWhenInUseUsageDescription — 在使用期间始终访问位置<br>NSLocationWhenInUseUsageDescription — 在使用期间访问位置<br>NSLocationAlwaysUsageDescription — 始终访问位置<br>NSLocationUsageDescription — 访问位置</p>
+<p>NSAppleMusicUsageDescription — 访问媒体资料库 — Privacy - Media Library Usage Description（key和描述不太一样）</p>
+<p>NSMicrophoneUsageDescription — 麦克风<br>NSMotionUsageDescription — 运动使用权限<br>kTCCServiceMediaLibrary —  访问音乐权限 — Privacy - Music Usage Description（key和描述不太一样）<br>NFCReaderUsageDescription — NFC权限 — Privacy - NFC Scan Usage Description（key和描述不太一样）</p>
+<p>NSPhotoLibraryAddUsageDescription — 添加内容到相册 — Privacy - Photo Library Additions Usage Description（key和描述不太一样）<br>NSPhotoLibraryUsageDescription — 访问相册</p>
+<p>NSRemindersUsageDescription — 访问提醒事项<br>NSSiriUsageDescription — 访问Siri<br>NSSpeechRecognitionUsageDescription — 语音识别</p>
+<p>NSVideoSubscriberAccountUsageDescription — 电视供应商使用权限<br>Privacy - TV Provider Usage Description 、<br>Privacy - Video Subscriber Account Usage Description<br>最后两项是相同的。</p>
+<blockquote>
+<p>注：到目前为止一共是24项，但是最后两项是相同的，有一个被弃用了，所以只有23项。</p>
+</blockquote>
+<p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/iOS内购之二次验证/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1836,6 +1719,155 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/Github上如何创建ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/Github上如何创建ssh/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##1.创建本地ssh：操作环境（终端）</p>
+<blockquote>
+<ol>
+<li>ssh-keygen  </li>
+<li>输入密码</li>
+<li>进入个人 / .ssh文件夹，打开id_rsa.pub，将里面内容拷贝。</li>
+</ol>
+</blockquote>
+<p>##2.在Github上创建ssh</p>
+<blockquote>
+<p>1.进入<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，登录。点击右上角头像<br>2.选择<code>setting</code>进入设置页面<br>3.在左侧栏选择<code>SSH and GPG keys</code>，创建新的ssh<br>4.Title随便填自己明白就行，Key就是将你本地创建的ssh复制过来。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1883,12 +1915,25 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
               
 
               
