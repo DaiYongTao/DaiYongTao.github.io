@@ -293,299 +293,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/28--实现strStr()/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/28--实现strStr()/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;</span><br><span class="line"> 输出: 2</span><br><span class="line"> </span><br><span class="line"> 输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;</span><br><span class="line"> 输出: -1</span><br><span class="line"></span><br><span class="line">说明:</span><br><span class="line">当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。</span><br><span class="line">对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.方法简单，运用swift语言特性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func strStr(_ haystack: String, _ needle: String) -&gt; Int &#123;</span><br><span class="line">    if needle.count == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    let range = haystack.range(of: needle)</span><br><span class="line">    return range?.lowerBound.encodedOffset ?? -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.将字符串变成数组，进行遍历。(借鉴top1的方案，其实也简单，就是看起来代码貌似会比较多)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">func strStr(_ haystack: String, _ needle: String) -&gt; Int &#123;</span><br><span class="line">    let count1 = haystack.count</span><br><span class="line">    let count2 = needle.count</span><br><span class="line">    if count2 == 0 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if count1 &lt; count2 &#123;</span><br><span class="line">        return -1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var haystackChars = haystack.cString(using: .utf8)!</span><br><span class="line">    var needleChars = needle.cString(using: .utf8)!</span><br><span class="line">    var i = 0</span><br><span class="line">    var j = 0</span><br><span class="line">    </span><br><span class="line">    let maxi = count1 - count2</span><br><span class="line">    let maxj = count2 - 1</span><br><span class="line">    </span><br><span class="line">    while i &lt;= maxi &amp;&amp; j &lt;= maxj &#123;</span><br><span class="line">        var m = i</span><br><span class="line">        while m &lt;= count1 - 1 &amp;&amp; j &lt;= maxj &#123;</span><br><span class="line">            let mv = haystackChars[m]</span><br><span class="line">            let jv = needleChars[j]</span><br><span class="line">            if mv == jv &#123;</span><br><span class="line">                m += 1</span><br><span class="line">                j += 1</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            j = 0</span><br><span class="line">            i += 1</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    j = j - 1</span><br><span class="line">    if j == maxj&#123;</span><br><span class="line">        return i</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>1.耗时<code>856</code>毫秒，超过<code>32.58%</code>的提交记录，总提交数<code>74</code>。<br>2.耗时<code>12</code>毫秒，超过<code>100%</code>的提交记录，总提交数<code>74</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之屏幕旋转控制/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之屏幕旋转控制/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言：<br>1.屏幕分为：横竖屏。<br>2.在苹果系统中，分为4个类型：Portrait(竖直正方向)、Upside Down(竖直倒转方向)、 LandscapeLeft(左)、LandscapeRight(右)<br>一般情况下，我们创建一个app，系统默认选择的是1、3、4方向，倒转方向用的很少，如果需要使用2方向，即竖直倒转方向，除了info.plist设置之外，还需在视图控制器里设置shouldAutorotate为NO;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 是否默认旋转</span><br><span class="line">- (BOOL)shouldAutorotate &#123;</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>横屏用的地方也比较多，比如视频app从竖屏切到横屏全屏观看模式，再比如某些app的横屏页面板块。这就需要进行页面的横屏设置了。</p>
-<blockquote>
-<p>这里还涉及到一个跳转问题，iOS页面跳转分为模态视图跳转Modal Presentation和通过导航栏的跳转</p>
-</blockquote>
-<p>######1.通过模态视图跳转，只需要在destination控制器里加上以下代码配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)shouldAutorotate &#123;</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br><span class="line">- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation &#123;</span><br><span class="line">    return toInterfaceOrientation == UIInterfaceOrientationLandscapeRight;</span><br><span class="line">&#125;</span><br><span class="line">- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation &#123;</span><br><span class="line">    return UIInterfaceOrientationLandscapeRight;</span><br><span class="line">&#125;</span><br><span class="line">- (UIInterfaceOrientationMask)supportedInterfaceOrientations &#123;</span><br><span class="line">    return UIInterfaceOrientationMaskLandscapeRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######2.通过导航栏的跳转push到下个控制器</p>
-<p>在Appdelegate.h里添加外部属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic,assign)BOOL allowRotation; //是否允许转向</span><br></pre></td></tr></table></figure></p>
-<p>在Appdelegate.m里设定整个app的Orientation属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window &#123;</span><br><span class="line">    </span><br><span class="line">    if (self.allowRotation == YES) &#123;</span><br><span class="line">        //横屏</span><br><span class="line">        return UIInterfaceOrientationMaskLandscape;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //竖屏</span><br><span class="line">        return UIInterfaceOrientationMaskPortrait;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在目标控制器里，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;</span><br><span class="line">//允许转成横屏</span><br><span class="line">appDelegate.allowRotation = YES;</span><br><span class="line">//调用横屏代码</span><br><span class="line">[UIDevice switchNewOrientation:UIInterfaceOrientationLandscapeRight]; //设定切换模式，如果在手机里取消了屏幕旋转锁定，那么横屏时就会根据手机的放置方向而自动旋转。</span><br></pre></td></tr></table></figure></p>
-<p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/26-从排序数组中删除重复项/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -679,6 +386,331 @@
 <p>注：题中的使用 O(1) 额外空间的条件下完成，固定多少的变量下其实也是O(1)，并不是说只能用一个额外的变量。</p>
 <p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-ce87f57dfcb10984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-91b6f1127888db08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/iOS随笔/APP基础功能的配置管理之ATS/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##一、TLS的历史</p>
+<blockquote>
+<p>1994年，NetScape公司设计了SSL协议（Secure Sockets Layer）的1.0版，但是未发布。<br>1995年，NetScape公司发布SSL 2.0版，很快发现有严重漏洞。<br>1996年，SSL 3.0版问世，得到大规模应用。<br>1999年，互联网标准化组织ISOC接替NetScape公司，发布了SSL的升级版<a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" target="_blank" rel="noopener">TLS</a>（Transport Layer Security） 1.0版。<br>2006年和2008年，TLS进行了两次升级，分别为TLS 1.1版和TLS 1.2版。最新的变动是2011年TLS 1.2的<a href="http://tools.ietf.org/html/rfc6176" target="_blank" rel="noopener">修订版</a>。</p>
+</blockquote>
+<p>##二、Xcode中info.plist相关字段含义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInMedia&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsLocalNetworking&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSAllowsArbitraryLoadsInWebContent&lt;/key&gt;</span><br><span class="line">	&lt;false/&gt;</span><br><span class="line">	&lt;key&gt;NSExceptionDomains&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;www.app.youCompany.cn&lt;/key&gt;</span><br><span class="line">		&lt;dict&gt;</span><br><span class="line">			&lt;key&gt;NSIncludesSubdomains&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">			&lt;key&gt;NSRequiresCertificateTransparency&lt;/key&gt;</span><br><span class="line">			&lt;true/&gt;</span><br><span class="line">		&lt;/dict&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">&lt;/dict&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>NSAllowsArbitraryLoads ：   默认为NO。如果设置为YES，将解除ATS限制，将会引发苹果的审查。一般设置为NO，然后通过下面的NSExceptionDomains去添加白名单（或者叫例外）。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsArbitraryLoadsInMedia ：  默认为NO。如果设置为YES，将解除AVFoundation访问媒体内容时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsArbitraryLoadsInWebContent ：  默认为NO。如果设置为YES，将解除网页访问时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSAllowsLocalNetworking：  默认为NO。如果设置为YES，将解除访问本地资源时的ATS限制。</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionDomains : 添加例外</p>
+</blockquote>
+<blockquote>
+<p>NSIncludesSubdomains ： 默认为NO。如果设置为YES，当前域名的 ATS 策略适用于其所有子域名。</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionAllowsInsecureHTTPLoads：  默认为NO。如果设置为YES，可以同时通过 HTTP 和 HTTPS 访问当前域名。（将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionMinimumTLSVersion： string类型，可以设置 TLS 最低版本。（因为低版本有安全漏洞，将会引发苹果的审查，上线时需要说明原因）</p>
+</blockquote>
+<blockquote>
+<p>NSExceptionRequiresForwardSecrecy：  默认为YES。如果设置为NO，允许针对当前域名使用不支持正向保密的 TLS 加密算法。</p>
+</blockquote>
+<blockquote>
+<p>NSRequiresCertificateTransparency：  默认为NO。如果设置为YES，将验证域名服务器证书的Certificate Transparency时间戳 。</p>
+</blockquote>
+<p>提交审核说明(举例)：</p>
+<ul>
+<li>必须连接由其他机构控制的服务器，其还不支持安全连接。</li>
+<li>必须通过 web 展示来源不一的各种网络内容，但又不能完全使用NSAllowsArbitraryLoadsInWebContent所管理的类。</li>
+<li>必须支持那些还未升级至可使用安全连接，不得不通过公共域名访问网络的设备。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">后记：因最近公司需要我们整理一些自己在工作中用到的基础知识，特此整理搜集了一些笔记，放入简书供大家学习探讨。</span><br></pre></td></tr></table></figure>
+<p>相关文章：<br><a href="https://www.jianshu.com/p/928618d1c831" target="_blank" rel="noopener">APP基础功能的配置管理之URL Scheme和白名单</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/283--移动零/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/283--移动零/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br><span class="line">说明:</span><br><span class="line">必须在原数组上操作，不能拷贝额外的数组。</span><br><span class="line">尽量减少操作次数。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>遍历数组，如果发现元素=0，直接删除当前元素，在数组末尾加上0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[0,1,0,3,12]</span><br><span class="line">[1,0,3,12,0]</span><br><span class="line">[1,3,12,0,0]</span><br><span class="line">[1,3,12,0,0]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">func moveZeroes(_ nums: inout [Int]) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 1 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    var i: Int = 0</span><br><span class="line">    var j: Int = 0</span><br><span class="line">    let n: Int = nums.count</span><br><span class="line">    while i&lt;n &amp;&amp; j&lt;n &#123;</span><br><span class="line">        if nums[i] == 0 &#123;</span><br><span class="line">              print(&quot;\(i)开始\(nums)&quot;)</span><br><span class="line">            nums.remove(at: i)</span><br><span class="line">              print(&quot;\(i)删除\(nums)&quot;)</span><br><span class="line">            nums.append(0)</span><br><span class="line">              print(&quot;\(i)添加\(nums)&quot;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">          i = i + 1</span><br><span class="line">        &#125;</span><br><span class="line">        j = j + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>耗时<code>32</code>毫秒，超过<code>59.06%</code>的提交记录，总提交数<code>21</code>。</p>
 
           
         
@@ -899,151 +931,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/344--反转字符串/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/344--反转字符串/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>编写一个函数，其作用是将输入的字符串反转过来。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;hello&quot;</span><br><span class="line">输出: &quot;olleh&quot;</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: &quot;amanaP :lanac a ,nalp a ,nam A&quot;</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.用一个数组存起来，再反向遍历。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    var chars: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        chars.append(char)</span><br><span class="line">    &#125;</span><br><span class="line">    var string: String = &quot;&quot;</span><br><span class="line">    var index = s.count - 1</span><br><span class="line">    while index &gt;= 0 &#123;</span><br><span class="line">        string.append(chars[index])</span><br><span class="line">        index = index - 1</span><br><span class="line">    &#125;</span><br><span class="line">    return string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.用一个数组接收字符串，直接利用原数组进行反转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)!</span><br><span class="line">    var left = 0</span><br><span class="line">    var right = s.count - 1</span><br><span class="line">    </span><br><span class="line">    while left &lt; right &#123;</span><br><span class="line">        </span><br><span class="line">        let char = chars[left]</span><br><span class="line">        chars[left] = chars[right]</span><br><span class="line">        chars[right] = char</span><br><span class="line">        </span><br><span class="line">        left = left + 1</span><br><span class="line">        right = right - 1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">      print(chars)</span><br><span class="line">    return String.init(utf8String: chars)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>1.耗时<code>60</code>毫秒，超过<code>48%</code>的提交记录，总提交数<code>476</code>。<br>2.耗时<code>36</code>毫秒，超过<code>99.33%</code>的提交记录，总提交数<code>476</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/350--两个数组的交集-II/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1207,7 +1094,7 @@ return nums
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/36--有效的数独/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/344--反转字符串/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1227,7 +1114,7 @@ return nums
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/36--有效的数独/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/344--反转字符串/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -1290,14 +1177,12 @@ return nums
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。</p>
+<p>编写一个函数，其作用是将输入的字符串反转过来。</p>
 </blockquote>
-<blockquote>
-<p>数字 1-9 在每一行只能出现一次。<br>数字 1-9 在每一列只能出现一次。<br>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],</span><br><span class="line">[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],</span><br><span class="line">[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]</span><br><span class="line">]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>数独，应该大家都玩过，其实就只是判断三个点，横、竖、3*3的方格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">func isValidSudoku(_ board: [[Character]]) -&gt; Bool &#123;</span><br><span class="line"></span><br><span class="line">    var bool: Bool = true</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        let characters = board[i]</span><br><span class="line">        var mutCharacters1: [Character] = []</span><br><span class="line">        var mutCharacters2: [Character] = []</span><br><span class="line">        for j in 0..&lt;characters.count &#123;</span><br><span class="line">            </span><br><span class="line">            // 1.每行比较</span><br><span class="line">            let character1 = board[i][j]</span><br><span class="line">            if character1 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters1.append(character1)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 2.每列比较</span><br><span class="line">            let character2 = board[j][i]</span><br><span class="line">            if character2 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters2.append(character2)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if j == characters.count - 1 &#123;</span><br><span class="line">                </span><br><span class="line">                let set1: Set = Set(mutCharacters1)</span><br><span class="line">                if set1.count == mutCharacters1.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let set2: Set = Set(mutCharacters2)</span><br><span class="line">                if set2.count == mutCharacters2.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var index_i = 0</span><br><span class="line">    var index_j = 0</span><br><span class="line">    while index_i&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        // 3.每方格</span><br><span class="line">        while index_j&lt;board[0].count &#123;</span><br><span class="line">            </span><br><span class="line">            var square: [Character] = []</span><br><span class="line">            if board[index_i][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if index_j % 3 == 0 &#123;</span><br><span class="line">                let set: Set = Set(square)</span><br><span class="line">                if set.count == square.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 因为是3*3的小方格，所以需要+3，而不是再+1了</span><br><span class="line">            index_j = index_j + 3</span><br><span class="line">        &#125;</span><br><span class="line">        index_i = index_i + 3</span><br><span class="line">        // 因为index_j循环后变成了9，需要设置为0</span><br><span class="line">        index_j = 0</span><br><span class="line">    &#125;</span><br><span class="line">    return bool</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>耗时<code>72</code>毫秒，超过<code>73.77%</code>的提交记录，总提交数<code>504</code>。</p>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: &quot;hello&quot;</span><br><span class="line">输出: &quot;olleh&quot;</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: &quot;amanaP :lanac a ,nalp a ,nam A&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>1.用一个数组存起来，再反向遍历。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    var chars: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        chars.append(char)</span><br><span class="line">    &#125;</span><br><span class="line">    var string: String = &quot;&quot;</span><br><span class="line">    var index = s.count - 1</span><br><span class="line">    while index &gt;= 0 &#123;</span><br><span class="line">        string.append(chars[index])</span><br><span class="line">        index = index - 1</span><br><span class="line">    &#125;</span><br><span class="line">    return string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.用一个数组接收字符串，直接利用原数组进行反转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func reverseString(_ s: String) -&gt; String &#123;</span><br><span class="line">    </span><br><span class="line">    var chars = s.cString(using: String.Encoding.utf8)!</span><br><span class="line">    var left = 0</span><br><span class="line">    var right = s.count - 1</span><br><span class="line">    </span><br><span class="line">    while left &lt; right &#123;</span><br><span class="line">        </span><br><span class="line">        let char = chars[left]</span><br><span class="line">        chars[left] = chars[right]</span><br><span class="line">        chars[right] = char</span><br><span class="line">        </span><br><span class="line">        left = left + 1</span><br><span class="line">        right = right - 1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">      print(chars)</span><br><span class="line">    return String.init(utf8String: chars)!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>1.耗时<code>60</code>毫秒，超过<code>48%</code>的提交记录，总提交数<code>476</code>。<br>2.耗时<code>36</code>毫秒，超过<code>99.33%</code>的提交记录，总提交数<code>476</code>。</p>
 
           
         
@@ -1502,6 +1387,298 @@ return nums
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/387--字符串中的第一个唯一字符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/387--字符串中的第一个唯一字符/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。<br>注意事项：您可以假定该字符串只包含小写字母。</p>
+</blockquote>
+<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">返回 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">返回 2.</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>用ASCII码来判断，因为一个字符对应唯一的一个ASCII码。由于题目可以假定只包含小写字母，我们范围就可缩小至小写字母这一块：97~122。<br>用一个count=27的数组，所有元素初始化都为0。如果ASCII码出现一次，该元素就+1；如果重复出现多次，该元素就会&gt;1。所以我们只需要拿到最后的==1的元素就行。取它的i值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let allLowerLetters: [Int8]? = &quot;abcdefghijklmnopqrstuvwxyz&quot;.cString(using: String.Encoding.utf8)</span><br><span class="line">// 小写字母ASCII码为：97~122</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func firstUniqChar(_ s: String) -&gt; Int &#123;</span><br><span class="line">    // 1.先将字符串转换成ASCII码数组</span><br><span class="line">    let chars: [Int8]? = s.cString(using: String.Encoding.utf8)</span><br><span class="line">    var ret: Int = -1</span><br><span class="line">    var last: [Int] = Array.init(repeating: 0, count: 27)</span><br><span class="line">    </span><br><span class="line">    if s.count &gt; 0 &#123;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            last[hash_i - hash_a] = last[hash_i - hash_a] + 1</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for i in 0..&lt;s.count &#123;</span><br><span class="line">            let hash_i: Int = Int(chars![i])</span><br><span class="line">            let hash_a: Int = 97</span><br><span class="line">            if last[hash_i - hash_a] == 1 &#123;</span><br><span class="line">                ret = i</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br>1.耗时<code>188</code>毫秒，超过<code>96.94%</code>的提交记录，总提交数<code>104</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/36--有效的数独/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/36--有效的数独/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。</p>
+</blockquote>
+<blockquote>
+<p>数字 1-9 在每一行只能出现一次。<br>数字 1-9 在每一列只能出现一次。<br>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],</span><br><span class="line">[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],</span><br><span class="line">[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],</span><br><span class="line">[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]</span><br><span class="line">]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>数独，应该大家都玩过，其实就只是判断三个点，横、竖、3*3的方格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">func isValidSudoku(_ board: [[Character]]) -&gt; Bool &#123;</span><br><span class="line"></span><br><span class="line">    var bool: Bool = true</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        let characters = board[i]</span><br><span class="line">        var mutCharacters1: [Character] = []</span><br><span class="line">        var mutCharacters2: [Character] = []</span><br><span class="line">        for j in 0..&lt;characters.count &#123;</span><br><span class="line">            </span><br><span class="line">            // 1.每行比较</span><br><span class="line">            let character1 = board[i][j]</span><br><span class="line">            if character1 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters1.append(character1)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 2.每列比较</span><br><span class="line">            let character2 = board[j][i]</span><br><span class="line">            if character2 != &quot;.&quot; &#123;</span><br><span class="line">                mutCharacters2.append(character2)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if j == characters.count - 1 &#123;</span><br><span class="line">                </span><br><span class="line">                let set1: Set = Set(mutCharacters1)</span><br><span class="line">                if set1.count == mutCharacters1.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let set2: Set = Set(mutCharacters2)</span><br><span class="line">                if set2.count == mutCharacters2.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var index_i = 0</span><br><span class="line">    var index_j = 0</span><br><span class="line">    while index_i&lt;board.count &#123;</span><br><span class="line">        </span><br><span class="line">        // 3.每方格</span><br><span class="line">        while index_j&lt;board[0].count &#123;</span><br><span class="line">            </span><br><span class="line">            var square: [Character] = []</span><br><span class="line">            if board[index_i][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+1] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+1])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+1][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+1][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            if board[index_i+2][index_j+2] != &quot;.&quot; &#123;</span><br><span class="line">                square.append(board[index_i+2][index_j+2])</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if index_j % 3 == 0 &#123;</span><br><span class="line">                let set: Set = Set(square)</span><br><span class="line">                if set.count == square.count &#123;</span><br><span class="line">                    bool = true</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    bool = false</span><br><span class="line">                    return bool</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // 因为是3*3的小方格，所以需要+3，而不是再+1了</span><br><span class="line">            index_j = index_j + 3</span><br><span class="line">        &#125;</span><br><span class="line">        index_i = index_i + 3</span><br><span class="line">        // 因为index_j循环后变成了9，需要设置为0</span><br><span class="line">        index_j = 0</span><br><span class="line">    &#125;</span><br><span class="line">    return bool</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br>耗时<code>72</code>毫秒，超过<code>73.77%</code>的提交记录，总提交数<code>504</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/412--Fizz-Buzz/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1597,170 +1774,6 @@ return nums
 <p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 15,</span><br><span class="line">返回:</span><br><span class="line">[&quot;1&quot;,&quot;2&quot;,&quot;Fizz&quot;,&quot;4&quot;,&quot;Buzz&quot;,&quot;Fizz&quot;,&quot;7&quot;,&quot;8&quot;,&quot;Fizz&quot;,&quot;Buzz&quot;,</span><br><span class="line">&quot;11&quot;,&quot;Fizz&quot;,&quot;13&quot;,&quot;14&quot;,&quot;FizzBuzz&quot;]</span><br></pre></td></tr></table></figure></p>
 <p>#三、解题思路：<br>这题非常简单，就是从0遍历到n-1，把对应的数字换成字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 公倍数</span><br><span class="line">func fizzBuzz(_ n: Int) -&gt; [String] &#123;</span><br><span class="line">    </span><br><span class="line">    var strings: [String] = []</span><br><span class="line">    for i in 0..&lt;n &#123;</span><br><span class="line">        </span><br><span class="line">        if (i + 1) % 15 == 0 &#123;</span><br><span class="line">            strings.append(&quot;FizzBuzz&quot;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            if (i + 1) % 3 == 0 &#123;</span><br><span class="line">                strings.append(&quot;Fizz&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">            else if (i + 1) % 5 == 0 &#123;</span><br><span class="line">                strings.append(&quot;Buzz&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                strings.append(&quot;\(i+1)&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return strings</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>#四、小结<br>耗时<code>20</code>毫秒，超过<code>100%</code>的提交记录，总提交数<code>8</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/48--旋转图像/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/48--旋转图像/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。</p>
-</blockquote>
-<blockquote>
-<p>说明：<br>你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
-</blockquote>
-<p>#二、示例剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">给定 matrix =</span><br><span class="line">[</span><br><span class="line">[1,2,3],</span><br><span class="line">[4,5,6],</span><br><span class="line">[7,8,9]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">[7,4,1],</span><br><span class="line">[8,5,2],</span><br><span class="line">[9,6,3]</span><br><span class="line">]</span><br><span class="line">示例 2:</span><br><span class="line">给定 matrix =</span><br><span class="line">[</span><br><span class="line">[ 5, 1, 9,11],</span><br><span class="line">[ 2, 4, 8,10],</span><br><span class="line">[13, 3, 6, 7],</span><br><span class="line">[15,14,12,16]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">[15,13, 2, 5],</span><br><span class="line">[14, 3, 4, 1],</span><br><span class="line">[12, 6, 8, 9],</span><br><span class="line">[16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>原题题意，我们把n*n的数组想象成一个正方形，我们顺时针旋转正方形的时候，最后得到的就是旋转后的新数组。<br>乍一看很简单，因为有很多规律可以找到。<br>比方说示例1，第一行123，变成了新数组的最后一列；第二行456，变成了新数组的倒数第二列；第三行789，变成了新数组的第一列。<br>我们完全可以用一个临时数组将每一行抽取出来，再根据该规律，加入到新数组中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">![推算笔记](https://upload-images.jianshu.io/upload_images/1869467-5ff49721e2c6ba57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">然后发现，全乱了。。。问题原因应该是在相互赋值时，i和j的遍历会重复，反正方法是不对的。</span><br><span class="line"></span><br><span class="line">接下来我想，既然一步完成不了，就分几步来做吧。</span><br><span class="line">1.```上下置换```，将最上面的一排放到最下面，第二排放到倒数第二排。</span><br></pre></td></tr></table></figure>
-<p>[<br> [1,2,3],<br> [4,5,6],<br> [7,8,9]<br>],</p>
-<p>变成</p>
-<p>[<br> [7,8,9],<br> [4,5,6],<br> [1,2,3]<br>],<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>var i: Int = 0<br>var j: Int = 0<br>let m = matrix.count<br>let n = matrix[0].count<br>while j &lt; n {</p>
-<pre><code>while i &lt; m/2 {
-    let temp = matrix[i][j]
-    matrix[i][j] = matrix[m-1-i][j]
-    matrix[m-1-i][j] = temp
-    i = i + 1
-}
-j = j + 1
-i = 0
-</code></pre><p>}<br>print(“i = (i) j = (j)            (matrix)”)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.根据中间的753这条斜线对称。</span><br></pre></td></tr></table></figure></p>
-<p>[<br> [7,8,9],<br> [4,5,6],<br> [1,2,3]<br>],</p>
-<p>变成</p>
-<p>[<br> [7,4,1],<br> [8,5,2],<br> [9,6,3]<br>],<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">i = 0</span><br><span class="line">j = 0</span><br><span class="line">while j &lt; n - 1 &#123;</span><br><span class="line">    while i &lt; m &#123;</span><br><span class="line">        if (i &gt;= j) &#123;</span><br><span class="line">            let temp = matrix[i][j]</span><br><span class="line">            matrix[i][j] = matrix[j][i]</span><br><span class="line">            matrix[j][i] = temp</span><br><span class="line">            print(&quot;i = \(i) j = \(j)            \(matrix)&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        i = i + 1</span><br><span class="line">    &#125;</span><br><span class="line">    j = j + 1</span><br><span class="line">    i = 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>耗时<code>72</code>毫秒，超过<code>73.77%</code>的提交记录，总提交数<code>504</code>。</p>
 
           
         

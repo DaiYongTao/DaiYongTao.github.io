@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/128-旋转数组/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/14--最长公共前缀/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -313,7 +313,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/128-旋转数组/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/14--最长公共前缀/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -376,11 +376,12 @@
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。<br> 说明:<br> 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。<br> 要求使用空间复杂度为 O(1) 的原地算法。</p>
+<p>编写一个函数来查找字符串数组中的最长公共前缀。<br>如果不存在公共前缀，返回空字符串 “”。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line">输入: [1,2,3,4,5,6,7] 和 k = 3</span><br><span class="line">输出: [5,6,7,1,2,3,4]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [7,1,2,3,4,5,6]</span><br><span class="line">向右旋转 2 步: [6,7,1,2,3,4,5]</span><br><span class="line">向右旋转 3 步: [5,6,7,1,2,3,4]</span><br><span class="line"></span><br><span class="line">示例 2:</span><br><span class="line">输入: [-1,-100,3,99] 和 k = 2</span><br><span class="line">输出: [3,99,-1,-100]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [99,-1,-100,3]</span><br><span class="line">向右旋转 2 步: [3,99,-1,-100]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>1.最后一个数字 - &gt; 第一个<br>2.最后一个数字 - &gt; 第一个<br>。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func rotate(_ nums: inout [Int], _ k: Int) &#123;</span><br><span class="line">    </span><br><span class="line">    if nums.count == 0 &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var mutNums: [Int] = []</span><br><span class="line">    var mut_k: Int = k</span><br><span class="line">    </span><br><span class="line">    while mut_k &gt; 0 &#123;</span><br><span class="line">        mutNums.append(nums.last!)</span><br><span class="line">        for i in 0..&lt;nums.count-1 &#123;</span><br><span class="line">            mutNums.append(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        nums = mutNums</span><br><span class="line">        mutNums = []</span><br><span class="line">        mut_k = mut_k - 1</span><br><span class="line">    &#125;</span><br><span class="line">    print(nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>。。。待续</p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">输出: &quot;fl&quot;</span><br><span class="line"></span><br><span class="line">输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]</span><br><span class="line">输出: &quot;&quot;</span><br><span class="line">解释: 输入不存在公共前缀。</span><br><span class="line"></span><br><span class="line">说明:</span><br><span class="line">所有输入只包含小写字母 a-z 。</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>题目意思比较简单，首先我们需要找到最短的那个字符串，因为要找的公共串那个最短的字符串一定是包含的，我们需要的是最短字符串的长度minString。<br>我们需要一个变量maxLenth，表示最大长度。<br>我们先取到数组中第一个元素的prefix，然后和之后的元素的prefix进行比对。<br>例子：[“flower”,”flow”,”flight”]<br>第一轮：maxLenth  = 0，prefix = f，第0个元素prefix和后面的都相同，maxLenth + 1<br>第二轮：maxLenth  = 1，prefix = fl，第0个元素prefix和后面的都相同，maxLenth + 1<br>第三轮：maxLenth  = 2，prefix = flo，第0个元素prefix和第2个元素不同(fli)，直接break<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">func longestCommonPrefix(_ strs: [String]) -&gt; String &#123;</span><br><span class="line">    var minString: String = &quot;&quot;</span><br><span class="line">    if strs.count &gt; 0 &#123;</span><br><span class="line">       minString = strs.min()!</span><br><span class="line">    &#125;</span><br><span class="line">    var maxLenth: Int = 0</span><br><span class="line">    var prefix: String = &quot;&quot;</span><br><span class="line">    var tempIndex: Int = 0</span><br><span class="line">    for _ in 0..&lt;minString.count &#123;</span><br><span class="line">        prefix = String(strs[0].prefix(maxLenth+1))</span><br><span class="line">        for j in 1..&lt;strs.count&#123;</span><br><span class="line">            if prefix == String(strs[j].prefix(maxLenth+1)) &#123;</span><br><span class="line">                tempIndex = tempIndex + 1</span><br><span class="line">                if tempIndex == strs.count - 1 &#123;</span><br><span class="line">                    maxLenth = maxLenth + 1</span><br><span class="line">                    tempIndex = 0</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                tempIndex = 0</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if strs.count == 1 &#123;</span><br><span class="line">        return strs[0]</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        if maxLenth == 0 &#123;</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return String(strs[0].prefix(maxLenth))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>// 简化代码方案<br>思路：取到数组里的第0个元素，然后把它扔进取strs里遍历，从1开始。如果发现strs的其他元素不包含第0个元素，就让第0个元素长度-1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func longestCommonPrefix(_ strs: [String]) -&gt; String &#123;</span><br><span class="line">    guard var prefix = strs.first else &#123;</span><br><span class="line">        return &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    for i in 1..&lt;strs.count &#123;</span><br><span class="line">        // 如果strs里不包括第0个元素，就让他的长度-1</span><br><span class="line">        while(!strs[i].hasPrefix(prefix)) &#123;</span><br><span class="line">            // 关键两句代码</span><br><span class="line">            prefix = String(prefix.prefix(prefix.count-1))</span><br><span class="line">            if (prefix.count == 0) &#123;</span><br><span class="line">                return &quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return prefix</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-02fefaf996a73cae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-802491397de05980.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
 
           
         
@@ -884,6 +885,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/18--四数之和/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/25/leetCode题库笔记/18--四数之和/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#一、题目原型：</p>
+<blockquote>
+<p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。<br>注意：答案中不可以包含重复的四元组。</p>
+</blockquote>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 思路：和三元组相似。我们需要找到 a+b+c+d = t</span><br><span class="line"> */</span><br><span class="line">func fourSum(_ nums: [Int], _ target: Int) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    // 二元组。。。三元组。。。终于到了四元组。。。。</span><br><span class="line">    if nums.count &lt; 4 &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    else if nums.count == 4 &#123;</span><br><span class="line">        </span><br><span class="line">        if nums[0] + nums[1] + nums[2] + nums[3] == target &#123;</span><br><span class="line">            return [nums]</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        let tempNums: [Int] = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">        let count = tempNums.count</span><br><span class="line">        var fourSum: [[Int]] = Array.init()</span><br><span class="line">        print(tempNums)</span><br><span class="line">        for indexF in 0 ..&lt; count-3 &#123;</span><br><span class="line">            // 剔除首位相同的元素</span><br><span class="line">            if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            for indexH in indexF + 1 ..&lt; count-2 &#123;</span><br><span class="line">                </span><br><span class="line">                // 剔除第二位相同的元素，添加判断当 indexH 和 indexF不相邻时/</span><br><span class="line">                if (indexH != 0) &amp;&amp; (tempNums[indexH] == tempNums[indexH - 1]) &amp;&amp; indexH - 1 != indexF  &#123;</span><br><span class="line">                    continue</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let tempArray = self.aFunction(numbers: tempNums, begin: indexH + 1, end: count)</span><br><span class="line">                print(tempArray)</span><br><span class="line">                var left:Int = 0</span><br><span class="line">                var right:Int = tempArray.count - 1</span><br><span class="line">                while left &lt; right &#123;</span><br><span class="line">                    // 临时的四个数字之和。</span><br><span class="line">                    let tempTarget = tempNums[indexF] + tempNums[indexH] + tempArray[left] + tempArray[right]</span><br><span class="line">                    print(tempTarget)</span><br><span class="line">                    // 让tempTarget和目标值 target进行比对</span><br><span class="line">                    if tempTarget == target &#123;</span><br><span class="line">                        let tempFourSum = [tempNums[indexF],tempNums[indexH],tempArray[left],tempArray[right]]</span><br><span class="line">                        fourSum .append(tempFourSum)</span><br><span class="line">                        </span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[left] == tempArray[left+1] &#123;</span><br><span class="line">                            left = left + 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[right] == tempArray[right-1] &#123;</span><br><span class="line">                            right = right - 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                    if tempTarget &lt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                    &#125;else if tempTarget &gt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return fourSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func aFunction(numbers: Array&lt;Int&gt;, begin: Int, end: Int) -&gt; Array&lt;Int&gt; &#123;</span><br><span class="line">    let newNumbers = Array(numbers[begin..&lt;end])</span><br><span class="line">    return newNumbers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>本题和<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a>都可归为一类处理，如果有困惑的地方可以前后看看这几篇文章哦，解题思路差不多。</p>
+<p>小哥哥小姐姐们有其他好的方法请留言哦，有困惑的地方也非常乐意一起探讨呢。😄!</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/2--两数相加/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1035,7 +1185,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/18--四数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/20--有效的括号/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1055,7 +1205,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/25/leetCode题库笔记/18--四数之和/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2018/12/25/leetCode题库笔记/20--有效的括号/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -1118,16 +1268,13 @@
           
             <p>#一、题目原型：</p>
 <blockquote>
-<p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。<br>注意：答案中不可以包含重复的四元组。</p>
+<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。<br>有效字符串需满足：<br>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>注意空字符串可被认为是有效字符串。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 思路：和三元组相似。我们需要找到 a+b+c+d = t</span><br><span class="line"> */</span><br><span class="line">func fourSum(_ nums: [Int], _ target: Int) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    // 二元组。。。三元组。。。终于到了四元组。。。。</span><br><span class="line">    if nums.count &lt; 4 &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    else if nums.count == 4 &#123;</span><br><span class="line">        </span><br><span class="line">        if nums[0] + nums[1] + nums[2] + nums[3] == target &#123;</span><br><span class="line">            return [nums]</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        let tempNums: [Int] = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">        let count = tempNums.count</span><br><span class="line">        var fourSum: [[Int]] = Array.init()</span><br><span class="line">        print(tempNums)</span><br><span class="line">        for indexF in 0 ..&lt; count-3 &#123;</span><br><span class="line">            // 剔除首位相同的元素</span><br><span class="line">            if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            for indexH in indexF + 1 ..&lt; count-2 &#123;</span><br><span class="line">                </span><br><span class="line">                // 剔除第二位相同的元素，添加判断当 indexH 和 indexF不相邻时/</span><br><span class="line">                if (indexH != 0) &amp;&amp; (tempNums[indexH] == tempNums[indexH - 1]) &amp;&amp; indexH - 1 != indexF  &#123;</span><br><span class="line">                    continue</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let tempArray = self.aFunction(numbers: tempNums, begin: indexH + 1, end: count)</span><br><span class="line">                print(tempArray)</span><br><span class="line">                var left:Int = 0</span><br><span class="line">                var right:Int = tempArray.count - 1</span><br><span class="line">                while left &lt; right &#123;</span><br><span class="line">                    // 临时的四个数字之和。</span><br><span class="line">                    let tempTarget = tempNums[indexF] + tempNums[indexH] + tempArray[left] + tempArray[right]</span><br><span class="line">                    print(tempTarget)</span><br><span class="line">                    // 让tempTarget和目标值 target进行比对</span><br><span class="line">                    if tempTarget == target &#123;</span><br><span class="line">                        let tempFourSum = [tempNums[indexF],tempNums[indexH],tempArray[left],tempArray[right]]</span><br><span class="line">                        fourSum .append(tempFourSum)</span><br><span class="line">                        </span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[left] == tempArray[left+1] &#123;</span><br><span class="line">                            left = left + 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[right] == tempArray[right-1] &#123;</span><br><span class="line">                            right = right - 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                    if tempTarget &lt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                    &#125;else if tempTarget &gt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return fourSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func aFunction(numbers: Array&lt;Int&gt;, begin: Int, end: Int) -&gt; Array&lt;Int&gt; &#123;</span><br><span class="line">    let newNumbers = Array(numbers[begin..&lt;end])</span><br><span class="line">    return newNumbers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>本题和<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a>都可归为一类处理，如果有困惑的地方可以前后看看这几篇文章哦，解题思路差不多。</p>
-<p>小哥哥小姐姐们有其他好的方法请留言哦，有困惑的地方也非常乐意一起探讨呢。😄!</p>
+<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;()&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: &quot;()[]&#123;&#125;&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: &quot;(]&quot;</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">输入: &quot;([)]&quot;</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">输入: &quot;&#123;[]&#125;()&#123;&#125;&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
+<p>#三、解题思路：<br><img src="https://upload-images.jianshu.io/upload_images/1869467-50080a557bbb5bce.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解题思路"><br>核心思想 : 对称，将字符串分为左右两个部分，然后检测对称。<br>左边用strings数组保存，保存左括号。右边沿用当前的字符串 是右括号，然后进行对称匹配。一旦检测到不对称，就返回false。一旦检测到对称，就将他们两个消除。进行下一次比对。strings保存方式为栈式保存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">func isValid(_ s: String) -&gt; Bool &#123;</span><br><span class="line">    var strings: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        if char == &quot;&#123;&quot; || char == &quot;(&quot; || char == &quot;[&quot; &#123;</span><br><span class="line">            strings .append(char)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            if (strings.isEmpty) &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;&#125;&quot; &amp;&amp; strings.last != &quot;&#123;&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;)&quot; &amp;&amp; strings.last != &quot;(&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;]&quot; &amp;&amp; strings.last != &quot;[&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            strings .removeLast()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return strings.isEmpty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-5c7dc2bb71f905e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-838a65e9a99148fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>有其他好的方法请极速留言，非常乐意一起探讨。😄!</p>
 
           
         
@@ -1278,152 +1425,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 判断一个数字是否为质数</span><br><span class="line">func isPrime(_ num: Int) -&gt; Bool &#123;</span><br><span class="line">    </span><br><span class="line">    if num%6 != 1 &amp;&amp; num%6 != 5 &#123; //不是质数</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let num_sqrt = sqrt(Double(num))</span><br><span class="line">    let n = Int(num_sqrt) + 1</span><br><span class="line">    </span><br><span class="line">    var index: Int = 5</span><br><span class="line">    </span><br><span class="line">    if n &gt;= 5 &#123;</span><br><span class="line">        while index &lt;= n &#123;</span><br><span class="line">            if num % index == 0 || num % (index+2) == 0 &#123; //不是质数</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            index = index + 6</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func countPrimes(_ n: Int) -&gt; Int &#123;</span><br><span class="line">    var count: Int = 0</span><br><span class="line">    if n == 1 || n == 2 &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;else if n == 3 &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;else if n == 4 || n == 5 &#123;</span><br><span class="line">        return 2</span><br><span class="line">    &#125;else if n == 6 || n == 7 &#123;</span><br><span class="line">        return 3</span><br><span class="line">    &#125;else if n &gt; 7 &#123;</span><br><span class="line">        for i in 7..&lt;n &#123;</span><br><span class="line">            count = 3</span><br><span class="line">            if self.isPrime(i) &#123;</span><br><span class="line">                count = count + 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return count</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>#四、小结<br>耗时<code>1524</code>毫秒，超过<code>45.16%</code>的提交记录，总提交数<code>20</code>。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/leetCode题库笔记/20--有效的括号/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/25/leetCode题库笔记/20--有效的括号/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-25 17:57:44" itemprop="dateCreated datePublished" datetime="2018-12-25T17:57:44+08:00">2018-12-25</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#一、题目原型：</p>
-<blockquote>
-<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。<br>有效字符串需满足：<br>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>注意空字符串可被认为是有效字符串。</p>
-</blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;()&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: &quot;()[]&#123;&#125;&quot;</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: &quot;(]&quot;</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">输入: &quot;([)]&quot;</span><br><span class="line">输出: false</span><br><span class="line"></span><br><span class="line">输入: &quot;&#123;[]&#125;()&#123;&#125;&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><img src="https://upload-images.jianshu.io/upload_images/1869467-50080a557bbb5bce.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解题思路"><br>核心思想 : 对称，将字符串分为左右两个部分，然后检测对称。<br>左边用strings数组保存，保存左括号。右边沿用当前的字符串 是右括号，然后进行对称匹配。一旦检测到不对称，就返回false。一旦检测到对称，就将他们两个消除。进行下一次比对。strings保存方式为栈式保存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">func isValid(_ s: String) -&gt; Bool &#123;</span><br><span class="line">    var strings: [Character] = []</span><br><span class="line">    for char in s &#123;</span><br><span class="line">        if char == &quot;&#123;&quot; || char == &quot;(&quot; || char == &quot;[&quot; &#123;</span><br><span class="line">            strings .append(char)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            if (strings.isEmpty) &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;&#125;&quot; &amp;&amp; strings.last != &quot;&#123;&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;)&quot; &amp;&amp; strings.last != &quot;(&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            if char == &quot;]&quot; &amp;&amp; strings.last != &quot;[&quot; &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">            strings .removeLast()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return strings.isEmpty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-5c7dc2bb71f905e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-838a65e9a99148fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
-<p>有其他好的方法请极速留言，非常乐意一起探讨。😄!</p>
 
           
         
