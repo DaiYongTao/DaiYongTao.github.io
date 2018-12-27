@@ -107,7 +107,7 @@
   <meta name="description" content="划水划水。。。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="花果山松鼠’s Blog">
-<meta property="og:url" content="http://yoursite.com/page/58/index.html">
+<meta property="og:url" content="https://daiyongtao.github.io/page/58/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
 <meta property="og:description" content="划水划水。。。">
 <meta property="og:locale" content="zh-CN">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/58/">
+  <link rel="canonical" href="https://daiyongtao.github.io/page/58/">
 
 
 
@@ -230,8 +230,48 @@
     
 
     
+      
+    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">0</span></a>
 
   </li>
         
@@ -247,8 +287,10 @@
     
 
     
+      
+    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
 
   </li>
         
@@ -264,12 +306,79 @@
     
 
     
+      
+    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>时间轴<span class="badge">60</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
 
   </li>
 
       
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
       
     </ul>
   
@@ -279,6 +388,27 @@
 
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -317,7 +447,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/22/iOS随笔/iOS导航栏设置背景图片/">
+    <link itemprop="mainEntityOfPage" href="https://daiyongtao.github.io/2018/01/22/iOS随笔/iOS导航栏设置背景图片/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小坤">
@@ -482,24 +612,18 @@
       
         
           
-            <p>##一、基础知识铺垫<br>1.众所周知，导航栏设置背景图片有两个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.-setBackgroundImage:forBarMetrics:</span><br><span class="line">2.-setBackgroundImage:forBarPosition:barMetrics:</span><br></pre></td></tr></table></figure></p>
-<p>设置属性的话分别取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">forBarPosition ： </span><br><span class="line">UIBarPositionAny</span><br><span class="line">UIBarPositionBottom ：官方解释shadow above the bar，注：除了这个枚举，其他使用都有效。</span><br><span class="line">UIBarPositionTop</span><br><span class="line">UIBarPositionTopAttached</span><br><span class="line"></span><br><span class="line">barMetrics ： </span><br><span class="line">UIBarMetricsDefault ： 我试过了除了这个默认属性，其他的使用了都无效。</span><br><span class="line">UIBarMetricsCompact</span><br><span class="line">UIBarMetricsDefaultPrompt</span><br><span class="line">UIBarMetricsCompactPrompt</span><br><span class="line">UIBarMetricsLandscapePhone</span><br><span class="line">UIBarMetricsLandscapePhonePrompt</span><br><span class="line"></span><br><span class="line">注：一般情况下，只需要用1方法就行。</span><br></pre></td></tr></table></figure></p>
-<p>##二、遇到问题<br>但是，我就这么设置，然后遇到一个问题。<br>UI给了我们有一张颜色渐变的背景图，尺寸为750*6。<br>这张图分别用于：1.我们app中所有的按钮 2.首页的一张背景图 3.导航栏背景<br>设置时，这张图默认是平铺的。设置按钮和UIImageview时都没问题，但是导航栏背景出问题了。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-432ac52cf7df5a53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
-<p>从图中可以看出，导航栏的颜色和用UIImageView设置的颜色并不相同，导航栏中颜色没有渐变。<br>怎么办呢，我在想这是什么原因造成的。</p>
-<p>我把设置导航栏的代码又检查了一遍，而且用了各种方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如 ： 1.将图片变成颜色给导航栏设置backgroundcolor </span><br><span class="line">        2.自己来画渐变色</span><br><span class="line">        3.设置导航栏的透明度 </span><br><span class="line">        4.自定义UINavigaitonbar、、、等等</span><br></pre></td></tr></table></figure></p>
-<p>但是毫无效果，我细细琢磨，发现该导航栏上的颜色并没有出现渐变的颜色，而只取到了渐变颜色最左边的色值。有个朋友提醒我是不是导航栏设置颜色和其他控件设置颜色有什么不同。</p>
-<p>最终我们猜想是导航栏可能是通过像素来平铺图片的。而出现上面问题的原因是，我这张背景图只有一张，没有@2x和@3x。在这里又涉及到关于@1x和@2x、@3x的意思和设置问题。<img src="http://upload-images.jianshu.io/upload_images/1869467-aac41d779e9c0755.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">知识小结：</span><br><span class="line">如果只有一张图，拖进Xcode中Assets.xcassets里，会自动放入@1x的选项框内。</span><br><span class="line">在iPhone4及后面的机型，都是取@2x和@3x的。那如果没有@2x和@3x，会默认选择@1x，而且尺寸和原图像素相同。</span><br><span class="line">如果有@2x和@3x，得到的尺寸是原图像素的一半。</span><br><span class="line">所以UI给我的图是750*6，我只取到了它的前一部分的色值。所以颜色没有渐变。</span><br></pre></td></tr></table></figure></p>
-<p>##三、验证猜想<br>为了验证猜想，我将图设置为320*6，用的是iPhone5s进行测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-c051bc99ad77e2aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
-<p>完美！<br>此刻我的心情是激动的，为了进一步验证我的猜想，我创建了两张图@2x和@3x，图的尺寸分别为750 × 626和1125 × 939。<br>为了方便观看效果，我用了另一张图来试验，用的是iPhone7测试。<img src="http://upload-images.jianshu.io/upload_images/1869467-356b94738d6997b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
-<p>问题完美解决。<br>由于代码非常简单，这里给一张渐变的图，就放入下文了。<br>资源文件：<img src="http://upload-images.jianshu.io/upload_images/1869467-289d0554c21fda27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gradient.png"></p>
-<p>——————————————————– 分割线 ————————————————–<br>还有个东西忘记说了，就是设置设置导航栏底部阴影效果。<br>系统有个方法是:setShadowImage<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@&quot;timg&quot;]]; //这里的timg就是那张叶子图</span><br></pre></td></tr></table></figure></p>
-<p>然后得到了下面这样的效果。<br><img src="http://upload-images.jianshu.io/upload_images/1869467-280c9d35cde437fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
-<p>初看时觉得这又是啥情况，它的UI结构其实很简单，如下图<br><img src="http://upload-images.jianshu.io/upload_images/1869467-46f848935dec33fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"></p>
-<p>由此可见，导航栏上所有的图片设置，都是按照像素来平铺的。</p>
-<p>为了达到阴影效果，我在下面的UIImageView上加了一个view，设置view的阴影。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[self.navigationController.navigationBar setShadowImage:[UIImage new]]; //去除导航栏自带阴影</span><br><span class="line">UIView *view = [[UIView alloc] init];</span><br><span class="line">view.backgroundColor = [UIColor blackColor]; //这个随便设置什么颜色，切记不可设置为clearColor</span><br><span class="line">view.frame = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, 1);</span><br><span class="line">view.layer.shadowOpacity = 0.7; //不透明度</span><br><span class="line">view.layer.shadowOffset = CGSizeMake(0, 3); //偏移距离</span><br><span class="line">view.layer.shadowRadius = 5; //阴影半径</span><br><span class="line">[self.imgView addSubview: view];</span><br></pre></td></tr></table></figure></p>
-<p>最终效果：<br><img src="http://upload-images.jianshu.io/upload_images/1869467-0a5b0f088f69153f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
-
+          ##一、基础知识铺垫1.众所周知，导航栏设置背景图片有两个方法：121.-setBackgroundImage:forBarMetrics:2.-setBackgroundImage:forBarPosition:barMetrics:
+设置属性的话分别取：123456789101112131415
+          ...
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/01/22/iOS随笔/iOS导航栏设置背景图片/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -509,6 +633,10 @@
     
     
     
+   
+ 
+ 
+
 
     
 
@@ -525,7 +653,7 @@
       
 
       
-
+	
       
       
         <div class="post-eof"></div>
@@ -659,8 +787,10 @@
           
             
           
-          
-
+          <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=450567505&auto=1&height=66">
+   </iframe>
+</div>
         </div>
       </div>
 
@@ -786,7 +916,7 @@
     
       
   
-  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
 
@@ -858,6 +988,326 @@
 
 
   
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
