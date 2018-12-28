@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo笔记之版权信息和打赏]]></title>
+    <url>%2F2018%2F12%2F28%2FHexo%E7%AC%94%E8%AE%B0%2FHexo%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF%E5%92%8C%E6%89%93%E8%B5%8F%2F</url>
+    <content type="text"><![CDATA[##一、写之前备注： 站点根目录：就是你创建的blog文件夹目录，我的是daiyongtao.github.io。 主题目录：/theme/next。 在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置； 另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。 为了描述方便，在以下说明中，将前者称为 站点配置文件， 后者称为 主题配置文件。 ##二、底部配置 1234567891011121314151617####1.底部版权信息：#####第一步主题目录：layout/_macro下，打开post.swig，找到 END POST BODY。 &#123;% if not is_index %&#125; 表示不在body索引列表区域。在它下面有很多底部工具。找到post-copyright```bash&#123;% if theme.creative_commons.license and theme.creative_commons.post and not is_index %&#125; &lt;div&gt; &#123;% include &apos;../_partials/post/post-copyright.swig&apos; with &#123; post: post &#125; %&#125; &lt;/div&gt;&#123;% endif %&#125; 读代码可知：creative_commons下的license 和 post都有值的时候，才会创建版权信息div标签。 #####第二步 复制creative_commons，打开主题配置文件，找到creative_commons所在位置。 可以看到如下信息。 1234creative_commons: license: by-nc-sa sidebar: false post: false 我们把post、sidebar打开，改成true。 至于license许可证，大家可以根据提示：Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero进行修改看结果。 #####第三步 主题目录：source/css/_custom 下打开custom.styl。 添加如下代码： 12345678// 版权信息.post-copyright &#123; margin: 2em 0 0; padding: 0.5em 1em; border-left: 3px solid #ff1700; background-color: #f9f9f9; list-style: none;&#125; 我们在这里设置了post_copyright的样式。 #####第四步 最后，hexo g &amp;&amp;hexo server之后，就可以在本地查看效果了。 主题目录：layout/_partials/post下，存放着底部版权信息post-copyright.swig。 如果需要自定义底部版权信息，只需要在post-copyright.swig进行修改即可，网上有很多例子，在这就不多说了。 2.打赏：打开主题配置文件，找到reward所在位置。 123456reward: enable: true comment: 坚持原创技术分享，您的支持将鼓励我继续创作！ wechatpay: /images/wechatpay.jpg # alipay: /images/alipay.jpg # bitcoin: /images/bitcoin.jpg 将enable打开，comment可以自己随便写，也可以按照我的模版。 下面是微信支付、支付宝支付、比特币三种支付方式，需要在主题目录下的source/images里添加你自己的二维码收款，就以上面的wechatpay.jpg等名字命名。我就只弄了微信的。]]></content>
+      <categories>
+        <category>Hexo笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2018%2F12%2F25%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
