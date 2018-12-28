@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/28/5c25f9273f3c2.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/28/5c25fac684cad.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/28/5c25f4a6a792f.png">
-<meta property="og:updated_time" content="2018-12-28T10:29:27.284Z">
+<meta property="og:updated_time" content="2018-12-28T11:09:26.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo笔记之版权信息和打赏">
 <meta name="twitter:description" content="写之前备注：站点根目录：就是你创建的blog文件夹目录，我的是daiyongtao.github.io。 主题目录：/theme/next。 在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置； 另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。 为了描述方便，在以下说明中，将前者称为 站点">
@@ -313,7 +313,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>时间轴<span class="badge">62</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>时间轴<span class="badge">65</span></a>
 
   </li>
         
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 11:19:53 / 修改时间：18:29:27" itemprop="dateCreated datePublished" datetime="2018-12-28T11:19:53+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 11:19:53 / 修改时间：19:09:26" itemprop="dateCreated datePublished" datetime="2018-12-28T11:19:53+08:00">2018-12-28</time>
             
 
             
@@ -635,7 +635,7 @@
 <p><strong>第二步</strong></p>
 <p>复制creative_commons，打开<strong>主题配置</strong>文件，找到creative_commons所在位置。</p>
 <p>可以看到如下信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: false</span><br><span class="line">  post: false</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line"><span class="attr">  license:</span> <span class="string">by-nc-sa</span></span><br><span class="line"><span class="attr">  sidebar:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  post:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>我们把post、sidebar打开，改成true。</p>
 <p><img src="https://i.loli.net/2018/12/28/5c25f9273f3c2.png" alt="post打开效果.png"></p>
 <p><img src="https://i.loli.net/2018/12/28/5c25fac684cad.png" alt="sidebar打开效果.png"></p>
@@ -644,14 +644,14 @@
 <p><strong>第三步</strong></p>
 <p>主题目录：source/css/_custom 下打开custom.styl。</p>
 <p>添加如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 版权信息</span><br><span class="line">.post-copyright &#123;</span><br><span class="line">    margin: 2em 0 0;</span><br><span class="line">    padding: 0.5em 1em;</span><br><span class="line">    border-left: 3px solid #ff1700;</span><br><span class="line">    background-color: #f9f9f9;</span><br><span class="line">    list-style: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 版权信息</span></span><br><span class="line"><span class="selector-class">.post-copyright</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2em</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span> <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">3px</span> solid <span class="number">#ff1700</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f9f9f9</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们在这里设置了post_copyright的样式。</p>
 <p><strong>第四步</strong></p>
 <p>最后，hexo g &amp;&amp;hexo server之后，就可以在<a href="http://localhost:4000" target="_blank" rel="noopener">本地</a>查看效果了。</p>
 <p>主题目录：layout/_partials/post下，存放着底部版权信息post-copyright.swig。</p>
 <p>如果需要自定义底部版权信息，只需要在post-copyright.swig进行修改即可，网上有很多例子，在这就不多说了。</p>
 <h3 id="打赏："><a href="#打赏：" class="headerlink" title="打赏："></a>打赏：</h3><p>打开<strong>主题配置</strong>文件，找到reward所在位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">reward:</span><br><span class="line">  enable: true</span><br><span class="line">  comment: 坚持原创技术分享，您的支持将鼓励我继续创作！</span><br><span class="line">  wechatpay: /images/wechatpay.jpg</span><br><span class="line">  # alipay: /images/alipay.jpg</span><br><span class="line">  # bitcoin: /images/bitcoin.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">reward:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  comment:</span> <span class="string">坚持原创技术分享，您的支持将鼓励我继续创作！</span></span><br><span class="line"><span class="attr">  wechatpay:</span> <span class="string">/images/wechatpay.jpg</span></span><br><span class="line">  <span class="comment"># alipay: /images/alipay.jpg</span></span><br><span class="line">  <span class="comment"># bitcoin: /images/bitcoin.jpg</span></span><br></pre></td></tr></table></figure>
 <p>将enable打开，comment可以自己随便写，也可以按照我的模版。</p>
 <p>下面是微信支付、支付宝支付、比特币三种支付方式，需要在主题目录下的source/images里添加你自己的二维码收款，就以上面的wechatpay.jpg等名字命名。我就只弄了微信的。</p>
 
@@ -823,7 +823,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -955,7 +955,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">116k</span>
+    <span title="站点总字数">122k</span>
   
 
   
@@ -964,7 +964,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:46</span>
+    <span title="站点阅读时长">1:51</span>
   
 </div>
 
