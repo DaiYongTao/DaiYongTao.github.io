@@ -131,7 +131,7 @@
 <meta property="og:image" content="https://lc-cqha0xyi.cn-n1.lcfile.com/d91714cfd703ef42b94c.jpg">
 <meta property="og:image" content="https://lc-cqha0xyi.cn-n1.lcfile.com/c05e7ec9218820baf412.jpg">
 <meta property="og:image" content="https://lc-cqha0xyi.cn-n1.lcfile.com/c37b6e20726cfb1d3197.jpg">
-<meta property="og:updated_time" content="2018-12-28T11:31:10.230Z">
+<meta property="og:updated_time" content="2018-12-29T02:19:15.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo笔记之Leancloud文章阅读次数统计">
 <meta name="twitter:description" content="站点根目录：就是你创建的blog文件夹目录，我的是daiyongtao.github.io。 主题目录：/theme/next。 注册Leancloud并创建应用 首先，前往Leancloud官网leancloud.cn进行注册，并登陆。 然后点击图示1处，进入控制台： 接着，点击图示1处，创建应用： 在弹出窗口1处输入应用名称（可随意输入，可更改，为演示方便取名为test），并选择2处“开发版”">
@@ -530,12 +530,24 @@
                 
               
 
-              <time title="创建时间：2018-12-28 19:02:53 / 修改时间：19:31:10" itemprop="dateCreated datePublished" datetime="2018-12-28T19:02:53+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 19:02:53" itemprop="dateCreated datePublished" datetime="2018-12-28T19:02:53+08:00">2018-12-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-29 10:19:15" itemprop="dateModified" datetime="2018-12-29T10:19:15+08:00">2018-12-29</time>
               
             
           </span>
@@ -684,7 +696,7 @@
 <p><strong>对betterPerformance选项的说明：</strong><br>由于Leancloud免费版的云引擎存在请求线程数和运行时间限制以及休眠机制，很多时候访客数量加载会很慢。如果设置<code>betterPerformance</code>为<code>true</code>，则网页则会在提交请求之前直接显示访客人数为查询到的人数+1，以增加用户体验。</p>
 </li>
 <li><p>打开<strong>博客配置文件</strong><code>_config.yml</code>，新增以下配置：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security:</span></span><br><span class="line"><span class="attr">  enable_sync:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  app_id:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">id&gt;&gt;</span></span><br><span class="line"><span class="attr">  app_key:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">key&gt;</span></span><br><span class="line"><span class="attr">  username:</span> </span><br><span class="line"><span class="attr">  password:</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security:</span></span><br><span class="line"><span class="attr">  enable_sync:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  app_id:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">id&gt;&gt;</span></span><br><span class="line"><span class="attr">  app_key:</span> <span class="string">&lt;&lt;your</span> <span class="string">app</span> <span class="string">key&gt;</span></span><br><span class="line"><span class="attr">  username:</span></span><br><span class="line"><span class="attr">  password:</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>打开cmd并切换至<strong>博客根目录</strong>，键入以下命令以安装<code>hexo-leancloud-counter-security</code>插件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-leancloud-counter-security --save</span><br></pre></td></tr></table></figure>
@@ -713,7 +725,7 @@
 </li>
 </ul>
 <p>至此权限已设置完成，数据库记录只能在本地增删。<br>每次运行<code>hexo d</code>部署的时候，插件都会扫描本地<code>source/_posts</code>下的文章并与数据库对比，然后在数据库创建没有录入数据库的文章记录。<br>如果在<strong>博客配置文件</strong>中留空username或password，则在部署过程中程序会要求输入。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>遇到的坑点⚠️，在<strong>博客配置文件</strong><code>_config.yml</code>的<code>deploy</code>下添加项：</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>遇到的坑点⚠️，在<strong>博客配置文件</strong><code>_config.yml</code>的<code>deploy</code>下添加项：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="comment"># other deployer</span></span><br><span class="line"><span class="attr">- type:</span> <span class="string">leancloud_counter_security_sync</span></span><br></pre></td></tr></table></figure>
 <p>如果在配置- type: leancloud_counter_security_sync后hexo运行出现文件解析错误，了解一下<a href="http://yaml.org/" target="_blank" rel="noopener">YAML基础语法</a>就行了。</p>
 <p><strong>错误样式</strong>：</p>
@@ -991,7 +1003,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Leancloud并创建应用"><span class="nav-number">1.</span> <span class="nav-text">注册Leancloud并创建应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立Counter类并在NexT中启用插件"><span class="nav-number">2.</span> <span class="nav-text">建立Counter类并在NexT中启用插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署云引擎以保证访客数量不被随意篡改"><span class="nav-number">3.</span> <span class="nav-text">部署云引擎以保证访客数量不被随意篡改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进一步设置权限（可选，建议设置）"><span class="nav-number">4.</span> <span class="nav-text">进一步设置权限（可选，建议设置）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.1.</span> <span class="nav-text">后记</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Leancloud并创建应用"><span class="nav-number">1.</span> <span class="nav-text">注册Leancloud并创建应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立Counter类并在NexT中启用插件"><span class="nav-number">2.</span> <span class="nav-text">建立Counter类并在NexT中启用插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署云引擎以保证访客数量不被随意篡改"><span class="nav-number">3.</span> <span class="nav-text">部署云引擎以保证访客数量不被随意篡改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进一步设置权限（可选，建议设置）"><span class="nav-number">4.</span> <span class="nav-text">进一步设置权限（可选，建议设置）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
 
           </div>
