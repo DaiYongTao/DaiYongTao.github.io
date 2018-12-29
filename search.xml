@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hexo笔记之评论和搜索]]></title>
+    <title><![CDATA[Hexo笔记之文章阅读时长和文章字数]]></title>
     <url>%2F2018%2F12%2F29%2FHexo%E7%AC%94%E8%AE%B0%2FHexo%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF%E5%92%8C%E6%96%87%E7%AB%A0%E5%AD%97%E6%95%B0%2F</url>
     <content type="text"><![CDATA[根目录下的_config.yml称为 站点配置文件， next目录下的_config.yml称为 主题配置文件。 Installation12$ npm install hexo-symbols-count-time --saveUsage 站点配置添加如下代码123456#文章字数、阅读时间 计算symbols_count_time: symbols: true time: true total_symbols: true total_time: true 主题配置找到symbols_count_time123456symbols_count_time: separated_meta: true item_text_post: true item_text_total: false awl: 4 wpm: 275 效果]]></content>
       <categories>
