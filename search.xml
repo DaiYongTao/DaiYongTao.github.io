@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hexo上传的图片在网页上无法显示的解决办法]]></title>
-    <url>%2F2019%2F06%2F05%2FHexo%E4%B8%8A%E4%BC%A0%E7%9A%84%E5%9B%BE%E7%89%87%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Hexo笔记之文章阅读时长和文章字数]]></title>
     <url>%2F2018%2F12%2F29%2FHexo%E7%AC%94%E8%AE%B0%2FHexo%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF%E5%92%8C%E6%96%87%E7%AB%A0%E5%AD%97%E6%95%B0%2F</url>
     <content type="text"><![CDATA[根目录下的_config.yml称为 站点配置文件， next目录下的_config.yml称为 主题配置文件。 Installation12$ npm install hexo-symbols-count-time --saveUsage 站点配置添加如下代码123456#文章字数、阅读时间 计算symbols_count_time: symbols: true time: true total_symbols: true total_time: true 主题配置找到symbols_count_time123456symbols_count_time: separated_meta: true item_text_post: true item_text_total: false awl: 4 wpm: 275 效果]]></content>
@@ -52,11 +47,6 @@
       <categories>
         <category>Hexo笔记</category>
       </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F12%2F25%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
     <title><![CDATA[28. 实现strStr()]]></title>
