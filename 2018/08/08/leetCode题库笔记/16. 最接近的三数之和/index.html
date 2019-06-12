@@ -111,13 +111,10 @@
 <meta property="og:site_name" content="花果山松鼠’s Blog">
 <meta property="og:description" content="一、题目原型： 给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).  二、题目意思剖析：最接近其实可以">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-2ce88f0768a4f024.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-3696feb424a2b3a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-06-12T08:13:36.203Z">
+<meta property="og:updated_time" content="2019-06-12T09:59:36.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="16. 最接近的三数之和">
 <meta name="twitter:description" content="一、题目原型： 给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).  二、题目意思剖析：最接近其实可以">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-2ce88f0768a4f024.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -529,7 +526,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-12 16:13:36" itemprop="dateModified" datetime="2019-06-12T16:13:36+08:00">2019-06-12</time>
+                <time title="修改时间：2019-06-12 17:59:36" itemprop="dateModified" datetime="2019-06-12T17:59:36+08:00">2019-06-12</time>
               
             
           </span>
@@ -635,8 +632,9 @@
 </blockquote>
 <h2 id="二、题目意思剖析："><a href="#二、题目意思剖析：" class="headerlink" title="二、题目意思剖析："></a>二、题目意思剖析：</h2><p>最接近其实可以转化为，(三数之和 - target)的绝对值最小。<br>result = |三数之和 - target|，只需要找出最小的result即可。<br>result理论上最小值为0，即和target相等</p>
 <h2 id="三、解题思路："><a href="#三、解题思路：" class="headerlink" title="三、解题思路："></a>三、解题思路：</h2><p>最简单的是三层遍历。这里就不说了，复杂度太高。不过也通过了leetcode检测。耗时400ms，超过百分之11的提交记录。</p>
-<p>其实我们可以将其简化为 和 上一题<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>一样的模式上。<br>也就是将最前面的数字抽出来，然后让left指针和right指针在该数字之后的数组里进行滑动。找出三数之和 - target的绝对值的最小值即可。判断会有点多。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">func threeSumClosest(_ nums: [Int], _ target: Int) -&gt; Int &#123;</span><br><span class="line">    if(nums.count &lt; 3)&#123;</span><br><span class="line">        var result = 0</span><br><span class="line">        for value in nums &#123;</span><br><span class="line">            result = result + value</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNums = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">    let count = tempNums.count</span><br><span class="line">    var threeSum = tempNums[0] + tempNums[1] + tempNums[2]</span><br><span class="line">    print(tempNums)</span><br><span class="line">    for indexF in 0 ..&lt; count &#123;</span><br><span class="line">        if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        let tempArray = self.aFunction(numbers: tempNums, begin: indexF + 1, end: count)</span><br><span class="line">        print(tempArray)</span><br><span class="line">        var left:Int = 0</span><br><span class="line">        var right:Int = tempArray.count - 1</span><br><span class="line">        while left &lt; right &#123;</span><br><span class="line">            print(threeSum)</span><br><span class="line">            let newOffsetValue = tempArray[left] + tempArray[right] + tempNums[indexF] - target</span><br><span class="line">            if(newOffsetValue == 0)&#123;</span><br><span class="line">                return target;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            let result = threeSum - target</span><br><span class="line">            if(result &lt; 0)&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(newOffsetValue &gt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; abs(result))&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(abs(newOffsetValue) &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return threeSum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p><img src="https://upload-images.jianshu.io/upload_images/1869467-2ce88f0768a4f024.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-3696feb424a2b3a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
+<p>其实我们可以将其简化为 和 上一题<a href="http://dancheclassmate.cn/2018/08/07/leetCode%E9%A2%98%E5%BA%93%E7%AC%94%E8%AE%B0/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">15. 三数之和</a>一样的模式上。<br>也就是将最前面的数字抽出来，然后让left指针和right指针在该数字之后的数组里进行滑动。找出三数之和 - target的绝对值的最小值即可。判断会有点多。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">func threeSumClosest(_ nums: [Int], _ target: Int) -&gt; Int &#123;</span><br><span class="line">    if(nums.count &lt; 3)&#123;</span><br><span class="line">        var result = 0</span><br><span class="line">        for value in nums &#123;</span><br><span class="line">            result = result + value</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    var tempNums = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">    let count = tempNums.count</span><br><span class="line">    var threeSum = tempNums[0] + tempNums[1] + tempNums[2]</span><br><span class="line">    print(tempNums)</span><br><span class="line">    for indexF in 0 ..&lt; count &#123;</span><br><span class="line">        if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line">        let tempArray = self.aFunction(numbers: tempNums, begin: indexF + 1, end: count)</span><br><span class="line">        print(tempArray)</span><br><span class="line">        var left:Int = 0</span><br><span class="line">        var right:Int = tempArray.count - 1</span><br><span class="line">        while left &lt; right &#123;</span><br><span class="line">            print(threeSum)</span><br><span class="line">            let newOffsetValue = tempArray[left] + tempArray[right] + tempNums[indexF] - target</span><br><span class="line">            if(newOffsetValue == 0)&#123;</span><br><span class="line">                return target;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            let result = threeSum - target</span><br><span class="line">            if(result &lt; 0)&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(newOffsetValue &gt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; abs(result))&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(newOffsetValue &lt; 0)&#123;</span><br><span class="line">                    if(abs(newOffsetValue) &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    left = left + 1</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(newOffsetValue &lt; result)&#123;</span><br><span class="line">                        threeSum = newOffsetValue + target</span><br><span class="line">                    &#125;</span><br><span class="line">                    right = right - 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return threeSum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p>耗时<code>40</code>毫秒，超过<code>77.78%</code>的提交记录，总提交数<code>125</code>。</p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄!</p>
 
       
@@ -780,17 +778,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -897,23 +886,6 @@
       </div>
 
       
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
       
 
@@ -939,7 +911,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">122k</span>
   
 
   
@@ -948,7 +920,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:51</span>
   
 </div>
 

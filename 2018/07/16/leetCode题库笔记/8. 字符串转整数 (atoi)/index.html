@@ -111,13 +111,10 @@
 <meta property="og:site_name" content="花果山松鼠’s Blog">
 <meta property="og:description" content="一、题目原型： 实现 atoi，将字符串转为整数。在找到第一个非空字符之前，需要移除掉字符串中的空格字符。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。当字符串中的第一个非">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-bf9123c7a5fc4167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-8708ae67aa0e5b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-06-12T08:11:32.685Z">
+<meta property="og:updated_time" content="2019-06-12T09:30:37.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8. 字符串转整数 (atoi)">
 <meta name="twitter:description" content="一、题目原型： 实现 atoi，将字符串转为整数。在找到第一个非空字符之前，需要移除掉字符串中的空格字符。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。当字符串中的第一个非">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-bf9123c7a5fc4167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -529,7 +526,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-12 16:11:32" itemprop="dateModified" datetime="2019-06-12T16:11:32+08:00">2019-06-12</time>
+                <time title="修改时间：2019-06-12 17:30:37" itemprop="dateModified" datetime="2019-06-12T17:30:37+08:00">2019-06-12</time>
               
             
           </span>
@@ -639,8 +636,7 @@
 <p>2.几个重要的标记<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var flag: Int = 1 // 表示最终结果(整数)的符号，默认为1</span><br><span class="line">var space: Int = -1 // 表示当前字符是否为空格，如果不等于-1，就不是空格了。</span><br><span class="line">var valid: Bool = false //表示是否出现了第一个有效的字符(+ - 或者数字)</span><br></pre></td></tr></table></figure></p>
 <p>3.遍历numbers，获取最终结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">for i in 0..&lt;numbers.count &#123;</span><br><span class="line">    </span><br><span class="line">    // 1.排除空格</span><br><span class="line">    if (numbers[i] == &quot; &quot;) &amp;&amp; space == -1 &#123;</span><br><span class="line">        continue</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        space = i</span><br><span class="line">    &#125;</span><br><span class="line">    // 2.第一个非空字符字符为 数字或正、负号，将valid标记好</span><br><span class="line">    if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">        flag = (numbers[i] == &quot;+&quot;) ? 1 : -1</span><br><span class="line">        valid = true</span><br><span class="line">        continue</span><br><span class="line">    &#125;else if (arr .contains(numbers[i])) &#123;</span><br><span class="line">        valid = true</span><br><span class="line">        // 3.将numbers中的元素转换为int类型，将result*10叠加起来。</span><br><span class="line">        result = result*10 + Int(numbers[i])!</span><br><span class="line">        if result &gt; Int32.max &amp;&amp; flag == 1&#123;</span><br><span class="line">            result = Int(Int32.max)</span><br><span class="line">            return result</span><br><span class="line">        &#125;else if result*flag &lt;= Int32.min &amp;&amp; flag == -1&#123;</span><br><span class="line">            result = Int(Int32.min)</span><br><span class="line">            return result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        break</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return result * flag</span><br></pre></td></tr></table></figure></p>
 <p>4.举例 ：“   –0000123”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.前面的空格会跳过，直到第一个“-”。此时space = i，i = 3，进入下一步</span><br><span class="line">2.此时是“-”，找到了第一个有效的非空字符，valid = true，然后continue</span><br><span class="line">3.接下来是第二个“-”，但是!valid = false，不会进入</span><br><span class="line">if (numbers[i] == &quot;-&quot; || numbers[i] == &quot;+&quot;) &amp;&amp; !valid&#123;</span><br><span class="line">&#125;</span><br><span class="line">这个判断，会直接到else，会直接break，此时，result = 0</span><br></pre></td></tr></table></figure></p>
-<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p><img src="https://upload-images.jianshu.io/upload_images/1869467-bf9123c7a5fc4167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-8708ae67aa0e5b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p>耗时<code>76</code>毫秒，超过<code>11.9%</code>的提交记录，总提交数<code>1079</code>。</p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
 
       
@@ -784,17 +780,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -901,23 +888,6 @@
       </div>
 
       
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
       
 
@@ -943,7 +913,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">122k</span>
   
 
   
@@ -952,7 +922,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:51</span>
   
 </div>
 
