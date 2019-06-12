@@ -104,19 +104,19 @@
 
 
 
-  <meta name="description" content="#一、题目原型：  给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  #二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target">
+  <meta name="description" content="一、题目原型： 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target =">
 <meta property="og:type" content="article">
 <meta property="og:title" content="18. 四数之和">
 <meta property="og:url" content="http://dancheclassmate.cn/2018/09/04/leetCode题库笔记/18. 四数之和/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
-<meta property="og:description" content="#一、题目原型：  给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  #二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target">
+<meta property="og:description" content="一、题目原型： 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target =">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-26T07:18:05.016Z">
+<meta property="og:updated_time" content="2019-06-12T08:14:08.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="18. 四数之和">
-<meta name="twitter:description" content="#一、题目原型：  给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  #二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target">
+<meta name="twitter:description" content="一、题目原型： 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。  二、题目意思剖析：1234567给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target =">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -529,7 +529,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-26 15:18:05" itemprop="dateModified" datetime="2018-12-26T15:18:05+08:00">2018-12-26</time>
+                <time title="修改时间：2019-06-12 16:14:08" itemprop="dateModified" datetime="2019-06-12T16:14:08+08:00">2019-06-12</time>
               
             
           </span>
@@ -630,15 +630,13 @@
       
 
       
-        <p>#一、题目原型：</p>
-<blockquote>
+        <h2 id="一、题目原型："><a href="#一、题目原型：" class="headerlink" title="一、题目原型："></a>一、题目原型：</h2><blockquote>
 <p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。<br>注意：答案中不可以包含重复的四元组。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
+<h2 id="二、题目意思剖析："><a href="#二、题目意思剖析：" class="headerlink" title="二、题目意思剖析："></a>二、题目意思剖析：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="三、解题思路："><a href="#三、解题思路：" class="headerlink" title="三、解题思路："></a>三、解题思路：</h2><p>从二元组。。。三元组。。。现在终于到了四元组。。。。<br>其实不管是多少元组，都是一样的方法。到最后都转换到left和right两个指针来控制后两位数字。<br>详细思路具体请参考：<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 思路：和三元组相似。我们需要找到 a+b+c+d = t</span><br><span class="line"> */</span><br><span class="line">func fourSum(_ nums: [Int], _ target: Int) -&gt; [[Int]] &#123;</span><br><span class="line">    </span><br><span class="line">    // 二元组。。。三元组。。。终于到了四元组。。。。</span><br><span class="line">    if nums.count &lt; 4 &#123;</span><br><span class="line">        return []</span><br><span class="line">    &#125;</span><br><span class="line">    else if nums.count == 4 &#123;</span><br><span class="line">        </span><br><span class="line">        if nums[0] + nums[1] + nums[2] + nums[3] == target &#123;</span><br><span class="line">            return [nums]</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        let tempNums: [Int] = nums.sorted&#123;$0&lt;$1&#125;</span><br><span class="line">        let count = tempNums.count</span><br><span class="line">        var fourSum: [[Int]] = Array.init()</span><br><span class="line">        print(tempNums)</span><br><span class="line">        for indexF in 0 ..&lt; count-3 &#123;</span><br><span class="line">            // 剔除首位相同的元素</span><br><span class="line">            if (indexF != 0) &amp;&amp; (tempNums[indexF] == tempNums[indexF - 1])&#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            for indexH in indexF + 1 ..&lt; count-2 &#123;</span><br><span class="line">                </span><br><span class="line">                // 剔除第二位相同的元素，添加判断当 indexH 和 indexF不相邻时/</span><br><span class="line">                if (indexH != 0) &amp;&amp; (tempNums[indexH] == tempNums[indexH - 1]) &amp;&amp; indexH - 1 != indexF  &#123;</span><br><span class="line">                    continue</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                let tempArray = self.aFunction(numbers: tempNums, begin: indexH + 1, end: count)</span><br><span class="line">                print(tempArray)</span><br><span class="line">                var left:Int = 0</span><br><span class="line">                var right:Int = tempArray.count - 1</span><br><span class="line">                while left &lt; right &#123;</span><br><span class="line">                    // 临时的四个数字之和。</span><br><span class="line">                    let tempTarget = tempNums[indexF] + tempNums[indexH] + tempArray[left] + tempArray[right]</span><br><span class="line">                    print(tempTarget)</span><br><span class="line">                    // 让tempTarget和目标值 target进行比对</span><br><span class="line">                    if tempTarget == target &#123;</span><br><span class="line">                        let tempFourSum = [tempNums[indexF],tempNums[indexH],tempArray[left],tempArray[right]]</span><br><span class="line">                        fourSum .append(tempFourSum)</span><br><span class="line">                        </span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[left] == tempArray[left+1] &#123;</span><br><span class="line">                            left = left + 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        // 如果两个数字相同，我们直接跳到下一个循环。</span><br><span class="line">                        while left &lt; right &amp;&amp; tempArray[right] == tempArray[right-1] &#123;</span><br><span class="line">                            right = right - 1</span><br><span class="line">                        &#125;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                    if tempTarget &lt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        left = left + 1</span><br><span class="line">                    &#125;else if tempTarget &gt; target &amp;&amp; left &lt; right&#123;</span><br><span class="line">                        right = right - 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return fourSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func aFunction(numbers: Array&lt;Int&gt;, begin: Int, end: Int) -&gt; Array&lt;Int&gt; &#123;</span><br><span class="line">    let newNumbers = Array(numbers[begin..&lt;end])</span><br><span class="line">    return newNumbers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#四、小结</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p><img src="https://upload-images.jianshu.io/upload_images/1869467-540e520a4820e1c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-b9cabfebfbe7f872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
 <p>本题和<a href="https://www.jianshu.com/p/69b0a1170f96" target="_blank" rel="noopener">15. 三数之和</a>、<a href="https://www.jianshu.com/p/5e73a9894e94" target="_blank" rel="noopener">16. 最接近的三数之和</a>都可归为一类处理，如果有困惑的地方可以前后看看这几篇文章哦，解题思路差不多。</p>
 <p>小哥哥小姐姐们有其他好的方法请留言哦，有困惑的地方也非常乐意一起探讨呢。😄!</p>
@@ -784,8 +782,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -892,6 +899,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -917,7 +941,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">121k</span>
   
 
   
@@ -926,7 +950,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:50</span>
   
 </div>
 

@@ -104,19 +104,19 @@
 
 
 
-  <meta name="description" content="#一、题目原型：  给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  #二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 #三、解题思路：123456789101112func">
+  <meta name="description" content="一、题目原型： 给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 三、解题思路：123456789101112func reve">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7. 反转整数">
 <meta property="og:url" content="http://dancheclassmate.cn/2018/07/16/leetCode题库笔记/7. 反转整数/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
-<meta property="og:description" content="#一、题目原型：  给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  #二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 #三、解题思路：123456789101112func">
+<meta property="og:description" content="一、题目原型： 给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 三、解题思路：123456789101112func reve">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-15ba2a43478f2b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-26T07:13:45.756Z">
+<meta property="og:updated_time" content="2019-06-12T08:11:15.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7. 反转整数">
-<meta name="twitter:description" content="#一、题目原型：  给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  #二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 #三、解题思路：123456789101112func">
+<meta name="twitter:description" content="一、题目原型： 给定一个 32 位有符号整数，将整数中的数字进行反转。输入: 123输出: 321输入: -123输出: -321输入: 120输出: 21  二、题目意思剖析：123用原整数一直余10，保存起来和sum*10相加再赋值给sumsum = sum * 10 + tempX % 10tempX =  tempX / 10 三、解题思路：123456789101112func reve">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -529,7 +529,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-26 15:13:45" itemprop="dateModified" datetime="2018-12-26T15:13:45+08:00">2018-12-26</time>
+                <time title="修改时间：2019-06-12 16:11:15" itemprop="dateModified" datetime="2019-06-12T16:11:15+08:00">2019-06-12</time>
               
             
           </span>
@@ -596,7 +596,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">518</span>
+                <span title="本文字数">513</span>
               
 
               
@@ -630,13 +630,12 @@
       
 
       
-        <p>#一、题目原型：</p>
-<blockquote>
+        <h2 id="一、题目原型："><a href="#一、题目原型：" class="headerlink" title="一、题目原型："></a>一、题目原型：</h2><blockquote>
 <p>给定一个 32 位有符号整数，将整数中的数字进行反转。<br>输入: 123<br>输出: 321<br>输入: -123<br>输出: -321<br>输入: 120<br>输出: 21</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用原整数一直余10，保存起来和sum*10相加再赋值给sum</span><br><span class="line">sum = sum * 10 + tempX % 10</span><br><span class="line">tempX =  tempX / 10</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func reverse(_ x: Int) -&gt; Int &#123;</span><br><span class="line">    var tempX:Int = x</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    while tempX != 0 &#123;</span><br><span class="line">        sum = sum * 10 + tempX % 10</span><br><span class="line">        tempX =  tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    if sum &gt; Int32.max || sum &lt; Int32.min &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>就比较简单，普通的算法。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-15ba2a43478f2b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
+<h2 id="二、题目意思剖析："><a href="#二、题目意思剖析：" class="headerlink" title="二、题目意思剖析："></a>二、题目意思剖析：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用原整数一直余10，保存起来和sum*10相加再赋值给sum</span><br><span class="line">sum = sum * 10 + tempX % 10</span><br><span class="line">tempX =  tempX / 10</span><br></pre></td></tr></table></figure>
+<h2 id="三、解题思路："><a href="#三、解题思路：" class="headerlink" title="三、解题思路："></a>三、解题思路：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func reverse(_ x: Int) -&gt; Int &#123;</span><br><span class="line">    var tempX:Int = x</span><br><span class="line">    var sum: Int = 0</span><br><span class="line">    while tempX != 0 &#123;</span><br><span class="line">        sum = sum * 10 + tempX % 10</span><br><span class="line">        tempX =  tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    if sum &gt; Int32.max || sum &lt; Int32.min &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p>就比较简单，普通的算法。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-39e127956357f7df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数.png"><br><img src="https://upload-images.jianshu.io/upload_images/1869467-15ba2a43478f2b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果.png"></p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
 
       
@@ -780,8 +779,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -888,6 +896,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -913,7 +938,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">121k</span>
   
 
   
@@ -922,7 +947,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:50</span>
   
 </div>
 

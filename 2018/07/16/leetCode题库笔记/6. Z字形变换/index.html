@@ -104,21 +104,21 @@
 
 
 
-  <meta name="description" content="#一、题目原型：  将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(st">
+  <meta name="description" content="一、题目原型： 将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(stri">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6. Z字形变换">
 <meta property="og:url" content="http://dancheclassmate.cn/2018/07/16/leetCode题库笔记/6. Z字形变换/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
-<meta property="og:description" content="#一、题目原型：  将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(st">
+<meta property="og:description" content="一、题目原型： 将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(stri">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-70f7b1df5477c737.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-7859008047d2878f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-e1318be6f0cbd079.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-a381f78813e255e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-26T07:13:27.721Z">
+<meta property="og:updated_time" content="2019-06-12T08:11:02.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6. Z字形变换">
-<meta name="twitter:description" content="#一、题目原型：  将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(st">
+<meta name="twitter:description" content="一、题目原型： 将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数： 输入: s = “PAYPALISHIRING”, numRows = 3 输出: “PAHNAPLSIIGYIR” 输入: s = “PAYPALISHIRING”, numRows = 4 输出: “PINALSIGYAHRPI”实现一个将字符串进行指定行数变换的函数:string convert(stri">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-70f7b1df5477c737.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -531,7 +531,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-26 15:13:27" itemprop="dateModified" datetime="2018-12-26T15:13:27+08:00">2018-12-26</time>
+                <time title="修改时间：2019-06-12 16:11:02" itemprop="dateModified" datetime="2019-06-12T16:11:02+08:00">2019-06-12</time>
               
             
           </span>
@@ -598,7 +598,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4k</span>
+                <span title="本文字数">3.9k</span>
               
 
               
@@ -632,26 +632,23 @@
       
 
       
-        <p>#一、题目原型：</p>
-<blockquote>
+        <h2 id="一、题目原型："><a href="#一、题目原型：" class="headerlink" title="一、题目原型："></a>一、题目原型：</h2><blockquote>
 <p>将字符串 “PAYPALISHIRING” 以Z字形排列成给定的行数：<br> 输入: s = “PAYPALISHIRING”, numRows = 3<br> 输出: “PAHNAPLSIIGYIR”<br> 输入: s = “PAYPALISHIRING”, numRows = 4<br> 输出: “PINALSIGYAHRPI”<br>实现一个将字符串进行指定行数变换的函数:<br>string convert(string s, int numRows);</p>
 </blockquote>
-<p>#二、题目意思剖析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">numRows = 3</span><br><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br><span class="line"></span><br><span class="line">numRows = 4</span><br><span class="line">P      I       N</span><br><span class="line">A   L  S    I  G</span><br><span class="line">Y A    H  R</span><br><span class="line">P      I</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：</p>
-<p>######3.1. 将原字符串按照“z字转换规律”保存进一个二维数组</p>
-<p>######3.2.将该二维数组横竖对调，得到最后的二维数组</p>
-<p>######3.3.用字符串拼接得到最后的答案<br>核心思路：找规律，找关键的几个数据和numRows、字符串总长度之间的关系。<br>下图中方框内表示一个单元格。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-70f7b1df5477c737.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="笔记思路"></p>
-<p>######第一步：能够看出，这个排列是由一个个单元格(相同的排列)组成。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> P      I       N</span><br><span class="line"> A   L  S    I  G</span><br><span class="line"> Y A    H  R</span><br><span class="line"> P      I</span><br><span class="line">其中，单元格是</span><br><span class="line"> P</span><br><span class="line"> A   L</span><br><span class="line"> Y A</span><br><span class="line"> P</span><br></pre></td></tr></table></figure></p>
-<p>######第二步：算出每一个单元所包含的字符个数<br>很简单可以看出，每个单元是由最长的那一列+中间的那几个字符。<br>而中间那些字符，刚好是除去最上面和最下面的那些。<br>所以：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let letterCount = numRows + (numRows - 2)</span><br></pre></td></tr></table></figure></p>
-<p>######第三步：每个单元格包含的列数<br>1表示是行数最大那一列，(numRows - 2)是中间过渡的那几列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let cols: Int = 1 + (numRows - 2)</span><br></pre></td></tr></table></figure></p>
-<p>######第四步：总共有多少个单元格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var count: Int = 0</span><br><span class="line">while letterCount*count &lt;= letters.count &#123;</span><br><span class="line">    </span><br><span class="line">    count = count + 1</span><br><span class="line">&#125;</span><br><span class="line">// 因为最后count会再次累加1，所以需要减1.</span><br><span class="line">count = count - 1</span><br></pre></td></tr></table></figure></p>
-<p>######第五步：总共列数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 最终列数</span><br><span class="line">var allCols: Int = 0</span><br><span class="line">// 余数：比如字符长度为17，17 % 6 = 5</span><br><span class="line">let remainder = letters.count % letterCount</span><br><span class="line">if remainder == 0 &#123; // 说明刚好有整数个单元格</span><br><span class="line">    allCols = count * cols</span><br><span class="line">&#125;else if remainder &gt;= numRows &amp;&amp; remainder &lt; letterCount &#123; </span><br><span class="line">    //如果余数大于或者行数，并且小于一个单元格所包含的最大字符数，allCols = 前面整数个的单元格列数 + 1 + (余数 - numRows)</span><br><span class="line">    allCols = count * cols + 1 + (remainder - numRows)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    // 比如上面的例子， PAYPALISHIRING中，结果余数 = 14%6 = 2，2 &lt; numRows，所以allCols =  前面整数个的单元格列数 + 1</span><br><span class="line">    allCols = count * cols + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、题目意思剖析："><a href="#二、题目意思剖析：" class="headerlink" title="二、题目意思剖析："></a>二、题目意思剖析：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">numRows = 3</span><br><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br><span class="line"></span><br><span class="line">numRows = 4</span><br><span class="line">P      I       N</span><br><span class="line">A   L  S    I  G</span><br><span class="line">Y A    H  R</span><br><span class="line">P      I</span><br></pre></td></tr></table></figure>
+<h2 id="三、解题思路："><a href="#三、解题思路：" class="headerlink" title="三、解题思路："></a>三、解题思路：</h2><h4 id="3-1-将原字符串按照“z字转换规律”保存进一个二维数组"><a href="#3-1-将原字符串按照“z字转换规律”保存进一个二维数组" class="headerlink" title="3.1. 将原字符串按照“z字转换规律”保存进一个二维数组"></a>3.1. 将原字符串按照“z字转换规律”保存进一个二维数组</h4><h4 id="3-2-将该二维数组横竖对调，得到最后的二维数组"><a href="#3-2-将该二维数组横竖对调，得到最后的二维数组" class="headerlink" title="3.2.将该二维数组横竖对调，得到最后的二维数组"></a>3.2.将该二维数组横竖对调，得到最后的二维数组</h4><h4 id="3-3-用字符串拼接得到最后的答案"><a href="#3-3-用字符串拼接得到最后的答案" class="headerlink" title="3.3.用字符串拼接得到最后的答案"></a>3.3.用字符串拼接得到最后的答案</h4><p>核心思路：找规律，找关键的几个数据和numRows、字符串总长度之间的关系。<br>下图中方框内表示一个单元格。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-70f7b1df5477c737.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="笔记思路"></p>
+<h6 id="第一步：能够看出，这个排列是由一个个单元格-相同的排列-组成。"><a href="#第一步：能够看出，这个排列是由一个个单元格-相同的排列-组成。" class="headerlink" title="第一步：能够看出，这个排列是由一个个单元格(相同的排列)组成。"></a>第一步：能够看出，这个排列是由一个个单元格(相同的排列)组成。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> P      I       N</span><br><span class="line"> A   L  S    I  G</span><br><span class="line"> Y A    H  R</span><br><span class="line"> P      I</span><br><span class="line">其中，单元格是</span><br><span class="line"> P</span><br><span class="line"> A   L</span><br><span class="line"> Y A</span><br><span class="line"> P</span><br></pre></td></tr></table></figure>
+<h6 id="第二步：算出每一个单元所包含的字符个数"><a href="#第二步：算出每一个单元所包含的字符个数" class="headerlink" title="第二步：算出每一个单元所包含的字符个数"></a>第二步：算出每一个单元所包含的字符个数</h6><p>很简单可以看出，每个单元是由最长的那一列+中间的那几个字符。<br>而中间那些字符，刚好是除去最上面和最下面的那些。<br>所以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let letterCount = numRows + (numRows - 2)</span><br></pre></td></tr></table></figure>
+<h5 id="第三步：每个单元格包含的列数"><a href="#第三步：每个单元格包含的列数" class="headerlink" title="第三步：每个单元格包含的列数"></a>第三步：每个单元格包含的列数</h5><p>1表示是行数最大那一列，(numRows - 2)是中间过渡的那几列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let cols: Int = 1 + (numRows - 2)</span><br></pre></td></tr></table></figure></p>
+<h6 id="第四步：总共有多少个单元格"><a href="#第四步：总共有多少个单元格" class="headerlink" title="第四步：总共有多少个单元格"></a>第四步：总共有多少个单元格</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var count: Int = 0</span><br><span class="line">while letterCount*count &lt;= letters.count &#123;</span><br><span class="line">    </span><br><span class="line">    count = count + 1</span><br><span class="line">&#125;</span><br><span class="line">// 因为最后count会再次累加1，所以需要减1.</span><br><span class="line">count = count - 1</span><br></pre></td></tr></table></figure>
+<h6 id="第五步：总共列数"><a href="#第五步：总共列数" class="headerlink" title="第五步：总共列数"></a>第五步：总共列数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 最终列数</span><br><span class="line">var allCols: Int = 0</span><br><span class="line">// 余数：比如字符长度为17，17 % 6 = 5</span><br><span class="line">let remainder = letters.count % letterCount</span><br><span class="line">if remainder == 0 &#123; // 说明刚好有整数个单元格</span><br><span class="line">    allCols = count * cols</span><br><span class="line">&#125;else if remainder &gt;= numRows &amp;&amp; remainder &lt; letterCount &#123; </span><br><span class="line">    //如果余数大于或者行数，并且小于一个单元格所包含的最大字符数，allCols = 前面整数个的单元格列数 + 1 + (余数 - numRows)</span><br><span class="line">    allCols = count * cols + 1 + (remainder - numRows)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    // 比如上面的例子， PAYPALISHIRING中，结果余数 = 14%6 = 2，2 &lt; numRows，所以allCols =  前面整数个的单元格列数 + 1</span><br><span class="line">    allCols = count * cols + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 1.前二维数组</span><br><span class="line">var allConvert = dim(allCols, dim(numRows, &quot;*&quot;))</span><br><span class="line">var index: Int = 0 // 总字符串索引</span><br><span class="line">for i in 0..&lt;allCols &#123;</span><br><span class="line">    // i % cols，余数 - 指的是字母离底部多长。</span><br><span class="line">    if i % cols == 0 &#123; // 当余数为0时，就是最长列的时候。</span><br><span class="line">        var convert: [String] = Array.init(repeating: &quot;*&quot;, count: numRows)</span><br><span class="line">        var j: Int = 0</span><br><span class="line">        while index &lt; letterCount * (i/cols + 1) &amp;&amp; index &lt; letters.count &amp;&amp; j &lt; numRows &#123;</span><br><span class="line">            convert[j] = letters[index]</span><br><span class="line">            allConvert[i] = convert</span><br><span class="line">            index = index + 1</span><br><span class="line">            j = j + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123; // 其他时候，就是用（ 最大行数 - 1 - 余数 ）</span><br><span class="line">        var convert: [String] = Array.init(repeating: &quot;*&quot;, count: numRows)</span><br><span class="line">        convert[numRows - 1 - i%cols] = letters[index]</span><br><span class="line">        allConvert[i] = convert</span><br><span class="line">        index = index + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(allConvert)</span><br></pre></td></tr></table></figure>
 <p>这里需要一个创建二维数组的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 创建二维数组</span><br><span class="line">func dim&lt;T&gt;(_ count: Int, _ value: T) -&gt; [T] &#123;</span><br><span class="line">    return [T](repeating: value, count: count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######第六步：横竖置换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;e&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;f&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;l&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br><span class="line">         变成</span><br><span class="line"> [[&quot;a&quot;, &quot;*&quot;, &quot;*&quot;, &quot;g&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;b&quot;, &quot;*&quot;, &quot;f&quot;, &quot;h&quot;, &quot;*&quot;, &quot;l&quot;],</span><br><span class="line"> [&quot;c&quot;, &quot;e&quot;, &quot;*&quot;, &quot;i&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;d&quot;, &quot;*&quot;, &quot;*&quot;, &quot;j&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br></pre></td></tr></table></figure></p>
+<h6 id="第六步：横竖置换"><a href="#第六步：横竖置换" class="headerlink" title="第六步：横竖置换"></a>第六步：横竖置换</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;e&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;f&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;*&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;*&quot;, &quot;l&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br><span class="line">         变成</span><br><span class="line"> [[&quot;a&quot;, &quot;*&quot;, &quot;*&quot;, &quot;g&quot;, &quot;*&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;b&quot;, &quot;*&quot;, &quot;f&quot;, &quot;h&quot;, &quot;*&quot;, &quot;l&quot;],</span><br><span class="line"> [&quot;c&quot;, &quot;e&quot;, &quot;*&quot;, &quot;i&quot;, &quot;k&quot;, &quot;*&quot;],</span><br><span class="line"> [&quot;d&quot;, &quot;*&quot;, &quot;*&quot;, &quot;j&quot;, &quot;*&quot;, &quot;*&quot;]]</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 将数组横转，横 -&gt; 竖</span><br><span class="line">// i[0,6) j[0,4)  -&gt;   i[0,4) j[0,6)</span><br><span class="line">var resultConverts = dim(numRows, dim(allCols, &quot;*&quot;))</span><br><span class="line">for i in 0..&lt;allCols &#123;</span><br><span class="line">    for j in 0..&lt;numRows &#123;</span><br><span class="line">        resultConverts[j][i] = allConvert[i][j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>######第七步：拼接最终字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var result: String = &quot;&quot;</span><br><span class="line">for i in 0..&lt;numRows &#123;</span><br><span class="line">    for j in 0..&lt;allCols &#123;</span><br><span class="line">        if resultConverts[i][j] != &quot;*&quot; &#123;</span><br><span class="line">            result.append(resultConverts[i][j])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(resultConverts)</span><br><span class="line">// result就是我们需要的答案</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br><img src="https://upload-images.jianshu.io/upload_images/1869467-7859008047d2878f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
+<h6 id="第七步：拼接最终字符串"><a href="#第七步：拼接最终字符串" class="headerlink" title="第七步：拼接最终字符串"></a>第七步：拼接最终字符串</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var result: String = &quot;&quot;</span><br><span class="line">for i in 0..&lt;numRows &#123;</span><br><span class="line">    for j in 0..&lt;allCols &#123;</span><br><span class="line">        if resultConverts[i][j] != &quot;*&quot; &#123;</span><br><span class="line">            result.append(resultConverts[i][j])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(resultConverts)</span><br><span class="line">// result就是我们需要的答案</span><br></pre></td></tr></table></figure>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p><img src="https://upload-images.jianshu.io/upload_images/1869467-7859008047d2878f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-e1318be6f0cbd079.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
 <p>思路完全正确的，就是耗时太长了，<img src="https://upload-images.jianshu.io/upload_images/1869467-a381f78813e255e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
@@ -797,8 +794,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -905,6 +911,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-将原字符串按照“z字转换规律”保存进一个二维数组"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1. 将原字符串按照“z字转换规律”保存进一个二维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-将该二维数组横竖对调，得到最后的二维数组"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2.将该二维数组横竖对调，得到最后的二维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-用字符串拼接得到最后的答案"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3.用字符串拼接得到最后的答案</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#第一步：能够看出，这个排列是由一个个单元格-相同的排列-组成。"><span class="nav-number">3.0.3.0.1.</span> <span class="nav-text">第一步：能够看出，这个排列是由一个个单元格(相同的排列)组成。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第二步：算出每一个单元所包含的字符个数"><span class="nav-number">3.0.3.0.2.</span> <span class="nav-text">第二步：算出每一个单元所包含的字符个数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三步：每个单元格包含的列数"><span class="nav-number">3.0.3.1.</span> <span class="nav-text">第三步：每个单元格包含的列数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#第四步：总共有多少个单元格"><span class="nav-number">3.0.3.1.1.</span> <span class="nav-text">第四步：总共有多少个单元格</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第五步：总共列数"><span class="nav-number">3.0.3.1.2.</span> <span class="nav-text">第五步：总共列数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第六步：横竖置换"><span class="nav-number">3.0.3.1.3.</span> <span class="nav-text">第六步：横竖置换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第七步：拼接最终字符串"><span class="nav-number">3.0.3.1.4.</span> <span class="nav-text">第七步：拼接最终字符串</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -930,7 +953,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">121k</span>
   
 
   
@@ -939,7 +962,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:50</span>
   
 </div>
 

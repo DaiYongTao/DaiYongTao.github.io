@@ -104,20 +104,20 @@
 
 
 
-  <meta name="description" content="##一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication sh">
+  <meta name="description" content="一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication shar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APP基础功能的配置管理之URL Scheme和白名单">
 <meta property="og:url" content="http://dancheclassmate.cn/2018/04/19/iOS随笔/APP基础功能的配置管理之URL-Scheme和白名单/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
-<meta property="og:description" content="##一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication sh">
+<meta property="og:description" content="一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication shar">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-a086db78de75397a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-e9d3d2ce34559e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-612ce6828e28f37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-06-12T06:50:38.353Z">
+<meta property="og:updated_time" content="2019-06-12T07:57:36.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP基础功能的配置管理之URL Scheme和白名单">
-<meta name="twitter:description" content="##一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication sh">
+<meta name="twitter:description" content="一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication shar">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-a086db78de75397a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -530,7 +530,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-12 14:50:38" itemprop="dateModified" datetime="2019-06-12T14:50:38+08:00">2019-06-12</time>
+                <time title="修改时间：2019-06-12 15:57:36" itemprop="dateModified" datetime="2019-06-12T15:57:36+08:00">2019-06-12</time>
               
             
           </span>
@@ -631,7 +631,7 @@
       
 
       
-        <p>##一、URL Scheme<br>相信大家都知道 URL，例如 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">http://www.jianshu.com/</a>就是一个URL。在 :// 之前的部分就称为 URL Scheme。<br>也就是说 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">http://www.jianshu.com/</a> 的 URL Scheme 就是 http </p>
+        <h2 id="一、URL-Scheme"><a href="#一、URL-Scheme" class="headerlink" title="一、URL Scheme"></a>一、URL Scheme</h2><p>相信大家都知道 URL，例如 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">http://www.jianshu.com/</a>就是一个URL。在 :// 之前的部分就称为 URL Scheme。<br>也就是说 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">http://www.jianshu.com/</a> 的 URL Scheme 就是 http </p>
 <blockquote>
 <p>URL Scheme 就是一个可以让 app 相互之间可以跳转的协议</p>
 </blockquote>
@@ -639,9 +639,8 @@
 <p>2.打开电话<br>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@”tel:10086”]];</p>
 <p>3.打开SMS<br>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@”sms:10086”]];</p>
 <p>4.通过自定义 <strong>URL Scheme</strong> 向应用传递参数<br>举例：支付宝的<strong>URL Scheme</strong> ：<a href="alipay2018081200218976://safepay/?" target="_blank" rel="noopener">alipay2018081200218976://safepay/?</a>{“memo”:{“result”:””,”ResultStatus”:”6001”,”memo”:”用户中途取消”},”requestType”:”safepay”}</p>
-<p>##二、白名单</p>
-<p>######1.实际项目里用到的常见白名单。<br><img src="https://upload-images.jianshu.io/upload_images/1869467-a086db78de75397a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="常见白名单.png"></p>
-<p>######2.自定义白名单。<br>白名单一般是和URL Scheme结合使用的。<br>比如app_A想打开app_B，app_B的URL Schemes是haha。<img src="https://upload-images.jianshu.io/upload_images/1869467-e9d3d2ce34559e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义白名单1.png"></p>
+<h2 id="二、白名单"><a href="#二、白名单" class="headerlink" title="二、白名单"></a>二、白名单</h2><h5 id="1-实际项目里用到的常见白名单。"><a href="#1-实际项目里用到的常见白名单。" class="headerlink" title="1.实际项目里用到的常见白名单。"></a>1.实际项目里用到的常见白名单。</h5><p><img src="https://upload-images.jianshu.io/upload_images/1869467-a086db78de75397a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="常见白名单.png"></p>
+<h5 id="2-自定义白名单。"><a href="#2-自定义白名单。" class="headerlink" title="2.自定义白名单。"></a>2.自定义白名单。</h5><p>白名单一般是和URL Scheme结合使用的。<br>比如app_A想打开app_B，app_B的URL Schemes是haha。<img src="https://upload-images.jianshu.io/upload_images/1869467-e9d3d2ce34559e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义白名单1.png"></p>
 <p>我们就需要在app_A里的info.plist添加白名单。<img src="https://upload-images.jianshu.io/upload_images/1869467-612ce6828e28f37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义白名单2.png"></p>
 <p>废话不多说，直接上代码（app_A里写）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)clickBtn &#123;</span><br><span class="line">    </span><br><span class="line">    NSString *urlString = @&quot;haha://&quot;;</span><br><span class="line">    // 若有中文传输需要进行转义</span><br><span class="line">    NSString *customURL = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];</span><br><span class="line">    // 检查自定义 URL 是否被定义，如果定义了，则使用 shared application 实例来打开 URL</span><br><span class="line">    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:customURL]]) &#123;</span><br><span class="line">        // openURL: 方法启动应用并将 URL 传入应用，在此过程中，当前的应用进入后台</span><br><span class="line">        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:customURL]];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;URL error&quot; message:[NSString stringWithFormat:@&quot;No custom URL defined for %@&quot;, customURL] delegate:self cancelButtonTitle:@&quot;Ok&quot; otherButtonTitles:nil];</span><br><span class="line">        [alert show];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">后记：</span><br><span class="line">1.每个app的 URL Scheme 都是不一样的，如果存在一样的 URL Scheme，那么系统就会响应先安装那个app的 URL Scheme，因为后安装的app的 URL Scheme 被覆盖掉了，是不能被调用的。</span><br><span class="line">2.所以这里存在一个漏洞。比如app_A想打开app_B，但是app_C的 URL Scheme和app_B的一样，而且它比app_B先安装。那就永远调不起app_B，除非将app_C卸载。</span><br><span class="line">3.所以自己公司的URLScheme取名时尽量复杂些，这样别人想调起你app的难度就大大增加了。</span><br></pre></td></tr></table></figure>
@@ -788,8 +787,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -896,6 +904,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、URL-Scheme"><span class="nav-number">1.</span> <span class="nav-text">一、URL Scheme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、白名单"><span class="nav-number">2.</span> <span class="nav-text">二、白名单</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-实际项目里用到的常见白名单。"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1.实际项目里用到的常见白名单。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-自定义白名单。"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2.自定义白名单。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -921,7 +946,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">121k</span>
   
 
   
@@ -930,7 +955,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:50</span>
   
 </div>
 

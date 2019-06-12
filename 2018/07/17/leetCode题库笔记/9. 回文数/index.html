@@ -104,19 +104,19 @@
 
 
 
-  <meta name="description" content="#一、题目原型：  判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  #二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 0">
+  <meta name="description" content="一、题目原型： 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 01 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="9. 回文数">
 <meta property="og:url" content="http://dancheclassmate.cn/2018/07/17/leetCode题库笔记/9. 回文数/index.html">
 <meta property="og:site_name" content="花果山松鼠’s Blog">
-<meta property="og:description" content="#一、题目原型：  判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  #二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 0">
+<meta property="og:description" content="一、题目原型： 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 01 。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-c30af19ddb35cae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-ccc10836670acdf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-26T07:14:27.566Z">
+<meta property="og:updated_time" content="2019-06-12T08:11:57.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="9. 回文数">
-<meta name="twitter:description" content="#一、题目原型：  判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  #二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 0">
+<meta name="twitter:description" content="一、题目原型： 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  二、题目意思剖析：回文数可以看作一个对称的字符串。12345678910输入: 121输出: true输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。输入: 10输出: false解释: 从右向左读, 为 01 。">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1869467-c30af19ddb35cae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -529,7 +529,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-26 15:14:27" itemprop="dateModified" datetime="2018-12-26T15:14:27+08:00">2018-12-26</time>
+                <time title="修改时间：2019-06-12 16:11:57" itemprop="dateModified" datetime="2019-06-12T16:11:57+08:00">2019-06-12</time>
               
             
           </span>
@@ -596,7 +596,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">1.1k</span>
               
 
               
@@ -630,15 +630,35 @@
       
 
       
-        <p>#一、题目原型：</p>
-<blockquote>
+        <h2 id="一、题目原型："><a href="#一、题目原型：" class="headerlink" title="一、题目原型："></a>一、题目原型：</h2><blockquote>
 <p>判断一个整数是否是回文数。<br>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
 </blockquote>
-<p>#二、题目意思剖析：<br>回文数可以看作一个对称的字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br><span class="line"></span><br><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure></p>
-<p>#三、解题思路：</p>
-<p>######第一种思路：用数组将每个数字存起来，看是否对称<br>1.如果该整数为负数，就不是回文数。比如-123，反过来是321-，不管如何反都不是。<br>2.遍历将余数保存在一个数组里，然后遍历该数组，如果左右对称 –<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    var remainder: Int = 0</span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var array: Array = Array.init(repeating: 0, count: 0)</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        remainder = tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">        array .append(remainder)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for i in 0..&lt;array.count &#123;</span><br><span class="line">        </span><br><span class="line">        if array[i] != array[array.count - 1 - i] &#123;</span><br><span class="line">            </span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>######第二种思路：将数字反序，然后对比和原整数是否相等<br>（推荐，耗时较少，少了一步遍历的时间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</span><br><span class="line">    if x &lt; 0 &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var tempX: Int = x</span><br><span class="line">    var result: Int = 0</span><br><span class="line">    while tempX != 0  &#123;</span><br><span class="line">        result = result * 10 + tempX % 10</span><br><span class="line">        tempX = tempX / 10</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if result != x &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#四、小结<br>如果是第一种方法大概是300ms，第二种大概是200ms。</p>
+<h2 id="二、题目意思剖析："><a href="#二、题目意思剖析：" class="headerlink" title="二、题目意思剖析："></a>二、题目意思剖析：</h2><p>回文数可以看作一个对称的字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br><span class="line"></span><br><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br><span class="line"></span><br><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、解题思路："><a href="#三、解题思路：" class="headerlink" title="三、解题思路："></a>三、解题思路：</h2><h4 id="第一种思路：用数组将每个数字存起来，看是否对称"><a href="#第一种思路：用数组将每个数字存起来，看是否对称" class="headerlink" title="第一种思路：用数组将每个数字存起来，看是否对称"></a>第一种思路：用数组将每个数字存起来，看是否对称</h4><p>1.如果该整数为负数，就不是回文数。比如-123，反过来是321-，不管如何反都不是。<br>2.遍历将余数保存在一个数组里，然后遍历该数组，如果左右对称 –<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>func isPalindrome(_ x: Int) -&gt; Bool {<br>    if x &lt; 0 {<br>        return false<br>    }<br>    var remainder: Int = 0<br>    var tempX: Int = x<br>    var array: Array = Array.init(repeating: 0, count: 0)<br>    while tempX != 0  {<br>        remainder = tempX % 10<br>        tempX = tempX / 10<br>        array .append(remainder)<br>    }</p>
+<pre><code>for i in 0..&lt;array.count {
+
+    if array[i] != array[array.count - 1 - i] {
+
+        return false
+    }
+}
+return true
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#### 第二种思路：将数字反序，然后对比和原整数是否相等</span><br><span class="line"></span><br><span class="line">（推荐，耗时较少，少了一步遍历的时间）</span><br></pre></td></tr></table></figure></p>
+<p>func isPalindrome(_ x: Int) -&gt; Bool {<br>    if x &lt; 0 {<br>        return false<br>    }</p>
+<pre><code>var tempX: Int = x
+var result: Int = 0
+while tempX != 0  {
+    result = result * 10 + tempX % 10
+    tempX = tempX / 10
+}
+
+if result != x {
+    return false
+}
+return true
+</code></pre><p>}<br><code>`</code></p>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><p>如果是第一种方法大概是300ms，第二种大概是200ms。</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-c30af19ddb35cae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="总提交数"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/1869467-ccc10836670acdf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交结果"></p>
 <p>有其他好的方法请极速留言，非常乐意一起探讨。😄</p>
@@ -784,8 +804,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -892,6 +921,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题目原型："><span class="nav-number">1.</span> <span class="nav-text">一、题目原型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题目意思剖析："><span class="nav-number">2.</span> <span class="nav-text">二、题目意思剖析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、解题思路："><span class="nav-number">3.</span> <span class="nav-text">三、解题思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种思路：用数组将每个数字存起来，看是否对称"><span class="nav-number">3.0.1.</span> <span class="nav-text">第一种思路：用数组将每个数字存起来，看是否对称</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#四、小结"><span class="nav-number">4.</span> <span class="nav-text">四、小结</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -917,7 +963,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">121k</span>
   
 
   
@@ -926,7 +972,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:50</span>
   
 </div>
 
