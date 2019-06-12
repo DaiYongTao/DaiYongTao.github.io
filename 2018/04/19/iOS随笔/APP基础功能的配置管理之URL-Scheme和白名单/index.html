@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-a086db78de75397a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-e9d3d2ce34559e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1869467-612ce6828e28f37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-26T06:54:28.658Z">
+<meta property="og:updated_time" content="2019-06-12T06:50:38.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP基础功能的配置管理之URL Scheme和白名单">
 <meta name="twitter:description" content="##一、URL Scheme相信大家都知道 URL，例如 http://www.jianshu.com/就是一个URL。在 :// 之前的部分就称为 URL Scheme。也就是说 http://www.jianshu.com/ 的 URL Scheme 就是 http   URL Scheme 就是一个可以让 app 相互之间可以跳转的协议  1.打开Mail[[UIApplication sh">
@@ -530,7 +530,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-26 14:54:28" itemprop="dateModified" datetime="2018-12-26T14:54:28+08:00">2018-12-26</time>
+                <time title="修改时间：2019-06-12 14:50:38" itemprop="dateModified" datetime="2019-06-12T14:50:38+08:00">2019-06-12</time>
               
             
           </span>
@@ -645,7 +645,7 @@
 <p>我们就需要在app_A里的info.plist添加白名单。<img src="https://upload-images.jianshu.io/upload_images/1869467-612ce6828e28f37e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自定义白名单2.png"></p>
 <p>废话不多说，直接上代码（app_A里写）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)clickBtn &#123;</span><br><span class="line">    </span><br><span class="line">    NSString *urlString = @&quot;haha://&quot;;</span><br><span class="line">    // 若有中文传输需要进行转义</span><br><span class="line">    NSString *customURL = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];</span><br><span class="line">    // 检查自定义 URL 是否被定义，如果定义了，则使用 shared application 实例来打开 URL</span><br><span class="line">    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:customURL]]) &#123;</span><br><span class="line">        // openURL: 方法启动应用并将 URL 传入应用，在此过程中，当前的应用进入后台</span><br><span class="line">        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:customURL]];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;URL error&quot; message:[NSString stringWithFormat:@&quot;No custom URL defined for %@&quot;, customURL] delegate:self cancelButtonTitle:@&quot;Ok&quot; otherButtonTitles:nil];</span><br><span class="line">        [alert show];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">后记：</span><br><span class="line">1.每个app的 URL Scheme 都是不一样的，如果存在一样的 URL Scheme，那么系统就会响应先安装那个app的 URL Scheme，因为后安装的app的 URL Scheme 被覆盖掉了，是不能被调用的。</span><br><span class="line">2.所以这里存在一个漏洞。比如app_A想打开app_B，但是app_C的 URL Scheme和app_B的一样，而且它比app_B先安装。那就永远调不起app_B，除非将app_C卸载。</span><br><span class="line">3.所以自己公司的URLScheme取名时尽量复杂些，这样别人想调起你app的难度就大大增加了。</span><br></pre></td></tr></table></figure>
-<p>相关文章：<br><a href="https://www.jianshu.com/p/6d474abbf97e" target="_blank" rel="noopener">APP基础功能的配置管理之ATS</a><br><a href="https://www.jianshu.com/p/733288fc6fdb" target="_blank" rel="noopener">APP基础功能的配置管理之屏幕旋转控制</a><br><a href="https://www.jianshu.com/p/1d91b09a12d8" target="_blank" rel="noopener">APP基础功能的配置管理之系统权限控制</a></p>
+<p>相关文章：<br><a href="http://dancheclassmate.cn/2018/04/19/iOS%E9%9A%8F%E7%AC%94/APP%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E4%B9%8BATS/">APP基础功能的配置管理之ATS</a><br><a href="http://dancheclassmate.cn/2018/04/19/iOS%E9%9A%8F%E7%AC%94/APP%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E4%B9%8B%E5%B1%8F%E5%B9%95%E6%97%8B%E8%BD%AC%E6%8E%A7%E5%88%B6/">APP基础功能的配置管理之屏幕旋转控制</a><br><a href="http://dancheclassmate.cn/2018/04/19/iOS%E9%9A%8F%E7%AC%94/APP%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/">APP基础功能的配置管理之系统权限控制</a></p>
 
       
     </div>
