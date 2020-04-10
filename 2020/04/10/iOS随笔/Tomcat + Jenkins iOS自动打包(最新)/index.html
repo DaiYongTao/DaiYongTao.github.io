@@ -111,18 +111,18 @@
 <meta property="og:site_name" content="花果山松鼠’s Blog">
 <meta property="og:description" content="开篇：前几天个人业务空档期，想着把自动打包部署一下，不影响我们开发时间。首选就想到了Jenkins，想必有很多朋友都自己部署过。在初期我使用纯Jenkins去部署，确实遇到了各种各样的问题。之后多谢明中的帮助，所以之后选择了Tomcat，最终也部署成功了。  自动打包原理其实是在Jenkins的子目录下，拷贝一份我们的项目过去，通过打包指令，对拷贝的项目进行打包，如果需要上传至蒲公英，只需要加上几">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
 <meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
-<meta property="og:updated_time" content="2020-04-10T09:02:12.424Z">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta property="og:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta property="og:updated_time" content="2020-04-10T09:06:24.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat + Jenkins iOS自动打包(最新)">
 <meta name="twitter:description" content="开篇：前几天个人业务空档期，想着把自动打包部署一下，不影响我们开发时间。首选就想到了Jenkins，想必有很多朋友都自己部署过。在初期我使用纯Jenkins去部署，确实遇到了各种各样的问题。之后多谢明中的帮助，所以之后选择了Tomcat，最终也部署成功了。  自动打包原理其实是在Jenkins的子目录下，拷贝一份我们的项目过去，通过打包指令，对拷贝的项目进行打包，如果需要上传至蒲公英，只需要加上几">
-<meta name="twitter:image" content="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
+<meta name="twitter:image" content="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新">
 
 
 
@@ -517,7 +517,7 @@
                 
               
 
-              <time title="创建时间：2020-04-10 16:30:12 / 修改时间：17:02:12" itemprop="dateCreated datePublished" datetime="2020-04-10T16:30:12+08:00">2020-04-10</time>
+              <time title="创建时间：2020-04-10 16:30:12 / 修改时间：17:06:24" itemprop="dateCreated datePublished" datetime="2020-04-10T16:30:12+08:00">2020-04-10</time>
             
 
             
@@ -633,21 +633,21 @@
 <p>#一、Tomcat</p>
 <p>####1.为何选择Tomcat<br>在之前使用纯Jenkins去部署，遇到了权限问题和路径问题，差点没把自己搞晕了。<br>使用Tomcat优点：<br>1.不用管权限问题。<br>2.不用在Jenkins里设置上传各种证书：.keychain和.mobileprovision。<br>3.目录结构清晰，目录结构完全可配。</p>
 <p>####2.Tomcat安装与设置<br>下载地址：<a href="https://links.jianshu.com/go?to=http%3A%2F%2Ftomcat.apache.org%2F" target="_blank" rel="noopener">http://tomcat.apache.org/</a><br>下载完成后 ，解压，然后放到任意目录，这里我放入了 /Users/YourName/Library<br>1.修改文件夹权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 /Library/Tomcat</span><br></pre></td></tr></table></figure></p>
-<p>2.启动Tomcat:<br>默认端口是8080,如果被占用了，编辑Library/Tomcat/conf/server.xml文件,找到<connector port="8080" ......="">等代码，将8080改为自己想改的端口。我这里改成了8825。<img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="设置端口">/设置端口.png)</connector></p>
+<p>2.启动Tomcat:<br>默认端口是8080,如果被占用了，编辑Library/Tomcat/conf/server.xml文件,找到<connector port="8080" ......="">等代码，将8080改为自己想改的端口。我这里改成了8825。<img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="设置端口">/设置端口.png)</connector></p>
 <p>#二、Jenkins</p>
 <p>####1.安装<br>下载Jenkins.war:<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fmirrors.jenkins.io%2Fwar-stable%2Flatest%2Fjenkins.war" target="_blank" rel="noopener">http://mirrors.jenkins.io/war-stable/latest/jenkins.war</a><br>下载完成后，将jenkins.war包保存到Tomcat\webapps下</p>
 <p>####2.配置Jenkins工作路径：<br>在/Library/Tomcat/bin下打到catalina.sh文件，添加下面这行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JENKINS_HOME=&quot;/Users/xxxx/Jenkins&quot;</span><br></pre></td></tr></table></figure></p>
 <p>####3.重启Tomcat:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//关闭</span><br><span class="line">/Library/Tomcat/bin/shutdown.sh</span><br><span class="line">//启动</span><br><span class="line">/Library/Tomcat/bin/startup.sh</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="开启成功">/开启成功.png)</p>
+<p><img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="开启成功">/开启成功.png)</p>
 <p>在浏览器中输入：<a href="http://localhost:8825/jenkins，顺利打开Jenkins！" target="_blank" rel="noopener">http://localhost:8825/jenkins，顺利打开Jenkins！</a></p>
 <p>#三、配置Jenkins脚本<br>jenkins的解锁等前期步骤，直接跳过，直接到最重要的部分，脚本配置。</p>
 <p>####1.配置参数<br><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="配置Scheme+config">/配置Scheme+config.png)</p>
-<p><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="其他">/其他.png)</p>
-<p>####2.svn配置<br><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="svn">/svn.png)</p>
+<p><img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="其他">/其他.png)</p>
+<p>####2.svn配置<br><img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="svn">/svn.png)</p>
 <p>####3.shell脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">Date=&quot;$(date +&quot;%m%d_%H%M&quot;)&quot;</span><br><span class="line">Day=&quot;$(date +&quot;%m%d&quot;)&quot;</span><br><span class="line"></span><br><span class="line">workspace_path=$WORKSPACE</span><br><span class="line">archive_path=$JENKINS_HOME/workspace/Packages/项目名</span><br><span class="line"></span><br><span class="line">cd $workspace_path</span><br><span class="line">pod install</span><br><span class="line"></span><br><span class="line">cd 项目名.xcodeproj</span><br><span class="line"></span><br><span class="line"># 我的项目中有配置bugly的脚本，打包时会上传DSYM，影响打包速度。</span><br><span class="line"># 打包给测试使用时，用不到，所以使用perl正则找到配置bugly的脚本，替换为空字符串。</span><br><span class="line">cat project.pbxproj | perl -pe &quot;s/(?&lt;=shellScript = \&quot;).*UPLOAD_DSYM_ONLY=1.*(?=(\&quot;))//&quot; &gt; 999.pbxproj</span><br><span class="line">mv -f 999.pbxproj project.pbxproj</span><br><span class="line"></span><br><span class="line">xcodebuild archive \</span><br><span class="line">-workspace &quot;$workspace_path/项目名.xcworkspace&quot; \</span><br><span class="line">-scheme $Scheme \</span><br><span class="line">-configuration $Configuration \</span><br><span class="line">-archivePath $archive_path/项目名.xcarchive</span><br><span class="line"></span><br><span class="line">xcodebuild \</span><br><span class="line">-exportArchive \</span><br><span class="line">-archivePath $archive_path/项目名.xcarchive \</span><br><span class="line">-exportPath $archive_path \</span><br><span class="line">-exportOptionsPlist $WORKSPACE/$&#123;ExportType&#125;_ExportOptions.plist</span><br><span class="line"></span><br><span class="line">#删除旧xcarchive</span><br><span class="line">rm -rf archive_path/项目名.xcarchive</span><br><span class="line">#改名</span><br><span class="line">IpaName=&quot;$&#123;Scheme&#125;_$&#123;Configuration&#125;_$&#123;Date&#125;.ipa&quot;</span><br><span class="line">mv $archive_path/项目名.ipa $archive_path/$IpaName</span><br><span class="line"></span><br><span class="line">if [ $UP_PGY == true ] </span><br><span class="line">then</span><br><span class="line">IPA=&quot;$archive_path/$IpaName&quot;</span><br><span class="line">PGYUSERKEY=&quot;user_key&quot;</span><br><span class="line">PGYAPIKEY=&quot;api_key&quot;</span><br><span class="line">PGYDESC=&quot;Jenkins自动打包&quot;</span><br><span class="line"></span><br><span class="line">#自动上传到蒲公英</span><br><span class="line">curl -F &quot;file=@$IPA&quot; \</span><br><span class="line">-F &quot;uKey=$PGYUSERKEY&quot; \</span><br><span class="line">-F &quot;_api_key=$PGYAPIKEY&quot; \</span><br><span class="line">-F &quot;updateDescription=$PGYDESC&quot; \</span><br><span class="line">&quot;https://qiniu-storage.pgyer.com/apiv1/app/upload&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
 <p>！！在打包过程中如果出现问题，可能是路径问题。所以路径要仔细检查，要知道哪个路径代表什么意思，存放着什么东西。</p>
-<p>最终实现：可以一键打包测试环境debug、预发布release-pre、线上release三个环境。<br><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="构建时参数选择">/构建时参数选择.png)</p>
-<p><img src="http://dancheclassmate.cn/2017/11/13/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="构建成功">/打包成功.png)</p>
+<p>最终实现：可以一键打包测试环境debug、预发布release-pre、线上release三个环境。<br><img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="构建时参数选择">/构建时参数选择.png)</p>
+<p><img src="http://dancheclassmate.cn/2020/04/10/iOS随笔/Tomcat + Jenkins iOS自动打包(最新" alt="构建成功">/打包成功.png)</p>
 <p>参考资料：<br><a href="https://www.jianshu.com/p/efe4a5737b5f" target="_blank" rel="noopener">Jenkins环境搭建 iOS</a><br><a href="https://juejin.im/post/5c21d048f265da616f6ffd4b" target="_blank" rel="noopener">如何为你的App配置多环境变量</a><br><a href="https://www.jianshu.com/p/83b6e781eb51" target="_blank" rel="noopener">手把手教你给一个iOS app配置多个环境变量</a></p>
 
       
